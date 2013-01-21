@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XMAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+#import "XMHistoryViewController.h"
+#import "XMIntroViewController.h"
+#import "XMSubmissionViewController.h"
+
+@interface XMAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UINavigationController *historyNavController;
+@property (strong, nonatomic) XMHistoryViewController *historyViewController;
+@property (strong, nonatomic) XMSubmissionViewController *submissionViewController;
 
-@property (strong, nonatomic) UITabBarController *tabBarController;
+- (void)showIntroView;
+- (void)showSubmissionView;
+- (void)showHistoryView;
 
 @end

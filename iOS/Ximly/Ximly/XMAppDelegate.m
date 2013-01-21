@@ -8,29 +8,64 @@
 
 #import "XMAppDelegate.h"
 
-#import "XMSubmissionViewController.h"
-
-#import "XMHistoryViewController.h"
-
 @implementation XMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    UIViewController *viewController1, *viewController2;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        viewController1 = [[XMSubmissionViewController alloc] initWithNibName:@"XMSubmissionViewController_iPhone" bundle:nil];
-        viewController2 = [[XMHistoryViewController alloc] initWithNibName:@"XMHistoryViewController_iPhone" bundle:nil];
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    BOOL hasSeenInstructions = [userDefaults boolForKey:@"hasSeenInstructions"];
+    
+    if (!hasSeenInstructions) {
+        [self showIntroView];
     } else {
-        viewController1 = [[XMSubmissionViewController alloc] initWithNibName:@"XMSubmissionViewController_iPad" bundle:nil];
-        viewController2 = [[XMHistoryViewController alloc] initWithNibName:@"XMHistoryViewController_iPad" bundle:nil];
+        [self showHistoryView];
     }
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[viewController1, viewController2];
-    self.window.rootViewController = self.tabBarController;
-    [self.window makeKeyAndVisible];
+    
+    
     return YES;
+}
+
+- (void)showIntroView
+{
+    XMIntroViewController *introViewController = [[XMIntroViewController alloc] initWithNibName:@"XMIntroViewController" bundle:nil];
+    self.window.rootViewController = introViewController;
+    [self.window makeKeyAndVisible];
+}
+
+- (void)showHistoryView
+{
+    if (!self.historyViewController) {
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            self.historyViewController = [[XMHistoryViewController alloc] initWithNibName:@"XMHistoryViewController_iPhone" bundle:nil];
+        } else {
+            // TODO
+        }
+    }
+    
+    if (!self.historyNavController) {
+        self.historyNavController= [[UINavigationController alloc] initWithRootViewController:self.historyViewController];
+        self.historyNavController.navigationBar.barStyle = UIBarStyleBlack;
+    }
+
+    self.window.rootViewController = self.historyNavController;
+    [self.window makeKeyAndVisible];
+}
+
+- (void)showSubmissionView
+{
+    if (!self.submissionViewController) {
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            self.submissionViewController = [[XMSubmissionViewController alloc] initWithNibName:@"XMSubmissionViewController_iPhone" bundle:nil];
+        } else {
+            self.submissionViewController = [[XMSubmissionViewController alloc] initWithNibName:@"XMSubmissionViewController_iPad" bundle:nil];
+        }
+    }
+    self.window.rootViewController = self.submissionViewController;
+    [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

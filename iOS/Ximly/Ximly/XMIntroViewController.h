@@ -1,5 +1,5 @@
 //
-//  XMSubmissionViewController.h
+//  XMIntroViewController.h
 //  Ximly
 //
 //  Created by Young-Kyu Yoo on 1/21/13.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XMSubmissionViewController : UIViewController <UIImagePickerControllerDelegate>
+@interface XMIntroViewController : UIViewController
+
+- (IBAction)doStart:(id)sender;
 
 @end

@@ -18,8 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"First", @"First");
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.title = NSLocalizedString(@"Photo", @"Photo");
     }
     return self;
 }
@@ -27,7 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    /*
 	// Do any additional setup after loading the view, typically from a nib.
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera
+     */
+    
 }
 
 - (void)didReceiveMemoryWarning
