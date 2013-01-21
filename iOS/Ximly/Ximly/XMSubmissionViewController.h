@@ -1,5 +1,5 @@
 //
-//  XMFirstViewController.h
+//  XMSubmissionViewController.h
 //  Ximly
 //
 //  Created by Young-Kyu Yoo on 1/21/13.

@@ -20,11 +20,11 @@
     // Override point for customization after application launch.
     UIViewController *viewController1, *viewController2;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        viewController1 = [[XMSubmissionViewController alloc] initWithNibName:@"XMFirstViewController_iPhone" bundle:nil];
-        viewController2 = [[XMHistoryViewController alloc] initWithNibName:@"XMSecondViewController_iPhone" bundle:nil];
+        viewController1 = [[XMSubmissionViewController alloc] initWithNibName:@"XMSubmissionViewController_iPhone" bundle:nil];
+        viewController2 = [[XMHistoryViewController alloc] initWithNibName:@"XMHistoryViewController_iPhone" bundle:nil];
     } else {
-        viewController1 = [[XMSubmissionViewController alloc] initWithNibName:@"XMFirstViewController_iPad" bundle:nil];
-        viewController2 = [[XMHistoryViewController alloc] initWithNibName:@"XMSecondViewController_iPad" bundle:nil];
+        viewController1 = [[XMSubmissionViewController alloc] initWithNibName:@"XMSubmissionViewController_iPad" bundle:nil];
+        viewController2 = [[XMHistoryViewController alloc] initWithNibName:@"XMHistoryViewController_iPad" bundle:nil];
     }
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[viewController1, viewController2];

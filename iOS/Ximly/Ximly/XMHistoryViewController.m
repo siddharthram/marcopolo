@@ -1,5 +1,5 @@
 //
-//  XMSecondViewController.m
+//  XMHistoryViewController.m
 //  Ximly
 //
 //  Created by Young-Kyu Yoo on 1/21/13.
