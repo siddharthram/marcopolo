@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XMSubmissionViewController : UIViewController <UIImagePickerControllerDelegate>
+@interface XMSubmissionViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property (strong, nonatomic) UIActionSheet *photoSourceSelectionSheet;
+@property (strong, nonatomic) UIImage *pickedImage;
+
+- (void)showSelectionSheet;
+
 
 @end

@@ -8,6 +8,8 @@
 
 #import "XMHistoryViewController.h"
 
+#import "XMAppDelegate.h"
+
 @interface XMHistoryViewController ()
 
 @end
@@ -33,6 +35,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)doSubmit:(id)sender
+{
+    XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showSubmissionView];
 }
 
 @end

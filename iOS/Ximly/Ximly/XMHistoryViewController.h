@@ -10,4 +10,6 @@
 
 @interface XMHistoryViewController : UIViewController
 
+- (IBAction)doSubmit:(id)sender;
+
 @end

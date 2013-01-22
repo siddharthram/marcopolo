@@ -55,7 +55,7 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)showSubmissionView
+- (void)showSubmissionView;
 {
     if (!self.submissionViewController) {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -64,8 +64,8 @@
             self.submissionViewController = [[XMSubmissionViewController alloc] initWithNibName:@"XMSubmissionViewController_iPad" bundle:nil];
         }
     }
-    self.window.rootViewController = self.submissionViewController;
-    [self.window makeKeyAndVisible];
+    [self.window addSubview:self.submissionViewController.view];
+    [self.submissionViewController showSelectionSheet];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
