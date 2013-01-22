@@ -44,6 +44,7 @@
 
 - (void)showSelectionSheet
 {
+    self.pickedImage = nil;
     [self.photoSourceSelectionSheet showInView:self.view];
 }
 
@@ -102,6 +103,33 @@
     }
 }
 
+- (void)submitToCloud
+{
+    if (!self.pickedImage) {
+        return;
+    }
+    
+    
+}
+
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)editingInfo
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    self.pickedImage = [XMSubmissionViewController editedImageFromMediaWithInfo:editingInfo];
+    
+    [self submitToCloud];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1];
+}
+
 
 // Code copied from http://pastebin.com/Qwm8SVnc
 // TODO: Move this into a utilities class
@@ -145,24 +173,5 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     
     return resultImage;
 }
-
-
-#pragma mark - UIImagePickerControllerDelegate
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)editingInfo
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    self.pickedImage = [XMSubmissionViewController editedImageFromMediaWithInfo:editingInfo];
-    
-    [self.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    [self.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1];
-}
-
 
 @end

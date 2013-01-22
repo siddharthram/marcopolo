@@ -35,6 +35,7 @@
 		248A4CC516ADEA2F0042B46C /* XMIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */; };
 		248A4CC616ADEA2F0042B46C /* XMIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */; };
 		248A4CDD16ADF2320042B46C /* intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CDC16ADF2310042B46C /* intro.png */; };
+		248A4CEA16AE1FE20042B46C /* XMXimlyHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMIntroViewController.m; sourceTree = "<group>"; };
 		248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMIntroViewController.xib; sourceTree = "<group>"; };
 		248A4CDC16ADF2310042B46C /* intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro.png; sourceTree = "<group>"; };
+		248A4CE816AE1FE20042B46C /* XMXimlyHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMXimlyHTTPClient.h; sourceTree = "<group>"; };
+		248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMXimlyHTTPClient.m; sourceTree = "<group>"; };
 		443383F986B54B62861349AB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		F23C08989CC04E6D986F4BB5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -153,6 +156,8 @@
 				245022B516ADD7F100FA03B0 /* XMHistoryViewController.m */,
 				245022C116ADD7F100FA03B0 /* XMHistoryViewController_iPhone.xib */,
 				245022C416ADD7F100FA03B0 /* XMHistoryViewController_iPad.xib */,
+				248A4CE816AE1FE20042B46C /* XMXimlyHTTPClient.h */,
+				248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */,
 				248A4CC216ADEA2E0042B46C /* XMIntroViewController.h */,
 				248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */,
 				248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */,
@@ -343,6 +348,7 @@
 				245022AF16ADD7F100FA03B0 /* XMSubmissionViewController.m in Sources */,
 				245022B616ADD7F100FA03B0 /* XMHistoryViewController.m in Sources */,
 				248A4CC516ADEA2F0042B46C /* XMIntroViewController.m in Sources */,
+				248A4CEA16AE1FE20042B46C /* XMXimlyHTTPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

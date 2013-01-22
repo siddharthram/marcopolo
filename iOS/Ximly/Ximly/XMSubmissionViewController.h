@@ -15,5 +15,6 @@
 
 - (void)showSelectionSheet;
 
+- (void)submitToCloud;
 
 @end
