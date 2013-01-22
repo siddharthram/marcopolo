@@ -19,5 +19,14 @@
 	<classpathentry kind="lib" path="C:/Workspace/LIBS/SimpleJavaMail/simple-java-mail-v2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Workspace/LIBS/SimpleJavaMail/smtp-1.4.4.jar"/>
 	<classpathentry kind="lib" path="C:/Tools/google-gson-2.2.2/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/aws-java-sdk-1.3.28/lib/aws-java-sdk-1.3.28.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/aws-java-sdk-1.3.28/lib/aws-java-sdk-flow-build-tools-1.3.28.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/httpcomponents-client-4.2.1/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/httpcomponents-client-4.2.1/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/httpcomponents-client-4.2.1/lib/fluent-hc-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/httpcomponents-client-4.2.1/lib/httpclient-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/httpcomponents-client-4.2.1/lib/httpclient-cache-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/httpcomponents-client-4.2.1/lib/httpcore-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Tools/httpcomponents-client-4.2.1/lib/httpmime-4.2.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

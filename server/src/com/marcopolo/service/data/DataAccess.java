@@ -91,7 +91,7 @@ public class DataAccess {
 		} else {
 			//private static String insertTask = "insert into task_table (image_url, sumbit_time, device_table_iddevice, unique_guid) values(?, ?, ?, ?)";
 			PreparedStatement pstmtInsert = conn.prepareStatement(insertTask);
-			pstmtInsert.setString(1, preq.getImage_url());
+			pstmtInsert.setString(1, presp.getImage_url());
 			pstmtInsert.setDate(2, (Date) preq.getTimestamp());
 			pstmtInsert.setInt(3, iddevice);
 			pstmtInsert.setString(4, presp.getServerUniqueId());

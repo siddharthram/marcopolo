@@ -5,6 +5,7 @@ public class PostResponse {
 	public int freeImagesLeft;
 	public int responseCode;
 	public String responseText;
+	public String image_url;
 	
 	public String getServerUniqueId() {
 		return serverUniqueId;
@@ -29,6 +30,12 @@ public class PostResponse {
 	}
 	public void setResponseText(String responseText) {
 		this.responseText = responseText;
+	}
+	public String getImage_url() {
+		return image_url;
+	}
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
 	}
 
 }

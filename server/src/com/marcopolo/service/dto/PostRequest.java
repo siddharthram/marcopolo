@@ -3,18 +3,8 @@ package com.marcopolo.service.dto;
 import java.util.Date;
 
 public class PostRequest {
-	private String auth_id, device_id, urgency, fileName, image_url;
+	private String auth_id, device_id, urgency, fileName;
 	private Date timestamp;
-	
-	
-	public String getImage_url() {
-		return image_url;
-	}
-
-
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
-	}
 	
 	public String getAuth_id() {
 		return auth_id;

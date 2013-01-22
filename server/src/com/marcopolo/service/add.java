@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-import javax.mail.internet.MimeMessage.RecipientType;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -20,10 +19,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.codemonkey.simplejavamail.Email;
-import org.codemonkey.simplejavamail.Mailer;
-import org.codemonkey.simplejavamail.TransportStrategy;
 
+import com.marcopolo.service.aws.S3StoreImage;
 import com.marcopolo.service.data.DataAccess;
 import com.marcopolo.service.dto.PostRequest;
 import com.marcopolo.service.dto.PostResponse;
@@ -122,6 +119,8 @@ public class add extends HttpServlet {
 					// email the file
 					if (postReq.isValid()) {
 						// sendEmail(postReq, pngData, "image/png");
+						String imageUrl = S3StoreImage.storeS3File(presp.getServerUniqueId(), pngData);
+						presp.setImage_url(imageUrl);
 
 					} else {
 						throw new Exception("All parameters not sent.");
@@ -139,26 +138,4 @@ public class add extends HttpServlet {
 
 	}
 
-	private void sendEmail(PostRequest taskReq, byte[] pngData, String string) {
-		final Email email = new Email();
-
-		email.setFromAddress(fromName, fromEmail);
-		email.setSubject("New task request");
-		email.addRecipient("Task Requested", toEmail, RecipientType.TO);
-		/*
-		 * email.setText(String .format(
-		 * "New task received at %1$tD %1$tH:%1$tM:%1$tS from user id %2$s with description '%3$s' and priority %4$s. Output format requested is %5$s."
-		 * , taskReq.getTimestamp() taskReq.getUserId(),
-		 * taskReq.getDescription(), taskReq.getPriority(),
-		 * taskReq.getOutput_type())
-		 * 
-		 * );
-		 */
-		// embed images and include downloadable attachments
-		email.addEmbeddedImage(taskReq.getFileName(), pngData, "image/png");
-
-		new Mailer("smtp.gmail.com", 587, fromEmail, emailPass,
-				TransportStrategy.SMTP_TLS).sendMail(email);
-
-	}
 }
