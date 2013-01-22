@@ -27,8 +27,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    NSString *titleText = [self.jobData valueForKey:@"title"];
+    self.title = titleText ? titleText : @"Untitled";
     self.imageView.image = [UIImage imageNamed:@"intro.png"];
+    
+    NSString *transcribedText = [self.jobData valueForKey:@"transcription"];
+    self.transcribedTextView.text = transcribedText ? transcribedText : @"Not Yet Available";
 }
+
 
 - (void)didReceiveMemoryWarning
 {

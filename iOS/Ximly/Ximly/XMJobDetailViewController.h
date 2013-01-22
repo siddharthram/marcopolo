@@ -10,6 +10,7 @@
 
 @interface XMJobDetailViewController : UIViewController
 
+@property (nonatomic, strong) NSDictionary *jobData;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UITextView *transcribedTextView;

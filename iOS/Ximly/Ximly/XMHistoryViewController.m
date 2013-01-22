@@ -46,9 +46,9 @@ static NSString     *_dataFilePath = nil;
         self.historyList = [NSMutableArray arrayWithContentsOfFile:[XMHistoryViewController dataFilePath]];
 #else
         self.historyList = [@[@{@"imageID" : @"1", @"status" : @"PROCESSING",  @"time" : @"20 mins ago"},
-                            @{@"imageID" : @"2", @"status" : @"NEW", @"time" : @"25 mins ago"},
-                            @{@"imageID" : @"3", @"status" : @"NEW", @"time" : @"2 days ago"},
-                            @{@"imageID" : @"4",@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago"}] mutableCopy];
+                            @{@"imageID" : @"2", @"status" : @"NEW", @"time" : @"25 mins ago", @"transcription" : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah."},
+                            @{@"imageID" : @"3", @"status" : @"NEW", @"time" : @"2 days ago", @"transcription" : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."},
+                            @{@"imageID" : @"4",@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago", @"transcription" : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."}] mutableCopy];
 
 #endif
         
@@ -75,6 +75,15 @@ static NSString     *_dataFilePath = nil;
 {
     XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showSubmissionView];
+}
+
+- (IBAction)showJobDetailForRow:(int)row
+{
+    XMJobDetailViewController *jobDetailController = [[XMJobDetailViewController alloc] initWithNibName:@"XMJobDetailViewController" bundle:nil];
+    NSDictionary *jobData = [self.historyList objectAtIndex:row];
+    jobDetailController.jobData = jobData;
+    
+    [self.navigationController pushViewController:jobDetailController animated:YES];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -138,15 +147,11 @@ static NSString     *_dataFilePath = nil;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self showJobDetailForRow:indexPath.row];
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    XMJobDetailViewController *jobDetailController = [[XMJobDetailViewController alloc] initWithNibName:@"XMJobDetailViewController" bundle:nil];
-    NSDictionary *jobData = [self.historyList objectAtIndex:indexPath.row];
-    NSString *labelText = [jobData valueForKey:@"title"];
-    jobDetailController.title = labelText ? labelText : @"Untitled";
-
-    [self.navigationController pushViewController:jobDetailController animated:YES];
+    [self showJobDetailForRow:indexPath.row];
 }
 @end
