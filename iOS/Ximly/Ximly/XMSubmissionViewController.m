@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    self.photoSourceSelectionSheet = [[UIActionSheet alloc] initWithTitle:nil
+    self.photoSourceSelectionSheet = [[UIActionSheet alloc] initWithTitle:@"Submit Photo From ..."
                                                                     delegate:self
                                                              cancelButtonTitle:nil
                                                         destructiveButtonTitle:nil
@@ -112,6 +112,7 @@
     
     self.view.hidden = YES;
     [self.view removeFromSuperview];
+    
 }
 
 
@@ -134,7 +135,7 @@
 }
 
 
-// Code copied from http://pastebin.com/Qwm8SVnc
+// editedImageFromMediaWithInfo: is copied from http://pastebin.com/Qwm8SVnc
 // TODO: Move this into a utilities class
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 

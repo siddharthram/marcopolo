@@ -32,6 +32,10 @@
 		245022D016ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
 		245022D816ADD7F100FA03B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 245022D616ADD7F100FA03B0 /* InfoPlist.strings */; };
 		245022DB16ADD7F100FA03B0 /* XimlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 245022DA16ADD7F100FA03B0 /* XimlyTests.m */; };
+		2486248D16AE67EE00DDCA75 /* XMHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */; };
+		2486248F16AE681D00DDCA75 /* XMHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */; };
+		2486249316AE7D0100DDCA75 /* XMJobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486249116AE7D0100DDCA75 /* XMJobDetailViewController.m */; };
+		2486249416AE7D0100DDCA75 /* XMJobDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2486249216AE7D0100DDCA75 /* XMJobDetailViewController.xib */; };
 		248A4CC516ADEA2F0042B46C /* XMIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */; };
 		248A4CC616ADEA2F0042B46C /* XMIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */; };
 		248A4CDD16ADF2320042B46C /* intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CDC16ADF2310042B46C /* intro.png */; };
@@ -80,6 +84,12 @@
 		245022D716ADD7F100FA03B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		245022D916ADD7F100FA03B0 /* XimlyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XimlyTests.h; sourceTree = "<group>"; };
 		245022DA16ADD7F100FA03B0 /* XimlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XimlyTests.m; sourceTree = "<group>"; };
+		2486248B16AE67EE00DDCA75 /* XMHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMHistoryTableViewCell.h; sourceTree = "<group>"; };
+		2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMHistoryTableViewCell.m; sourceTree = "<group>"; };
+		2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		2486249016AE7D0100DDCA75 /* XMJobDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMJobDetailViewController.h; sourceTree = "<group>"; };
+		2486249116AE7D0100DDCA75 /* XMJobDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMJobDetailViewController.m; sourceTree = "<group>"; };
+		2486249216AE7D0100DDCA75 /* XMJobDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMJobDetailViewController.xib; sourceTree = "<group>"; };
 		248A4CC216ADEA2E0042B46C /* XMIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMIntroViewController.h; sourceTree = "<group>"; };
 		248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMIntroViewController.m; sourceTree = "<group>"; };
 		248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMIntroViewController.xib; sourceTree = "<group>"; };
@@ -152,12 +162,16 @@
 			children = (
 				245022A416ADD7F100FA03B0 /* XMAppDelegate.h */,
 				245022A516ADD7F100FA03B0 /* XMAppDelegate.m */,
+				2486248B16AE67EE00DDCA75 /* XMHistoryTableViewCell.h */,
+				2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */,
+				2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */,
 				245022B416ADD7F100FA03B0 /* XMHistoryViewController.h */,
 				245022B516ADD7F100FA03B0 /* XMHistoryViewController.m */,
 				245022C116ADD7F100FA03B0 /* XMHistoryViewController_iPhone.xib */,
 				245022C416ADD7F100FA03B0 /* XMHistoryViewController_iPad.xib */,
-				248A4CE816AE1FE20042B46C /* XMXimlyHTTPClient.h */,
-				248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */,
+				2486249016AE7D0100DDCA75 /* XMJobDetailViewController.h */,
+				2486249116AE7D0100DDCA75 /* XMJobDetailViewController.m */,
+				2486249216AE7D0100DDCA75 /* XMJobDetailViewController.xib */,
 				248A4CC216ADEA2E0042B46C /* XMIntroViewController.h */,
 				248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */,
 				248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */,
@@ -165,6 +179,8 @@
 				245022AE16ADD7F100FA03B0 /* XMSubmissionViewController.m */,
 				245022BB16ADD7F100FA03B0 /* XMSubmissionViewController_iPhone.xib */,
 				245022BE16ADD7F100FA03B0 /* XMSubmissionViewController_iPad.xib */,
+				248A4CE816AE1FE20042B46C /* XMXimlyHTTPClient.h */,
+				248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */,
 				248A4CDC16ADF2310042B46C /* intro.png */,
 				245022B016ADD7F100FA03B0 /* first.png */,
 				245022B216ADD7F100FA03B0 /* first@2x.png */,
@@ -295,6 +311,8 @@
 				245022C616ADD7F100FA03B0 /* XMHistoryViewController_iPad.xib in Resources */,
 				248A4CC616ADEA2F0042B46C /* XMIntroViewController.xib in Resources */,
 				248A4CDD16ADF2320042B46C /* intro.png in Resources */,
+				2486248F16AE681D00DDCA75 /* XMHistoryTableViewCell.xib in Resources */,
+				2486249416AE7D0100DDCA75 /* XMJobDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +367,8 @@
 				245022B616ADD7F100FA03B0 /* XMHistoryViewController.m in Sources */,
 				248A4CC516ADEA2F0042B46C /* XMIntroViewController.m in Sources */,
 				248A4CEA16AE1FE20042B46C /* XMXimlyHTTPClient.m in Sources */,
+				2486248D16AE67EE00DDCA75 /* XMHistoryTableViewCell.m in Sources */,
+				2486249316AE7D0100DDCA75 /* XMJobDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XMHistoryViewController : UIViewController
+@interface XMHistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray *historyList;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 - (IBAction)doSubmit:(id)sender;
 
