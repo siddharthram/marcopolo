@@ -5,8 +5,12 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +24,10 @@ import org.codemonkey.simplejavamail.Email;
 import org.codemonkey.simplejavamail.Mailer;
 import org.codemonkey.simplejavamail.TransportStrategy;
 
+import com.marcopolo.service.data.DataAccess;
+import com.marcopolo.service.dto.PostRequest;
+import com.marcopolo.service.dto.PostResponse;
+
 /**
  * Servlet implementation class add
  */
@@ -28,9 +36,9 @@ public class add extends HttpServlet {
 
 	private static final long MAX_FILE_SIZE_IN_BYTES = 10000000l;
 	private static final String fromName = "Mark Polson";
-	private static final String fromEmail  = "markpolson50@gmail.com";
-	private static final String emailPass  = "rem2mb3rm3";	
-	private static final String toEmail = fromEmail;	
+	private static final String fromEmail = "markpolson50@gmail.com";
+	private static final String emailPass = "rem2mb3rm3";
+	private static final String toEmail = fromEmail;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,6 +46,15 @@ public class add extends HttpServlet {
 	public add() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public void init() throws ServletException {
+		try {
+			// initalize database access layer
+			DataAccess.init((Context) new InitialContext().lookup("java:comp/env"));
+		} catch (NamingException e) {
+			throw new ServletException(e);
+		}
 	}
 
 	/**
@@ -64,10 +81,12 @@ public class add extends HttpServlet {
 	private void handleUploadRequest(HttpServletRequest request)
 			throws Exception {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-
-		TaskRequest taskReq = new TaskRequest();
-		taskReq.setTimestamp(new Date());
-		// if request is not multipart, i.e. no file upload then send error back
+		PostResponse presp = new PostResponse();
+		presp.setServerUniqueId(UUID.randomUUID().toString());
+		PostRequest postReq = new PostRequest();
+		postReq.setTimestamp(new Date());
+		// if request is not multipart, i.e. no file upload then send just
+		// response with free trial left
 		if (isMultipart) {
 			// Create a factory for disk-based file items
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -86,30 +105,31 @@ public class add extends HttpServlet {
 				if (item.isFormField()) {
 					String name = item.getFieldName();
 					if ("auth_id".equals(name)) {
-						taskReq.setAuth_id(item.getString());
+						postReq.setAuth_id(item.getString());
 					}
 					if ("device_id".equals(name)) {
-						taskReq.setDevice_id(item.getString());
+						postReq.setDevice_id(item.getString());
 					}
 					if ("urgency".equals(name)) {
-						taskReq.setUrgency(item.getString());
+						postReq.setUrgency(item.getString());
 					}
 				} else {
 					isFileUploaded = true;
 					String fileName = item.getName();
-					taskReq.setFileName(fileName);
+					postReq.setFileName(fileName);
 					long sizeInBytes = item.getSize();
 					byte[] pngData = item.get();
 					// email the file
-					if (taskReq.isValid()) {
-						sendEmail(taskReq, pngData, "image/png");
+					if (postReq.isValid()) {
+						// sendEmail(postReq, pngData, "image/png");
+
 					} else {
 						throw new Exception("All parameters not sent.");
 					}
 				}
 			}
-			if (!taskReq.isValid()) {
-				throw new Exception("No items in upload file request.");
+			if (!postReq.isValid()) {
+				throw new Exception("Parameters not set.");
 			}
 
 		} else {
@@ -119,24 +139,26 @@ public class add extends HttpServlet {
 
 	}
 
-	private void sendEmail(TaskRequest taskReq, byte[] pngData, String string) {
+	private void sendEmail(PostRequest taskReq, byte[] pngData, String string) {
 		final Email email = new Email();
 
 		email.setFromAddress(fromName, fromEmail);
 		email.setSubject("New task request");
-		email.addRecipient("Task Requested", toEmail,
-				RecipientType.TO);
-		email.setText(String
-				.format("New task received at %1$tD %1$tH:%1$tM:%1$tS from user id %2$s with description '%3$s' and priority %4$s. Output format requested is %5$s.",
-						taskReq.getTimestamp(), taskReq.getUserId(),
-						taskReq.getDescription(), taskReq.getPriority(),
-						taskReq.getOutput_type()));
-
+		email.addRecipient("Task Requested", toEmail, RecipientType.TO);
+		/*
+		 * email.setText(String .format(
+		 * "New task received at %1$tD %1$tH:%1$tM:%1$tS from user id %2$s with description '%3$s' and priority %4$s. Output format requested is %5$s."
+		 * , taskReq.getTimestamp() taskReq.getUserId(),
+		 * taskReq.getDescription(), taskReq.getPriority(),
+		 * taskReq.getOutput_type())
+		 * 
+		 * );
+		 */
 		// embed images and include downloadable attachments
 		email.addEmbeddedImage(taskReq.getFileName(), pngData, "image/png");
 
-		new Mailer("smtp.gmail.com", 587, fromEmail,
-				emailPass, TransportStrategy.SMTP_TLS).sendMail(email);
+		new Mailer("smtp.gmail.com", 587, fromEmail, emailPass,
+				TransportStrategy.SMTP_TLS).sendMail(email);
 
 	}
 }

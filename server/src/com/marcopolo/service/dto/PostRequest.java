@@ -1,11 +1,20 @@
-package com.marcopolo.service;
+package com.marcopolo.service.dto;
 
 import java.util.Date;
 
-public class TaskRequest {
-	private String auth_id, device_id, urgency, fileName;
+public class PostRequest {
+	private String auth_id, device_id, urgency, fileName, image_url;
 	private Date timestamp;
+	
+	
+	public String getImage_url() {
+		return image_url;
+	}
 
+
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
+	}
 	
 	public String getAuth_id() {
 		return auth_id;
@@ -57,6 +66,13 @@ public class TaskRequest {
 	}
 
 
+	public boolean hasImage() {
+		boolean retVal = true;
+		if (fileName == null) {
+			retVal = false;
+		}
+		return retVal;
+	}
 	/**
 	 * For now only make auth_id and device_id as mandatory fields
 	 * @return
