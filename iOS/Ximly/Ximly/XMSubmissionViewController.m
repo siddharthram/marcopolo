@@ -109,7 +109,7 @@
         return;
     }
     
-    
+    [self.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1];
 }
 
 

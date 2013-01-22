@@ -10,4 +10,6 @@
 
 @interface XMXimlyHTTPClient : AFHTTPClient
 
++ (XMXimlyHTTPClient *)sharedClient;
+
 @end
