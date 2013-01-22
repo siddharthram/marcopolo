@@ -55,7 +55,7 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)showSubmissionView;
+- (void)showSubmissionView
 {
     if (!self.submissionViewController) {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

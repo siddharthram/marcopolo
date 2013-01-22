@@ -97,6 +97,7 @@
     }
     
     if (cancelled == YES) {
+        self.view.hidden = YES;
         [self.view removeFromSuperview];
     } else {
         [self presentViewController:imagePicker animated:YES completion:nil];
@@ -109,7 +110,8 @@
         return;
     }
     
-    [self.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1];
+    self.view.hidden = YES;
+    [self.view removeFromSuperview];
 }
 
 
@@ -127,7 +129,8 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    [self.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1];
+    self.view.hidden = YES;
+    [self.view removeFromSuperview];
 }
 
 
