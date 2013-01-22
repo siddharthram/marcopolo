@@ -28,9 +28,9 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 
 public class S3StoreImage {
-	private static final String awsAccessKeyId = "1GHMG6P91ACQW6VM0W02";
-	private static final String key = "Va1ZFXmrFKBkqoDxSqs3wMOcAKZxmAr6x69j0TUm";
-	private static final String bucketName = "ximly_test";
+	private static final String awsAccessKeyId = "AKIAIGP5BWDMWRRINTSQ";
+	private static final String key = "SNZNbO2QlOAdpZc19BLlbgz7HoVLTOnHOMteClge";
+	private static final String bucketName = "ximly_test1";
 
 	public static String storeS3File(String uuid, byte[] data) {
 		String returnUrl = "https://s3.amazonaws.com/" + bucketName + "/" + uuid;
