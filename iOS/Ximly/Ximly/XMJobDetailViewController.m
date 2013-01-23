@@ -8,6 +8,8 @@
 
 #import "XMJobDetailViewController.h"
 
+#import "XMImageCache.h"
+
 @interface XMJobDetailViewController ()
 
 @end
@@ -30,12 +32,18 @@
     NSString *titleText = [self.jobData valueForKey:@"title"];
     self.title = titleText ? titleText : @"Untitled";
     
-    UIImage *theImage = [self.jobData valueForKey:@"image"];
+    NSString *imageKey = [self.jobData valueForKey:@"imageKey"];
     
-    if (theImage) {
-        self.imageView.image = theImage;
+    UIImage *anImage = nil;
+    
+    if ([imageKey length] > 0) {
+        anImage = [XMImageCache loadImageForKey:imageKey];
+    }
+    
+    if (anImage) {
+        self.imageView.image = anImage;
     } else {
-        self.imageView.image = [UIImage imageNamed:@"intro.png"];
+        self.imageView.image = [UIImage imageNamed:@"Default.png"];
     }
     
     NSString *transcribedText = [self.jobData valueForKey:@"transcription"];

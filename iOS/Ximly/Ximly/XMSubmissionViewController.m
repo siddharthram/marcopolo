@@ -8,6 +8,8 @@
 
 #import "XMSubmissionViewController.h"
 
+#import "XMImageCache.h"
+
 @interface XMSubmissionViewController ()
 
 @end
@@ -121,7 +123,10 @@
 {
     self.view.hidden = YES;
     [self.view removeFromSuperview];
-    NSDictionary *jobData = @{@"status" : @"PROCESSING", @"image" : self.pickedImage, @"time" : @"0 mins"};
+    
+    NSString *imageKey = [XMImageCache newKey];
+    [XMImageCache saveImage:self.pickedImage withKey:imageKey];
+    NSDictionary *jobData = @{@"status" : @"PROCESSING", @"imageKey" : imageKey, @"time" : @"0 mins ago"};
     [self.delegate submissionCompletedForJob:jobData];
 	[[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:jobData];
 }

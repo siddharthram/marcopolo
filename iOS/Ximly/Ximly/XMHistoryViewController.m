@@ -10,6 +10,7 @@
 
 #import "XMAppDelegate.h"
 #import "XMHistoryTableViewCell.h"
+#import "XMImageCache.h"
 #import "XMJobDetailViewController.h"
 
 #define kJobCellReuseIdentifier @"JobCellReuseIdentifier"
@@ -35,6 +36,7 @@ static NSString     *_dataFilePath = nil;
 	return _dataFilePath;
 }
 
+#define kDummyKey @"DummyKey"
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,10 +47,11 @@ static NSString     *_dataFilePath = nil;
         self.historyList = [NSMutableArray arrayWithContentsOfFile:[XMHistoryViewController dataFilePath]];
 
         if ([self.historyList count] == 0) {
-            self.historyList = [@[@{@"imageID" : @"1", @"status" : @"PROCESSING",  @"time" : @"20 mins ago"},
-                            @{@"imageID" : @"2", @"status" : @"NEW", @"time" : @"25 mins ago", @"transcription" : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah."},
-                            @{@"imageID" : @"3", @"status" : @"NEW", @"time" : @"2 days ago", @"transcription" : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."},
-                            @{@"imageID" : @"4",@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago", @"transcription" : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."}] mutableCopy];
+            [XMImageCache saveImage:[UIImage imageNamed:@"intro.png"] withKey:kDummyKey];
+            self.historyList = [@[@{@"imageKey" : kDummyKey, @"status" : @"PROCESSING",  @"time" : @"20 mins ago"},
+                            @{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"25 mins ago", @"transcription" : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah."},
+                            @{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"2 days ago", @"transcription" : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."},
+                            @{@"imageKey" : kDummyKey,@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago", @"transcription" : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."}] mutableCopy];
             [self.historyList writeToFile:[XMHistoryViewController dataFilePath] atomically:YES];
         }
 
@@ -97,7 +100,7 @@ static NSString     *_dataFilePath = nil;
     NSDictionary *jobData = (NSDictionary *)[notification object];
     if (jobData) {
         [self.historyList insertObject:jobData atIndex:0];
- // TODO       [self.historyList writeToFile:[XMHistoryViewController dataFilePath] atomically:YES];
+        [self.historyList writeToFile:[XMHistoryViewController dataFilePath] atomically:YES];
         [self.tableView reloadData];
     }
 }
@@ -136,12 +139,18 @@ static NSString     *_dataFilePath = nil;
     
     NSDictionary *jobData = [self.historyList objectAtIndex:indexPath.row];
     
-    UIImage *anImage = [jobData valueForKey:@"image"];
+    NSString *imageKey = [jobData valueForKey:@"imageKey"];
+    
+    UIImage *anImage = nil;
+    
+    if ([imageKey length] > 0) {
+        anImage = [XMImageCache loadImageForKey:imageKey];
+    }
     
     if (anImage) {
         cell.thumbnailView.image = anImage;
     } else {
-        cell.thumbnailView.image = [UIImage imageNamed:@"intro.png"];
+        cell.thumbnailView.image = [UIImage imageNamed:@"Default.png"];
     }
     
     NSString *labelText = [jobData valueForKey:@"status"];
