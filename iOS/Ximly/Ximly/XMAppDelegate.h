@@ -20,7 +20,7 @@
 @property (strong, nonatomic) XMSubmissionViewController *submissionViewController;
 
 - (void)showIntroView;
-- (void)showSubmissionView;
+- (void)showSubmissionViewWithDelegate:(NSObject<XMSubmissionDelegate> *)submissionDelegate;
 - (void)showHistoryView;
 
 @end

@@ -42,8 +42,9 @@
     [self.photoSourceSelectionSheet addButtonWithTitle:@"Cancel"];
 }
 
-- (void)showSelectionSheet
+- (void)startSubmissionWithDelegate:(NSObject<XMSubmissionDelegate> *)submissionDelegate
 {
+    self.delegate = submissionDelegate;
     self.pickedImage = nil;
     [self.photoSourceSelectionSheet showInView:self.view];
 }
@@ -99,6 +100,7 @@
     if (cancelled == YES) {
         self.view.hidden = YES;
         [self.view removeFromSuperview];
+        [self.delegate submissionCancelled];
     } else {
         [self presentViewController:imagePicker animated:YES completion:nil];
     }
@@ -110,9 +112,18 @@
         return;
     }
     
+    // TODO call cloud
+    [self submissionToCloudCompleted];
+
+}
+     
+- (void)submissionToCloudCompleted
+{
     self.view.hidden = YES;
     [self.view removeFromSuperview];
-    
+    NSDictionary *jobData = @{@"status" : @"PROCESSING", @"image" : self.pickedImage, @"time" : @"0 mins"};
+    [self.delegate submissionCompletedForJob:jobData];
+	[[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:jobData];
 }
 
 
@@ -132,6 +143,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     self.view.hidden = YES;
     [self.view removeFromSuperview];
+    [self.delegate submissionCancelled];
 }
 
 

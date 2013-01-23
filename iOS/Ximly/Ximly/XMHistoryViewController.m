@@ -42,18 +42,23 @@ static NSString     *_dataFilePath = nil;
     if (self) {
         self.title = NSLocalizedString(@"History", @"History");
         
-#if 0
         self.historyList = [NSMutableArray arrayWithContentsOfFile:[XMHistoryViewController dataFilePath]];
-#else
-        self.historyList = [@[@{@"imageID" : @"1", @"status" : @"PROCESSING",  @"time" : @"20 mins ago"},
+
+        if ([self.historyList count] == 0) {
+            self.historyList = [@[@{@"imageID" : @"1", @"status" : @"PROCESSING",  @"time" : @"20 mins ago"},
                             @{@"imageID" : @"2", @"status" : @"NEW", @"time" : @"25 mins ago", @"transcription" : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah."},
                             @{@"imageID" : @"3", @"status" : @"NEW", @"time" : @"2 days ago", @"transcription" : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."},
                             @{@"imageID" : @"4",@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago", @"transcription" : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."}] mutableCopy];
+            [self.historyList writeToFile:[XMHistoryViewController dataFilePath] atomically:YES];
+        }
 
-#endif
-        
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 							
 - (void)viewDidLoad
@@ -63,6 +68,7 @@ static NSString     *_dataFilePath = nil;
     // Register the nib for our custom cell for re-use
     UINib *cellNib = [UINib nibWithNibName:@"XMHistoryTableViewCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:kJobCellReuseIdentifier];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobWasSubmitted:) name:XM_NOTIFICATION_JOB_SUBMITTED object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,7 +80,7 @@ static NSString     *_dataFilePath = nil;
 - (IBAction)doSubmit:(id)sender
 {
     XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate showSubmissionView];
+    [appDelegate showSubmissionViewWithDelegate:self];
 }
 
 - (IBAction)showJobDetailForRow:(int)row
@@ -84,6 +90,29 @@ static NSString     *_dataFilePath = nil;
     jobDetailController.jobData = jobData;
     
     [self.navigationController pushViewController:jobDetailController animated:YES];
+}
+
+- (void)jobWasSubmitted:(id)notification
+{
+    NSDictionary *jobData = (NSDictionary *)[notification object];
+    if (jobData) {
+        [self.historyList insertObject:jobData atIndex:0];
+ // TODO       [self.historyList writeToFile:[XMHistoryViewController dataFilePath] atomically:YES];
+        [self.tableView reloadData];
+    }
+}
+
+#pragma mark - XMSubmission delegate methods
+
+- (void)submissionCancelled
+{
+    // No op
+}
+
+- (void)submissionCompletedForJob:(NSDictionary *)jobData
+{
+    // No op
+    // We will handle updating the UI for the new job when we get the XM_NOTIFICATION_JOB_SUBMITTED notification
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -107,7 +136,13 @@ static NSString     *_dataFilePath = nil;
     
     NSDictionary *jobData = [self.historyList objectAtIndex:indexPath.row];
     
-    cell.thumbnailView.image = [UIImage imageNamed:@"intro.png"];
+    UIImage *anImage = [jobData valueForKey:@"image"];
+    
+    if (anImage) {
+        cell.thumbnailView.image = anImage;
+    } else {
+        cell.thumbnailView.image = [UIImage imageNamed:@"intro.png"];
+    }
     
     NSString *labelText = [jobData valueForKey:@"status"];
     

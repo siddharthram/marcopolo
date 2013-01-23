@@ -55,7 +55,7 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)showSubmissionView
+- (void)showSubmissionViewWithDelegate:(NSObject<XMSubmissionDelegate> *)submissionDelegate
 {
     if (!self.submissionViewController) {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -65,7 +65,7 @@
         }
     }
     [self.window addSubview:self.submissionViewController.view];
-    [self.submissionViewController showSelectionSheet];
+    [self.submissionViewController startSubmissionWithDelegate:submissionDelegate];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

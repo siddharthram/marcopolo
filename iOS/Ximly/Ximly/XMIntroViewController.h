@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XMIntroViewController : UIViewController
+#import "XMSubmissionViewController.h"
+
+@interface XMIntroViewController : UIViewController <XMSubmissionDelegate>
 
 - (IBAction)doStart:(id)sender;
 

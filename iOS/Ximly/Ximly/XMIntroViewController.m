@@ -10,7 +10,6 @@
 
 #import "XMAppDelegate.h"
 #import "XMHistoryViewController.h"
-#import "XMSubmissionViewController.h"
 
 @interface XMIntroViewController ()
 
@@ -51,6 +50,21 @@
 - (IBAction)doStart:(id)sender
 {
     XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate showSubmissionView];
+    [appDelegate showSubmissionViewWithDelegate:self];
 }
+
+#pragma mark - XMSubmission delegate methods
+
+- (void)submissionCancelled
+{
+    XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showHistoryView];
+}
+
+- (void)submissionCompletedForJob:(NSDictionary *)jobData
+{
+    XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showHistoryView];
+}
+
 @end
