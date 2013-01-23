@@ -8,6 +8,8 @@
 
 #import "XMImageCache.h"
 
+#import "XMUtilities.h"
+
 static NSString     *_cacheFolderPath = nil;
 
 @implementation XMImageCache
@@ -20,11 +22,25 @@ static NSString     *_cacheFolderPath = nil;
     return (__bridge_transfer NSString *)string;
 }
 
++ (void)createCacheFolder
+{
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    if (![fileManager fileExistsAtPath:[self cacheFolderPath]]) {
+        [fileManager createDirectoryAtPath:[self cacheFolderPath]
+               withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:NULL];
+        [XMUtilities addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:[self cacheFolderPath]]];
+    }
+    
+}
+
 + (NSString *)cacheFolderPath
 {
 	if (!_cacheFolderPath) {
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		_cacheFolderPath = [paths objectAtIndex:0];
+		NSString *rootPath = [paths objectAtIndex:0];
+        _cacheFolderPath = [NSString stringWithFormat:@"%@/images", rootPath];
 	}
 	return _cacheFolderPath;
 }
@@ -36,9 +52,12 @@ static NSString     *_cacheFolderPath = nil;
 
 + (void)saveImage:(UIImage *)image withKey:(NSString *)key
 {
+    [self createCacheFolder];
     NSData *imageData = UIImagePNGRepresentation(image);
     NSString *filePath = [self cacheFilePathForKey:key];
     [imageData writeToFile:filePath atomically:YES];
+    
+    [XMUtilities addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:filePath]];
     NSError *error = nil;
     [[NSFileManager defaultManager] setAttributes: @{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:filePath error:&error];
 }

@@ -12,6 +12,7 @@
 #import "XMHistoryTableViewCell.h"
 #import "XMImageCache.h"
 #import "XMJobDetailViewController.h"
+#import "XMUtilities.h"
 
 #define kJobCellReuseIdentifier @"JobCellReuseIdentifier"
 
@@ -109,6 +110,8 @@ static NSString     *_dataFilePath = nil;
 {
     NSString *filePath = [XMHistoryViewController dataFilePath];
     [self.historyList writeToFile:filePath atomically:YES];
+    
+    [XMUtilities addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:filePath]];
     NSError *error = nil;
     [[NSFileManager defaultManager] setAttributes: @{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:filePath error:&error];
 }
