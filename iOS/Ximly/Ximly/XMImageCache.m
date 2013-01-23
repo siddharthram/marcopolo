@@ -37,7 +37,10 @@ static NSString     *_cacheFolderPath = nil;
 + (void)saveImage:(UIImage *)image withKey:(NSString *)key
 {
     NSData *imageData = UIImagePNGRepresentation(image);
-    [imageData writeToFile:[self cacheFilePathForKey:key] atomically:YES];
+    NSString *filePath = [self cacheFilePathForKey:key];
+    [imageData writeToFile:filePath atomically:YES];
+    NSError *error = nil;
+    [[NSFileManager defaultManager] setAttributes: @{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:filePath error:&error];
 }
 
 + (UIImage *)loadImageForKey:(NSString *)key

@@ -52,7 +52,7 @@ static NSString     *_dataFilePath = nil;
                             @{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"25 mins ago", @"transcription" : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah."},
                             @{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"2 days ago", @"transcription" : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."},
                             @{@"imageKey" : kDummyKey,@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago", @"transcription" : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."}] mutableCopy];
-            [self.historyList writeToFile:[XMHistoryViewController dataFilePath] atomically:YES];
+            [self writeHistoryListToDisk];
         }
 
     }
@@ -100,9 +100,17 @@ static NSString     *_dataFilePath = nil;
     NSDictionary *jobData = (NSDictionary *)[notification object];
     if (jobData) {
         [self.historyList insertObject:jobData atIndex:0];
-        [self.historyList writeToFile:[XMHistoryViewController dataFilePath] atomically:YES];
+        [self writeHistoryListToDisk];
         [self.tableView reloadData];
     }
+}
+
+- (void)writeHistoryListToDisk
+{
+    NSString *filePath = [XMHistoryViewController dataFilePath];
+    [self.historyList writeToFile:filePath atomically:YES];
+    NSError *error = nil;
+    [[NSFileManager defaultManager] setAttributes: @{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:filePath error:&error];
 }
 
 #pragma mark - XMSubmission delegate methods
