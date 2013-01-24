@@ -171,6 +171,7 @@ static NSString     *_dataFilePath = nil;
         cell.label1.text = labelText;
         
         labelText = [jobData valueForKey:@"title"];
+        cell.label2.font = [UIFont boldSystemFontOfSize:13.0];
         cell.label2.text = labelText ? labelText : @"Untitled";
         
         labelText = [jobData valueForKey:@"time"];
@@ -182,6 +183,7 @@ static NSString     *_dataFilePath = nil;
         cell.label1.text = labelText ? labelText : @"Untitled";
         
         labelText = [jobData valueForKey:@"time"];
+        cell.label2.font = [UIFont systemFontOfSize:10];
         cell.label2.text = labelText ? labelText : @"";
         
         cell.label3.text = @"";
