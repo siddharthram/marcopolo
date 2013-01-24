@@ -26,11 +26,12 @@ static NSString     *_cacheFolderPath = nil;
 {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     if (![fileManager fileExistsAtPath:[self cacheFolderPath]]) {
-        [fileManager createDirectoryAtPath:[self cacheFolderPath]
+        if ([fileManager createDirectoryAtPath:[self cacheFolderPath]
                withIntermediateDirectories:YES
                                 attributes:nil
-                                     error:NULL];
-        [XMUtilities addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:[self cacheFolderPath]]];
+                                         error:NULL]) {
+            [XMUtilities addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:[self cacheFolderPath]]];
+        }
     }
     
 }
@@ -40,7 +41,7 @@ static NSString     *_cacheFolderPath = nil;
 	if (!_cacheFolderPath) {
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *rootPath = [paths objectAtIndex:0];
-        _cacheFolderPath = [NSString stringWithFormat:@"%@/images", rootPath];
+        _cacheFolderPath = [rootPath stringByAppendingPathComponent:@"images"];
 	}
 	return _cacheFolderPath;
 }
