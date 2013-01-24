@@ -45,7 +45,7 @@ static NSString     *_dataFilePath = nil;
     if (self) {
         self.title = NSLocalizedString(@"History", @"History");
         
-        self.historyList = [NSMutableArray arrayWithContentsOfFile:[XMHistoryViewController dataFilePath]];
+        [self readHistoryListFromDisk];
 
         if ([self.historyList count] == 0) {
             [XMImageCache saveImage:[UIImage imageNamed:@"intro.png"] withKey:kDummyKey];
@@ -104,6 +104,11 @@ static NSString     *_dataFilePath = nil;
         [self writeHistoryListToDisk];
         [self.tableView reloadData];
     }
+}
+
+- (void)readHistoryListFromDisk
+{
+    self.historyList = [NSMutableArray arrayWithContentsOfFile:[XMHistoryViewController dataFilePath]];
 }
 
 - (void)writeHistoryListToDisk
@@ -183,7 +188,7 @@ static NSString     *_dataFilePath = nil;
         cell.label1.text = labelText ? labelText : @"Untitled";
         
         labelText = [jobData valueForKey:@"time"];
-        cell.label2.font = [UIFont systemFontOfSize:10];
+        cell.label2.font = [UIFont systemFontOfSize:10.0];
         cell.label2.text = labelText ? labelText : @"";
         
         cell.label3.text = @"";
