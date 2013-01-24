@@ -76,7 +76,7 @@
     self.imageView.image = [self getImage];
     
     NSString *transcribedText = [self.jobData valueForKey:@"transcription"];
-    self.transcribedTextView.text = transcribedText ? transcribedText : @"Not Yet Available";
+    self.transcribedTextView.text = transcribedText ? transcribedText : @"Transcription Not Yet Available";
 }
 
 
