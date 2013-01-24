@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
     
-    self.photoSourceSelectionSheet = [[UIActionSheet alloc] initWithTitle:@"Submit Photo From ..."
+    self.photoSourceSelectionSheet = [[UIActionSheet alloc] initWithTitle:@"Submit Photo from ..."
                                                                     delegate:self
                                                              cancelButtonTitle:nil
                                                         destructiveButtonTitle:nil
