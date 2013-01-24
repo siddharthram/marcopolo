@@ -15,4 +15,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UITextView *transcribedTextView;
 
+- (IBAction)share:(id)sender;
+
 @end
