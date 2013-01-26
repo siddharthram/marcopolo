@@ -44,8 +44,6 @@
     CGRect ratingBoxFrame = self.ratingBox.frame;
     
     if ([self.rating length] > 0) {
-        self.commentBackdrop.hidden = NO;
-        self.submitButton.hidden = NO;
         ratingBoxFrame.size.height = 252.0;
         NSString *comment = [self.jobData valueForKey:@"ratingComment"];
         self.commentTextView.text = comment ? comment : @"";
@@ -60,6 +58,8 @@
             self.goodButton.selected = NO;
             self.badButton.selected = NO;
         }
+        self.commentBackdrop.hidden = NO;
+        self.submitButton.hidden = NO;
     } else {
         self.commentBackdrop.hidden = YES;
         self.submitButton.hidden = YES;
@@ -79,7 +79,7 @@
 {
     if ([self.rating length] == 0) {
         self.rating = kJobRatingGood;
-        [UIView animateWithDuration:.2 animations:^(void){[self drawRatingBox];}];
+        [UIView animateWithDuration:.3 animations:^(void){[self drawRatingBox];}];
     } else {
         self.rating = kJobRatingGood;
         self.goodButton.selected = YES;
@@ -91,7 +91,7 @@
 {
     if ([self.rating length] == 0) {
         self.rating = kJobRatingBad;
-        [UIView animateWithDuration:.2 animations:^(void){[self drawRatingBox];}];
+        [UIView animateWithDuration:.3 animations:^(void){[self drawRatingBox];}];
     } else {
         self.rating = kJobRatingBad;
         self.goodButton.selected = NO;
