@@ -97,4 +97,13 @@
     [self presentViewController:activityVC animated:YES completion:nil];
 }
 
+- (IBAction)rate:(id)sender
+{
+    self.rateJobViewController = [[XMRateJobViewController alloc] initWithNibName:@"XMRateJobViewController" bundle:nil];
+    self.rateJobViewController.jobData = self.jobData;
+    [self.view addSubview:self.rateJobViewController.view];
+    
+    // TODO - Write ratings to disk (create a singleton history list that we can read and write from disk anywhere in the app)
+}
+
 @end

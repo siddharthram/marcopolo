@@ -49,10 +49,10 @@ static NSString     *_dataFilePath = nil;
 
         if ([self.historyList count] == 0) {
             [XMImageCache saveImage:[UIImage imageNamed:@"intro.png"] withKey:kDummyKey];
-            self.historyList = [@[@{@"imageKey" : kDummyKey, @"status" : @"PROCESSING",  @"time" : @"20 mins ago"},
-                            @{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"25 mins ago", @"transcription" : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah."},
-                            @{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"2 days ago", @"transcription" : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."},
-                            @{@"imageKey" : kDummyKey,@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago", @"transcription" : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."}] mutableCopy];
+            self.historyList = [@[[@{@"imageKey" : kDummyKey, @"status" : @"PROCESSING",  @"time" : @"20 mins ago"} mutableCopy],
+                                [@{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"25 mins ago", @"transcription" : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah.", @"rating" : @"Good", @"ratingComment" : @"Wow! Better than sliced bread."} mutableCopy],
+                            [@{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"2 days ago", @"transcription" : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."} mutableCopy],
+                            [@{@"imageKey" : kDummyKey,@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago", @"transcription" : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."} mutableCopy]] mutableCopy];
             [self writeHistoryListToDisk];
         }
 
@@ -90,7 +90,7 @@ static NSString     *_dataFilePath = nil;
 - (IBAction)showJobDetailForRow:(int)row
 {
     XMJobDetailViewController *jobDetailController = [[XMJobDetailViewController alloc] initWithNibName:@"XMJobDetailViewController" bundle:nil];
-    NSDictionary *jobData = [self.historyList objectAtIndex:row];
+    NSMutableDictionary *jobData = [self.historyList objectAtIndex:row];
     jobDetailController.jobData = jobData;
     
     [self.navigationController pushViewController:jobDetailController animated:YES];
@@ -98,7 +98,7 @@ static NSString     *_dataFilePath = nil;
 
 - (void)jobWasSubmitted:(id)notification
 {
-    NSDictionary *jobData = (NSDictionary *)[notification object];
+    NSMutableDictionary *jobData = (NSMutableDictionary *)[notification object];
     if (jobData) {
         [self.historyList insertObject:jobData atIndex:0];
         [self writeHistoryListToDisk];
@@ -128,7 +128,7 @@ static NSString     *_dataFilePath = nil;
     // No op
 }
 
-- (void)submissionCompletedForJob:(NSDictionary *)jobData
+- (void)submissionCompletedForJob:(NSMutableDictionary *)jobData
 {
     // No op
     // We will handle updating the UI for the new job when we get the XM_NOTIFICATION_JOB_SUBMITTED notification

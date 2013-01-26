@@ -61,7 +61,7 @@
     [appDelegate showHistoryView];
 }
 
-- (void)submissionCompletedForJob:(NSDictionary *)jobData
+- (void)submissionCompletedForJob:(NSMutableDictionary *)jobData
 {
     XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showHistoryView];

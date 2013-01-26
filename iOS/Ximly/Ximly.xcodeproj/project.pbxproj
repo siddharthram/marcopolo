@@ -42,6 +42,14 @@
 		248A4CC616ADEA2F0042B46C /* XMIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */; };
 		248A4CDD16ADF2320042B46C /* intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CDC16ADF2310042B46C /* intro.png */; };
 		248A4CEA16AE1FE20042B46C /* XMXimlyHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */; };
+		24B2E04D16B3D21E0022DFAF /* XMRateJobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2E04B16B3D21E0022DFAF /* XMRateJobViewController.m */; };
+		24B2E04E16B3D21E0022DFAF /* XMRateJobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E04C16B3D21E0022DFAF /* XMRateJobViewController.xib */; };
+		24B2E06516B3D5150022DFAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B2E06416B3D5150022DFAF /* QuartzCore.framework */; };
+		24B2E06A16B3E1F00022DFAF /* bad.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06816B3E1EF0022DFAF /* bad.png */; };
+		24B2E06B16B3E1F00022DFAF /* good.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06916B3E1EF0022DFAF /* good.png */; };
+		24B2E06D16B3E43B0022DFAF /* badSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06C16B3E43B0022DFAF /* badSelected.png */; };
+		24B2E06F16B3E6EC0022DFAF /* goodSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06E16B3E6EC0022DFAF /* goodSelected.png */; };
+		24B2E07116B3F9400022DFAF /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E07016B3F9400022DFAF /* closeButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +110,15 @@
 		248A4CDC16ADF2310042B46C /* intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro.png; sourceTree = "<group>"; };
 		248A4CE816AE1FE20042B46C /* XMXimlyHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMXimlyHTTPClient.h; sourceTree = "<group>"; };
 		248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMXimlyHTTPClient.m; sourceTree = "<group>"; };
+		24B2E04A16B3D21E0022DFAF /* XMRateJobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMRateJobViewController.h; sourceTree = "<group>"; };
+		24B2E04B16B3D21E0022DFAF /* XMRateJobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMRateJobViewController.m; sourceTree = "<group>"; };
+		24B2E04C16B3D21E0022DFAF /* XMRateJobViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMRateJobViewController.xib; sourceTree = "<group>"; };
+		24B2E06416B3D5150022DFAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		24B2E06816B3E1EF0022DFAF /* bad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bad.png; sourceTree = "<group>"; };
+		24B2E06916B3E1EF0022DFAF /* good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = good.png; sourceTree = "<group>"; };
+		24B2E06C16B3E43B0022DFAF /* badSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badSelected.png; sourceTree = "<group>"; };
+		24B2E06E16B3E6EC0022DFAF /* goodSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goodSelected.png; sourceTree = "<group>"; };
+		24B2E07016B3F9400022DFAF /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
 		443383F986B54B62861349AB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		F23C08989CC04E6D986F4BB5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -111,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24B2E06516B3D5150022DFAF /* QuartzCore.framework in Frameworks */,
 				2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */,
 				2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */,
 				2450229A16ADD7F100FA03B0 /* CoreGraphics.framework in Frameworks */,
@@ -134,6 +152,7 @@
 		2450228616ADD7F100FA03B0 = {
 			isa = PBXGroup;
 			children = (
+				24B2E06416B3D5150022DFAF /* QuartzCore.framework */,
 				2450229B16ADD7F100FA03B0 /* Ximly */,
 				245022D316ADD7F100FA03B0 /* XimlyTests */,
 				2450229416ADD7F100FA03B0 /* Frameworks */,
@@ -183,6 +202,9 @@
 				2486249016AE7D0100DDCA75 /* XMJobDetailViewController.h */,
 				2486249116AE7D0100DDCA75 /* XMJobDetailViewController.m */,
 				2486249216AE7D0100DDCA75 /* XMJobDetailViewController.xib */,
+				24B2E04A16B3D21E0022DFAF /* XMRateJobViewController.h */,
+				24B2E04B16B3D21E0022DFAF /* XMRateJobViewController.m */,
+				24B2E04C16B3D21E0022DFAF /* XMRateJobViewController.xib */,
 				245022AD16ADD7F100FA03B0 /* XMSubmissionViewController.h */,
 				245022AE16ADD7F100FA03B0 /* XMSubmissionViewController.m */,
 				245022BB16ADD7F100FA03B0 /* XMSubmissionViewController_iPhone.xib */,
@@ -191,9 +213,14 @@
 				248624A316AFEFFB00DDCA75 /* XMUtilities.m */,
 				248A4CE816AE1FE20042B46C /* XMXimlyHTTPClient.h */,
 				248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */,
-				248A4CDC16ADF2310042B46C /* intro.png */,
+				24B2E06816B3E1EF0022DFAF /* bad.png */,
+				24B2E06C16B3E43B0022DFAF /* badSelected.png */,
+				24B2E07016B3F9400022DFAF /* closeButton.png */,
 				245022B016ADD7F100FA03B0 /* first.png */,
 				245022B216ADD7F100FA03B0 /* first@2x.png */,
+				24B2E06916B3E1EF0022DFAF /* good.png */,
+				24B2E06E16B3E6EC0022DFAF /* goodSelected.png */,
+				248A4CDC16ADF2310042B46C /* intro.png */,
 				245022B716ADD7F100FA03B0 /* second.png */,
 				245022B916ADD7F100FA03B0 /* second@2x.png */,
 				2450229C16ADD7F100FA03B0 /* Supporting Files */,
@@ -323,6 +350,12 @@
 				248A4CDD16ADF2320042B46C /* intro.png in Resources */,
 				2486248F16AE681D00DDCA75 /* XMHistoryTableViewCell.xib in Resources */,
 				2486249416AE7D0100DDCA75 /* XMJobDetailViewController.xib in Resources */,
+				24B2E04E16B3D21E0022DFAF /* XMRateJobViewController.xib in Resources */,
+				24B2E06A16B3E1F00022DFAF /* bad.png in Resources */,
+				24B2E06B16B3E1F00022DFAF /* good.png in Resources */,
+				24B2E06D16B3E43B0022DFAF /* badSelected.png in Resources */,
+				24B2E06F16B3E6EC0022DFAF /* goodSelected.png in Resources */,
+				24B2E07116B3F9400022DFAF /* closeButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +414,7 @@
 				2486249316AE7D0100DDCA75 /* XMJobDetailViewController.m in Sources */,
 				2486249716AFDAB900DDCA75 /* XMImageCache.m in Sources */,
 				248624A416AFEFFB00DDCA75 /* XMUtilities.m in Sources */,
+				24B2E04D16B3D21E0022DFAF /* XMRateJobViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

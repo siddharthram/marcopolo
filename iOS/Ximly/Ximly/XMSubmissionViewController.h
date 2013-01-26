@@ -13,7 +13,7 @@
 @protocol XMSubmissionDelegate <NSObject>
 
 - (void)submissionCancelled;
-- (void)submissionCompletedForJob:(NSDictionary *)jobData;
+- (void)submissionCompletedForJob:(NSMutableDictionary *)jobData;
 
 @end
 

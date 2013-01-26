@@ -55,12 +55,16 @@ static NSString     *_cacheFolderPath = nil;
 {
     [self createCacheFolder];
     NSData *imageData = UIImagePNGRepresentation(image);
-    NSString *filePath = [self cacheFilePathForKey:key];
-    [imageData writeToFile:filePath atomically:YES];
-    
-    [XMUtilities addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:filePath]];
-    NSError *error = nil;
-    [[NSFileManager defaultManager] setAttributes: @{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:filePath error:&error];
+    if (imageData) {
+        NSString *filePath = [self cacheFilePathForKey:key];
+        if ([filePath length] > 0) {
+            if ([imageData writeToFile:filePath atomically:YES]) {
+                [XMUtilities addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:filePath]];
+                NSError *error = nil;
+                [[NSFileManager defaultManager] setAttributes: @{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:filePath error:&error];
+            }
+        }
+    }
 }
 
 + (UIImage *)loadImageForKey:(NSString *)key
