@@ -125,6 +125,7 @@
     
     if (labelText) {
         cell.label1.textColor = [UIColor redColor];
+        cell.label1.font = [UIFont boldSystemFontOfSize:11.0];
         cell.label1.text = labelText;
         
         labelText = theJob.title;
@@ -137,6 +138,7 @@
         cell.label1.textColor = [UIColor darkTextColor];
 
         labelText = theJob.title;
+        cell.label1.font = [UIFont boldSystemFontOfSize:13.0];
         cell.label1.text = labelText ? labelText : @"Untitled";
         
         labelText = theJob.durationSinceLastAction;
