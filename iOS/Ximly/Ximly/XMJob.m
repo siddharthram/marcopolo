@@ -13,7 +13,7 @@
 
 @implementation XMJob 
 
-@dynamic requestID:
+@dynamic requestID;
 @dynamic title;
 @dynamic status;
 @dynamic submissionTime;
