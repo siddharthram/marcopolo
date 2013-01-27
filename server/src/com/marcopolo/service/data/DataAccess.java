@@ -1,11 +1,9 @@
 package com.marcopolo.service.data;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -18,7 +16,7 @@ import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
 public class DataAccess {
-	private final static String DATASOURCE_NAME = "jdbc/mydb";
+	private final static String DATASOURCE_NAME = "jdbc/MarcoPolo";
 	private final static int MAX_FREE_TASKS = 5;
 	private static DataSource _dataSource;
 
