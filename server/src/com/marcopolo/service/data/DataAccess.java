@@ -20,6 +20,7 @@ import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
 public class DataAccess {
+	private final static String AWS_DATASOURCE_NAME = "jdbc/MarcoPoloAWS";
 	private final static String DATASOURCE_NAME = "jdbc/MarcoPolo";
 	private final static int MAX_FREE_TASKS = 5;
 	private static DataSource _dataSource;
@@ -41,10 +42,13 @@ public class DataAccess {
 			try {
 				_dataSource = (DataSource) env.lookup(DATASOURCE_NAME);
 
-				if (_dataSource == null)
-					log.error("Could not find datasource name " + DATASOURCE_NAME);
-					throw new ServletException("`" + DATASOURCE_NAME
-							+ "' is an unknown DataSource");
+				if (_dataSource == null) {
+					_dataSource = (DataSource) env.lookup(AWS_DATASOURCE_NAME);
+					
+					log.error("Could not find datasource name " + DATASOURCE_NAME + " or " + AWS_DATASOURCE_NAME);
+					throw new ServletException("'" + DATASOURCE_NAME + "' or '" + AWS_DATASOURCE_NAME  
+							+ "' datasources can not be found");
+				}
 			} catch (NamingException e) {
 				log.error("Error initlaizing datasource. The error was ", e);
 				throw new ServletException(e);
@@ -195,8 +199,7 @@ public class DataAccess {
 			"left join device_table dt on dt.iddevice = tt.device_table_iddevice " +
 			"left outer join assignment_table at on tt.idtask = at.task_table_idtask ";
 
-/*
-	public static TaskStatusResponse getAllOpen() throws SQLException {
+/*	public static TaskStatusResponse getAllOpen() throws SQLException {
 
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		Connection conn = _dataSource.getConnection();
@@ -239,5 +242,5 @@ public class DataAccess {
 		}
 		return taskStatusResponse;
 	}
-
-*/}
+*/
+}
