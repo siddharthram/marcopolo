@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11AF054716B5BD2200BADCE6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF054616B5BD2200BADCE6 /* MobileCoreServices.framework */; };
+		11AF054A16B5BD3900BADCE6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */; };
 		13CD030F926343A7A5CC5475 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F23C08989CC04E6D986F4BB5 /* libPods.a */; };
 		2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229516ADD7F100FA03B0 /* UIKit.framework */; };
 		2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
@@ -69,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11AF054616B5BD2200BADCE6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2450229116ADD7F100FA03B0 /* Ximly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ximly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2450229516ADD7F100FA03B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2450229716ADD7F100FA03B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,6 +146,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11AF054A16B5BD3900BADCE6 /* SystemConfiguration.framework in Frameworks */,
+				11AF054716B5BD2200BADCE6 /* MobileCoreServices.framework in Frameworks */,
 				24B2E06516B3D5150022DFAF /* QuartzCore.framework in Frameworks */,
 				2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */,
 				2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */,
@@ -166,6 +172,8 @@
 		2450228616ADD7F100FA03B0 = {
 			isa = PBXGroup;
 			children = (
+				11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */,
+				11AF054616B5BD2200BADCE6 /* MobileCoreServices.framework */,
 				24B2E06416B3D5150022DFAF /* QuartzCore.framework */,
 				2450229B16ADD7F100FA03B0 /* Ximly */,
 				245022D316ADD7F100FA03B0 /* XimlyTests */,
