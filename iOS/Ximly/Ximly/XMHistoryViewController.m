@@ -49,9 +49,33 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     // Register the nib for our custom cell for re-use
+    
+    self.tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    self.tableViewController.tableView = self.tableView;
+    
+    UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
+
+    [refreshControl addTarget:self action:@selector(reloadDataSource:) forControlEvents:UIControlEventValueChanged];
+
+    self.tableViewController.refreshControl = refreshControl;
+    
     UINib *cellNib = [UINib nibWithNibName:@"XMHistoryTableViewCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:kJobCellReuseIdentifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobWasSubmitted:) name:XM_NOTIFICATION_JOB_SUBMITTED object:nil];
+}
+
+- (void)reloadDataSource:(UIRefreshControl *)sender
+{
+	self.isReloading = YES;
+	// TODO_SID: put your data fetching code here
+    [self dataSourceDidFinishReloading]; // TODO_SID: remove this line when you put your real code here
+}
+
+- (void)dataSourceDidFinishReloading
+{
+    // TODO_SID: call this when you're done reloading or if the reloading fails
+    self.isReloading = NO;
+    [self.tableViewController.refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
