@@ -1,16 +1,48 @@
 package com.marcopolo.service.dto;
 
 public class TaskStatus {
-	public String taskId, imageUrl, transcriptionData;
-	public int responseCode;
-	public String responseText;
+	private String serverUniqueRequestId, clientUniqueRequestId, imageUrl, transcriptionData;
+	private int status; // -1 error, 0 - submitted, 1 in progress, 2 completed
+	private long serverSubmissionTimeStamp, clientSubmitTimeStamp;
 
-	public String getTaskId() {
-		return taskId;
+	public long getServerSubmissionTimeStamp() {
+		return serverSubmissionTimeStamp;
 	}
 
-	public void setTaskId(String taskId) {
-		this.taskId = taskId;
+	public void setServerSubmissionTimeStamp(long serverSubmissionTimeStamp) {
+		this.serverSubmissionTimeStamp = serverSubmissionTimeStamp;
+	}
+
+	public long getClientSubmitTimeStamp() {
+		return clientSubmitTimeStamp;
+	}
+
+	public void setClientSubmitTimeStamp(long clientSubmitTimeStamp) {
+		this.clientSubmitTimeStamp = clientSubmitTimeStamp;
+	}
+
+	public String getServerUniqueRequestId() {
+		return serverUniqueRequestId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public void setServerUniqueRequestId(String serverUniqueRequestId) {
+		this.serverUniqueRequestId = serverUniqueRequestId;
+	}
+
+	public String getClientUniqueRequestId() {
+		return clientUniqueRequestId;
+	}
+
+	public void setClientUniqueRequestId(String clientUniqueRequestId) {
+		this.clientUniqueRequestId = clientUniqueRequestId;
 	}
 
 	public String getImageUrl() {
@@ -27,22 +59,6 @@ public class TaskStatus {
 
 	public void setTranscriptionData(String transcriptionData) {
 		this.transcriptionData = transcriptionData;
-	}
-
-	public int getResponseCode() {
-		return responseCode;
-	}
-
-	public void setResponseCode(int responseCode) {
-		this.responseCode = responseCode;
-	}
-
-	public String getResponseText() {
-		return responseText;
-	}
-
-	public void setResponseText(String responseText) {
-		this.responseText = responseText;
 	}
 
 }
