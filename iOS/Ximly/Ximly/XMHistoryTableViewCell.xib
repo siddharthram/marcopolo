@@ -47,6 +47,7 @@
 								<string key="NSFrame">{{10, 5}, {50, 50}}</string>
 								<reference key="NSSuperview" ref="413915582"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="267203795"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -88,13 +89,13 @@
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="263900043">
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
-									<double key="pointSize">13</double>
+									<double key="pointSize">11</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="197155681">
+								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">13</double>
+									<double key="NSSize">11</double>
 									<int key="NSfFlags">16</int>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -120,8 +121,15 @@
 								</object>
 								<reference key="IBUIHighlightedColor" ref="960374451"/>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<reference key="IBUIFontDescription" ref="263900043"/>
-								<reference key="IBUIFont" ref="197155681"/>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<int key="type">2</int>
+									<double key="pointSize">13</double>
+								</object>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">13</double>
+									<int key="NSfFlags">16</int>
+								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 							<object class="IBUILabel" id="790512573">
@@ -130,7 +138,7 @@
 								<string key="NSFrame">{{77, 33}, {176, 21}}</string>
 								<reference key="NSSuperview" ref="413915582"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="937364288"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -156,7 +164,7 @@
 						<string key="NSFrameSize">{320, 59}</string>
 						<reference key="NSSuperview" ref="69586889"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="267203795"/>
+						<reference key="NSNextKeyView" ref="937364288"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
