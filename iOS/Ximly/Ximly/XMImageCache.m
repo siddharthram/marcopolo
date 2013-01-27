@@ -14,13 +14,6 @@ static NSString     *_cacheFolderPath = nil;
 
 @implementation XMImageCache
 
-+ (NSString *)newKey
-{
-    CFUUIDRef theUUID = CFUUIDCreate(NULL);
-    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
-    CFRelease(theUUID);
-    return (__bridge_transfer NSString *)string;
-}
 
 + (void)createCacheFolder
 {

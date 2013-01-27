@@ -8,11 +8,20 @@
 
 #import "AFHTTPClient.h"
 
+#define XM_NOTIFICATION_JOB_SUBMITTED               @"XM_NOTIFICATION_JOB_SUBMITTED"
+#define XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED    @"XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED"
+#define XM_NOTIFICATION_JOB_SUBMISSION_FAILED       @"XM_NOTIFICATION_JOB_SUBMISSION_FAILED"
+
+
+@class XMJob;
+
 typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error);
 
 @interface XMXimlyHTTPClient : AFHTTPClient
 
 + (XMXimlyHTTPClient *)sharedClient;
+
++ (NSString *)newRequestID;
 
 - (void)cancelAndClean;
 
@@ -22,5 +31,8 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 - (void)uploadFile:(NSData *)fileData path:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure progress:(void (^)(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress;
 
 + (NSString *)getErrorFromOperation:(AFHTTPRequestOperation *)operation;
+
+
+- (void)submitImage:(NSData *)imageData withMetaData:(NSDictionary *)metaData;
 
 @end

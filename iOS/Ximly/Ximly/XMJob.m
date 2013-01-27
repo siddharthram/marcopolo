@@ -13,6 +13,7 @@
 
 @implementation XMJob 
 
+@dynamic requestID:
 @dynamic title;
 @dynamic status;
 @dynamic submissionTime;
@@ -22,6 +23,17 @@
 @dynamic imageKey;
 @dynamic image;
 @dynamic durationSinceLastAction;
+
+
+- (NSString *)requestID
+{
+    return [self.jobData valueForKey:kJobRequestID];
+}
+
+- (void)setRequestID:(NSString *)value
+{
+    [self.jobData setValue:value forKey:kJobRequestID];
+}
 
 - (NSString *)title
 {
@@ -93,14 +105,25 @@
     [self.jobData setValue:value forKey:kJobRatingCommentKey];
 }
 
+- (int)urgency
+{
+    NSString *urgencyString = [self.jobData valueForKey:kJobUrgency];
+    return [urgencyString intValue];
+}
+
+- (void)setUrgency:(int)value
+{
+    [self.jobData setValue:[NSString stringWithFormat:@"%d", value] forKey:kJobUrgency];
+}
+
 - (NSString *)imageKey
 {
-    return [self.jobData valueForKey:kJobImageKey];
+    return self.requestID;
 }
 
 - (void)setImageKey:(NSString *)value
 {
-    [self.jobData setValue:value forKey:kJobImageKey];
+    self.requestID = value;
 }
 
 - (UIImage *)image
@@ -140,4 +163,13 @@
     
     return dateString;
 }
+
+- (NSDictionary *)submissionMetaData
+{
+    NSDictionary *metaData = @{kJobRequestID : self.requestID, @"auth_id" : @"", @"device_id" : @"", kJobSubmissionTimeKey : self.submissionTime, kJobUrgency : [NSString stringWithFormat:@"%lld", (long long)[[NSDate date] timeIntervalSince1970]*1000]};
+    
+    
+    return metaData;
+}
+
 @end

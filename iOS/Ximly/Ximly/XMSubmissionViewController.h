@@ -10,12 +10,10 @@
 
 #import "XMJob.h"
 
-#define XM_NOTIFICATION_JOB_SUBMITTED      @"XM_NOTIFICATION_JOB_SUBMITTED"
-
 @protocol XMSubmissionDelegate <NSObject>
 
 - (void)submissionCancelled;
-- (void)submissionCompletedForJob:(XMJob *)job;
+- (void)jobSubmitted:(XMJob *)job;
 
 @end
 

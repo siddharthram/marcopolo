@@ -9,6 +9,8 @@
 #import "XMXimlyHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 #import "AFJSONRequestOperation.h"
+#import "XMImageCache.h"
+#import "XMJob.h"
 
 static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPolo";
 
@@ -22,6 +24,14 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
     });
     
     return _sharedClient;
+}
+
++ (NSString *)newRequestID;
+{
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    return (__bridge_transfer NSString *)string;
 }
 
 - (id)initWithBaseURL:(NSURL *)url {
@@ -56,6 +66,7 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
 - (void)uploadFile:(NSData *)fileData path:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure progress:(void (^)(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress {
     
     // TODO
+    
 }
 
 // Override AFHTTPClient to log requests
@@ -107,6 +118,30 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
     }
     
     return errorMessage;
+}
+
+- (void)submitImage:(NSData *)imageData withMetaData:(NSDictionary *)metaData
+{
+    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"/task/new" parameters:metaData constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"dummyName" fileName:@"dummyFileName" mimeType:@"image/png"];
+    }];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:
+        ^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"success: %@", operation.responseString);
+            [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:[metaData valueForKey:kJobRequestID]];
+        
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"error: %@",  operation.responseString);
+            [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:[metaData valueForKey:kJobRequestID]];
+        }
+    ];
+
+    
+    [operation start];
 }
 
 @end

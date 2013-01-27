@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-
+#define kJobRequestID           @"client_request_id"
 #define kJobTitleKey            @"title"
 #define kJobTranscriptionKey    @"transcription"
 #define kJobStatusKey           @"status"
-#define kJobSubmissionTimeKey   @"submissionTime"
+#define kJobSubmissionTimeKey   @"client_submission_timestamp"
 #define kJobFinishTimeKey       @"finishTime"
 #define kJobRatingKey           @"rating"
 #define kJobRatingCommentKey    @"ratingComment"
 #define kJobImageKey            @"imageKey"
+#define kJobUrgency             @"urgency"
 
 
 @interface XMJob : NSObject {
@@ -25,6 +26,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *jobData;
 
+@property (nonatomic, readwrite) NSString *requestID;
 @property (nonatomic, readwrite) NSString *title;
 @property (nonatomic, readwrite) NSString *transcription;
 @property (nonatomic, readwrite) NSString *status;
@@ -33,9 +35,12 @@
 @property (nonatomic, readwrite) NSString *rating;
 @property (nonatomic, readwrite) NSString *ratingComment;
 @property (nonatomic, readwrite) NSString *imageKey;
+@property (nonatomic, assign) int urgency;
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSString *durationSinceLastAction;
 
 - (void)setImage:(UIImage *)anImage withKey:(NSString *)theImageKey;
+
+- (NSDictionary *)submissionMetaData;
 
 @end
