@@ -10,7 +10,7 @@
 
 #import "AFJSONRequestOperation.h"
 
-static NSString * const kXimlyBaseURLString = @"https://TODO";
+static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPolo";
 
 @implementation XMXimlyHTTPClient
 
