@@ -44,6 +44,10 @@
 		248A4CEA16AE1FE20042B46C /* XMXimlyHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */; };
 		24A782A716B47E6A0091AB46 /* XMJobList.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A782A616B47E6A0091AB46 /* XMJobList.m */; };
 		24A782AB16B47E820091AB46 /* XMJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A782AA16B47E820091AB46 /* XMJob.m */; };
+		24A782C416B4F6A20091AB46 /* sample1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24A782C016B4F6A00091AB46 /* sample1.jpg */; };
+		24A782C516B4F6A20091AB46 /* sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24A782C116B4F6A10091AB46 /* sample2.jpg */; };
+		24A782C616B4F6A20091AB46 /* sample3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24A782C216B4F6A10091AB46 /* sample3.jpg */; };
+		24A782C716B4F6A20091AB46 /* sample4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24A782C316B4F6A20091AB46 /* sample4.jpg */; };
 		24B2E04D16B3D21E0022DFAF /* XMRateJobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2E04B16B3D21E0022DFAF /* XMRateJobViewController.m */; };
 		24B2E04E16B3D21E0022DFAF /* XMRateJobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E04C16B3D21E0022DFAF /* XMRateJobViewController.xib */; };
 		24B2E06516B3D5150022DFAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B2E06416B3D5150022DFAF /* QuartzCore.framework */; };
@@ -116,6 +120,10 @@
 		24A782A616B47E6A0091AB46 /* XMJobList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMJobList.m; sourceTree = "<group>"; };
 		24A782A916B47E820091AB46 /* XMJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMJob.h; sourceTree = "<group>"; };
 		24A782AA16B47E820091AB46 /* XMJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMJob.m; sourceTree = "<group>"; };
+		24A782C016B4F6A00091AB46 /* sample1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample1.jpg; sourceTree = "<group>"; };
+		24A782C116B4F6A10091AB46 /* sample2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample2.jpg; sourceTree = "<group>"; };
+		24A782C216B4F6A10091AB46 /* sample3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample3.jpg; sourceTree = "<group>"; };
+		24A782C316B4F6A20091AB46 /* sample4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample4.jpg; sourceTree = "<group>"; };
 		24B2E04A16B3D21E0022DFAF /* XMRateJobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMRateJobViewController.h; sourceTree = "<group>"; };
 		24B2E04B16B3D21E0022DFAF /* XMRateJobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMRateJobViewController.m; sourceTree = "<group>"; };
 		24B2E04C16B3D21E0022DFAF /* XMRateJobViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMRateJobViewController.xib; sourceTree = "<group>"; };
@@ -231,6 +239,10 @@
 				24B2E06916B3E1EF0022DFAF /* good.png */,
 				24B2E06E16B3E6EC0022DFAF /* goodSelected.png */,
 				248A4CDC16ADF2310042B46C /* intro.png */,
+				24A782C016B4F6A00091AB46 /* sample1.jpg */,
+				24A782C116B4F6A10091AB46 /* sample2.jpg */,
+				24A782C216B4F6A10091AB46 /* sample3.jpg */,
+				24A782C316B4F6A20091AB46 /* sample4.jpg */,
 				245022B716ADD7F100FA03B0 /* second.png */,
 				245022B916ADD7F100FA03B0 /* second@2x.png */,
 				2450229C16ADD7F100FA03B0 /* Supporting Files */,
@@ -366,6 +378,10 @@
 				24B2E06D16B3E43B0022DFAF /* badSelected.png in Resources */,
 				24B2E06F16B3E6EC0022DFAF /* goodSelected.png in Resources */,
 				24B2E07116B3F9400022DFAF /* closeButton.png in Resources */,
+				24A782C416B4F6A20091AB46 /* sample1.jpg in Resources */,
+				24A782C516B4F6A20091AB46 /* sample2.jpg in Resources */,
+				24A782C616B4F6A20091AB46 /* sample3.jpg in Resources */,
+				24A782C716B4F6A20091AB46 /* sample4.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

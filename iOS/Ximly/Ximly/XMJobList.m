@@ -14,7 +14,11 @@
 
 static NSString     *_dataFilePath = nil;
 
-#define kDummyKey @"DummyKey"
+#define kDummyKey1 @"DummyKey1"
+#define kDummyKey2 @"DummyKey2"
+#define kDummyKey3 @"DummyKey3"
+#define kDummyKey4 @"DummyKey4"
+
 
 @interface XMJobList ()
 
@@ -100,11 +104,15 @@ static NSString     *_dataFilePath = nil;
     
     if ([listFromDisk count] == 0) {
         // This data is for testing purposes only
-        [XMImageCache saveImage:[UIImage imageNamed:@"intro.png"] withKey:kDummyKey];
-        listFromDisk = [@[[@{kJobImageKey : kDummyKey, kJobStatusKey : @"PROCESSING",  kJobSubmissionTimeKey : [NSDate dateWithTimeIntervalSinceNow:-1200]} mutableCopy],
-                        [@{kJobImageKey : kDummyKey, kJobStatusKey : @"NEW", kJobFinishTimeKey : [NSDate dateWithTimeIntervalSinceNow:-1500], kJobTranscriptionKey : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah.", kJobRatingKey : @"Good", kJobRatingCommentKey : @"Wow! Better than sliced bread."} mutableCopy],
-                        [@{kJobImageKey : kDummyKey, kJobStatusKey : @"NEW", kJobFinishTimeKey : [NSDate dateWithTimeIntervalSinceNow:-180000], kJobTranscriptionKey : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."} mutableCopy],
-                        [@{kJobImageKey : kDummyKey, kJobTitleKey : @"Whiteboard in San Jose", kJobFinishTimeKey : [NSDate dateWithTimeIntervalSinceNow:-192100], kJobTranscriptionKey : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."} mutableCopy]] mutableCopy];
+        [XMImageCache saveImage:[UIImage imageNamed:@"sample1.jpg"] withKey:kDummyKey1];
+        [XMImageCache saveImage:[UIImage imageNamed:@"sample2.jpg"] withKey:kDummyKey2];
+        [XMImageCache saveImage:[UIImage imageNamed:@"sample3.jpg"] withKey:kDummyKey3];
+        [XMImageCache saveImage:[UIImage imageNamed:@"sample4.jpg"] withKey:kDummyKey4];
+
+        listFromDisk = [@[[@{kJobImageKey : kDummyKey1, kJobStatusKey : @"PROCESSING",  kJobSubmissionTimeKey : [NSDate dateWithTimeIntervalSinceNow:-1200]} mutableCopy],
+                        [@{kJobImageKey : kDummyKey2, kJobStatusKey : @"NEW", kJobFinishTimeKey : [NSDate dateWithTimeIntervalSinceNow:-1500], kJobTranscriptionKey : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah.", kJobRatingKey : @"Good", kJobRatingCommentKey : @"Wow! Better than sliced bread."} mutableCopy],
+                        [@{kJobImageKey : kDummyKey3, kJobStatusKey : @"NEW", kJobFinishTimeKey : [NSDate dateWithTimeIntervalSinceNow:-180000], kJobTranscriptionKey : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."} mutableCopy],
+                        [@{kJobImageKey : kDummyKey4, kJobTitleKey : @"Whiteboard in San Jose", kJobFinishTimeKey : [NSDate dateWithTimeIntervalSinceNow:-192100], kJobTranscriptionKey : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."} mutableCopy]] mutableCopy];
         saveTestData = YES;
     }
     
