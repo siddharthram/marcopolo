@@ -46,7 +46,8 @@ public class DataAccess {
 	
 	private static String freeTaskQuery = "select iddevice, free_tasks_left from device_table where device_id = ?";
 	private static String insertDeviceRow = "insert into device_table (device_id, free_tasks_left) values(?,?)";
-	private static String insertTask = "insert into task_table (image_url, sumbit_time, device_table_iddevice, unique_guid) values(?, ?, ?, ?)";
+	
+	private static String insertTask = "insert into task_table (image_url, server_sumbit_time, device_table_iddevice, server_unique_guid, client_unique_guid, cleint_submit_time) values(?, ?, ?, ?, ? ?)";
 	private static String updateCount = "update device_table set free_tasks_left = (free_tasks_left-1) where device_id = ?";
 
 	/**
@@ -91,10 +92,14 @@ public class DataAccess {
 		} else {
 			//private static String insertTask = "insert into task_table (image_url, sumbit_time, device_table_iddevice, unique_guid) values(?, ?, ?, ?)";
 			PreparedStatement pstmtInsert = conn.prepareStatement(insertTask);
+			// image_url, server_sumbit_time, device_table_iddevice, server_unique_guid, client_unique_guid, cleint_submit_time
+			
 			pstmtInsert.setString(1, presp.getImage_url());
-			pstmtInsert.setDate(2, (Date) preq.getTimestamp());
+			pstmtInsert.setLong(2, preq.getServerSubmissionTimeStamp());
 			pstmtInsert.setInt(3, iddevice);
 			pstmtInsert.setString(4, presp.getServerUniqueId());
+			pstmtInsert.setString(5, preq.getClientRequestId());
+			pstmtInsert.setLong(6, preq.getClientSubmitTimeStamp());
 			pstmtInsert.executeUpdate();
 			pstmtInsert.close();
 			// reduce the count
