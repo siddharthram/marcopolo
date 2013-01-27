@@ -54,12 +54,18 @@
     // Do any additional setup after loading the view from its nib.
 
     NSString *titleText = self.job.title;
-    self.titleLabel.text = titleText ? titleText : @"Untitled";
+    self.title = titleText ? titleText : @"Untitled";
     
     self.imageView.image = self.job.image;
     
     NSString *transcribedText = self.job.transcription;
-    self.transcribedTextView.text = transcribedText ? transcribedText : @"Transcription not yet available";
+    
+    if ([transcribedText length] > 0) {
+        self.transcribedTextView.text = transcribedText;
+    } else {
+        self.titleLabel.text = @"Transcription not yet available";
+        self.transcribedTextView.text = @"";
+    }
 }
 
 
@@ -84,6 +90,12 @@
 {
     self.rateJobViewController = [[XMRateJobViewController alloc] initWithNibName:@"XMRateJobViewController" bundle:nil];
     self.rateJobViewController.job = self.job;
+    
+    CGRect rateJobFrame = self.rateJobViewController.view.frame;
+    rateJobFrame.size.height = self.view.bounds.size.height;
+    rateJobFrame.size.width = self.view.bounds.size.width;
+    self.rateJobViewController.view.frame = rateJobFrame;
+    
     [self.view addSubview:self.rateJobViewController.view];
     
     // TODO - Write ratings to disk (create a singleton history list that we can read and write from disk anywhere in the app)
