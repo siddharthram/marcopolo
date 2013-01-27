@@ -153,7 +153,6 @@ public class DataAccess {
 		Connection conn = _dataSource.getConnection();
 		try {
 			log.debug("Got request for status for device id " + taskReq.getDeviceId());
-			TaskStatusResponse taskStatusResp = new TaskStatusResponse();
 			String statusQuery = taskStatusQuery;
 			if (taskReq.getTaskId() != null && !taskReq.getTaskId().trim().equals("")) {
 				log.debug("got task id " + taskReq.getTaskId());
@@ -197,24 +196,15 @@ public class DataAccess {
 
 	private static String allOpenTasksQuery = "select * from task_table tt " +
 			"left join device_table dt on dt.iddevice = tt.device_table_iddevice " +
-			"left outer join assignment_table at on tt.idtask = at.task_table_idtask ";
+			"left outer join assignment_table at on tt.idtask = at.task_table_idtask and at.completion_time is null ";
 
-/*	public static TaskStatusResponse getAllOpen() throws SQLException {
+	public static TaskStatusResponse getAllOpen() throws SQLException {
 
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		Connection conn = _dataSource.getConnection();
 		try {
 			log.debug("Got request for all open tasks ");
-			TaskStatusResponse taskStatusResp = new TaskStatusResponse();
-			String statusQuery = taskStatusQuery;
-			PreparedStatement pstmtQuery = conn.prepareStatement(statusQuery);
-			
-			pstmtQuery.setString(1, taskReq.getDeviceId());
-			
-			if (taskReq.getTaskId() != null && !taskReq.getTaskId().trim().equals("")) {
-				pstmtQuery.setString(2, taskReq.getTaskId());
-			}
-			
+			PreparedStatement pstmtQuery = conn.prepareStatement(allOpenTasksQuery);
 
 			ResultSet rs = pstmtQuery.executeQuery();
 			while (rs.next()) {
@@ -224,11 +214,6 @@ public class DataAccess {
 				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs.getLong("server_submit_time"));
-				// check if task completed
-				if (rs.getString("completion_time") != null && !rs.getString("completion_time").equals("")) {
-					ts.setStatus(2); // defualt is 0 which means submitted
-					ts.setTranscriptionData(rs.getString("jobresult"));
-				}
 				taskStatusResponse.addTaskStatus(ts);	
 			}
 			rs.close();
@@ -242,5 +227,5 @@ public class DataAccess {
 		}
 		return taskStatusResponse;
 	}
-*/
+
 }

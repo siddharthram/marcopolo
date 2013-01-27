@@ -29,6 +29,7 @@ import com.marcopolo.service.aws.S3StoreImage;
 import com.marcopolo.service.data.DataAccess;
 import com.marcopolo.service.dto.PostRequest;
 import com.marcopolo.service.dto.PostResponse;
+import com.marcopolo.service.dto.TaskStatusResponse;
 
 
 @WebServlet(
@@ -43,6 +44,7 @@ public class open extends HttpServlet {
 
 	private Log log = LogFactory.getLog(open.class);
 	
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -50,6 +52,18 @@ public class open extends HttpServlet {
 		super();
 	}
 
+	public void init() throws ServletException {
+		try {
+			log.debug("initalizing servlet");			
+			// initalize database access layer
+			DataAccess.init((Context) new InitialContext().lookup("java:comp/env"));
+		} catch (NamingException e) {
+			throw new ServletException(e);
+		}
+	}
+
+
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -57,15 +71,15 @@ public class open extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/xml");
-/*		try {
-			DataAccess.getStatus(taskReq)
+		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
+		try {
+			taskStatusResponse  = DataAccess.getAllOpen();
 		} catch (Exception ex) {
 		}
 		PrintWriter writer = response.getWriter();
 		Gson gson = new Gson();
-		Type postRespType = new TypeToken<PostResponse>() {}.getType();
-		writer.println(gson.toJson(presp, postRespType));
-*/
+		Type postRespType = new TypeToken<TaskStatusResponse>() {}.getType();
+		writer.println(gson.toJson(taskStatusResponse, postRespType));
 	}
 
 
