@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "XMJob.h"
+
 #define kJobRatingGood @"Good"
 #define kJobRatingBad @"Bad"
 
@@ -19,7 +21,7 @@
 @property (nonatomic, weak) IBOutlet UITextView *commentTextView;
 @property (nonatomic, weak) IBOutlet UIView *commentBackdrop;
 @property (nonatomic, weak) IBOutlet UIButton *submitButton;
-@property (nonatomic, strong) NSMutableDictionary *jobData;
+@property (nonatomic, strong) XMJob *job;
 @property (nonatomic, strong) NSString *rating;
 
 - (IBAction)rateAsGood:(id)sender;

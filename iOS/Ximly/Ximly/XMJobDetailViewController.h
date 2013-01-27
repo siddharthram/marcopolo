@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "XMJob.h"
 #import "XMRateJobViewController.h"
 
 @interface XMJobDetailViewController : UIViewController
 
-@property (nonatomic, strong) NSMutableDictionary *jobData;
+@property (nonatomic, strong) XMJob *job;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UITextView *transcribedTextView;

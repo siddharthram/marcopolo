@@ -25,29 +25,12 @@
     return self;
 }
 
-- (UIImage *)getImage
-{
-    UIImage *theImage = nil;
-
-    NSString *imageKey = [self.jobData valueForKey:@"imageKey"];
-    
-    if ([imageKey length] > 0) {
-        theImage = [XMImageCache loadImageForKey:imageKey];
-    }
-    
-    if (!theImage) {
-        theImage = [UIImage imageNamed:@"Default.png"];
-    }
-    
-    return theImage;
-}
-
 - (NSString *)getMessageForSharing
 {
     NSString *messageText = @"";
     
-    NSString *titleText = [self.jobData valueForKey:@"title"];
-    NSString *transcribedText = [self.jobData valueForKey:@"transcription"];
+    NSString *titleText = self.job.title;
+    NSString *transcribedText = self.job.transcription;
 
     if ([titleText length] > 0) {
         if ([transcribedText length] > 0) {
@@ -70,13 +53,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    NSString *titleText = [self.jobData valueForKey:@"title"];
+    NSString *titleText = self.job.title;
     self.titleLabel.text = titleText ? titleText : @"Untitled";
     
-    self.imageView.image = [self getImage];
+    self.imageView.image = self.job.image;
     
-    NSString *transcribedText = [self.jobData valueForKey:@"transcription"];
-    self.transcribedTextView.text = transcribedText ? transcribedText : @"Transcription Not Yet Available";
+    NSString *transcribedText = self.job.transcription;
+    self.transcribedTextView.text = transcribedText ? transcribedText : @"Transcription not yet available";
 }
 
 
@@ -88,7 +71,7 @@
 
 - (IBAction)share:(id)sender
 {
-    NSArray *postItems = @[[self getImage], [self getMessageForSharing]];
+    NSArray *postItems = @[self.job.image, [self getMessageForSharing]];
     
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]
                                             initWithActivityItems:postItems
@@ -100,7 +83,7 @@
 - (IBAction)rate:(id)sender
 {
     self.rateJobViewController = [[XMRateJobViewController alloc] initWithNibName:@"XMRateJobViewController" bundle:nil];
-    self.rateJobViewController.jobData = self.jobData;
+    self.rateJobViewController.job = self.job;
     [self.view addSubview:self.rateJobViewController.view];
     
     // TODO - Write ratings to disk (create a singleton history list that we can read and write from disk anywhere in the app)

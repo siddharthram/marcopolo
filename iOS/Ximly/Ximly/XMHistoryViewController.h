@@ -12,7 +12,6 @@
 
 @interface XMHistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, XMSubmissionDelegate>
 
-@property (nonatomic, strong) NSMutableArray *historyList;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 - (IBAction)doSubmit:(id)sender;

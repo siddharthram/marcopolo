@@ -9,6 +9,7 @@
 #import "XMRateJobViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import "XMJobList.h"
 
 @interface XMRateJobViewController ()
 
@@ -35,7 +36,7 @@
     boxLayer.borderWidth = 6;
     boxLayer.borderColor = [[UIColor blackColor] CGColor];
  
-    self.rating = [self.jobData valueForKey:@"rating"];
+    self.rating = self.job.rating;
     [self drawRatingBox];
 }
 
@@ -45,7 +46,7 @@
     
     if ([self.rating length] > 0) {
         ratingBoxFrame.size.height = 252.0;
-        NSString *comment = [self.jobData valueForKey:@"ratingComment"];
+        NSString *comment = self.job.ratingComment;
         self.commentTextView.text = comment ? comment : @"";
         if ([self.rating isEqualToString:kJobRatingGood]) {
             self.goodButton.selected = YES;
@@ -112,8 +113,9 @@
 
 - (IBAction)submit:(id)sender
 {
-    [self.jobData setValue:self.rating forKey:@"rating"];
-    [self.jobData setValue:self.commentTextView.text forKey:@"ratingComment"];
+    self.job.rating = self.rating;
+    self.job.ratingComment = self.commentTextView.text;
+    [[XMJobList sharedInstance] writeToDisk];
     [self.view removeFromSuperview];
 }
 

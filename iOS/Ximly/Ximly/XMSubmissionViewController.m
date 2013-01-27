@@ -126,9 +126,10 @@
     
     NSString *imageKey = [XMImageCache newKey];
     [XMImageCache saveImage:self.pickedImage withKey:imageKey];
-    NSMutableDictionary *jobData = [@{@"status" : @"PROCESSING", @"imageKey" : imageKey, @"time" : @"0 mins ago"} mutableCopy];
-    [self.delegate submissionCompletedForJob:jobData];
-	[[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:jobData];
+    XMJob *theJob = [XMJob new];
+    theJob.jobData = [@{kJobStatusKey : @"PROCESSING", kJobImageKey : imageKey, kJobSubmissionTimeKey : [NSDate date]} mutableCopy];
+    [self.delegate submissionCompletedForJob:theJob];
+	[[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
 }
 
 

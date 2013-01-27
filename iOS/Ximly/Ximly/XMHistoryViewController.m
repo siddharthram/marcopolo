@@ -10,34 +10,22 @@
 
 #import "XMAppDelegate.h"
 #import "XMHistoryTableViewCell.h"
+#import "XMJob.h"
 #import "XMImageCache.h"
 #import "XMJobDetailViewController.h"
+#import "XMJobList.h"
 #import "XMUtilities.h"
 
 #define kJobCellReuseIdentifier @"JobCellReuseIdentifier"
-
-static NSString     *_dataFilePath = nil;
 
 
 @interface XMHistoryViewController ()
 
 @end
 
+
 @implementation XMHistoryViewController
 
-+ (NSString *)dataFilePath
-{
-	if (!_dataFilePath) {
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-		NSString *dataDirectory = [paths objectAtIndex:0];
-        if ([dataDirectory length] > 0) {
-            _dataFilePath = [NSString stringWithFormat:@"%@/HistoryData", dataDirectory];
-        }
-	}
-	return _dataFilePath;
-}
-
-#define kDummyKey @"DummyKey"
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,16 +33,7 @@ static NSString     *_dataFilePath = nil;
     if (self) {
         self.title = NSLocalizedString(@"History", @"History");
         
-        [self readHistoryListFromDisk];
-
-        if ([self.historyList count] == 0) {
-            [XMImageCache saveImage:[UIImage imageNamed:@"intro.png"] withKey:kDummyKey];
-            self.historyList = [@[[@{@"imageKey" : kDummyKey, @"status" : @"PROCESSING",  @"time" : @"20 mins ago"} mutableCopy],
-                                [@{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"25 mins ago", @"transcription" : @"Blah blah blah blah.  Blah blah blah blah blah.  Blah blah blah blah blah blah blah blah blah blah.", @"rating" : @"Good", @"ratingComment" : @"Wow! Better than sliced bread."} mutableCopy],
-                            [@{@"imageKey" : kDummyKey, @"status" : @"NEW", @"time" : @"2 days ago", @"transcription" : @"Gobbledygook gobbledygook gobbledygook gobbledygook.  Blah blah gobbledygook blah blah.  Gobbledygook blah blah gobbledygook blah blah blah blah blah blah."} mutableCopy],
-                            [@{@"imageKey" : kDummyKey,@"title" : @"Whiteboard in San Jose", @"time" : @"2 days ago", @"transcription" : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."} mutableCopy]] mutableCopy];
-            [self writeHistoryListToDisk];
-        }
+        [XMJobList sharedInstance];
 
     }
     return self;
@@ -90,35 +69,20 @@ static NSString     *_dataFilePath = nil;
 - (IBAction)showJobDetailForRow:(int)row
 {
     XMJobDetailViewController *jobDetailController = [[XMJobDetailViewController alloc] initWithNibName:@"XMJobDetailViewController" bundle:nil];
-    NSMutableDictionary *jobData = [self.historyList objectAtIndex:row];
-    jobDetailController.jobData = jobData;
+    XMJob *theJob = [[XMJobList sharedInstance] jobAtIndex:row];
+    jobDetailController.job = theJob;
     
     [self.navigationController pushViewController:jobDetailController animated:YES];
 }
 
 - (void)jobWasSubmitted:(id)notification
 {
-    NSMutableDictionary *jobData = (NSMutableDictionary *)[notification object];
-    if (jobData) {
-        [self.historyList insertObject:jobData atIndex:0];
-        [self writeHistoryListToDisk];
+    XMJob *theJob = (XMJob *)[notification object];
+    if (theJob) {
+        [[XMJobList sharedInstance] insertJob:theJob atIndex:0];
+        [[XMJobList sharedInstance] writeToDisk];
         [self.tableView reloadData];
     }
-}
-
-- (void)readHistoryListFromDisk
-{
-    self.historyList = [NSMutableArray arrayWithContentsOfFile:[XMHistoryViewController dataFilePath]];
-}
-
-- (void)writeHistoryListToDisk
-{
-    NSString *filePath = [XMHistoryViewController dataFilePath];
-    [self.historyList writeToFile:filePath atomically:YES];
-    
-    [XMUtilities addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:filePath]];
-    NSError *error = nil;
-    [[NSFileManager defaultManager] setAttributes: @{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:filePath error:&error];
 }
 
 #pragma mark - XMSubmission delegate methods
@@ -138,7 +102,7 @@ static NSString     *_dataFilePath = nil;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.historyList count];
+    return [[XMJobList sharedInstance] count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -153,41 +117,29 @@ static NSString     *_dataFilePath = nil;
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
-    NSDictionary *jobData = [self.historyList objectAtIndex:indexPath.row];
+    XMJob *theJob = [[XMJobList sharedInstance] jobAtIndex:indexPath.row];
     
-    NSString *imageKey = [jobData valueForKey:@"imageKey"];
-    
-    UIImage *anImage = nil;
-    
-    if ([imageKey length] > 0) {
-        anImage = [XMImageCache loadImageForKey:imageKey];
-    }
-    
-    if (anImage) {
-        cell.thumbnailView.image = anImage;
-    } else {
-        cell.thumbnailView.image = [UIImage imageNamed:@"Default.png"];
-    }
-    
-    NSString *labelText = [jobData valueForKey:@"status"];
+    cell.thumbnailView.image = theJob.image;
+
+    NSString *labelText = theJob.status;
     
     if (labelText) {
         cell.label1.textColor = [UIColor redColor];
         cell.label1.text = labelText;
         
-        labelText = [jobData valueForKey:@"title"];
+        labelText = theJob.title;
         cell.label2.font = [UIFont boldSystemFontOfSize:13.0];
         cell.label2.text = labelText ? labelText : @"Untitled";
         
-        labelText = [jobData valueForKey:@"time"];
+        labelText = theJob.durationSinceLastAction;
         cell.label3.text = labelText ? labelText : @"";
     } else {
         cell.label1.textColor = [UIColor darkTextColor];
 
-        labelText = [jobData valueForKey:@"title"];
+        labelText = theJob.title;
         cell.label1.text = labelText ? labelText : @"Untitled";
         
-        labelText = [jobData valueForKey:@"time"];
+        labelText = theJob.durationSinceLastAction;
         cell.label2.font = [UIFont systemFontOfSize:10.0];
         cell.label2.text = labelText ? labelText : @"";
         
