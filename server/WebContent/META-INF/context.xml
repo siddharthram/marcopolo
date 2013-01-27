@@ -31,6 +31,11 @@
     <!--
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
+
+ <Resource name="jdbc/MarcoPoloAWS" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="javauser" password="marcopolo" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://aa1fj65y0wi38vu.couokv6egrzf.us-east-1.rds.amazonaws.com:3306/marcopolo"/>	
 	
  <Resource name="jdbc/MarcoPolo" auth="Container" type="javax.sql.DataSource"
                maxActive="100" maxIdle="30" maxWait="10000"
