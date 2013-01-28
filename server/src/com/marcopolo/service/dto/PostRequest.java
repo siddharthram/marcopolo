@@ -2,7 +2,7 @@ package com.marcopolo.service.dto;
 
 
 public class PostRequest {
-	private String auth_id, device_id, urgency, fileName, clientRequestId;
+	private String auth_id, deviceId, urgency, fileName, clientRequestId;
 	private long serverSubmissionTimeStamp, clientSubmitTimeStamp;
 
 	public String getAuth_id() {
@@ -11,11 +11,11 @@ public class PostRequest {
 	public void setAuth_id(String auth_id) {
 		this.auth_id = auth_id;
 	}
-	public String getDevice_id() {
-		return device_id;
+	public String getDeviceId() {
+		return deviceId;
 	}
-	public void setDevice_id(String device_id) {
-		this.device_id = device_id;
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
 	}
 	public String getUrgency() {
 		return urgency;
@@ -59,7 +59,7 @@ public class PostRequest {
 	 * @return
 	 */
 	public boolean isValid() {
-		if (device_id != null && clientRequestId != null && clientSubmitTimeStamp > 0) {
+		if (deviceId != null && clientRequestId != null && clientSubmitTimeStamp > 0) {
 			return true;
 		} else {
 			return false;

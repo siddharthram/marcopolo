@@ -47,7 +47,7 @@ public class task extends AbstractServlet {
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		try {
 			TaskStatusRequest tsr = new TaskStatusRequest();
-			String deviceId = request.getParameter("device_id");
+			String deviceId = request.getParameter("deviceId");
 			if (deviceId != null && !deviceId.trim().equals("")) {
 				tsr.setDeviceId(deviceId);
 				taskStatusResponse  = DataAccess.getStatus(tsr);

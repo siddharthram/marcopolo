@@ -96,16 +96,16 @@ public class add extends AbstractServlet {
 				FileItem item = (FileItem) iter.next();
 				if (item.isFormField()) {
 					String name = item.getFieldName();
-					if ("auth_id".equals(name)) {
+					if ("authId".equals(name)) {
 						postReq.setAuth_id(item.getString());
 					}
-					if ("device_id".equals(name)) {
-						postReq.setDevice_id(item.getString());
+					if ("deviceId".equals(name)) {
+						postReq.setDeviceId(item.getString());
 					}
-					if ("client_request_id".equals(name)) {
+					if ("clientUniqueRequestId".equals(name)) {
 						postReq.setClientRequestId(item.getString());
 					}
-					if ("client_submission_timestamp".equals(name)) {
+					if ("clientSubmitTimeStamp".equals(name)) {
 						postReq.setClientSubmitTimeStamp(Long.parseLong(item.getString()));
 					}
 					if ("urgency".equals(name)) {
