@@ -154,7 +154,7 @@ public class DataAccess {
 	}
 
 	private static String taskStatusQuery = "select * from task_table tt "
-			+ "left join device_table dt on dt.iddevice = tt.device_table_iddevice and dt.device_id = ? "
+			+ "join device_table dt on dt.iddevice = tt.device_table_iddevice and dt.device_id = ? "
 			+ "left outer join assignment_table at on tt.idtask = at.task_table_idtask ";
 
 	public static TaskStatusResponse getStatus(TaskStatusRequest taskReq)
