@@ -173,7 +173,7 @@
 
 - (NSDictionary *)submissionMetaData
 {
-    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, @"auth_id" : [[XMXimlyHTTPClient sharedClient] getAuthID], @"device_id" : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[self submissionTimeInMs]], kJobUrgencyKey : @"0"} ;
+    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, kJobAuthIDKey : [[XMXimlyHTTPClient sharedClient] getAuthID], kJobDeviceIDKey : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[self submissionTimeInMs]], kJobUrgencyKey : @"0"} ;
     
     return metaData;
 }
