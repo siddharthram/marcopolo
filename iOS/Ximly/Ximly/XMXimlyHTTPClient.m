@@ -12,7 +12,7 @@
 #import "XMImageCache.h"
 #import "XMJob.h"
 
-static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPolo";
+static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/";
 
 @implementation XMXimlyHTTPClient
 
