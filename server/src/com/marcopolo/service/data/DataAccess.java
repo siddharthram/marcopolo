@@ -59,7 +59,7 @@ public class DataAccess {
 	private static String freeTaskQuery = "select iddevice, free_tasks_left from device_table where device_id = ?";
 	private static String insertDeviceRow = "insert into device_table (device_id, free_tasks_left) values(?,?)";
 	
-	private static String insertTask = "insert into task_table (image_url, server_sumbit_time, device_table_iddevice, server_unique_guid, client_unique_guid, cleint_submit_time) values(?, ?, ?, ?, ? ?)";
+	private static String insertTask = "insert into task_table (image_url, server_submit_time, device_table_iddevice, server_unique_guid, client_unique_guid, client_submit_time) values(?, ?, ?, ?, ?, ?)";
 	private static String updateCount = "update device_table set free_tasks_left = (free_tasks_left-1) where device_id = ?";
 
 	/**
@@ -96,7 +96,7 @@ public class DataAccess {
 				pstmtInsert.executeUpdate();
 				// get id of inserted row
 				ResultSet rsInsert = pstmtInsert.getGeneratedKeys();
-				rs.next();
+				rsInsert.next();
 				iddevice = rsInsert.getInt(1);
 				rsInsert.close();
 				pstmtInsert.close();
@@ -205,7 +205,7 @@ public class DataAccess {
 
 		Connection conn = _dataSource.getConnection();
 		try {
-			log.debug("Got request with a response for guid " + guid);
+			log.debug("Got request to submit transcript for guid " + guid);
 			PreparedStatement pstmtQuery = conn.prepareStatement(deleteExistingResponse);
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();

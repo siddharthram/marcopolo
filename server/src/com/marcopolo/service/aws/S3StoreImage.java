@@ -33,10 +33,10 @@ public class S3StoreImage {
 	private static final String bucketName = "ximly_test1";
 
 	public static String storeS3File(String uuid, byte[] data) {
-		String returnUrl = "https://s3.amazonaws.com/" + bucketName + "/" + uuid;
+		String returnUrl = "https://s3.amazonaws.com/" + bucketName + "/" + uuid + ".png";
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(
 				awsAccessKeyId, key));
-		putObject(s3, bucketName, uuid, data);
+		putObject(s3, bucketName, uuid + ".png", data);
 		return returnUrl;
 	}
 
