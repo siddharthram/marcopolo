@@ -46,4 +46,6 @@
 
 - (NSDictionary *)submissionMetaData;
 
+- (void)populateObjectFromServerJSON:(NSDictionary *)serverJSON;
+
 @end

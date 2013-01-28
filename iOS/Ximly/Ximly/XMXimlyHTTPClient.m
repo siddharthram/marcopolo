@@ -11,6 +11,7 @@
 #import "AFJSONRequestOperation.h"
 #import "XMImageCache.h"
 #import "XMJob.h"
+#import "XMJobList.h"
 
 static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/";
 
@@ -134,8 +135,13 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDict = (NSDictionary *)responseObject;
         NSArray *taskStatusesArray = [responseDict objectForKey:@"taskStatuses"];
+        XMJobList *xmJobList = [XMJobList sharedInstance];
+        // TODO: do we want to merge instead?
+        [xmJobList removeAllJobs];
         for (NSDictionary *taskStatus in taskStatusesArray) {
             XMJob *xmJob = [[XMJob alloc] init];
+            [xmJob populateObjectFromServerJSON:taskStatus];
+            [xmJobList addJob:xmJob];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
     }

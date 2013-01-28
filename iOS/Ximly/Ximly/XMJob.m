@@ -57,12 +57,21 @@
 
 - (NSString *)status
 {
-    return [self.jobData valueForKey:kJobStatusKey];
+    NSString *status = [self.jobData valueForKey:kJobStatusKey];
+    if (![[status class] isSubclassOfClass:[NSString class]]) {
+        return [NSString stringWithFormat:@"%d", (int)status];
+    }
+    return status;
 }
 
 - (void)setStatus:(NSString *)value
 {
-    [self.jobData setValue:value forKey:kJobStatusKey];
+    if (![[value class] isSubclassOfClass:[NSString class]]) {
+        [self.jobData setValue:[NSString stringWithFormat:@"%d", (int)value] forKey:kJobStatusKey];
+    }
+    else {
+        [self.jobData setValue:value forKey:kJobStatusKey];
+    }
 }
 
 - (NSDate *)submissionTime
@@ -149,6 +158,10 @@
     }
     
     return _image;
+}
+
+- (void)populateObjectFromServerJSON:(NSDictionary *)serverJSON {
+    self.jobData = [NSMutableDictionary dictionaryWithDictionary:serverJSON];
 }
 
 - (void)setImage:(UIImage *)anImage withKey:(NSString *)theImageKey
