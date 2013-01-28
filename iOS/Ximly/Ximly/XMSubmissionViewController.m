@@ -9,6 +9,7 @@
 #import "XMSubmissionViewController.h"
 
 #import "XMImageCache.h"
+#import "XMXimlyHTTPClient.h"
 
 @interface XMSubmissionViewController ()
 
@@ -114,24 +115,19 @@
         return;
     }
     
-    // TODO call cloud
-    [self submissionToCloudCompleted];
-
-}
-     
-- (void)submissionToCloudCompleted
-{
     self.view.hidden = YES;
     [self.view removeFromSuperview];
     
-    NSString *imageKey = [XMImageCache newKey];
-    [XMImageCache saveImage:self.pickedImage withKey:imageKey];
     XMJob *theJob = [XMJob new];
-    theJob.jobData = [@{kJobStatusKey : @"PROCESSING", kJobImageKey : imageKey, kJobSubmissionTimeKey : [NSDate date]} mutableCopy];
-    [self.delegate submissionCompletedForJob:theJob];
-	[[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
-}
+    theJob.jobData = [@{kJobRequestIDKey : [XMXimlyHTTPClient newRequestID], kJobStatusKey : @"PROCESSING", kJobSubmissionTimeKey : [NSDate date]} mutableCopy];
+    
+    [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
+    
+    [[XMXimlyHTTPClient sharedClient] submitImage:UIImagePNGRepresentation(self.pickedImage) withMetaData:[theJob submissionMetaData]];
+    [self.delegate jobSubmitted:theJob];
 
+}
+     
 
 #pragma mark - UIImagePickerControllerDelegate
 

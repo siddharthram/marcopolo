@@ -15,6 +15,7 @@
 #import "XMJobDetailViewController.h"
 #import "XMJobList.h"
 #import "XMUtilities.h"
+#import "XMXimlyHTTPClient.h"
 
 #define kJobCellReuseIdentifier @"JobCellReuseIdentifier"
 
@@ -116,7 +117,7 @@
     // No op
 }
 
-- (void)submissionCompletedForJob:(NSMutableDictionary *)jobData
+- (void)jobSubmitted:(XMJob *)job
 {
     // No op
     // We will handle updating the UI for the new job when we get the XM_NOTIFICATION_JOB_SUBMITTED notification

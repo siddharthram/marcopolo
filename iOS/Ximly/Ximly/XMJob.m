@@ -9,10 +9,11 @@
 #import "XMJob.h"
 
 #import "XMImageCache.h"
-
+#import "XMXimlyHTTPClient.h"
 
 @implementation XMJob 
 
+@dynamic requestID;
 @dynamic title;
 @dynamic status;
 @dynamic submissionTime;
@@ -22,6 +23,17 @@
 @dynamic imageKey;
 @dynamic image;
 @dynamic durationSinceLastAction;
+
+
+- (NSString *)requestID
+{
+    return [self.jobData valueForKey:kJobRequestIDKey];
+}
+
+- (void)setRequestID:(NSString *)value
+{
+    [self.jobData setValue:value forKey:kJobRequestIDKey];
+}
 
 - (NSString *)title
 {
@@ -93,14 +105,25 @@
     [self.jobData setValue:value forKey:kJobRatingCommentKey];
 }
 
+- (int)urgency
+{
+    NSString *urgencyString = [self.jobData valueForKey:kJobUrgencyKey];
+    return [urgencyString intValue];
+}
+
+- (void)setUrgency:(int)value
+{
+    [self.jobData setValue:[NSString stringWithFormat:@"%d", value] forKey:kJobUrgencyKey];
+}
+
 - (NSString *)imageKey
 {
-    return [self.jobData valueForKey:kJobImageKey];
+    return self.requestID;
 }
 
 - (void)setImageKey:(NSString *)value
 {
-    [self.jobData setValue:value forKey:kJobImageKey];
+    self.requestID = value;
 }
 
 - (UIImage *)image
@@ -140,4 +163,12 @@
     
     return dateString;
 }
+
+- (NSDictionary *)submissionMetaData
+{
+    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, @"auth_id" : [[XMXimlyHTTPClient sharedClient] getAuthID], @"device_id" : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[[NSDate date] timeIntervalSince1970]*1000], kJobUrgencyKey : @"0"} ;
+    
+    return metaData;
+}
+
 @end
