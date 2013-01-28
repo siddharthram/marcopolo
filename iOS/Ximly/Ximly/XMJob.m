@@ -66,16 +66,20 @@
 }
 
 - (NSDate *)submissionTime
-{
-    NSString *timeStr = [self.jobData valueForKey:kJobSubmissionTimeKey];
-    double timeInMs = [timeStr doubleValue];
-    return [NSDate dateWithTimeIntervalSince1970:timeInMs/1000];
+{ 
+    return [NSDate dateWithTimeIntervalSince1970:[self submissionTimeInMs]/1000];
 }
 
 - (void)setSubmissionTime:(NSDate *)value
 {
     long long timeInMs = (long long)[value timeIntervalSince1970] * 1000;
     [self.jobData setValue:[NSString stringWithFormat:@"%lld", timeInMs] forKey:kJobSubmissionTimeKey];
+}
+
+- (double)submissionTimeInMs
+{
+    NSString *timeStr = [self.jobData valueForKey:kJobSubmissionTimeKey];
+    return [timeStr doubleValue];
 }
 
 - (NSDate *)finishTime
@@ -169,7 +173,7 @@
 
 - (NSDictionary *)submissionMetaData
 {
-    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, @"auth_id" : [[XMXimlyHTTPClient sharedClient] getAuthID], @"device_id" : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[[NSDate date] timeIntervalSince1970]*1000], kJobUrgencyKey : @"0"} ;
+    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, @"auth_id" : [[XMXimlyHTTPClient sharedClient] getAuthID], @"device_id" : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[self submissionTimeInMs]], kJobUrgencyKey : @"0"} ;
     
     return metaData;
 }

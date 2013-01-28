@@ -119,14 +119,15 @@
     [self.view removeFromSuperview];
     
     XMJob *theJob = [XMJob new];
-    theJob.jobData = [@{kJobRequestIDKey : [XMXimlyHTTPClient newRequestID], kJobStatusKey : @"PROCESSING", kJobSubmissionTimeKey : [NSDate date]} mutableCopy];
+    theJob.jobData = [@{kJobRequestIDKey : [XMXimlyHTTPClient newRequestID], kJobStatusKey : @"PROCESSING", kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[[NSDate date] timeIntervalSince1970]*1000]} mutableCopy];
     
     [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
     
-    [self.delegate jobSubmitted:theJob];
     [[XMXimlyHTTPClient sharedClient] submitImage:UIImagePNGRepresentation(self.pickedImage) withMetaData:[theJob submissionMetaData]];
+    [self.delegate jobSubmitted:theJob];
+    [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
 }
-     
+
 
 #pragma mark - UIImagePickerControllerDelegate
 
