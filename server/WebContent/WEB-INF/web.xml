@@ -1,13 +1,47 @@
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-    version="2.4">
-  <description>Marcopolo</description>
-  <resource-ref>
-      <description>DB Connection</description>
-      <res-ref-name>jdbc/marcopoloaws</res-ref-name>
-      <res-type>javax.sql.DataSource</res-type>
-      <res-auth>Container</res-auth>
-  </resource-ref>
+	version="2.4">
+	<description>Marcopolo</description>
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/marcopoloaws</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+	<servlet>
+		<servlet-name>add</servlet-name>
+		<servlet-class>com.marcopolo.service.add</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>open</servlet-name>
+		<servlet-class>com.marcopolo.service.open</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>submit</servlet-name>
+		<servlet-class>com.marcopolo.service.submit</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>task</servlet-name>
+		<servlet-class>com.marcopolo.service.task</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>add</servlet-name>
+		<url-pattern>/task/new</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>open</servlet-name>
+		<url-pattern>/task/open</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>submit</servlet-name>
+		<url-pattern>/task/submit</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>task</servlet-name>
+		<url-pattern>/task/mine</url-pattern>
+	</servlet-mapping>
+
 </web-app>
