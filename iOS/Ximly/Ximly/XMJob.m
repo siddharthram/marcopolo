@@ -9,7 +9,7 @@
 #import "XMJob.h"
 
 #import "XMImageCache.h"
-
+#import "XMXimlyHTTPClient.h"
 
 @implementation XMJob 
 
@@ -27,12 +27,12 @@
 
 - (NSString *)requestID
 {
-    return [self.jobData valueForKey:kJobRequestID];
+    return [self.jobData valueForKey:kJobRequestIDKey];
 }
 
 - (void)setRequestID:(NSString *)value
 {
-    [self.jobData setValue:value forKey:kJobRequestID];
+    [self.jobData setValue:value forKey:kJobRequestIDKey];
 }
 
 - (NSString *)title
@@ -107,13 +107,13 @@
 
 - (int)urgency
 {
-    NSString *urgencyString = [self.jobData valueForKey:kJobUrgency];
+    NSString *urgencyString = [self.jobData valueForKey:kJobUrgencyKey];
     return [urgencyString intValue];
 }
 
 - (void)setUrgency:(int)value
 {
-    [self.jobData setValue:[NSString stringWithFormat:@"%d", value] forKey:kJobUrgency];
+    [self.jobData setValue:[NSString stringWithFormat:@"%d", value] forKey:kJobUrgencyKey];
 }
 
 - (NSString *)imageKey
@@ -166,8 +166,7 @@
 
 - (NSDictionary *)submissionMetaData
 {
-    NSDictionary *metaData = @{kJobRequestID : self.requestID, @"auth_id" : @"", @"device_id" : @"", kJobSubmissionTimeKey : self.submissionTime, kJobUrgency : [NSString stringWithFormat:@"%lld", (long long)[[NSDate date] timeIntervalSince1970]*1000]};
-    
+    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, @"auth_id" : [[XMXimlyHTTPClient sharedClient] getAuthID], @"device_id" : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[[NSDate date] timeIntervalSince1970]*1000], kJobUrgencyKey : @"0"} ;
     
     return metaData;
 }

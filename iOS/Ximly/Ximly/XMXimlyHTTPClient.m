@@ -148,7 +148,7 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
 
 - (void)submitImage:(NSData *)imageData withMetaData:(NSDictionary *)metaData
 {
-    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"/task/new" parameters:metaData constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
+    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"task/new" parameters:metaData constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"dummyName" fileName:@"dummyFileName" mimeType:@"image/png"];
     }];
     
@@ -157,12 +157,12 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
     [operation setCompletionBlockWithSuccess:
      ^(AFHTTPRequestOperation *operation, id responseObject) {
          NSLog(@"success: %@", operation.responseString);
-         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:[metaData valueForKey:kJobRequestID]];
+         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:[metaData valueForKey:kJobRequestIDKey]];
          
      }
                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"error: %@",  operation.responseString);
-                                         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:[metaData valueForKey:kJobRequestID]];
+                                         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_FAILED object:[metaData valueForKey:kJobRequestIDKey]];
                                      }
      ];
     

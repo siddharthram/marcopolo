@@ -119,10 +119,9 @@
     [self.view removeFromSuperview];
     
     XMJob *theJob = [XMJob new];
-    theJob.requestID = [XMXimlyHTTPClient newRequestID];
+    theJob.jobData = [@{kJobRequestIDKey : [XMXimlyHTTPClient newRequestID], kJobStatusKey : @"PROCESSING", kJobSubmissionTimeKey : [NSDate date]} mutableCopy];
     
     [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
-    theJob.jobData = [@{kJobStatusKey : @"PROCESSING", kJobSubmissionTimeKey : [NSDate date]} mutableCopy];
     
     [[XMXimlyHTTPClient sharedClient] submitImage:UIImagePNGRepresentation(self.pickedImage) withMetaData:[theJob submissionMetaData]];
     [self.delegate jobSubmitted:theJob];

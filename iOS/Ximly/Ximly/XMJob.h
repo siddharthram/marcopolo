@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kJobRequestID           @"client_request_id"
+#define kJobRequestIDKey        @"client_request_id"
 #define kJobTitleKey            @"title"
 #define kJobTranscriptionKey    @"transcription"
 #define kJobStatusKey           @"status"
@@ -17,7 +17,7 @@
 #define kJobRatingKey           @"rating"
 #define kJobRatingCommentKey    @"ratingComment"
 #define kJobImageKey            @"imageKey"
-#define kJobUrgency             @"urgency"
+#define kJobUrgencyKey          @"urgency"
 
 
 @interface XMJob : NSObject {
