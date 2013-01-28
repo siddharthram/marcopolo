@@ -1,0 +1,8 @@
+.DS_Store
+xcuserdata
+build/
+*.[oa]
+*~.nib
+*.swp
+*~
+*(Autosaved).rtfd/
