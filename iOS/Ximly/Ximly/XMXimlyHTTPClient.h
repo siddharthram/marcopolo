@@ -34,7 +34,7 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 
 - (NSString *)getDeviceID;
 - (NSString *)getAuthID;
-- (void)getFileList;
+- (void)updateTasks;
 
 - (void)submitImage:(NSData *)imageData withMetaData:(NSDictionary *)metaData;
 
