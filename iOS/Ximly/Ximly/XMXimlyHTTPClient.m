@@ -130,7 +130,7 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
 }
 
 - (void)updateTasks {
-    [self requestPath:@"task/mine" method:@"POST" parameters:[NSDictionary dictionaryWithObject:[self getDeviceID] forKey:@"device_id"]
+    [self requestPath:@"task/mine" method:@"POST" parameters:[NSDictionary dictionaryWithObject:[self getDeviceID] forKey:kJobDeviceIDKey]
     success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDict = (NSDictionary *)responseObject;
         NSArray *taskStatusesArray = [responseDict objectForKey:@"taskStatuses"];
