@@ -38,7 +38,7 @@ import com.marcopolo.service.dto.PostResponse;
 /**
  * Servlet implementation class add
  */
-public class add extends HttpServlet {
+public class add extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final long MAX_FILE_SIZE_IN_BYTES = 40000000l; // about 4 MB's
@@ -50,16 +50,6 @@ public class add extends HttpServlet {
 	 */
 	public add() {
 		super();
-	}
-
-	public void init() throws ServletException {
-		try {
-			log.debug("initalizing servlet");			
-			// initalize database access layer
-			DataAccess.init((Context) new InitialContext().lookup("java:comp/env"));
-		} catch (NamingException e) {
-			throw new ServletException(e);
-		}
 	}
 
 	/**

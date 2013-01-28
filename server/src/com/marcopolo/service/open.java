@@ -39,7 +39,7 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 /**
  * Servlet implementation class add
  */
-public class open extends HttpServlet {
+public class open extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 
 	private Log log = LogFactory.getLog(open.class);
@@ -51,24 +51,12 @@ public class open extends HttpServlet {
 	public open() {
 		super();
 	}
-
-	public void init() throws ServletException {
-		try {
-			log.debug("initalizing servlet");			
-			// initalize database access layer
-			DataAccess.init((Context) new InitialContext().lookup("java:comp/env"));
-		} catch (NamingException e) {
-			throw new ServletException(e);
-		}
-	}
-
-
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
+	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/xml");
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
