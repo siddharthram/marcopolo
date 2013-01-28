@@ -122,19 +122,7 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
 
 
 - (NSString *)getDeviceID {
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *uniqueId = [standardUserDefaults objectForKey:@"UniqueDeviceID"];
-    if (uniqueId == nil) {
-        // Create a new UUID
-        CFUUIDRef uuidObj = CFUUIDCreate(nil);
-        
-        // Get the string representation of the UUID
-        NSString *uniqueId = (__bridge NSString*)CFUUIDCreateString(nil, uuidObj);
-        [standardUserDefaults setObject:uniqueId forKey:@"UniqueDeviceID"];
-        [standardUserDefaults synchronize];
-    }
-    
-    return uniqueId;
+    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 }
 
 - (NSString *)getAuthID {
@@ -149,9 +137,11 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
         for (NSDictionary *taskStatus in taskStatusesArray) {
             XMJob *xmJob = [[XMJob alloc] init];
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failed to get file list");
+        [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
     }];
 }
 

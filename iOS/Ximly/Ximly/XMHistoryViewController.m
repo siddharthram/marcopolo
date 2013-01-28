@@ -63,18 +63,17 @@
     UINib *cellNib = [UINib nibWithNibName:@"XMHistoryTableViewCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:kJobCellReuseIdentifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobWasSubmitted:) name:XM_NOTIFICATION_JOB_SUBMITTED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskUpdateCompleted:) name:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
 }
 
 - (void)reloadDataSource:(UIRefreshControl *)sender
 {
 	self.isReloading = YES;
-	// TODO_SID: put your data fetching code here
-    [self dataSourceDidFinishReloading]; // TODO_SID: remove this line when you put your real code here
+	[[XMXimlyHTTPClient sharedClient] updateTasks];
 }
 
 - (void)dataSourceDidFinishReloading
 {
-    // TODO_SID: call this when you're done reloading or if the reloading fails
     self.isReloading = NO;
     [self.tableViewController.refreshControl endRefreshing];
 }
@@ -108,6 +107,12 @@
         [[XMJobList sharedInstance] writeToDisk];
         [self.tableView reloadData];
     }
+}
+
+- (void)taskUpdateCompleted:(id)notification {
+    [self dataSourceDidFinishReloading];
+    [[XMJobList sharedInstance] writeToDisk];
+    [self.tableView reloadData];
 }
 
 #pragma mark - XMSubmission delegate methods
