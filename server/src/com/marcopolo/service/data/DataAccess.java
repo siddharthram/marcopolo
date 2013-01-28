@@ -71,13 +71,13 @@ public class DataAccess {
 		int iddevice = 0; // our assigned id
 		Connection conn = _dataSource.getConnection();
 		log.debug("Got request for storing image for device id "
-				+ preq.getDevice_id());
+				+ preq.getDeviceId());
 		// select free_tasks_left from user_table ut, device_table dt where
 		// ut.iduser = dt.user_table_iduser
 		try {
 
 			PreparedStatement pstmtQuery = conn.prepareStatement(freeTaskQuery);
-			pstmtQuery.setString(1, preq.getDevice_id());
+			pstmtQuery.setString(1, preq.getDeviceId());
 			ResultSet rs = pstmtQuery.executeQuery();
 			if (rs.next()) {
 				// get id of row and free tasks left
@@ -86,16 +86,16 @@ public class DataAccess {
 				rs.close();
 				pstmtQuery.close();
 				log.debug("Found device table row for free tasks for device id "
-						+ preq.getDevice_id());
+						+ preq.getDeviceId());
 			} else {
 				log.debug("No device table rows found for device id "
-						+ preq.getDevice_id());
+						+ preq.getDeviceId());
 				pstmtQuery.close();
 				// insert device row
 				PreparedStatement pstmtInsert = conn.prepareStatement(
 						insertDeviceRow,
 						PreparedStatement.RETURN_GENERATED_KEYS);
-				pstmtInsert.setString(1, preq.getDevice_id());
+				pstmtInsert.setString(1, preq.getDeviceId());
 				pstmtInsert.setInt(2, MAX_FREE_TASKS);
 				pstmtInsert.executeUpdate();
 				// get id of inserted row
@@ -112,11 +112,11 @@ public class DataAccess {
 				presp.setResponseCode(-1);
 				presp.setResponseText("Free quota exceeded");
 				log.debug("Max free tasks " + freeTasksLeft + " exceeded for "
-						+ preq.getDevice_id());
+						+ preq.getDeviceId());
 			} else {
 
 				log.debug("Free tasks " + freeTasksLeft + " left for for "
-						+ preq.getDevice_id());
+						+ preq.getDeviceId());
 				// private static String insertTask =
 				// "insert into task_table (image_url, sumbit_time, device_table_iddevice, unique_guid) values(?, ?, ?, ?)";
 				PreparedStatement pstmtInsert = conn
@@ -134,7 +134,7 @@ public class DataAccess {
 				pstmtInsert.close();
 				// reduce the count
 				pstmtInsert = conn.prepareStatement(updateCount);
-				pstmtInsert.setString(1, preq.getDevice_id());
+				pstmtInsert.setString(1, preq.getDeviceId());
 				pstmtInsert.executeUpdate();
 				pstmtInsert.close();
 				freeTasksLeft--;
