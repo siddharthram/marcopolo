@@ -30,7 +30,7 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 /**
  * Servlet implementation class add
  */
-public class submit extends HttpServlet {
+public class submit extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 
 	private Log log = LogFactory.getLog(submit.class);
@@ -42,17 +42,6 @@ public class submit extends HttpServlet {
 	public submit() {
 		super();
 	}
-
-	public void init() throws ServletException {
-		try {
-			log.debug("initalizing servlet");			
-			// initalize database access layer
-			DataAccess.init((Context) new InitialContext().lookup("java:comp/env"));
-		} catch (NamingException e) {
-			throw new ServletException(e);
-		}
-	}
-
 
 	
 	/**
