@@ -3,9 +3,6 @@ package com.marcopolo.service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,39 +13,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.marcopolo.service.aws.S3StoreImage;
 import com.marcopolo.service.data.DataAccess;
-import com.marcopolo.service.dto.PostRequest;
-import com.marcopolo.service.dto.PostResponse;
+import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
 
 @WebServlet(
-	    name = "open", 
-	    urlPatterns = {"/task/open"}
+	    name = "submit", 
+	    urlPatterns = {"/task/submit"}
 	)
 /**
  * Servlet implementation class add
  */
-public class open extends HttpServlet {
+public class submit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private Log log = LogFactory.getLog(open.class);
+	private Log log = LogFactory.getLog(submit.class);
 	
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public open() {
+	public submit() {
 		super();
 	}
 
@@ -73,8 +64,14 @@ public class open extends HttpServlet {
 		response.setContentType("text/xml");
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		try {
-			taskStatusResponse  = DataAccess.getAllOpen();
+			TaskStatusRequest tsr = new TaskStatusRequest();
+			String guid = request.getParameter("serverUniqueRequestId");
+			String transcript = request.getParameter("output");
+			if (guid != null && !guid.trim().equals("")) {
+				DataAccess.submit(guid, transcript);
+			}
 		} catch (Exception ex) {
+			throw new ServletException(ex);
 		}
 		response.setContentType("application/json");
 		PrintWriter writer = response.getWriter();
