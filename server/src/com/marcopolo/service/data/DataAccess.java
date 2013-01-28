@@ -59,7 +59,7 @@ public class DataAccess {
 	private static String freeTaskQuery = "select iddevice, free_tasks_left from device_table where device_id = ?";
 	private static String insertDeviceRow = "insert into device_table (device_id, free_tasks_left) values(?,?)";
 	
-	private static String insertTask = "insert into task_table (image_url, server_sumbit_time, device_table_iddevice, server_unique_guid, client_unique_guid, cleint_submit_time) values(?, ?, ?, ?, ? ?)";
+	private static String insertTask = "insert into task_table (image_url, server_submit_time, device_table_iddevice, server_unique_guid, client_unique_guid, client_submit_time) values(?, ?, ?, ?, ?, ?)";
 	private static String updateCount = "update device_table set free_tasks_left = (free_tasks_left-1) where device_id = ?";
 
 	/**
@@ -83,19 +83,21 @@ public class DataAccess {
 				// get id of row and free tasks left
 				iddevice = rs.getInt(1);
 				freeTasksLeft = rs.getInt(2);
+				rs.close();
 				pstmtQuery.close();
 				log.debug("Found device table row for free tasks for device id " + preq.getDevice_id());
 			} else {
 				log.debug("No device table rows found for device id " + preq.getDevice_id());
 				pstmtQuery.close();
 				// insert device row
-				PreparedStatement pstmtInsert = conn.prepareStatement(insertDeviceRow);
+				PreparedStatement pstmtInsert = conn.prepareStatement(insertDeviceRow, PreparedStatement.RETURN_GENERATED_KEYS);
 				pstmtInsert.setString(1, preq.getDevice_id());
 				pstmtInsert.setInt(2, MAX_FREE_TASKS);
 				pstmtInsert.executeUpdate();
 				// get id of inserted row
 				ResultSet rsInsert = pstmtInsert.getGeneratedKeys();
-				iddevice = rs.getInt(1);
+				rsInsert.next();
+				iddevice = rsInsert.getInt(1);
 				rsInsert.close();
 				pstmtInsert.close();
 			}
@@ -194,9 +196,38 @@ public class DataAccess {
 		return taskStatusResponse;
 	}
 
+	
+	private static String deleteExistingResponse = "delete from assignment_table where task_table_idtask in (select idtask from task_table where server_unique_guid = ?) ";
+	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = NOW(), task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
+
+	
+	public static void submit(String guid, String response) throws SQLException {
+
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got request to submit transcript for guid " + guid);
+			PreparedStatement pstmtQuery = conn.prepareStatement(deleteExistingResponse);
+			pstmtQuery.executeUpdate();
+			pstmtQuery.close();
+			pstmtQuery = conn.prepareStatement(storeResponseQuery);
+			pstmtQuery.setString(1, response);
+			pstmtQuery.setString(2, guid);
+			pstmtQuery.executeUpdate();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+
+	}
+	
 	private static String allOpenTasksQuery = "select * from task_table tt " +
-			"left join device_table dt on dt.iddevice = tt.device_table_iddevice " +
-			"left outer join assignment_table at on tt.idtask = at.task_table_idtask and at.completion_time is null ";
+				"left join device_table dt on dt.iddevice = tt.device_table_iddevice " +
+				"left outer join assignment_table at on tt.idtask = at.task_table_idtask and at.completion_time is null ";
+
 
 	public static TaskStatusResponse getAllOpen() throws SQLException {
 

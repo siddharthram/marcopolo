@@ -41,7 +41,7 @@ import com.marcopolo.service.dto.PostResponse;
 public class add extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final long MAX_FILE_SIZE_IN_BYTES = 4000000l; // about 4 MB's
+	private static final long MAX_FILE_SIZE_IN_BYTES = 40000000l; // about 4 MB's
 
 	private Log log = LogFactory.getLog(add.class);
 	
@@ -76,6 +76,7 @@ public class add extends HttpServlet {
 			presp.setResponseCode(-1);
 			presp.setResponseText(ex.getLocalizedMessage());
 		}
+		response.setContentType("application/json");
 		PrintWriter writer = response.getWriter();
 		Gson gson = new Gson();
 		Type postRespType = new TypeToken<PostResponse>() {}.getType();
