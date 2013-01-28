@@ -102,6 +102,7 @@ static NSString     *_dataFilePath = nil;
     
     NSArray *listFromDisk = [NSMutableArray arrayWithContentsOfFile:[XMJobList dataFilePath]];
     
+    /*
     if ([listFromDisk count] == 0) {
         // This data is for testing purposes only
         [XMImageCache saveImage:[UIImage imageNamed:@"sample1.jpg"] withKey:kDummyKey1];
@@ -115,6 +116,7 @@ static NSString     *_dataFilePath = nil;
                         [@{kJobRequestIDKey : kDummyKey4, kJobTitleKey : @"Whiteboard in San Jose", kJobFinishTimeKey : [NSDate dateWithTimeIntervalSinceNow:-192100], kJobTranscriptionKey : @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."} mutableCopy]] mutableCopy];
         saveTestData = YES;
     }
+     */
     
     self.jobList = [NSMutableArray arrayWithCapacity:[listFromDisk count]];
     

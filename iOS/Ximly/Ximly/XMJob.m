@@ -67,12 +67,15 @@
 
 - (NSDate *)submissionTime
 {
-    return [self.jobData valueForKey:kJobSubmissionTimeKey];
+    NSString *timeStr = [self.jobData valueForKey:kJobSubmissionTimeKey];
+    double timeInMs = [timeStr doubleValue];
+    return [NSDate dateWithTimeIntervalSince1970:timeInMs/1000];
 }
 
 - (void)setSubmissionTime:(NSDate *)value
 {
-    [self.jobData setValue:value forKey:kJobSubmissionTimeKey];
+    long long timeInMs = (long long)[value timeIntervalSince1970] * 1000;
+    [self.jobData setValue:[NSString stringWithFormat:@"%lld", timeInMs] forKey:kJobSubmissionTimeKey];
 }
 
 - (NSDate *)finishTime

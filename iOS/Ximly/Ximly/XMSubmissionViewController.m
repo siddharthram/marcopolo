@@ -123,9 +123,8 @@
     
     [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
     
-    [[XMXimlyHTTPClient sharedClient] submitImage:UIImagePNGRepresentation(self.pickedImage) withMetaData:[theJob submissionMetaData]];
     [self.delegate jobSubmitted:theJob];
-
+    [[XMXimlyHTTPClient sharedClient] submitImage:UIImagePNGRepresentation(self.pickedImage) withMetaData:[theJob submissionMetaData]];
 }
      
 
