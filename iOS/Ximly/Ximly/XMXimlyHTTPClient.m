@@ -130,7 +130,17 @@ static NSString * const kXimlyBaseURLString = @"http://10.15.1.171:8080/MarcoPol
 }
 
 - (void)getFileList {
-    // TODO
+    [self requestPath:@"task/mine" method:@"POST" parameters:[NSDictionary dictionaryWithObject:[self getDeviceID] forKey:@"device_id"]
+    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDict = (NSDictionary *)responseObject;
+        NSArray *taskStatusesArray = [responseDict objectForKey:@"taskStatuses"];
+        for (NSDictionary *taskStatus in taskStatusesArray) {
+            
+        }
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Failed to get file list");
+    }];
 }
 
 @end
