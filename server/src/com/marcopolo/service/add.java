@@ -71,6 +71,7 @@ public class add extends AbstractServlet {
 		Gson gson = new Gson();
 		Type postRespType = new TypeToken<PostResponse>() {}.getType();
 		writer.println(gson.toJson(presp, postRespType));
+		gson = null;
 
 	}
 

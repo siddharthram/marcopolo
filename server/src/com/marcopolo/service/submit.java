@@ -67,6 +67,7 @@ public class submit extends AbstractServlet {
 		Gson gson = new Gson();
 		Type postRespType = new TypeToken<TaskStatusResponse>() {}.getType();
 		writer.println(gson.toJson(taskStatusResponse, postRespType));
+		gson = null;
 	}
 
 
