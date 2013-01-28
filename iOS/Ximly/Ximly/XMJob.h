@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-#define kJobRequestIDKey        @"client_request_id"
+#define kJobAuthIDKey           @"authId"
+#define kJobDeviceIDKey         @"deviceId"
+
+#define kJobRequestIDKey        @"clientUniqueRequestId"
 #define kJobTitleKey            @"title"
 #define kJobTranscriptionKey    @"transcription"
 #define kJobStatusKey           @"status"
-#define kJobSubmissionTimeKey   @"client_submission_timestamp"
+#define kJobSubmissionTimeKey   @"clientSubmitTimeStamp"
 #define kJobFinishTimeKey       @"finishTime"
 #define kJobRatingKey           @"rating"
 #define kJobRatingCommentKey    @"ratingComment"
