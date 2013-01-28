@@ -31,11 +31,6 @@ import com.marcopolo.service.dto.PostRequest;
 import com.marcopolo.service.dto.PostResponse;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
-
-@WebServlet(
-	    name = "open", 
-	    urlPatterns = {"/task/open"}
-	)
 /**
  * Servlet implementation class add
  */

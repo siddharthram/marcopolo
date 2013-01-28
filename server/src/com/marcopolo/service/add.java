@@ -31,10 +31,6 @@ import com.marcopolo.service.dto.PostRequest;
 import com.marcopolo.service.dto.PostResponse;
 
 
-@WebServlet(
-	    name = "new", 
-	    urlPatterns = {"/task/new"}
-	)
 /**
  * Servlet implementation class add
  */
