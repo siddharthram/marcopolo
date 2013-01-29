@@ -34,6 +34,12 @@
 		245022D016ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
 		245022D816ADD7F100FA03B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 245022D616ADD7F100FA03B0 /* InfoPlist.strings */; };
 		245022DB16ADD7F100FA03B0 /* XimlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 245022DA16ADD7F100FA03B0 /* XimlyTests.m */; };
+		2473EF1616B7D2F900885451 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1016B7D2F900885451 /* Icon-72.png */; };
+		2473EF1716B7D2F900885451 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1116B7D2F900885451 /* Icon-Small-50.png */; };
+		2473EF1816B7D2F900885451 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1216B7D2F900885451 /* Icon-Small.png */; };
+		2473EF1916B7D2F900885451 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1316B7D2F900885451 /* Icon-Small@2x.png */; };
+		2473EF1A16B7D2F900885451 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1416B7D2F900885451 /* Icon.png */; };
+		2473EF1B16B7D2F900885451 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1516B7D2F900885451 /* iTunesArtwork */; };
 		2486248D16AE67EE00DDCA75 /* XMHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */; };
 		2486248F16AE681D00DDCA75 /* XMHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */; };
 		2486249316AE7D0100DDCA75 /* XMJobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486249116AE7D0100DDCA75 /* XMJobDetailViewController.m */; };
@@ -104,6 +110,12 @@
 		245022D716ADD7F100FA03B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		245022D916ADD7F100FA03B0 /* XimlyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XimlyTests.h; sourceTree = "<group>"; };
 		245022DA16ADD7F100FA03B0 /* XimlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XimlyTests.m; sourceTree = "<group>"; };
+		2473EF1016B7D2F900885451 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		2473EF1116B7D2F900885451 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		2473EF1216B7D2F900885451 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		2473EF1316B7D2F900885451 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		2473EF1416B7D2F900885451 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		2473EF1516B7D2F900885451 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		2486248B16AE67EE00DDCA75 /* XMHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMHistoryTableViewCell.h; sourceTree = "<group>"; };
 		2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMHistoryTableViewCell.m; sourceTree = "<group>"; };
 		2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMHistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -261,6 +273,12 @@
 		2450229C16ADD7F100FA03B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2473EF1016B7D2F900885451 /* Icon-72.png */,
+				2473EF1116B7D2F900885451 /* Icon-Small-50.png */,
+				2473EF1216B7D2F900885451 /* Icon-Small.png */,
+				2473EF1316B7D2F900885451 /* Icon-Small@2x.png */,
+				2473EF1416B7D2F900885451 /* Icon.png */,
+				2473EF1516B7D2F900885451 /* iTunesArtwork */,
 				2450229D16ADD7F100FA03B0 /* Ximly-Info.plist */,
 				2450229E16ADD7F100FA03B0 /* InfoPlist.strings */,
 				245022A116ADD7F100FA03B0 /* main.m */,
@@ -390,6 +408,12 @@
 				24A782C516B4F6A20091AB46 /* sample2.jpg in Resources */,
 				24A782C616B4F6A20091AB46 /* sample3.jpg in Resources */,
 				24A782C716B4F6A20091AB46 /* sample4.jpg in Resources */,
+				2473EF1616B7D2F900885451 /* Icon-72.png in Resources */,
+				2473EF1716B7D2F900885451 /* Icon-Small-50.png in Resources */,
+				2473EF1816B7D2F900885451 /* Icon-Small.png in Resources */,
+				2473EF1916B7D2F900885451 /* Icon-Small@2x.png in Resources */,
+				2473EF1A16B7D2F900885451 /* Icon.png in Resources */,
+				2473EF1B16B7D2F900885451 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
