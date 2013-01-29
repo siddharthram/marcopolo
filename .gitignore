@@ -13,3 +13,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.DS_Store
+xcuserdata
+build/
+*.[oa]
+*~.nib
+*.swp
+*~
+*(Autosaved).rtfd/
