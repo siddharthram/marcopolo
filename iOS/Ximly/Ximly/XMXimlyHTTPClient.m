@@ -135,14 +135,7 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDict = (NSDictionary *)responseObject;
         NSArray *taskStatusesArray = [responseDict objectForKey:@"taskStatuses"];
-        XMJobList *xmJobList = [XMJobList sharedInstance];
-        // TODO: do we want to merge instead?
-        [xmJobList removeAllJobs];
-        for (NSDictionary *taskStatus in taskStatusesArray) {
-            XMJob *xmJob = [[XMJob alloc] init];
-            [xmJob populateObjectFromServerJSON:taskStatus];
-            [xmJobList addJob:xmJob];
-        }
+        [[XMJobList sharedInstance] mergeInJobsData:taskStatusesArray];
         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {

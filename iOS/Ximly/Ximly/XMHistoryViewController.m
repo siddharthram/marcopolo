@@ -111,7 +111,6 @@
 
 - (void)taskUpdateCompleted:(id)notification {
     [self dataSourceDidFinishReloading];
-    [[XMJobList sharedInstance] writeToDisk];
     [self.tableView reloadData];
 }
 
