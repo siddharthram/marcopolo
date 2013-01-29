@@ -57,21 +57,39 @@
 
 - (NSString *)status
 {
-    NSString *status = [self.jobData valueForKey:kJobStatusKey];
-    if (![[status class] isSubclassOfClass:[NSString class]]) {
-        return [NSString stringWithFormat:@"%d", (int)status];
+    NSString *statusStr = kJobStatusNoneString;
+    NSNumber *status = [self.jobData valueForKey:kJobStatusKey];
+    
+    if (status) {
+        switch ([status intValue]) {
+            case JobStatusProcessing:
+                statusStr = kJobStatusProcessingString;
+                break;
+                
+            case JobStatusTranscribed:
+                statusStr = kJobStatusTranscribedString;
+                break;
+                
+            default:
+                statusStr = kJobStatusNoneString;
+                break;
+        }
     }
-    return status;
+
+    return statusStr;
 }
 
 - (void)setStatus:(NSString *)value
 {
-    if (![[value class] isSubclassOfClass:[NSString class]]) {
-        [self.jobData setValue:[NSString stringWithFormat:@"%d", (int)value] forKey:kJobStatusKey];
+    NSNumber *newStatus = nil;
+    
+    if ([value isEqualToString:kJobStatusProcessingString]) {
+        newStatus = [NSNumber numberWithInt:JobStatusProcessing];
+    } else if ([value isEqualToString:kJobStatusTranscribedString]) {
+        newStatus = [NSNumber numberWithInt:JobStatusTranscribed];
     }
-    else {
-        [self.jobData setValue:value forKey:kJobStatusKey];
-    }
+    
+    [self.jobData setValue:newStatus forKey:kJobStatusKey];
 }
 
 - (NSDate *)submissionTime
@@ -93,12 +111,19 @@
 
 - (NSDate *)finishTime
 {
-    return [self.jobData valueForKey:kJobFinishTimeKey];
+    return [NSDate dateWithTimeIntervalSince1970:[self finishTimeInMs]/1000];
 }
 
 - (void)setFinishTime:(NSDate *)value
 {
-    [self.jobData setValue:value forKey:kJobFinishTimeKey];
+    long long timeInMs = (long long)[value timeIntervalSince1970] * 1000;
+    [self.jobData setValue:[NSString stringWithFormat:@"%lld", timeInMs] forKey:kJobFinishTimeKey];
+}
+
+- (double)finishTimeInMs
+{
+    NSString *timeStr = [self.jobData valueForKey:kJobFinishTimeKey];
+    return [timeStr doubleValue];
 }
 
 - (NSString *)rating
