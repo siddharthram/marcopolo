@@ -119,7 +119,7 @@
     [self.view removeFromSuperview];
     
     XMJob *theJob = [XMJob new];
-    theJob.jobData = [@{kJobRequestIDKey : [XMXimlyHTTPClient newRequestID], kJobStatusKey : @"PROCESSING", kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[[NSDate date] timeIntervalSince1970]*1000]} mutableCopy];
+    theJob.jobData = [@{kJobRequestIDKey : [XMXimlyHTTPClient newRequestID], kJobStatusKey : [NSNumber numberWithInt:JobStatusProcessing], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[[NSDate date] timeIntervalSince1970]*1000]} mutableCopy];
     
     [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
     
