@@ -23,6 +23,17 @@
 #define kJobUrgencyKey          @"urgency"
 
 
+typedef enum {
+    JobStatusProcessing       = 0,
+    JobStatusTranscribed      = 2,
+} JobStatus;
+
+#define kJobStatusNoneString          @""
+#define kJobStatusProcessingString    @"PROCESSING"
+#define kJobStatusTranscribedString   @"DONE!"
+
+
+
 @interface XMJob : NSObject {
     UIImage *_image;
 }
