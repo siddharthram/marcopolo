@@ -10,6 +10,9 @@
 
 #import "XMJob.h"
 
+#define XM_NOTIFICATION_TASK_UPDATE_DONE            @"XM_NOTIFICATION_TASK_UPDATE_DONE"
+
+
 @interface XMJobList : NSObject
 
 @property (nonatomic, readonly) NSMutableArray *jobList;
@@ -23,6 +26,7 @@
 - (void)removeJob:(XMJob *)aJob;
 - (void)removeAllJobs;
 - (void)sortUsingDescriptors:(NSArray *)sortDescriptors;
+- (void)mergeInJobsData:(NSArray *)jobsData;
 
 - (void)readFromDisk;
 - (void)writeToDisk;

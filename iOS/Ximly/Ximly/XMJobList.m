@@ -149,4 +149,36 @@ static NSString     *_dataFilePath = nil;
     [[NSFileManager defaultManager] setAttributes: @{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:filePath error:&error];
 }
 
+- (NSArray *)defaultSortDescriptors
+{
+    NSSortDescriptor *sortDescriptor =  [[NSSortDescriptor alloc] initWithKey:@"submissionTime" ascending:NO];
+	return [NSArray arrayWithObject:sortDescriptor];
+}
+
+- (void)mergeInJobsData:(NSArray *)jobsData
+{
+    int numNewJobs = [jobsData count];
+    NSMutableDictionary *jobsMap = [NSMutableDictionary dictionaryWithCapacity:numNewJobs];
+    NSMutableArray *newJobsList = [NSMutableArray arrayWithCapacity:numNewJobs];
+    
+    for (NSMutableDictionary *jobData in jobsData) {
+        XMJob *newJob = [XMJob new];
+        newJob.jobData = jobData;
+        [jobsMap setValue:newJob forKey:newJob.requestID];
+        [newJobsList addObject:newJob];
+    }
+    
+    for (XMJob *oldJob in self.jobList) {
+        if (![jobsMap valueForKey:oldJob.requestID]) {
+            [newJobsList addObject:oldJob];
+        }
+    }
+    
+    self.jobList = newJobsList;
+
+    [self sortUsingDescriptors:[self defaultSortDescriptors]];
+    
+    [self writeToDisk];
+}
+
 @end

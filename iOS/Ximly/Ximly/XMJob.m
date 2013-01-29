@@ -11,19 +11,34 @@
 #import "XMImageCache.h"
 #import "XMXimlyHTTPClient.h"
 
+#define kNumberOfFields 11
+
 @implementation XMJob 
 
 @dynamic requestID;
+@dynamic serverRequestID;
 @dynamic title;
+@dynamic transcription;
 @dynamic status;
 @dynamic submissionTime;
+@dynamic serverSubmissionTime;
 @dynamic finishTime;
 @dynamic rating;
 @dynamic ratingComment;
+@dynamic imageURL;
 @dynamic imageKey;
 @dynamic image;
 @dynamic durationSinceLastAction;
 
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.jobData = [NSMutableDictionary dictionaryWithCapacity:kNumberOfFields];
+    }
+    return self;
+}
 
 - (NSString *)requestID
 {
@@ -33,6 +48,16 @@
 - (void)setRequestID:(NSString *)value
 {
     [self.jobData setValue:value forKey:kJobRequestIDKey];
+}
+
+- (NSString *)serverRequestID
+{
+    return [self.jobData valueForKey:kJobServerReqeustIDKey];
+}
+
+- (void)setServerRequestID:(NSString *)value
+{
+    [self.jobData setValue:value forKey:kJobServerReqeustIDKey];
 }
 
 - (NSString *)title
@@ -93,37 +118,68 @@
 }
 
 - (NSDate *)submissionTime
-{ 
-    return [NSDate dateWithTimeIntervalSince1970:[self submissionTimeInMs]/1000];
+{
+    double timeInMs = [self submissionTimeInMs];
+    if (timeInMs != 0) {
+        return [NSDate dateWithTimeIntervalSince1970:timeInMs/1000];
+    } else {
+        return nil;
+    }
 }
 
 - (void)setSubmissionTime:(NSDate *)value
 {
     long long timeInMs = (long long)[value timeIntervalSince1970] * 1000;
-    [self.jobData setValue:[NSString stringWithFormat:@"%lld", timeInMs] forKey:kJobSubmissionTimeKey];
+    [self.jobData setValue:[NSNumber numberWithLongLong:timeInMs] forKey:kJobSubmissionTimeKey];
 }
 
 - (double)submissionTimeInMs
 {
-    NSString *timeStr = [self.jobData valueForKey:kJobSubmissionTimeKey];
-    return [timeStr doubleValue];
+    NSNumber *timeNum = [self.jobData valueForKey:kJobSubmissionTimeKey];
+    return [timeNum doubleValue];
+}
+
+- (NSDate *)serverSubmissionTime
+{
+    double timeInMs = [self serverSubmissionTimeInMs];
+    if (timeInMs != 0) {
+        return [NSDate dateWithTimeIntervalSince1970:timeInMs/1000];
+    } else {
+        return nil;
+    }
+}
+
+- (void)setServerSubmissionTime:(NSDate *)value
+{
+    long long timeInMs = (long long)[value timeIntervalSince1970] * 1000;
+    [self.jobData setValue:[NSNumber numberWithLongLong:timeInMs] forKey:kJobServerSubmissionTimeKey];
+}
+
+- (double)serverSubmissionTimeInMs
+{
+    NSNumber *timeNum = [self.jobData valueForKey:kJobServerSubmissionTimeKey];
+    return [timeNum doubleValue];
 }
 
 - (NSDate *)finishTime
 {
-    return [NSDate dateWithTimeIntervalSince1970:[self finishTimeInMs]/1000];
+    double timeInMs = [self submissionTimeInMs];
+    if (timeInMs != 0) {
+        return [NSDate dateWithTimeIntervalSince1970:timeInMs/1000];
+    }
+    return nil;
 }
 
 - (void)setFinishTime:(NSDate *)value
 {
     long long timeInMs = (long long)[value timeIntervalSince1970] * 1000;
-    [self.jobData setValue:[NSString stringWithFormat:@"%lld", timeInMs] forKey:kJobFinishTimeKey];
+    [self.jobData setValue:[NSNumber numberWithLongLong:timeInMs] forKey:kJobFinishTimeKey];
 }
 
 - (double)finishTimeInMs
 {
-    NSString *timeStr = [self.jobData valueForKey:kJobFinishTimeKey];
-    return [timeStr doubleValue];
+    NSNumber *timeNum = [self.jobData valueForKey:kJobFinishTimeKey];
+    return [timeNum doubleValue];
 }
 
 - (NSString *)rating
@@ -155,6 +211,16 @@
 - (void)setUrgency:(int)value
 {
     [self.jobData setValue:[NSString stringWithFormat:@"%d", value] forKey:kJobUrgencyKey];
+}
+
+- (NSString *)imageURL
+{
+    return [self.jobData valueForKey:kJobImageURLKey];
+}
+
+- (void)setImageURL:(NSString *)value
+{
+    [self.jobData setValue:value forKey:kJobImageURLKey];
 }
 
 - (NSString *)imageKey
