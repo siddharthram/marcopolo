@@ -220,6 +220,7 @@ public class DataAccess {
 			log.debug("Got request to submit transcript for guid " + guid);
 			PreparedStatement pstmtQuery = conn
 					.prepareStatement(deleteExistingResponse);
+			pstmtQuery.setString(1, guid);
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
 			pstmtQuery = conn.prepareStatement(storeResponseQuery);
