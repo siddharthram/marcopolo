@@ -11,6 +11,8 @@
 		11AF054A16B5BD3900BADCE6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */; };
 		13CD030F926343A7A5CC5475 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F23C08989CC04E6D986F4BB5 /* libPods.a */; };
 		2409380316B8D40E0045446F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2409380216B8D40E0045446F /* Icon@2x.png */; };
+		2409380816B8E8B40045446F /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2409380716B8E8B40045446F /* SFHFKeychainUtils.m */; };
+		2409380A16B8EF9C0045446F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2409380916B8EF9C0045446F /* Security.framework */; };
 		2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229516ADD7F100FA03B0 /* UIKit.framework */; };
 		2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
 		2450229A16ADD7F100FA03B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229916ADD7F100FA03B0 /* CoreGraphics.framework */; };
@@ -80,6 +82,9 @@
 		11AF054616B5BD2200BADCE6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2409380216B8D40E0045446F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		2409380616B8E8B40045446F /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		2409380716B8E8B40045446F /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		2409380916B8EF9C0045446F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2450229116ADD7F100FA03B0 /* Ximly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ximly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2450229516ADD7F100FA03B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2450229716ADD7F100FA03B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -158,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2409380A16B8EF9C0045446F /* Security.framework in Frameworks */,
 				11AF054A16B5BD3900BADCE6 /* SystemConfiguration.framework in Frameworks */,
 				11AF054716B5BD2200BADCE6 /* MobileCoreServices.framework in Frameworks */,
 				24B2E06516B3D5150022DFAF /* QuartzCore.framework in Frameworks */,
@@ -181,9 +187,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2409380416B8E8360045446F /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				2409380516B8E86F0045446F /* SFHFKeychainUtils */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		2409380516B8E86F0045446F /* SFHFKeychainUtils */ = {
+			isa = PBXGroup;
+			children = (
+				2409380616B8E8B40045446F /* SFHFKeychainUtils.h */,
+				2409380716B8E8B40045446F /* SFHFKeychainUtils.m */,
+			);
+			name = SFHFKeychainUtils;
+			sourceTree = "<group>";
+		};
 		2450228616ADD7F100FA03B0 = {
 			isa = PBXGroup;
 			children = (
+				2409380916B8EF9C0045446F /* Security.framework */,
 				11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */,
 				11AF054616B5BD2200BADCE6 /* MobileCoreServices.framework */,
 				24B2E06416B3D5150022DFAF /* QuartzCore.framework */,
@@ -265,6 +289,7 @@
 				24A782C316B4F6A20091AB46 /* sample4.jpg */,
 				245022B716ADD7F100FA03B0 /* second.png */,
 				245022B916ADD7F100FA03B0 /* second@2x.png */,
+				2409380416B8E8360045446F /* ThirdParty */,
 				2450229C16ADD7F100FA03B0 /* Supporting Files */,
 			);
 			path = Ximly;
@@ -475,6 +500,7 @@
 				24B2E04D16B3D21E0022DFAF /* XMRateJobViewController.m in Sources */,
 				24A782A716B47E6A0091AB46 /* XMJobList.m in Sources */,
 				24A782AB16B47E820091AB46 /* XMJob.m in Sources */,
+				2409380816B8E8B40045446F /* SFHFKeychainUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
