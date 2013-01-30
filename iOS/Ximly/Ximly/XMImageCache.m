@@ -48,6 +48,11 @@ static NSString     *_cacheFolderPath = nil;
 {
     [self createCacheFolder];
     NSData *imageData = UIImagePNGRepresentation(image);
+    [self saveImageData:imageData withKey:key];
+}
+
++ (void)saveImageData:(NSData *)imageData withKey:(NSString *)key
+{
     if (imageData) {
         NSString *filePath = [self cacheFilePathForKey:key];
         if ([filePath length] > 0) {
@@ -58,6 +63,7 @@ static NSString     *_cacheFolderPath = nil;
             }
         }
     }
+    
 }
 
 + (UIImage *)loadImageForKey:(NSString *)key

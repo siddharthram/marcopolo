@@ -13,6 +13,7 @@
 		2409380316B8D40E0045446F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2409380216B8D40E0045446F /* Icon@2x.png */; };
 		2409380816B8E8B40045446F /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2409380716B8E8B40045446F /* SFHFKeychainUtils.m */; };
 		2409380A16B8EF9C0045446F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2409380916B8EF9C0045446F /* Security.framework */; };
+		2409380D16B9029F0045446F /* UIImage+XMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2409380C16B9029F0045446F /* UIImage+XMAdditions.m */; };
 		2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229516ADD7F100FA03B0 /* UIKit.framework */; };
 		2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
 		2450229A16ADD7F100FA03B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229916ADD7F100FA03B0 /* CoreGraphics.framework */; };
@@ -85,6 +86,8 @@
 		2409380616B8E8B40045446F /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		2409380716B8E8B40045446F /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		2409380916B8EF9C0045446F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		2409380B16B9029F0045446F /* UIImage+XMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XMAdditions.h"; sourceTree = "<group>"; };
+		2409380C16B9029F0045446F /* UIImage+XMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XMAdditions.m"; sourceTree = "<group>"; };
 		2450229116ADD7F100FA03B0 /* Ximly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ximly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2450229516ADD7F100FA03B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2450229716ADD7F100FA03B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -243,6 +246,8 @@
 		2450229B16ADD7F100FA03B0 /* Ximly */ = {
 			isa = PBXGroup;
 			children = (
+				2409380B16B9029F0045446F /* UIImage+XMAdditions.h */,
+				2409380C16B9029F0045446F /* UIImage+XMAdditions.m */,
 				245022A416ADD7F100FA03B0 /* XMAppDelegate.h */,
 				245022A516ADD7F100FA03B0 /* XMAppDelegate.m */,
 				2486248B16AE67EE00DDCA75 /* XMHistoryTableViewCell.h */,
@@ -501,6 +506,7 @@
 				24A782A716B47E6A0091AB46 /* XMJobList.m in Sources */,
 				24A782AB16B47E820091AB46 /* XMJob.m in Sources */,
 				2409380816B8E8B40045446F /* SFHFKeychainUtils.m in Sources */,
+				2409380D16B9029F0045446F /* UIImage+XMAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
