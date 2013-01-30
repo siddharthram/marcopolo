@@ -10,6 +10,7 @@
 		11AF054716B5BD2200BADCE6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF054616B5BD2200BADCE6 /* MobileCoreServices.framework */; };
 		11AF054A16B5BD3900BADCE6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */; };
 		13CD030F926343A7A5CC5475 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F23C08989CC04E6D986F4BB5 /* libPods.a */; };
+		2409380316B8D40E0045446F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2409380216B8D40E0045446F /* Icon@2x.png */; };
 		2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229516ADD7F100FA03B0 /* UIKit.framework */; };
 		2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
 		2450229A16ADD7F100FA03B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229916ADD7F100FA03B0 /* CoreGraphics.framework */; };
@@ -39,7 +40,6 @@
 		2473EF1816B7D2F900885451 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1216B7D2F900885451 /* Icon-Small.png */; };
 		2473EF1916B7D2F900885451 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1316B7D2F900885451 /* Icon-Small@2x.png */; };
 		2473EF1A16B7D2F900885451 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1416B7D2F900885451 /* Icon.png */; };
-		2473EF1B16B7D2F900885451 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1516B7D2F900885451 /* iTunesArtwork */; };
 		2486248D16AE67EE00DDCA75 /* XMHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */; };
 		2486248F16AE681D00DDCA75 /* XMHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */; };
 		2486249316AE7D0100DDCA75 /* XMJobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486249116AE7D0100DDCA75 /* XMJobDetailViewController.m */; };
@@ -79,6 +79,7 @@
 /* Begin PBXFileReference section */
 		11AF054616B5BD2200BADCE6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2409380216B8D40E0045446F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		2450229116ADD7F100FA03B0 /* Ximly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ximly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2450229516ADD7F100FA03B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2450229716ADD7F100FA03B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -115,7 +116,6 @@
 		2473EF1216B7D2F900885451 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		2473EF1316B7D2F900885451 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		2473EF1416B7D2F900885451 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		2473EF1516B7D2F900885451 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		2486248B16AE67EE00DDCA75 /* XMHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMHistoryTableViewCell.h; sourceTree = "<group>"; };
 		2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMHistoryTableViewCell.m; sourceTree = "<group>"; };
 		2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMHistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 				2473EF1216B7D2F900885451 /* Icon-Small.png */,
 				2473EF1316B7D2F900885451 /* Icon-Small@2x.png */,
 				2473EF1416B7D2F900885451 /* Icon.png */,
-				2473EF1516B7D2F900885451 /* iTunesArtwork */,
+				2409380216B8D40E0045446F /* Icon@2x.png */,
 				2450229D16ADD7F100FA03B0 /* Ximly-Info.plist */,
 				2450229E16ADD7F100FA03B0 /* InfoPlist.strings */,
 				245022A116ADD7F100FA03B0 /* main.m */,
@@ -413,7 +413,7 @@
 				2473EF1816B7D2F900885451 /* Icon-Small.png in Resources */,
 				2473EF1916B7D2F900885451 /* Icon-Small@2x.png in Resources */,
 				2473EF1A16B7D2F900885451 /* Icon.png in Resources */,
-				2473EF1B16B7D2F900885451 /* iTunesArtwork in Resources */,
+				2409380316B8D40E0045446F /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
