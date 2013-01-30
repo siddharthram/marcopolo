@@ -238,9 +238,10 @@ public class DataAccess {
 
 	}
 
-	private static String allOpenTasksQuery = "select * from task_table tt "
-			+ "left join device_table dt on dt.iddevice = tt.device_table_iddevice "
-			+ "left outer join assignment_table at on tt.idtask = at.task_table_idtask and at.completion_time is null ";
+	private static String allOpenTasksQuery = "select * from task_table tt " + 
+												"join device_table dt on dt.iddevice = tt.device_table_iddevice " + 
+												"left outer join assignment_table at on tt.idtask = at.task_table_idtask " + 
+												"where at.completion_time is null ";
 
 	public static TaskStatusResponse getAllOpen() throws SQLException {
 

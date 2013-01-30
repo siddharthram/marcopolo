@@ -41,7 +41,6 @@ public class submit extends AbstractServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/xml");
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		try {
 			TaskStatusRequest tsr = new TaskStatusRequest();
