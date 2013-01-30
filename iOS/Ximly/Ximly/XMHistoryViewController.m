@@ -10,12 +10,14 @@
 
 #import "XMAppDelegate.h"
 #import "XMHistoryTableViewCell.h"
+#import "XMImageCache.h"
 #import "XMJob.h"
 #import "XMImageCache.h"
 #import "XMJobDetailViewController.h"
 #import "XMJobList.h"
 #import "XMUtilities.h"
 #import "XMXimlyHTTPClient.h"
+#import "UIImageView+AFNetworking.h"
 
 #define kJobCellReuseIdentifier @"JobCellReuseIdentifier"
 
@@ -148,8 +150,24 @@
     
     XMJob *theJob = [[XMJobList sharedInstance] jobAtIndex:indexPath.row];
     
-    cell.thumbnailView.image = theJob.image;
-
+    if (theJob.image) {
+        cell.waitIndicator.hidden = YES;
+        cell.thumbnailView.image = theJob.image;
+    } else if ([theJob.imageURL length] > 0) {
+        cell.waitIndicator.hidden = NO;
+        [cell.thumbnailView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:theJob.imageURL]]
+                                  placeholderImage:[UIImage imageNamed:@"Default.png"]
+                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                               cell.waitIndicator.hidden = YES;
+                                               [XMImageCache saveImage:image withKey:theJob.imageKey];
+                                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                               cell.waitIndicator.hidden = YES;
+                                           }];
+    } else {
+        cell.waitIndicator.hidden = YES;
+        cell.thumbnailView.image = [UIImage imageNamed:@"Default.png"];
+    }
+    
     NSString *labelText = theJob.status;
     
     if (labelText) {

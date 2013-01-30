@@ -11,6 +11,7 @@
 @interface XMImageCache : NSObject
 
 + (void)saveImage:(UIImage *)image withKey:(NSString *)key;
++ (void)saveImageData:(NSData *)imageData withKey:(NSString *)key;
 + (UIImage *)loadImageForKey:(NSString *)key;
 
 @end

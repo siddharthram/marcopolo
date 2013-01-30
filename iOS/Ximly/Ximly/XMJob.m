@@ -10,6 +10,7 @@
 
 #import "XMImageCache.h"
 #import "XMXimlyHTTPClient.h"
+#import "AFImageRequestOperation.h"
 
 #define kNumberOfFields 11
 
@@ -241,10 +242,6 @@
         
         if ([imageKey length] > 0) {
             _image = [XMImageCache loadImageForKey:imageKey];
-        }
-        
-        if (!_image) {
-            _image = [UIImage imageNamed:@"Default.png"];
         }
     }
     
