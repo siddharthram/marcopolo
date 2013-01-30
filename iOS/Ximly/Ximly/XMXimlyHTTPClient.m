@@ -12,6 +12,10 @@
 #import "XMImageCache.h"
 #import "XMJob.h"
 #import "XMJobList.h"
+#import "SFHFKeychainUtils.h"
+
+
+static NSString *_deviceID = nil;
 
 static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/";
 
@@ -121,9 +125,26 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     return errorMessage;
 }
 
+// If you want to use a particular device ID for testing purposes, set the value for kXMTextDeviceID here
+#define kXMTestDeviceID         @""
+
+#define kXMKeychainService      @"XMKeychainService"
+#define kXMKeychainDeviceIDKey  @"XMKeychainDeviceIDKey"
 
 - (NSString *)getDeviceID {
-    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    
+    if ([_deviceID length] == 0) {
+        _deviceID = kXMTestDeviceID;
+        if ([_deviceID length] == 0) {
+            NSError *error;
+            _deviceID = [SFHFKeychainUtils getPasswordForUsername:kXMKeychainDeviceIDKey andServiceName:kXMKeychainService error:&error];
+            if ([_deviceID length] == 0) {
+                _deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+                [SFHFKeychainUtils storeUsername:kXMKeychainDeviceIDKey andPassword:_deviceID forServiceName:kXMKeychainService updateExisting:YES error:&error];
+            }
+        }
+    }
+    return _deviceID;
 }
 
 - (NSString *)getAuthID {

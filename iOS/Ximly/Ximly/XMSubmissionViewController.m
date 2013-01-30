@@ -10,6 +10,11 @@
 
 #import "XMImageCache.h"
 #import "XMXimlyHTTPClient.h"
+#import "UIImage+XMAdditions.h"
+
+#define kMaxImageDimension      500
+
+
 
 @interface XMSubmissionViewController ()
 
@@ -122,11 +127,13 @@
     theJob.requestID = [XMXimlyHTTPClient newRequestID];
     theJob.status = kJobStatusProcessingString;
     theJob.submissionTime = [NSDate date];
-    [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
+    
+    UIImage *scaledImage = [UIImage scaleDownImage:self.pickedImage toMaxDimension:kMaxImageDimension];
+    [XMImageCache saveImage:scaledImage withKey:theJob.requestID];
     
     [self.delegate jobSubmitted:theJob];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
-    [[XMXimlyHTTPClient sharedClient] submitImage:UIImagePNGRepresentation(self.pickedImage) withMetaData:[theJob submissionMetaData]];
+    [[XMXimlyHTTPClient sharedClient] submitImage:UIImagePNGRepresentation(scaledImage) withMetaData:[theJob submissionMetaData]];
 }
 
 
