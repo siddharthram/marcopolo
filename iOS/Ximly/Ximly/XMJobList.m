@@ -157,24 +157,23 @@ static NSString     *_dataFilePath = nil;
 
 - (void)mergeInJobsData:(NSArray *)jobsData
 {
-    int numNewJobs = [jobsData count];
-    NSMutableDictionary *jobsMap = [NSMutableDictionary dictionaryWithCapacity:numNewJobs];
-    NSMutableArray *newJobsList = [NSMutableArray arrayWithCapacity:numNewJobs];
+    NSMutableDictionary *jobsMap = [NSMutableDictionary dictionaryWithCapacity:[self.jobList count]];
+    XMJob *oldJob = nil;
     
-    for (NSMutableDictionary *jobData in jobsData) {
-        XMJob *newJob = [XMJob new];
-        newJob.jobData = jobData;
-        [jobsMap setValue:newJob forKey:newJob.requestID];
-        [newJobsList addObject:newJob];
+    for (oldJob in self.jobList) {
+        [jobsMap setValue:oldJob forKey:oldJob.requestID];
     }
     
-    for (XMJob *oldJob in self.jobList) {
-        if (![jobsMap valueForKey:oldJob.requestID]) {
-            [newJobsList addObject:oldJob];
+    for (NSMutableDictionary *newJobData in jobsData) {
+        oldJob = [jobsMap valueForKey:[newJobData valueForKey:kJobRequestIDKey]];
+        if (oldJob) {
+            oldJob.jobData = newJobData;
+        } else {
+            XMJob *newJob = [XMJob new];
+            newJob.jobData = newJobData;
+            [self.jobList addObject:newJob];
         }
     }
-    
-    self.jobList = newJobsList;
 
     [self sortUsingDescriptors:[self defaultSortDescriptors]];
     
