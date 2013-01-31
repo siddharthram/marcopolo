@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+#git push github webclient
+#git push heroku webclient:master
+
 ruby "1.9.3"
 gem 'rails', '3.2.11'
 gem 'bootstrap-sass'
