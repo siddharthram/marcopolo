@@ -12,6 +12,7 @@
 
 @interface XMIntroViewController : UIViewController <XMSubmissionDelegate>
 
+@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 - (IBAction)doStart:(id)sender;
 
 @end
