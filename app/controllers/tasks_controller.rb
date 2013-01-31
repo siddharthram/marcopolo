@@ -39,7 +39,9 @@ class TasksController < ApplicationController
         #i=i+1
       end
     end
-    @tasks = Task.all
+    #@tasks = Task.all
+    @tasks = Task.paginate(:page => params[:page], :per_page => 5)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tasks }

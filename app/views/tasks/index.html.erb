@@ -1,6 +1,9 @@
 <h1>Open tasks</h1>
 
 
+<%= will_paginate @tasks, :renderer => BootstrapPagination::Rails %>
+
+
 <div class="container-fluid">
   <section>
 <% for task in @tasks -%>
@@ -23,5 +26,6 @@
 
 
 <br />
+<%= will_paginate @tasks, :renderer => BootstrapPagination::Rails %>
 
     <%= link_to 'New Task', new_task_path %>
