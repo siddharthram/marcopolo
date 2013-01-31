@@ -44,11 +44,12 @@ static NSString     *_cacheFolderPath = nil;
     return [NSString stringWithFormat:@"%@/%@.png", [self cacheFolderPath], key];
 }
 
-+ (void)saveImage:(UIImage *)image withKey:(NSString *)key
++ (NSData *)saveImage:(UIImage *)image withKey:(NSString *)key
 {
     [self createCacheFolder];
-    NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
     [self saveImageData:imageData withKey:key];
+    return imageData;
 }
 
 + (void)saveImageData:(NSData *)imageData withKey:(NSString *)key

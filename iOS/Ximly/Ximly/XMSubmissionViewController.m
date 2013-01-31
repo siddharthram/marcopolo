@@ -128,12 +128,11 @@
     theJob.status = kJobStatusProcessingString;
     theJob.submissionTime = [NSDate date];
     
-    UIImage *scaledImage = [UIImage scaleDownImage:self.pickedImage toMaxDimension:kMaxImageDimension];
-    [XMImageCache saveImage:scaledImage withKey:theJob.requestID];
+    NSData *imageData = [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
     
     [self.delegate jobSubmitted:theJob];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
-    [[XMXimlyHTTPClient sharedClient] submitImage:UIImagePNGRepresentation(scaledImage) withMetaData:[theJob submissionMetaData]];
+    [[XMXimlyHTTPClient sharedClient] submitImage:imageData withMetaData:[theJob submissionMetaData]];
 }
 
 
