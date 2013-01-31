@@ -14,7 +14,7 @@
 #define kJobRequestIDKey                @"clientUniqueRequestId"
 #define kJobServerReqeustIDKey          @"serverUniqueRequestId"
 #define kJobTitleKey                    @"title"
-#define kJobTranscriptionKey            @"transcription"
+#define kJobTranscriptionKey            @"transcriptionData"
 #define kJobStatusKey                   @"status"
 #define kJobSubmissionTimeKey           @"clientSubmitTimeStamp"
 #define kJobServerSubmissionTimeKey     @"serverSubmissionTimeStamp"
