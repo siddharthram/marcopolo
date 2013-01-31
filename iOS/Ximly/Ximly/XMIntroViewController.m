@@ -30,6 +30,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGFloat screenScale = [[UIScreen mainScreen] scale];
+    CGSize screenSize = CGSizeMake(screenBounds.size.width * screenScale, screenBounds.size.height * screenScale);
+    
+    if (screenSize.height == 480.0) {
+        self.backgroundImageView.image = [UIImage imageNamed:@"Default.png"];
+    } else if (screenSize.height == 960.0) {
+        self.backgroundImageView.image = [UIImage imageNamed:@"Default@2x.png"];
+    } else {
+        self.backgroundImageView.image = [UIImage imageNamed:@"Default-568h@2x.png"];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
