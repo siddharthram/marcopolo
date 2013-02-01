@@ -10,11 +10,11 @@
 
 @implementation UIImage (XMAdditions)
 
-// Scale image to a size (No cropping)
+// Based on code from http://www.icodesnip.com/search/objective-c%20scale/
 + (UIImage*)scaleImage:(UIImage*)image toSize:(CGSize)newSize {
     
-    // Graphics operation
     if ([[UIScreen mainScreen] scale] == 2.0) {
+        // Retina
         UIGraphicsBeginImageContextWithOptions(newSize, YES, 2.0f);
     } else {
         UIGraphicsBeginImageContext(newSize);
