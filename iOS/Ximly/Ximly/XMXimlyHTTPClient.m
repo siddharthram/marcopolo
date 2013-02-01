@@ -157,6 +157,7 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
         NSDictionary *responseDict = (NSDictionary *)responseObject;
         NSArray *taskStatusesArray = [responseDict objectForKey:@"taskStatuses"];
         [[XMJobList sharedInstance] mergeInJobsData:taskStatusesArray];
+        [[XMJobList sharedInstance] submitUnsubmittedJobs];
         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -166,16 +167,25 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
 }
 
 
-- (void)submitImage:(NSData *)imageData withMetaData:(NSDictionary *)metaData
+- (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob
 {
-    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"task/new" parameters:metaData constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
+    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"task/new" parameters:[theJob submissionMetaData] constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"dummyName" fileName:@"dummyFileName" mimeType:@"image/png"];
     }];
     
+    
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:[metaData valueForKey:kJobRequestIDKey]];
+        NSDictionary *responseDict = (NSDictionary *)responseObject;
+        NSNumber *responseCode = [responseDict valueForKey:@"responseCode"];
+        if ([responseCode isEqualToNumber:[NSDecimalNumber zero]]) {
+            theJob.imageURL = [responseDict valueForKey:@"image_url"];  // TODO - ask Mukesh to change this to be consistent with other API
+            theJob.serverRequestID = [responseDict valueForKey:@"serverUniqueId"];  // TODO - ask Mukesh to change this to be consistent with other API
+            [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:theJob];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_FAILED object:theJob];
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_FAILED object:[metaData valueForKey:kJobRequestIDKey]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_FAILED object:theJob];
     }];
     
     [self enqueueHTTPRequestOperation:operation];

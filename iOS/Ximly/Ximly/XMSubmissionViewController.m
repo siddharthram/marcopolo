@@ -132,7 +132,7 @@
     
     [self.delegate jobSubmitted:theJob];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
-    [[XMXimlyHTTPClient sharedClient] submitImage:imageData withMetaData:[theJob submissionMetaData]];
+    [[XMXimlyHTTPClient sharedClient] submitImage:imageData forJob:theJob];
 }
 
 

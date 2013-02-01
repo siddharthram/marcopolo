@@ -36,6 +36,6 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 - (NSString *)getAuthID;
 - (void)updateTasks;
 
-- (void)submitImage:(NSData *)imageData withMetaData:(NSDictionary *)metaData;
+- (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob;
 
 @end

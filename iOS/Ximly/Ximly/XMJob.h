@@ -39,6 +39,7 @@ typedef enum {
 
 @interface XMJob : NSObject {
     UIImage *_image;
+    NSData *_imageData;
 }
 
 @property (nonatomic, strong) NSMutableDictionary *jobData;
@@ -57,6 +58,7 @@ typedef enum {
 @property (nonatomic, readwrite) NSString *imageKey;
 @property (nonatomic, assign) int urgency;
 @property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) NSData *imageData;
 @property (nonatomic, readonly) NSString *durationSinceLastAction;
 
 - (void)setImage:(UIImage *)anImage withKey:(NSString *)theImageKey;

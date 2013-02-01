@@ -10,6 +10,7 @@
 
 #import "XMImageCache.h"
 #import "XMUtilities.h"
+#import "XMXimlyHTTPClient.h"
 
 
 static NSString     *_dataFilePath = nil;
@@ -178,6 +179,18 @@ static NSString     *_dataFilePath = nil;
     [self sortUsingDescriptors:[self defaultSortDescriptors]];
     
     [self writeToDisk];
+}
+
+- (void)submitUnsubmittedJobs
+{
+    for (XMJob *job in self.jobList) {
+        if ([job.serverRequestID length] == 0) {
+            NSData *imageData = job.imageData;
+            if (imageData) {
+                [[XMXimlyHTTPClient sharedClient] submitImage:imageData forJob:job];
+            }
+        }
+    }
 }
 
 @end

@@ -13,5 +13,6 @@
 + (NSData *)saveImage:(UIImage *)image withKey:(NSString *)key;
 + (void)saveImageData:(NSData *)imageData withKey:(NSString *)key;
 + (UIImage *)loadImageForKey:(NSString *)key;
++ (NSData *)loadImageDataForKey:(NSString *)key;
 
 @end
