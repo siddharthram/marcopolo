@@ -164,13 +164,13 @@ static NSString     *_dataFilePath = nil;
         [jobsMap setValue:oldJob forKey:oldJob.requestID];
     }
     
-    for (NSMutableDictionary *newJobData in jobsData) {
+    for (NSDictionary *newJobData in jobsData) {
         oldJob = [jobsMap valueForKey:[newJobData valueForKey:kJobRequestIDKey]];
         if (oldJob) {
-            oldJob.jobData = newJobData;
+            [oldJob populateObjectFromServerJSON:newJobData];
         } else {
             XMJob *newJob = [XMJob new];
-            newJob.jobData = newJobData;
+            [newJob populateObjectFromServerJSON:newJobData];
             [self.jobList addObject:newJob];
         }
     }
