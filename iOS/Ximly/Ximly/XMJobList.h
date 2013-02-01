@@ -27,6 +27,7 @@
 - (void)removeAllJobs;
 - (void)sortUsingDescriptors:(NSArray *)sortDescriptors;
 - (void)mergeInJobsData:(NSArray *)jobsData;
+- (void)submitUnsubmittedJobs;
 
 - (void)readFromDisk;
 - (void)writeToDisk;

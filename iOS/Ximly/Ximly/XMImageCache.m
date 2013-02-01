@@ -72,4 +72,9 @@ static NSString     *_cacheFolderPath = nil;
     return [UIImage imageWithContentsOfFile:[self cacheFilePathForKey:key]];
 }
 
++ (NSData *)loadImageDataForKey:(NSString *)key
+{
+    return [NSData dataWithContentsOfFile:[self cacheFilePathForKey:key]];
+}
+
 @end

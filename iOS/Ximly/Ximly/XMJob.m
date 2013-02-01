@@ -248,6 +248,20 @@
     return _image;
 }
 
+- (NSData *)imageData
+{
+    if (!_imageData) {
+        
+        NSString *imageKey = self.imageKey;
+        
+        if ([imageKey length] > 0) {
+            _imageData = [XMImageCache loadImageDataForKey:imageKey];
+        }
+    }
+    
+    return _imageData;
+}
+
 - (void)populateObjectFromServerJSON:(NSDictionary *)serverJSON {
     self.jobData = [NSMutableDictionary dictionaryWithDictionary:serverJSON];
 }
