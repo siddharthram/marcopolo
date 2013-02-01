@@ -36,7 +36,7 @@
     
     if (screenHeight == 480.0) {
         self.backgroundImageView.image = [UIImage imageNamed:@"Default.png"];
-    } else if (screenHeight) {
+    } else if (screenHeight == 960.0) {
         self.backgroundImageView.image = [UIImage imageNamed:@"Default@2x.png"];
     } else {
         self.backgroundImageView.image = [UIImage imageNamed:@"Default-568h@2x.png"];
