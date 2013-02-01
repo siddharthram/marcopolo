@@ -13,11 +13,12 @@
 #define kJobRatingGood @"Good"
 #define kJobRatingBad @"Bad"
 
-@interface XMRateJobViewController : UIViewController
+@interface XMRateJobViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *ratingBox;
 @property (nonatomic, weak) IBOutlet UIButton *goodButton;
 @property (nonatomic, weak) IBOutlet UIButton *badButton;
+@property (nonatomic, weak) IBOutlet UIButton *closeButton;
 @property (nonatomic, weak) IBOutlet UITextView *commentTextView;
 @property (nonatomic, weak) IBOutlet UIView *commentBackdrop;
 @property (nonatomic, weak) IBOutlet UIButton *submitButton;

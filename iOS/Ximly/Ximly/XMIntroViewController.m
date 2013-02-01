@@ -10,6 +10,7 @@
 
 #import "XMAppDelegate.h"
 #import "XMHistoryViewController.h"
+#import "XMUtilities.h"
 
 @interface XMIntroViewController ()
 
@@ -31,13 +32,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGFloat screenScale = [[UIScreen mainScreen] scale];
-    CGSize screenSize = CGSizeMake(screenBounds.size.width * screenScale, screenBounds.size.height * screenScale);
+    CGFloat screenHeight = [XMUtilities heightOfScreen];
     
-    if (screenSize.height == 480.0) {
+    if (screenHeight == 480.0) {
         self.backgroundImageView.image = [UIImage imageNamed:@"Default.png"];
-    } else if (screenSize.height == 960.0) {
+    } else if (screenHeight) {
         self.backgroundImageView.image = [UIImage imageNamed:@"Default@2x.png"];
     } else {
         self.backgroundImageView.image = [UIImage imageNamed:@"Default-568h@2x.png"];
