@@ -51,6 +51,10 @@
 											 selector:@selector(keyboardDidShow:)
 												 name:UIKeyboardDidShowNotification
 											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardDidHide:)
+												 name:UIKeyboardDidHideNotification
+											   object:nil];
 }
 
 - (void)drawRatingBox
@@ -58,7 +62,7 @@
     CGRect ratingBoxFrame = self.ratingBox.frame;
     
     if ([self.rating length] > 0) {
-        ratingBoxFrame.size.height = 203.0;
+        ratingBoxFrame.size.height = 258.0;
         NSString *comment = self.job.ratingComment;
         self.commentTextView.text = comment ? comment : @"";
         if ([self.rating isEqualToString:kJobRatingGood]) {
@@ -143,7 +147,7 @@
     CGFloat shiftDelta = 61.0;
 
     if (screenHeight > 960.0) {
-        shiftDelta = 31.0;
+        shiftDelta = 51.0;
     }
     
     [UIView animateWithDuration:.2 animations:^(void){
@@ -157,6 +161,26 @@
     }];
 }
 
+- (void)keyboardDidHide:(NSNotification *)notification
+{
+    CGFloat screenHeight = [XMUtilities heightOfScreen];
+    CGFloat shiftDelta = 61.0;
+    
+    if (screenHeight > 960.0) {
+        shiftDelta = 51.0;
+    }
+    
+    [UIView animateWithDuration:.2 animations:^(void){
+        CGRect aFrame = self.ratingBox.frame;
+        aFrame.origin.y += shiftDelta;
+        self.ratingBox.frame = aFrame;
+        
+        aFrame = self.closeButton.frame;
+        aFrame.origin.y += shiftDelta;
+        self.closeButton.frame = aFrame;
+    }];
+}
+
 - (BOOL)textView:(UITextView *)textView
 shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text
@@ -164,7 +188,6 @@ shouldChangeTextInRange:(NSRange)range
     if ([text isEqualToString:@"\n"])
     {
         [textView resignFirstResponder];
-        [self submit:self];
     }
     return YES;
 }
