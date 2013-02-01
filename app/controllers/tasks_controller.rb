@@ -12,23 +12,25 @@ class TasksController < ApplicationController
      # ["1", "http://rafalab.jhsph.edu/simplystats/dongle-capitalism.jpg", "open"],
      # ["2", "http://williamkaminsky.files.wordpress.com/2006/06/whiteboard2.jpg", "open"]
     #]
-    response = HTTParty.get('http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/task/open
-')
+    response = HTTParty.get('http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/task/open')
+
+    puts "response = " + response.to_s
+
     #@tasks = Array.new
     #i = 0
+
+    Task.delete_all
+
     response.parsed_response.each do |k, v|
       v.each do |a|
         puts "" + a.to_s
-        
-
-
-        if !Task.exists?(:xim_id  => a["serverUniqueRequestId"])
+        #if !Task.exists?(:xim_id  => a["serverUniqueRequestId"])
           t = Task.new
           t.xim_id = a["serverUniqueRequestId"]
          t.imageurl = a["imageUrl"]
           puts "SAVING T.... " + t.to_s
           t.save
-        end
+        #end
         #t= Array.new
         #t= [
         ##    a["serverUniqueRequestId"], 
@@ -41,6 +43,7 @@ class TasksController < ApplicationController
     end
     #@tasks = Task.all
     @tasks = Task.paginate(:page => params[:page], :per_page => 5)
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -112,7 +115,8 @@ class TasksController < ApplicationController
       }
     }
 
-    r = HTTParty.post('http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/task/submit', options)
+    r = HTTParty.post('http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/task/submit', options).inspect
+
     puts "response ======" + r.to_s
 
 
