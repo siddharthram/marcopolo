@@ -12,4 +12,6 @@
 
 + (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
 
++ (CGFloat)heightOfScreen;
+
 @end
