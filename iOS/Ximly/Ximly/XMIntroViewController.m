@@ -64,6 +64,27 @@
     [appDelegate showSubmissionViewWithDelegate:self];
 }
 
+-(BOOL)shouldAutorotate{
+    return YES;
+}
+
+-(NSInteger)supportedInterfaceOrientations{
+    
+    //    UIInterfaceOrientationMaskLandscape;
+    //    24
+    //
+    //    UIInterfaceOrientationMaskLandscapeLeft;
+    //    16
+    //
+    //    UIInterfaceOrientationMaskLandscapeRight;
+    //    8
+    //
+    //    UIInterfaceOrientationMaskPortrait;
+    //    2
+
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 #pragma mark - XMSubmission delegate methods
 
 - (void)submissionCancelled
