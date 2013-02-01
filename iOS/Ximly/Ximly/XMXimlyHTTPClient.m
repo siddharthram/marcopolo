@@ -174,7 +174,6 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:[metaData valueForKey:kJobRequestIDKey]];
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_FAILED object:[metaData valueForKey:kJobRequestIDKey]];
     }];
