@@ -13,7 +13,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -26,8 +28,52 @@
         [self showHistoryView];
     }
     
+    UILocalNotification *remoteNotif =
+    [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (remoteNotif) {
+        [self alertUserToUpdatedJobs:remoteNotif.userInfo];
+        application.applicationIconBadgeNumber = remoteNotif.applicationIconBadgeNumber-1;
+    }
     
     return YES;
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is: %@", deviceToken);
+    // TODO send token to server
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+	NSLog(@"Got Notification%@",userInfo);
+	if ( application.applicationState == UIApplicationStateActive ){
+		// App was in forefront
+		[[XMXimlyHTTPClient sharedClient] updateTasks];
+        [self alertUserToUpdatedJobs:userInfo];
+    }
+    else
+    {
+        // App was just brought from background to forefront
+		[[XMXimlyHTTPClient sharedClient] updateTasks];
+        // The user got us here so no need to alert the assure about the updated job, but we may eventually want to take
+        // him directly to the updated job
+    }
+}
+
+- (void)alertUserToUpdatedJobs:(NSDictionary *)userInfo
+{
+    if ([[userInfo objectForKey:@"aps"] objectForKey:@"alert"]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:[NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]]  delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 - (void)showIntroView
