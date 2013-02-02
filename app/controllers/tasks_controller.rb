@@ -3,9 +3,9 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
   include HTTParty
   format :json
-  #base_uri 'http://default-environment-jrcyxn2kkh.elasticbeanstalk.com'
-  base_uri 'localhost:8080'
-  @@base = 'http://localhost:8080/MarcoPolo'
+  @@base ='http://default-environment-jrcyxn2kkh.elasticbeanstalk.com'
+  #base_uri 'localhost:8080'
+  #@@base = 'http://localhost:8080/MarcoPolo'
   # GET /tasks
   # GET /tasks.json
   def index
