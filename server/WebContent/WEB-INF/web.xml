@@ -15,6 +15,10 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		<servlet-class>com.marcopolo.service.add</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>register</servlet-name>
+		<servlet-class>com.marcopolo.service.register</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>open</servlet-name>
 		<servlet-class>com.marcopolo.service.open</servlet-class>
 	</servlet>
@@ -30,6 +34,10 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	<servlet-mapping>
 		<servlet-name>add</servlet-name>
 		<url-pattern>/task/new</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>register</servlet-name>
+		<url-pattern>/task/register</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>open</servlet-name>

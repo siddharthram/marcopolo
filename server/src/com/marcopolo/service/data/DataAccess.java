@@ -210,6 +210,41 @@ public class DataAccess {
 		return taskStatusResponse;
 	}
 
+
+	private static String updateRegisterRow = "update device_table set apns_device_id = ? where device_id = ?";
+	private static String addRegisterRow = "insert into device_table (device_id, apns_device_id, free_tasks_left) values(?,?,?)";
+	
+	public static void register(String ximlyDeviceId, String apnsDeviceId) throws SQLException {
+
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got register request");
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(updateRegisterRow);
+			pstmtQuery.setString(1, apnsDeviceId);
+			pstmtQuery.setString(2, ximlyDeviceId);
+			int rows = pstmtQuery.executeUpdate();
+			pstmtQuery.close();
+			
+			if (rows ==0) {
+				pstmtQuery = conn.prepareStatement(addRegisterRow);
+				pstmtQuery.setString(1, ximlyDeviceId);
+				pstmtQuery.setString(2, apnsDeviceId);
+				pstmtQuery.setInt(3, MAX_FREE_TASKS);
+				pstmtQuery.executeUpdate();
+				pstmtQuery.close();
+			}
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+
+	}
+
+	
 	private static String deleteExistingResponse = "delete from assignment_table where task_table_idtask in (select idtask from task_table where server_unique_guid = ?) ";
 	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = NOW(), task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
 
