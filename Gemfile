@@ -13,6 +13,11 @@ gem 'will_paginate', '~> 3.0'
 gem 'crack'
 gem 'httparty'
 gem 'will_paginate-bootstrap'
+gem 'activerecord-import'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'oauth2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

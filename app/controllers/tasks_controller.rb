@@ -1,8 +1,11 @@
 
 class TasksController < ApplicationController
+  before_filter :authenticate_user!
   include HTTParty
   format :json
-  base_uri 'http://default-environment-jrcyxn2kkh.elasticbeanstalk.com'
+  #base_uri 'http://default-environment-jrcyxn2kkh.elasticbeanstalk.com'
+  base_uri 'localhost:8080'
+  @@base = 'http://localhost:8080/MarcoPolo'
   # GET /tasks
   # GET /tasks.json
   def index
@@ -12,7 +15,12 @@ class TasksController < ApplicationController
      # ["1", "http://rafalab.jhsph.edu/simplystats/dongle-capitalism.jpg", "open"],
      # ["2", "http://williamkaminsky.files.wordpress.com/2006/06/whiteboard2.jpg", "open"]
     #]
-    response = HTTParty.get('http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/task/open')
+    # is this a pagination call?
+
+    page = params[:page]
+    #puts "PAGE>>>>>>>>" + page
+    if (page == nil )
+    response = HTTParty.get(@@base + '/task/open')
 
     puts "response = " + response.to_s
 
@@ -20,16 +28,16 @@ class TasksController < ApplicationController
     #i = 0
 
     Task.delete_all
-
+    newTasks = []
     response.parsed_response.each do |k, v|
       v.each do |a|
         puts "" + a.to_s
         #if !Task.exists?(:xim_id  => a["serverUniqueRequestId"])
-          t = Task.new
-          t.xim_id = a["serverUniqueRequestId"]
-         t.imageurl = a["imageUrl"]
+          newTasks << Task.new(xim_id: a["serverUniqueRequestId"], imageurl: a["imageUrl"] )
+         # t.xim_id = a["serverUniqueRequestId"]
+         # t.imageurl = a["imageUrl"]
           puts "SAVING T.... " + t.to_s
-          t.save
+         # t.save
         #end
         #t= Array.new
         #t= [
@@ -41,6 +49,8 @@ class TasksController < ApplicationController
         #i=i+1
       end
     end
+    Task.import newTasks
+  end
     #@tasks = Task.all
     @tasks = Task.paginate(:page => params[:page], :per_page => 5)
 
@@ -109,13 +119,17 @@ class TasksController < ApplicationController
     output = @task.output
 
     options = {
+      :headers => {'Content-type' => 'application/x-www-form-urlencoded'},
       :body => {
         :serverUniqueRequestId => @task.xim_id,
         :output => output
       }
     }
 
-    r = HTTParty.post('http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/task/submit', options).inspect
+    puts "CALLING OUT TO + " +  @@base
+
+    #r = HTTParty.post('http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/task/submit', options).inspect
+    r = HTTParty.post(@@base + '/task/submit', options).inspect
 
     puts "response ======" + r.to_s
 

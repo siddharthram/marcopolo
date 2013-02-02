@@ -1,5 +1,9 @@
 Ximly::Application.routes.draw do
 
+  #devise_for :users
+
+devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
+
   root to: 'tasks#index'
 
   get "static_pages/home"
