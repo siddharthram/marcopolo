@@ -43,13 +43,16 @@ public class submit extends AbstractServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		try {
+			
 			TaskStatusRequest tsr = new TaskStatusRequest();
 			String guid = request.getParameter("serverUniqueRequestId");
 			String transcript = request.getParameter("output");
+			log.debug("Got parameters as serverUniqueRequestId='" + guid + "' and output='" + transcript + "'");
 			if (guid != null && !guid.trim().equals("")) {
 				DataAccess.submit(guid, transcript);
 			}
 		} catch (Exception ex) {
+			log.error("Error when submitting", ex);
 			throw new ServletException(ex);
 		}
 		response.setContentType("application/json");
