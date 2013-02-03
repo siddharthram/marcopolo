@@ -73,7 +73,7 @@
 
 	UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
 	imagePicker.delegate = self;
-    imagePicker.allowsEditing = YES;
+    imagePicker.allowsEditing = NO;
     
     BOOL cancelled = NO;
     
@@ -138,11 +138,11 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)editingInfo
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
     
-    self.pickedImage = [XMSubmissionViewController editedImageFromMediaWithInfo:editingInfo];
+    self.pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     [self submitToCloud];
 }
