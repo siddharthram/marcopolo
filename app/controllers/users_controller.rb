@@ -10,6 +10,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def after_sign_in_path_for(resource)
+ "http://google.com"
+end
+
   # GET /users/1
   # GET /users/1.json
   def show

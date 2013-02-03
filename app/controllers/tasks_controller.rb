@@ -116,7 +116,9 @@ class TasksController < ApplicationController
 
     puts "UPDATING...."
     @task = Task.find(params[:id])
-    output = @task.output
+    output = params[:task][:output]
+
+    puts "output is " + output.to_s
 
     options = {
       :headers => {'Content-type' => 'application/x-www-form-urlencoded'},

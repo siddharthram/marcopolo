@@ -9,5 +9,7 @@ Ximly::Application.initialize!
 
 Ximly::Application.configure do
 	config.assets.initialize_on_precompile = false
-	config.action_mailer.default_url_options = { :host => 'http://mysterious-retreat-8129.herokuapp.com' }
+	#config.action_mailer.default_url_options = { :host => 'http://mysterious-retreat-8129.herokuapp.com' }
+	config.action_mailer.default_url_options = { :host => 'localhost' }
+
 end
