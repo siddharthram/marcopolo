@@ -1,10 +1,19 @@
 Ximly::Application.routes.draw do
 
+  #devise_for :users
+
+devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
+
   root to: 'tasks#index'
 
   get "static_pages/home"
   get "static_pages/help"
 
+  
+devise_scope :user do
+  match '/confirm/:confirmation_token', :to => "devise/confirmations#show", :as => "user_confirm", :only_path => false
+end
+  
   resources :tasks
 
 

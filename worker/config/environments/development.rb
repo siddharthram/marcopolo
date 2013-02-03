@@ -34,4 +34,24 @@ Ximly::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+
+require 'tlsmail'       
+ Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)   
+ ActionMailer::Base.delivery_method = :smtp   
+ ActionMailer::Base.perform_deliveries = true   
+ ActionMailer::Base.raise_delivery_errors = true   
+ ActionMailer::Base.smtp_settings = {   
+ :enable_starttls_auto => true,     
+ :address            => 'smtp.gmail.com',   
+ :port               => 587,   
+ :tls                  => true,   
+ :domain             => 'gmail.com',    
+ :authentication     => :plain,   
+ :user_name          => 'ximly12@gmail.com',   
+ :password           => 'marcopolo12' # for security reasons you can use a environment variable too. (ENV['INFO_MAIL_PASS'])   
+ }
+
+ config.action_mailer.default_url_options = { :host => 'localhost:3000' }   
+
 end
