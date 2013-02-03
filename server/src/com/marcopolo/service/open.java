@@ -58,6 +58,7 @@ public class open extends AbstractServlet {
 		try {
 			taskStatusResponse  = DataAccess.getAllOpen();
 		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		response.setContentType("application/json");
 		PrintWriter writer = response.getWriter();
