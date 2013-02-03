@@ -179,8 +179,8 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
         NSDictionary *responseDict = (NSDictionary *)responseObject;
         NSNumber *responseCode = [responseDict valueForKey:@"responseCode"];
         if ([responseCode isEqualToNumber:[NSDecimalNumber zero]]) {
-            theJob.imageURL = [responseDict valueForKey:@"image_url"];  // TODO - ask Mukesh to change this to be consistent with other API
-            theJob.serverRequestID = [responseDict valueForKey:@"serverUniqueId"];  // TODO - ask Mukesh to change this to be consistent with other API
+            theJob.imageURL = [responseDict valueForKey:kJobImageURLKey];  // TODO - ask Mukesh to change this to be consistent with other API
+            theJob.serverRequestID = [responseDict valueForKey:kJobServerReqeustIDKey];  // TODO - ask Mukesh to change this to be consistent with other API
             [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:theJob];
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_FAILED object:theJob];
