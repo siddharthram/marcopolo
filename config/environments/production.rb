@@ -23,6 +23,27 @@ config.assets.initialize_on_precompile = false
   # Generate digests for assets URLs
   config.assets.digest = true
 
+
+ # require 'tlsmail'       
+ #Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)   
+ #ActionMailer::Base.delivery_method = :smtp   
+ #ActionMailer::Base.perform_deliveries = true   
+ #ActionMailer::Base.raise_delivery_errors = true   
+ ActionMailer::Base.smtp_settings = {   
+ #:enable_starttls_auto => true,     
+ :address            => 'smtp.sendgrid.net',   
+ :port               => 587,   
+ #:tls                  => true,   
+ :domain             => 'heroku.com',    
+ :authentication     => :plain,   
+ :user_name          => ENV['SENDGRID_USERNAME'],   
+ :password           => ENV['SENDGRID_PASSWORD'], # for security reasons you can use a environment variable too. (ENV['INFO_MAIL_PASS'])   
+ }
+ ActionMailer::Base.delivery_method ||= :smtp
+
+ config.action_mailer.default_url_options = { :host => 'mysterious-retreat-8129.herokuapp.com' }   
+
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
