@@ -124,10 +124,10 @@ public class DataAccess {
 				// image_url, server_sumbit_time, device_table_iddevice,
 				// server_unique_guid, client_unique_guid, cleint_submit_time
 
-				pstmtInsert.setString(1, presp.getImage_url());
+				pstmtInsert.setString(1, presp.getImageUrl());
 				pstmtInsert.setLong(2, preq.getServerSubmissionTimeStamp());
 				pstmtInsert.setInt(3, iddevice);
-				pstmtInsert.setString(4, presp.getServerUniqueId());
+				pstmtInsert.setString(4, presp.getServerUniqueRequestId());
 				pstmtInsert.setString(5, preq.getClientRequestId());
 				pstmtInsert.setLong(6, preq.getClientSubmitTimeStamp());
 				pstmtInsert.executeUpdate();
@@ -247,10 +247,13 @@ public class DataAccess {
 	
 	private static String deleteExistingResponse = "delete from assignment_table where task_table_idtask in (select idtask from task_table where server_unique_guid = ?) ";
 	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = NOW(), task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
+	private static String getApnsId = "select * from device_table dt, task_table tt " +
+									  " where dt.iddevice = tt.device_table_iddevice and tt.server_unique_guid  = ?";
 
-	public static void submit(String guid, String response) throws SQLException {
+	public static String submit(String guid, String response) throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
+		String apnsId = "";
 		try {
 			log.debug("Got request to submit transcript for guid " + guid);
 			PreparedStatement pstmtQuery = conn
@@ -263,6 +266,15 @@ public class DataAccess {
 			pstmtQuery.setString(2, guid);
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
+			pstmtQuery =  conn
+					.prepareStatement(getApnsId);
+			pstmtQuery.setString(1, guid);
+			ResultSet rs = pstmtQuery.executeQuery();
+			if (rs.next()) {
+				apnsId = rs.getString("apns_device_id");
+			}
+			pstmtQuery.close();
+			
 		} finally {
 			try {
 				conn.close();
@@ -270,6 +282,7 @@ public class DataAccess {
 				log.error("Error closing connection", e);
 			}
 		}
+		return apnsId;
 
 	}
 

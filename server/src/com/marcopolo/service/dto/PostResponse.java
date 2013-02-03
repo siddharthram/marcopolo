@@ -1,18 +1,12 @@
 package com.marcopolo.service.dto;
 
 public class PostResponse {
-	public String serverUniqueId;
+	public String serverUniqueRequestId;
 	public int freeImagesLeft;
 	public int responseCode;
 	public String responseText;
-	public String image_url;
+	public String imageUrl;
 	
-	public String getServerUniqueId() {
-		return serverUniqueId;
-	}
-	public void setServerUniqueId(String serverUniqueId) {
-		this.serverUniqueId = serverUniqueId;
-	}
 	public int getFreeImagesLeft() {
 		return freeImagesLeft;
 	}
@@ -31,11 +25,17 @@ public class PostResponse {
 	public void setResponseText(String responseText) {
 		this.responseText = responseText;
 	}
-	public String getImage_url() {
-		return image_url;
+	public String getServerUniqueRequestId() {
+		return serverUniqueRequestId;
 	}
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
+	public void setServerUniqueRequestId(String serverUniqueRequestId) {
+		this.serverUniqueRequestId = serverUniqueRequestId;
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }

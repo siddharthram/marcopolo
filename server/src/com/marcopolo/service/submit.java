@@ -49,7 +49,12 @@ public class submit extends AbstractServlet {
 			String transcript = request.getParameter("output");
 			log.debug("Got parameters as serverUniqueRequestId='" + guid + "' and output='" + transcript + "'");
 			if (guid != null && !guid.trim().equals("")) {
-				DataAccess.submit(guid, transcript);
+				String apnsDeviceId = DataAccess.submit(guid, transcript);
+				if (apnsDeviceId != null && !apnsDeviceId.equals("")) {
+					SendNotification.sendPushNotification(apnsDeviceId, guid);
+				} else {
+					log.debug("No apns id found so not sending push notification");
+				}
 			}
 		} catch (Exception ex) {
 			log.error("Error when submitting", ex);

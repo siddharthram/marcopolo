@@ -75,7 +75,7 @@ public class add extends AbstractServlet {
 			throws Exception {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		PostResponse presp = new PostResponse();
-		presp.setServerUniqueId(UUID.randomUUID().toString());
+		presp.setServerUniqueRequestId(UUID.randomUUID().toString());
 		PostRequest postReq = new PostRequest();
 		postReq.setServerSubmissionTimeStamp(System.currentTimeMillis());
 		// if request is not multipart, i.e. no file upload then send just
@@ -119,8 +119,8 @@ public class add extends AbstractServlet {
 					// store file on S3
 					if (postReq.isValid()) {
 						// sendEmail(postReq, pngData, "image/png");
-						String imageUrl = S3StoreImage.storeS3File(presp.getServerUniqueId(), pngData);
-						presp.setImage_url(imageUrl);
+						String imageUrl = S3StoreImage.storeS3File(presp.getServerUniqueRequestId(), pngData);
+						presp.setImageUrl(imageUrl);
 						DataAccess.storeRequestData(postReq, presp);
 					} else {
 						throw new Exception("All parameters not sent.");
