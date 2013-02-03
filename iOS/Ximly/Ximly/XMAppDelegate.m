@@ -13,9 +13,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -27,6 +24,9 @@
     } else {
         [self showHistoryView];
     }
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
     UILocalNotification *remoteNotif =
     [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -41,12 +41,14 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
 	NSLog(@"My token is: %@", deviceToken);
-    // TODO send token to server
+    self.apnsDeviceToken = deviceToken;
+    [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:self.apnsDeviceToken];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
 	NSLog(@"Failed to get token, error: %@", error);
+
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -59,9 +61,7 @@
     else
     {
         // App was just brought from background to forefront
-		[[XMXimlyHTTPClient sharedClient] updateTasks];
-        // The user got us here so no need to alert the assure about the updated job, but we may eventually want to take
-        // him directly to the updated job
+        // We call '[[XMXimlyHTTPClient sharedClient] updateTasks]' in applicationDidBecomeActive: so there's nothing to do here
     }
 }
 
@@ -136,6 +136,7 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [[XMXimlyHTTPClient sharedClient] updateTasks];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
