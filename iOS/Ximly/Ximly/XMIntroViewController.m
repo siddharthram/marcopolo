@@ -32,15 +32,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+//    self.backgroundImageView.image = [UIImage imageNamed:@"Intro"];
+   
     CGFloat screenHeight = [XMUtilities heightOfScreen];
     
     if (screenHeight == 480.0) {
-        self.backgroundImageView.image = [UIImage imageNamed:@"Default.png"];
+        self.backgroundImageView.image = [UIImage imageNamed:@"Intro.png"];
     } else if (screenHeight == 960.0) {
-        self.backgroundImageView.image = [UIImage imageNamed:@"Default@2x.png"];
+        self.backgroundImageView.image = [UIImage imageNamed:@"Intro@2x.png"];
     } else {
-        self.backgroundImageView.image = [UIImage imageNamed:@"Default-568h@2x.png"];
+        self.backgroundImageView.image = [UIImage imageNamed:@"Intro-568h@2x.png"];
     }
+ 
 }
 
 - (void)viewDidAppear:(BOOL)animated
