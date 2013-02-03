@@ -7,6 +7,7 @@
 //
 
 #import "XMXimlyHTTPClient.h"
+#import "XMAppDelegate.h"
 #import "AFJSONRequestOperation.h"
 #import "AFJSONRequestOperation.h"
 #import "XMImageCache.h"
@@ -189,6 +190,20 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     }];
     
     [self enqueueHTTPRequestOperation:operation];
+}
+
+- (void)registerAPNSDeviceToken:(NSData *)token
+{
+    NSString *deviceTokenStr = [[[[token description]
+                                  stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                                 stringByReplacingOccurrencesOfString: @">" withString: @""]
+                                stringByReplacingOccurrencesOfString: @" " withString: @""];
+    [self requestPath:@"task/register" method:@"POST" parameters:[NSDictionary dictionaryWithObjects:@[[self getDeviceID], deviceTokenStr] forKeys:@[kJobDeviceIDKey, kAPNSDeviceTokenKey]]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Failed to register token");
+              }];
 }
 
 @end

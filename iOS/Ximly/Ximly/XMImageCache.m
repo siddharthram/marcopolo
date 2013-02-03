@@ -47,7 +47,7 @@ static NSString     *_cacheFolderPath = nil;
 + (NSData *)saveImage:(UIImage *)image withKey:(NSString *)key
 {
     [self createCacheFolder];
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
     [self saveImageData:imageData withKey:key];
     return imageData;
 }
