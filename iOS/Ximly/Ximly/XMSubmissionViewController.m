@@ -129,6 +129,7 @@
     theJob.submissionTime = [NSDate date];
     
     NSData *imageData = [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
+    self.pickedImage = nil;
     
     [self.delegate jobSubmitted:theJob];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
