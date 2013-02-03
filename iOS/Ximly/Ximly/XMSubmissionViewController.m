@@ -143,7 +143,7 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
     
-    self.pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    self.pickedImage = [UIImage scaleDownImage:[info objectForKey:UIImagePickerControllerOriginalImage] toMaxDimension:800.0];
     
     [self submitToCloud];
 }
