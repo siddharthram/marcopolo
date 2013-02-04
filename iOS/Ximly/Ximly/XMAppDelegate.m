@@ -32,7 +32,6 @@
     [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotif) {
         [self alertUserToUpdatedJobs:remoteNotif.userInfo];
-        application.applicationIconBadgeNumber = remoteNotif.applicationIconBadgeNumber-1;
     }
     
     return YES;
@@ -56,6 +55,9 @@
 	if ( application.applicationState == UIApplicationStateActive ){
 		// App was in forefront
 		[[XMXimlyHTTPClient sharedClient] updateTasks];
+        if (self.historyViewController && self.historyNavController && (self.window.rootViewController == self.historyNavController) && (self.historyNavController.visibleViewController == self.historyNavController)) {
+            application.applicationIconBadgeNumber = 0;
+        }
         [self alertUserToUpdatedJobs:userInfo];
     }
     else
@@ -136,7 +138,6 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [[XMXimlyHTTPClient sharedClient] updateTasks];
-
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
