@@ -232,45 +232,36 @@
 }
 
 - (UIImage *)image
-{
-    if (!_image) {
+{        
+    NSString *imageKey = self.imageKey;
         
-        NSString *imageKey = self.imageKey;
-        
-        if ([imageKey length] > 0) {
-            _image = [XMImageCache loadImageForKey:imageKey];
-        }
+    if ([imageKey length] > 0) {
+        return [XMImageCache loadImageForKey:imageKey];
     }
-    
-    return _image;
+    return nil;
 }
 
 - (NSData *)imageData
 {
-    if (!_imageData) {
-        
-        NSString *imageKey = self.imageKey;
-        
-        if ([imageKey length] > 0) {
-            _imageData = [XMImageCache loadImageDataForKey:imageKey];
-        }
-    }
     
-    return _imageData;
+    NSString *imageKey = self.imageKey;
+    
+    if ([imageKey length] > 0) {
+        return [XMImageCache loadImageDataForKey:imageKey];
+    }
+    return nil;
 }
 
 - (UIImage *)thumbnail
 {
-    if (!_thumbnail) {
         
-        NSString *thumbnailKey = self.thumbnailKey;
+    NSString *thumbnailKey = self.thumbnailKey;
         
-        if ([thumbnailKey length] > 0) {
-            _thumbnail = [XMImageCache loadImageForKey:thumbnailKey];
-        }
+    if ([thumbnailKey length] > 0) {
+        return [XMImageCache loadImageForKey:thumbnailKey];
     }
     
-    return _thumbnail;
+    return nil;
 }
 
 - (NSString *)thumbnailKey
