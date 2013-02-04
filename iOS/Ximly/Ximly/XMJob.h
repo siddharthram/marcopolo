@@ -23,6 +23,7 @@
 #define kJobRatingCommentKey            @"ratingComment"
 #define kJobImageURLKey                 @"imageUrl"
 #define kJobImageKey                    @"imageKey"
+#define kJobThumbnailKey                @"thumbnailKey"
 #define kJobUrgencyKey                  @"urgency"
 
 
@@ -40,6 +41,7 @@ typedef enum {
 @interface XMJob : NSObject {
     UIImage *_image;
     NSData *_imageData;
+    UIImage *_thumbnail;
 }
 
 @property (nonatomic, strong) NSMutableDictionary *jobData;
@@ -55,13 +57,13 @@ typedef enum {
 @property (nonatomic, readwrite) NSString *rating;
 @property (nonatomic, readwrite) NSString *ratingComment;
 @property (nonatomic, readwrite) NSString *imageURL;
-@property (nonatomic, readwrite) NSString *imageKey;
+@property (nonatomic, readonly) NSString *imageKey;
+@property (nonatomic, readonly) NSString *thumbnailKey;
 @property (nonatomic, assign) int urgency;
 @property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) UIImage *thumbnail;
 @property (nonatomic, readonly) NSData *imageData;
 @property (nonatomic, readonly) NSString *durationSinceLastAction;
-
-- (void)setImage:(UIImage *)anImage withKey:(NSString *)theImageKey;
 
 - (NSDictionary *)submissionMetaData;
 

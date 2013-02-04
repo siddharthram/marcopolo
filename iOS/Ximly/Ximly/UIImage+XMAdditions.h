@@ -10,7 +10,7 @@
 
 @interface UIImage (XMAdditions)
 
-+ (UIImage*)scaleImage:(UIImage*)image toSize:(CGSize)newSize;
-+ (UIImage *)scaleDownImage:(UIImage *)image toMaxDimension:(CGFloat)maxDimension;
++ (UIImage*)scale:(UIImage*)image toSize:(CGSize)newSize;
++ (UIImage *)shrink:(UIImage *)image toMaxSide:(CGFloat)maxSide;
 
 @end
