@@ -651,14 +651,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 443383F986B54B62861349AB /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: sid RAM (J5N46J8WFR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: sid RAM (J5N46J8WFR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ximly/Ximly-Prefix.pch";
 				INFOPLIST_FILE = "Ximly/Ximly-Info.plist";
 				PRODUCT_NAME = ximlydev;
-				PROVISIONING_PROFILE = "89A1E714-9151-41BD-A766-B00145977927";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89A1E714-9151-41BD-A766-B00145977927";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -667,14 +667,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 443383F986B54B62861349AB /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: sid RAM (J5N46J8WFR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: sid RAM (J5N46J8WFR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ximly/Ximly-Prefix.pch";
 				INFOPLIST_FILE = "Ximly/Ximly-Info.plist";
 				PRODUCT_NAME = ximlydev;
-				PROVISIONING_PROFILE = "89A1E714-9151-41BD-A766-B00145977927";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89A1E714-9151-41BD-A766-B00145977927";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
