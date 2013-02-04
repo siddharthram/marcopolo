@@ -56,7 +56,13 @@
     NSString *titleText = self.job.title;
     self.title = titleText ? titleText : @"Untitled";
     
-    self.imageView.image = self.job.image;
+    /*
+    NSURL *url = [NSURL fileURLWithPath:[XMImageCache cacheFilePathForKey:self.job.imageKey]];
+    [self.imageView loadRequest:[NSURLRequest requestWithURL:url]];
+    */
+    CGFloat width = self.imageView.frame.size.width;
+    NSString *html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=%f; maximum-scale=4.0; user-scalable=1;\"/></head><body><img src=\"%@\" width=\"%f\"/></body></html>", width, self.job.imageKey, width - 16.0];
+    [self.imageView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[XMImageCache cacheFolderPath]]];
     
     NSString *transcribedText = self.job.transcription;
     
