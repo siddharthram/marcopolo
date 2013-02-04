@@ -39,9 +39,7 @@ typedef enum {
 
 
 @interface XMJob : NSObject {
-    UIImage *_image;
-    NSData *_imageData;
-    UIImage *_thumbnail;
+
 }
 
 @property (nonatomic, strong) NSMutableDictionary *jobData;
