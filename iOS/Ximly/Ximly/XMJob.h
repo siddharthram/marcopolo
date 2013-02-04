@@ -18,7 +18,7 @@
 #define kJobStatusKey                   @"status"
 #define kJobSubmissionTimeKey           @"clientSubmitTimeStamp"
 #define kJobServerSubmissionTimeKey     @"serverSubmissionTimeStamp"
-#define kJobFinishTimeKey               @"finishTime"
+#define kJobTranscriptionTimeKey        @"transcriptionTimeStamp"
 #define kJobRatingKey                   @"rating"
 #define kJobRatingCommentKey            @"ratingComment"
 #define kJobImageURLKey                 @"imageUrl"
@@ -51,7 +51,7 @@ typedef enum {
 @property (nonatomic, readwrite) NSString *status;
 @property (nonatomic, readwrite) NSDate *submissionTime;
 @property (nonatomic, readwrite) NSDate *serverSubmissionTime;
-@property (nonatomic, readwrite) NSDate *finishTime;
+@property (nonatomic, readwrite) NSDate *transcriptionTime;
 @property (nonatomic, readwrite) NSString *rating;
 @property (nonatomic, readwrite) NSString *ratingComment;
 @property (nonatomic, readwrite) NSString *imageURL;
