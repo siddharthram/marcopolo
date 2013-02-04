@@ -68,6 +68,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskUpdateCompleted:) name:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
 - (void)reloadDataSource:(UIRefreshControl *)sender
 {
 	self.isReloading = YES;
