@@ -8,6 +8,7 @@
 
 #import "XMXimlyHTTPClient.h"
 #import "XMAppDelegate.h"
+#import "AFImageRequestOperation.h"
 #import "AFJSONRequestOperation.h"
 #import "AFJSONRequestOperation.h"
 #import "XMImageCache.h"
@@ -204,6 +205,16 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Failed to register token");
               }];
+}
+
+- (void)fetchImageWithURL:(NSURL *)url
+                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
+    [operation setCompletionBlockWithSuccess:success failure:failure];
+    [self enqueueHTTPRequestOperation:operation];
 }
 
 @end

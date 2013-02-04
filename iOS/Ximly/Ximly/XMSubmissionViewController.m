@@ -128,7 +128,7 @@
     theJob.status = kJobStatusProcessingString;
     theJob.submissionTime = [NSDate date];
     
-    NSData *imageData = [XMImageCache saveImage:self.pickedImage withKey:theJob.requestID];
+    NSData *imageData = [XMImageCache saveImage:self.pickedImage forJob:theJob];
     self.pickedImage = nil;
     
     [self.delegate jobSubmitted:theJob];
@@ -143,7 +143,7 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
     
-    self.pickedImage = [UIImage scaleDownImage:[info objectForKey:UIImagePickerControllerOriginalImage] toMaxDimension:800.0];
+    self.pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     [self submitToCloud];
 }

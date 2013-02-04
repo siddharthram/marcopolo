@@ -8,6 +8,8 @@
 
 #import "XMImageCache.h"
 
+#import "UIImage+XMAdditions.h"
+#import "XMJob.h"
 #import "XMUtilities.h"
 
 static NSString     *_cacheFolderPath = nil;
@@ -44,16 +46,23 @@ static NSString     *_cacheFolderPath = nil;
     return [NSString stringWithFormat:@"%@/%@.png", [self cacheFolderPath], key];
 }
 
-+ (NSData *)saveImage:(UIImage *)image withKey:(NSString *)key
++ (NSData *)saveImage:(UIImage *)image forJob:(XMJob *)job
 {
-    [self createCacheFolder];
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
-    [self saveImageData:imageData withKey:key];
+    
+    UIImage *resizedImage = [UIImage shrink:image toMaxSide:800.0];
+    NSData *imageData = UIImageJPEGRepresentation(resizedImage, 0.6);
+    [self saveImageData:imageData withKey:job.imageKey];
+    
+    resizedImage = [UIImage shrink:image toMaxSide:100];
+    NSData *thumbnailData = UIImageJPEGRepresentation(resizedImage, 0.6);
+    [self saveImageData:thumbnailData withKey:job.thumbnailKey];
+    
     return imageData;
 }
 
 + (void)saveImageData:(NSData *)imageData withKey:(NSString *)key
 {
+    [self createCacheFolder];
     if (imageData) {
         NSString *filePath = [self cacheFilePathForKey:key];
         if ([filePath length] > 0) {
