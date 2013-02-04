@@ -12,7 +12,7 @@
 #import "XMXimlyHTTPClient.h"
 #import "AFImageRequestOperation.h"
 
-#define kNumberOfFields 11
+#define kNumberOfFields 12
 
 @implementation XMJob 
 

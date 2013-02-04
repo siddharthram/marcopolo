@@ -49,7 +49,7 @@ static NSString     *_cacheFolderPath = nil;
 + (NSData *)saveImage:(UIImage *)image forJob:(XMJob *)job
 {
     
-    UIImage *resizedImage = [UIImage shrink:image toMaxSide:100];
+    UIImage *resizedImage = [UIImage shrink:image toMaxSide:800];
     NSData *imageData = UIImageJPEGRepresentation(resizedImage, 0.6);
     [self saveImageData:imageData withKey:job.imageKey];
     
