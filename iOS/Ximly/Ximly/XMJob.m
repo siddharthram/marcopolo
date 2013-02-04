@@ -29,6 +29,8 @@
 @dynamic imageURL;
 @dynamic imageKey;
 @dynamic image;
+@dynamic thumbnailKey;
+@dynamic thumbnail;
 @dynamic durationSinceLastAction;
 
 
@@ -229,11 +231,6 @@
     return self.requestID;
 }
 
-- (void)setImageKey:(NSString *)value
-{
-    self.requestID = value;
-}
-
 - (UIImage *)image
 {
     if (!_image) {
@@ -262,14 +259,30 @@
     return _imageData;
 }
 
-- (void)populateObjectFromServerJSON:(NSDictionary *)serverJSON {
-    self.jobData = [NSMutableDictionary dictionaryWithDictionary:serverJSON];
+- (UIImage *)thumbnail
+{
+    if (!_thumbnail) {
+        
+        NSString *thumbnailKey = self.thumbnailKey;
+        
+        if ([thumbnailKey length] > 0) {
+            _thumbnail = [XMImageCache loadImageForKey:thumbnailKey];
+        }
+    }
+    
+    return _thumbnail;
 }
 
-- (void)setImage:(UIImage *)anImage withKey:(NSString *)theImageKey
+- (NSString *)thumbnailKey
 {
-    _image = anImage;
-    self.imageKey = theImageKey;
+    if (!self.requestID) {
+        return nil;
+    }
+    return [NSString stringWithFormat:@"%@%@", self.requestID, @"_thumb"];
+}
+
+- (void)populateObjectFromServerJSON:(NSDictionary *)serverJSON {
+    self.jobData = [NSMutableDictionary dictionaryWithDictionary:serverJSON];
 }
 
 - (NSString *)durationSinceLastAction

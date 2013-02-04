@@ -11,7 +11,7 @@
 @implementation UIImage (XMAdditions)
 
 // Based on code from http://www.icodesnip.com/search/objective-c%20scale/
-+ (UIImage*)scaleImage:(UIImage*)image toSize:(CGSize)newSize {
++ (UIImage*)scale:(UIImage*)image toSize:(CGSize)newSize {
     
     if ([[UIScreen mainScreen] scale] == 2.0) {
         // Retina
@@ -27,24 +27,36 @@
     return newImage;
 }
 
-// Scale down image so that the maximum length of either side is less than or equal to maxDimension.  If the image
-// is already smaller, the image is returned unchanged.
-+ (UIImage *)scaleDownImage:(UIImage *)image toMaxDimension:(CGFloat)maxDimension
++ (UIImage *)shrink:(UIImage *)image toMaxSide:(CGFloat)maxSide
 {
     CGSize origSize = [image size];
     UIImage *resizedImage = image;
-    if ((origSize.width > maxDimension) || (origSize.height > maxDimension)) {
+    if ((origSize.width > maxSide) || (origSize.height > maxSide)) {
         CGSize newSize;
         if (origSize.width > origSize.height) {
-            newSize.height = maxDimension * origSize.height / origSize.width;
-            newSize.width = maxDimension;
+            newSize.height = maxSide * origSize.height / origSize.width;
+            newSize.width = maxSide;
         } else {
-            newSize.width = maxDimension * origSize.width / origSize.height;
-            newSize.height = maxDimension;
+            newSize.width = maxSide * origSize.width / origSize.height;
+            newSize.height = maxSide;
         }
-        resizedImage = [UIImage scaleImage:image toSize:newSize];
+        resizedImage = [UIImage scale:image toSize:newSize];
     }
     return resizedImage;
+}
+
+- (UIImage *)crop:(CGRect)rect {
+    if (self.scale > 1.0f) {
+        rect = CGRectMake(rect.origin.x * self.scale,
+                          rect.origin.y * self.scale,
+                          rect.size.width * self.scale,
+                          rect.size.height * self.scale);
+    }
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect(self.CGImage, rect);
+    UIImage *result = [UIImage imageWithCGImage:imageRef scale:self.scale orientation:self.imageOrientation];
+    CGImageRelease(imageRef);
+    return result;
 }
 
 @end

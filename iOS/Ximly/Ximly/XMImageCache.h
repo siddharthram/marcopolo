@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class XMJob;
+
 @interface XMImageCache : NSObject
 
-+ (NSData *)saveImage:(UIImage *)image withKey:(NSString *)key;
++ (NSData *)saveImage:(UIImage *)image forJob:(XMJob *)job;
 + (void)saveImageData:(NSData *)imageData withKey:(NSString *)key;
 + (UIImage *)loadImageForKey:(NSString *)key;
 + (NSData *)loadImageDataForKey:(NSString *)key;
