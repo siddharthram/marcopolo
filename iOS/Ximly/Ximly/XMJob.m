@@ -12,7 +12,7 @@
 #import "XMXimlyHTTPClient.h"
 #import "AFImageRequestOperation.h"
 
-#define kNumberOfFields 11
+#define kNumberOfFields 12
 
 @implementation XMJob 
 
@@ -23,7 +23,7 @@
 @dynamic status;
 @dynamic submissionTime;
 @dynamic serverSubmissionTime;
-@dynamic finishTime;
+@dynamic transcriptionTime;
 @dynamic rating;
 @dynamic ratingComment;
 @dynamic imageURL;
@@ -164,24 +164,24 @@
     return [timeNum doubleValue];
 }
 
-- (NSDate *)finishTime
+- (NSDate *)transcriptionTime
 {
-    double timeInMs = [self submissionTimeInMs];
+    double timeInMs = [self transcriptionTimeInMs];
     if (timeInMs != 0) {
         return [NSDate dateWithTimeIntervalSince1970:timeInMs/1000];
     }
     return nil;
 }
 
-- (void)setFinishTime:(NSDate *)value
+- (void)setTranscriptionTime:(NSDate *)value
 {
     long long timeInMs = (long long)[value timeIntervalSince1970] * 1000;
-    [self.jobData setValue:[NSNumber numberWithLongLong:timeInMs] forKey:kJobFinishTimeKey];
+    [self.jobData setValue:[NSNumber numberWithLongLong:timeInMs] forKey:kJobTranscriptionTimeKey];
 }
 
-- (double)finishTimeInMs
+- (double)transcriptionTimeInMs
 {
-    NSNumber *timeNum = [self.jobData valueForKey:kJobFinishTimeKey];
+    NSNumber *timeNum = [self.jobData valueForKey:kJobTranscriptionTimeKey];
     return [timeNum doubleValue];
 }
 
@@ -280,7 +280,7 @@
 {
     NSString *dateString = @"";
     
-    NSDate *timeToUse = self.finishTime ? self.finishTime : self.submissionTime;
+    NSDate *timeToUse = self.transcriptionTime ? self.transcriptionTime : self.submissionTime;
     
     if (timeToUse) {
         // TODO - proper date formatting...we want values like "26 min ago"
