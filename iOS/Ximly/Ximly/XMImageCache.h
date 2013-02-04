@@ -12,6 +12,8 @@
 
 @interface XMImageCache : NSObject
 
++ (NSString *)cacheFolderPath;
++ (NSString *)cacheFilePathForKey:(NSString *)key;
 + (NSData *)saveImage:(UIImage *)image forJob:(XMJob *)job;
 + (void)saveImageData:(NSData *)imageData withKey:(NSString *)key;
 + (UIImage *)loadImageForKey:(NSString *)key;

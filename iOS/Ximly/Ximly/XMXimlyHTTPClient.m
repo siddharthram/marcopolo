@@ -172,7 +172,7 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
 - (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob
 {
     NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"task/new" parameters:[theJob submissionMetaData] constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:@"dummyName" fileName:@"dummyFileName" mimeType:@"image/png"];
+        [formData appendPartWithFileData:imageData name:@"dummyName" fileName:@"dummyFileName" mimeType:@"image/jpeg"];
     }];
     
     

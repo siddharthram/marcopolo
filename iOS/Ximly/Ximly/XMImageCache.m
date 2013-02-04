@@ -43,7 +43,7 @@ static NSString     *_cacheFolderPath = nil;
 
 + (NSString *)cacheFilePathForKey:(NSString *)key
 {
-    return [NSString stringWithFormat:@"%@/%@.png", [self cacheFolderPath], key];
+    return [NSString stringWithFormat:@"%@/%@", [self cacheFolderPath], key];
 }
 
 + (NSData *)saveImage:(UIImage *)image forJob:(XMJob *)job
