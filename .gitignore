@@ -21,3 +21,8 @@ build/
 *.swp
 *~
 *(Autosaved).rtfd/
+/worker/tmp/*
+/worker/log/*
+/worker/db/development.sqlite3
+
+
