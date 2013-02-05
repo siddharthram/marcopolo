@@ -58,7 +58,7 @@
     CALayer *boxLayer = self.imageView.layer;
     boxLayer.cornerRadius = 14.0;
     boxLayer.masksToBounds = YES;
-    boxLayer.borderWidth = 6;
+    boxLayer.borderWidth = 4;
     boxLayer.borderColor = [[UIColor blackColor] CGColor];
 
     NSString *titleText = self.job.title;
