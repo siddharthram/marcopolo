@@ -43,8 +43,7 @@
 		2473EF1816B7D2F900885451 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1216B7D2F900885451 /* Icon-Small.png */; };
 		2473EF1916B7D2F900885451 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1316B7D2F900885451 /* Icon-Small@2x.png */; };
 		2473EF1A16B7D2F900885451 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2473EF1416B7D2F900885451 /* Icon.png */; };
-		24794E5A16BE293200246922 /* Intro-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24794E5816BE293100246922 /* Intro-568h@2x.png */; };
-		24794E5B16BE293200246922 /* Intro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24794E5916BE293200246922 /* Intro@2x.png */; };
+		24794E5D16C0D48F00246922 /* part_startHere.png in Resources */ = {isa = PBXBuildFile; fileRef = 24794E5C16C0D48F00246922 /* part_startHere.png */; };
 		2486248D16AE67EE00DDCA75 /* XMHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */; };
 		2486248F16AE681D00DDCA75 /* XMHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */; };
 		2486249316AE7D0100DDCA75 /* XMJobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486249116AE7D0100DDCA75 /* XMJobDetailViewController.m */; };
@@ -53,7 +52,6 @@
 		248624A416AFEFFB00DDCA75 /* XMUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 248624A316AFEFFB00DDCA75 /* XMUtilities.m */; };
 		248A4CC516ADEA2F0042B46C /* XMIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */; };
 		248A4CC616ADEA2F0042B46C /* XMIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */; };
-		248A4CDD16ADF2320042B46C /* Intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CDC16ADF2310042B46C /* Intro.png */; };
 		248A4CEA16AE1FE20042B46C /* XMXimlyHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */; };
 		24A782A716B47E6A0091AB46 /* XMJobList.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A782A616B47E6A0091AB46 /* XMJobList.m */; };
 		24A782AB16B47E820091AB46 /* XMJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A782AA16B47E820091AB46 /* XMJob.m */; };
@@ -126,8 +124,7 @@
 		2473EF1216B7D2F900885451 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		2473EF1316B7D2F900885451 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		2473EF1416B7D2F900885451 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		24794E5816BE293100246922 /* Intro-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intro-568h@2x.png"; sourceTree = "<group>"; };
-		24794E5916BE293200246922 /* Intro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Intro@2x.png"; sourceTree = "<group>"; };
+		24794E5C16C0D48F00246922 /* part_startHere.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = part_startHere.png; sourceTree = "<group>"; };
 		2486248B16AE67EE00DDCA75 /* XMHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMHistoryTableViewCell.h; sourceTree = "<group>"; };
 		2486248C16AE67EE00DDCA75 /* XMHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMHistoryTableViewCell.m; sourceTree = "<group>"; };
 		2486248E16AE681D00DDCA75 /* XMHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMHistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -141,7 +138,6 @@
 		248A4CC216ADEA2E0042B46C /* XMIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMIntroViewController.h; sourceTree = "<group>"; };
 		248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMIntroViewController.m; sourceTree = "<group>"; };
 		248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMIntroViewController.xib; sourceTree = "<group>"; };
-		248A4CDC16ADF2310042B46C /* Intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Intro.png; sourceTree = "<group>"; };
 		248A4CE816AE1FE20042B46C /* XMXimlyHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMXimlyHTTPClient.h; sourceTree = "<group>"; };
 		248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMXimlyHTTPClient.m; sourceTree = "<group>"; };
 		24A782A516B47E6A0091AB46 /* XMJobList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMJobList.h; sourceTree = "<group>"; };
@@ -250,6 +246,7 @@
 		2450229B16ADD7F100FA03B0 /* Ximly */ = {
 			isa = PBXGroup;
 			children = (
+				24794E5C16C0D48F00246922 /* part_startHere.png */,
 				2409380B16B9029F0045446F /* UIImage+XMAdditions.h */,
 				2409380C16B9029F0045446F /* UIImage+XMAdditions.m */,
 				245022A416ADD7F100FA03B0 /* XMAppDelegate.h */,
@@ -291,9 +288,6 @@
 				245022B216ADD7F100FA03B0 /* first@2x.png */,
 				24B2E06916B3E1EF0022DFAF /* good.png */,
 				24B2E06E16B3E6EC0022DFAF /* goodSelected.png */,
-				24794E5816BE293100246922 /* Intro-568h@2x.png */,
-				24794E5916BE293200246922 /* Intro@2x.png */,
-				248A4CDC16ADF2310042B46C /* Intro.png */,
 				24A782C016B4F6A00091AB46 /* sample1.jpg */,
 				24A782C116B4F6A10091AB46 /* sample2.jpg */,
 				24A782C216B4F6A10091AB46 /* sample3.jpg */,
@@ -431,7 +425,6 @@
 				245022C316ADD7F100FA03B0 /* XMHistoryViewController_iPhone.xib in Resources */,
 				245022C616ADD7F100FA03B0 /* XMHistoryViewController_iPad.xib in Resources */,
 				248A4CC616ADEA2F0042B46C /* XMIntroViewController.xib in Resources */,
-				248A4CDD16ADF2320042B46C /* Intro.png in Resources */,
 				2486248F16AE681D00DDCA75 /* XMHistoryTableViewCell.xib in Resources */,
 				2486249416AE7D0100DDCA75 /* XMJobDetailViewController.xib in Resources */,
 				24B2E04E16B3D21E0022DFAF /* XMRateJobViewController.xib in Resources */,
@@ -450,8 +443,7 @@
 				2473EF1916B7D2F900885451 /* Icon-Small@2x.png in Resources */,
 				2473EF1A16B7D2F900885451 /* Icon.png in Resources */,
 				2409380316B8D40E0045446F /* Icon@2x.png in Resources */,
-				24794E5A16BE293200246922 /* Intro-568h@2x.png in Resources */,
-				24794E5B16BE293200246922 /* Intro@2x.png in Resources */,
+				24794E5D16C0D48F00246922 /* part_startHere.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
