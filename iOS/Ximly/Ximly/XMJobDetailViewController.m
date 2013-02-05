@@ -9,6 +9,8 @@
 #import "XMJobDetailViewController.h"
 
 #import "XMImageCache.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @interface XMJobDetailViewController ()
 
@@ -52,6 +54,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    CALayer *boxLayer = self.imageView.layer;
+    boxLayer.cornerRadius = 14.0;
+    boxLayer.masksToBounds = YES;
+    boxLayer.borderWidth = 6;
+    boxLayer.borderColor = [[UIColor blackColor] CGColor];
 
     NSString *titleText = self.job.title;
     self.title = titleText ? titleText : @"Untitled";
