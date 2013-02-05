@@ -74,6 +74,10 @@
     }
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.imageView reload];
+}
 
 - (void)didReceiveMemoryWarning
 {
