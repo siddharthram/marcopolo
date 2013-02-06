@@ -14,6 +14,7 @@
 #import "XMImageCache.h"
 #import "XMJob.h"
 #import "XMJobList.h"
+#import "XMSettingsViewController.h"
 #import "SFHFKeychainUtils.h"
 
 
@@ -128,7 +129,6 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
 }
 
 // If you want to use a particular device ID for testing purposes, set the value for kXMTextDeviceID here
-#define kXMTestDeviceID         @""
 
 #define kXMKeychainService      @"XMKeychainService"
 #define kXMKeychainDeviceIDKey  @"XMKeychainDeviceIDKey"
@@ -136,7 +136,8 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
 - (NSString *)getDeviceID {
     
     if ([_deviceID length] == 0) {
-        _deviceID = kXMTestDeviceID;
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        _deviceID = [userDefaults stringForKey:kDeviceIDPrefKey];
         if ([_deviceID length] == 0) {
             NSError *error;
             _deviceID = [SFHFKeychainUtils getPasswordForUsername:kXMKeychainDeviceIDKey andServiceName:kXMKeychainService error:&error];

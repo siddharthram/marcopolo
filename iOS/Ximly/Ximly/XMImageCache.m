@@ -86,4 +86,22 @@ static NSString     *_cacheFolderPath = nil;
     return [NSData dataWithContentsOfFile:[self cacheFilePathForKey:key]];
 }
 
++ (void)deleteCache
+{
+    NSFileManager *fileMgr = [NSFileManager new];
+    NSError *error = nil;
+    NSArray *directoryContents = [fileMgr contentsOfDirectoryAtPath:[self cacheFolderPath] error:&error];
+    if (error == nil) {
+        for (NSString *path in directoryContents) {
+            NSString *fullPath = [[self cacheFolderPath] stringByAppendingPathComponent:path];
+            BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
+            if (!removeSuccess) {
+                // TODO
+            }
+        }
+    } else {
+        // TODO
+    }
+}
+
 @end

@@ -14,6 +14,8 @@
 		2409380816B8E8B40045446F /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2409380716B8E8B40045446F /* SFHFKeychainUtils.m */; };
 		2409380A16B8EF9C0045446F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2409380916B8EF9C0045446F /* Security.framework */; };
 		2409380D16B9029F0045446F /* UIImage+XMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2409380C16B9029F0045446F /* UIImage+XMAdditions.m */; };
+		2419BE3816C250C000650F3B /* XMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2419BE3616C250C000650F3B /* XMSettingsViewController.m */; };
+		2419BE3916C250C000650F3B /* XMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2419BE3716C250C000650F3B /* XMSettingsViewController.xib */; };
 		2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229516ADD7F100FA03B0 /* UIKit.framework */; };
 		2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
 		2450229A16ADD7F100FA03B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229916ADD7F100FA03B0 /* CoreGraphics.framework */; };
@@ -88,6 +90,9 @@
 		2409380916B8EF9C0045446F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2409380B16B9029F0045446F /* UIImage+XMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XMAdditions.h"; sourceTree = "<group>"; };
 		2409380C16B9029F0045446F /* UIImage+XMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XMAdditions.m"; sourceTree = "<group>"; };
+		2419BE3516C250C000650F3B /* XMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMSettingsViewController.h; sourceTree = "<group>"; };
+		2419BE3616C250C000650F3B /* XMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMSettingsViewController.m; sourceTree = "<group>"; };
+		2419BE3716C250C000650F3B /* XMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMSettingsViewController.xib; sourceTree = "<group>"; };
 		2450229116ADD7F100FA03B0 /* ximlydev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ximlydev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2450229516ADD7F100FA03B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2450229716ADD7F100FA03B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -273,6 +278,9 @@
 				24B2E04A16B3D21E0022DFAF /* XMRateJobViewController.h */,
 				24B2E04B16B3D21E0022DFAF /* XMRateJobViewController.m */,
 				24B2E04C16B3D21E0022DFAF /* XMRateJobViewController.xib */,
+				2419BE3516C250C000650F3B /* XMSettingsViewController.h */,
+				2419BE3616C250C000650F3B /* XMSettingsViewController.m */,
+				2419BE3716C250C000650F3B /* XMSettingsViewController.xib */,
 				245022AD16ADD7F100FA03B0 /* XMSubmissionViewController.h */,
 				245022AE16ADD7F100FA03B0 /* XMSubmissionViewController.m */,
 				245022BB16ADD7F100FA03B0 /* XMSubmissionViewController_iPhone.xib */,
@@ -444,6 +452,7 @@
 				2473EF1A16B7D2F900885451 /* Icon.png in Resources */,
 				2409380316B8D40E0045446F /* Icon@2x.png in Resources */,
 				24794E5D16C0D48F00246922 /* part_startHere.png in Resources */,
+				2419BE3916C250C000650F3B /* XMSettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +516,7 @@
 				24A782AB16B47E820091AB46 /* XMJob.m in Sources */,
 				2409380816B8E8B40045446F /* SFHFKeychainUtils.m in Sources */,
 				2409380D16B9029F0045446F /* UIImage+XMAdditions.m in Sources */,
+				2419BE3816C250C000650F3B /* XMSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
