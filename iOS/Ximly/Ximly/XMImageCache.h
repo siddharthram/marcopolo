@@ -18,5 +18,6 @@
 + (void)saveImageData:(NSData *)imageData withKey:(NSString *)key;
 + (UIImage *)loadImageForKey:(NSString *)key;
 + (NSData *)loadImageDataForKey:(NSString *)key;
++ (void)deleteCache;
 
 @end

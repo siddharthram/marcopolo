@@ -17,6 +17,7 @@
 #import "XMJobList.h"
 #import "XMUtilities.h"
 #import "XMXimlyHTTPClient.h"
+#import "XMSettingsViewController.h"
 #import "UIImageView+AFNetworking.h"
 
 #define kJobCellReuseIdentifier @"JobCellReuseIdentifier"
@@ -61,6 +62,9 @@
     [refreshControl addTarget:self action:@selector(reloadDataSource:) forControlEvents:UIControlEventValueChanged];
 
     self.tableViewController.refreshControl = refreshControl;
+    
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
     
     UINib *cellNib = [UINib nibWithNibName:@"XMHistoryTableViewCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:kJobCellReuseIdentifier];
@@ -203,6 +207,12 @@
     }
     
     return cell;
+}
+
+- (IBAction)showSettings
+{
+    XMSettingsViewController *settingsController = [[XMSettingsViewController alloc] initWithNibName:@"XMSettingsViewController" bundle:nil];
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 #pragma mark - UITableViewDelegate methods
