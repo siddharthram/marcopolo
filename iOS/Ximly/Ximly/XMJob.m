@@ -12,7 +12,7 @@
 #import "XMXimlyHTTPClient.h"
 #import "AFImageRequestOperation.h"
 
-#define kNumberOfFields 12
+#define kNumberOfFields 14
 
 @implementation XMJob 
 
@@ -20,10 +20,12 @@
 @dynamic serverRequestID;
 @dynamic title;
 @dynamic transcription;
+@dynamic userTranscription;
 @dynamic status;
 @dynamic submissionTime;
 @dynamic serverSubmissionTime;
 @dynamic transcriptionTime;
+@dynamic transcriptionID;
 @dynamic rating;
 @dynamic ratingComment;
 @dynamic imageURL;
@@ -82,6 +84,16 @@
 - (void)setTranscription:(NSString *)value
 {
     [self.jobData setValue:value forKey:kJobTranscriptionKey];
+}
+
+- (NSString *)userTranscription
+{
+    return [self.jobData valueForKey:kJobUserTranscriptionKey];
+}
+
+- (void)setUserTranscription:(NSString *)value
+{
+    [self.jobData setValue:value forKey:kJobUserTranscriptionKey];
 }
 
 - (BOOL)isPending
@@ -190,6 +202,16 @@
 {
     NSNumber *timeNum = [self.jobData valueForKey:kJobTranscriptionTimeKey];
     return [timeNum doubleValue];
+}
+
+- (NSString *)transcriptionID
+{
+    NSNumber *idNum = [self.jobData valueForKey:kJobTranscriptionIDKey];
+    return [idNum stringValue];}
+
+- (void)setTranscriptionID:(NSString *)value
+{
+    [self.jobData setValue:[NSNumber numberWithLongLong:[value longLongValue]] forKey:kJobTranscriptionIDKey];
 }
 
 - (NSString *)rating
