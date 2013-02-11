@@ -1,9 +1,50 @@
 package com.marcopolo.service.dto;
 
 public class TaskStatus {
-	private String serverUniqueRequestId, clientUniqueRequestId, imageUrl, transcriptionData;
+	private String serverUniqueRequestId, clientUniqueRequestId, imageUrl, transcriptionData, userTranscriptionData, rating, ratingComment;
 	private int status; // -1 error, 0 - submitted, 1 in progress, 2 completed
-	private long serverSubmissionTimeStamp, clientSubmitTimeStamp;
+	private long serverSubmissionTimeStamp, clientSubmitTimeStamp, trasncriptionTimeStamp, transcriptionId;
+	
+	
+	public long getTranscriptionId() {
+		return transcriptionId;
+	}
+
+	public void setTranscriptionId(long transcriptionId) {
+		this.transcriptionId = transcriptionId;
+	}
+
+	public String getUserTranscriptionData() {
+		return userTranscriptionData;
+	}
+
+	public void setUserTranscriptionData(String userTranscriptionData) {
+		this.userTranscriptionData = userTranscriptionData;
+	}
+
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+	public String getRatingComment() {
+		return ratingComment;
+	}
+
+	public void setRatingComment(String ratingComment) {
+		this.ratingComment = ratingComment;
+	}
+
+	public long getTrasncriptionTimeStamp() {
+		return trasncriptionTimeStamp;
+	}
+
+	public void setTrasncriptionTimeStamp(long trasncriptionTimeStamp) {
+		this.trasncriptionTimeStamp = trasncriptionTimeStamp;
+	}
 
 	public long getServerSubmissionTimeStamp() {
 		return serverSubmissionTimeStamp;

@@ -179,7 +179,7 @@ public class DataAccess {
 					&& !taskReq.getTaskId().trim().equals("")) {
 				pstmtQuery.setString(2, taskReq.getTaskId());
 			}
-
+			
 			ResultSet rs = pstmtQuery.executeQuery();
 			while (rs.next()) {
 				TaskStatus ts = new TaskStatus();
@@ -190,11 +190,15 @@ public class DataAccess {
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs
 						.getLong("server_submit_time"));
+				ts.setUserTranscriptionData(rs.getString("user_transcription"));
 				// check if task completed
-				if (rs.getString("completion_time") != null
-						&& !rs.getString("completion_time").equals("")) {
+				if (rs.getString("completion_time") != null) {
+					ts.setTranscriptionId(rs.getLong("idassignment"));
 					ts.setStatus(2); // defualt is 0 which means submitted
+					ts.setTrasncriptionTimeStamp(rs.getLong("completion_time"));
 					ts.setTranscriptionData(rs.getString("jobresult"));
+					ts.setRating(rs.getString("rating"));
+					ts.setRatingComment(rs.getString("rating_comment"));
 				}
 				taskStatusResponse.addTaskStatus(ts);
 			}
@@ -246,26 +250,31 @@ public class DataAccess {
 
 	
 	private static String deleteExistingResponse = "delete from assignment_table where task_table_idtask in (select idtask from task_table where server_unique_guid = ?) ";
-	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = NOW(), task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
+	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = UNIX_TIMESTAMP(), task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
 	private static String getApnsId = "select * from device_table dt, task_table tt " +
 									  " where dt.iddevice = tt.device_table_iddevice and tt.server_unique_guid  = ?";
 
+	private static String copyUserTranscription = "update task_table set user_transcription = ? where server_unique_guid = ? and user_transcription is not null";
+	
 	public static String submit(String guid, String response) throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
 		String apnsId = "";
 		try {
 			log.debug("Got request to submit transcript for guid " + guid);
+			// delete existing transcription
 			PreparedStatement pstmtQuery = conn
 					.prepareStatement(deleteExistingResponse);
 			pstmtQuery.setString(1, guid);
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
+			// store new transcription
 			pstmtQuery = conn.prepareStatement(storeResponseQuery);
 			pstmtQuery.setString(1, response);
 			pstmtQuery.setString(2, guid);
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
+			// get apns device id
 			pstmtQuery =  conn
 					.prepareStatement(getApnsId);
 			pstmtQuery.setString(1, guid);
@@ -274,6 +283,14 @@ public class DataAccess {
 				apnsId = rs.getString("apns_device_id");
 			}
 			pstmtQuery.close();
+			// set user transcription
+			pstmtQuery = conn.prepareStatement(copyUserTranscription);
+			pstmtQuery.setString(1, response);
+			pstmtQuery.setString(2, guid);
+			pstmtQuery.executeUpdate();
+			pstmtQuery.close();
+			
+			
 			
 		} finally {
 			try {
@@ -322,6 +339,43 @@ public class DataAccess {
 			}
 		}
 		return taskStatusResponse;
+	}
+
+	private static String storeUserTranscription = "update task_table set user_transcription = ? where server_unique_guid = ? ";
+	private static String storeRatingAndComment = "update assignment_table set rating = ?, rating_comment = ? where idassignment= ? ";
+	
+	public static void rate(String ximlyDeviceId, String idassignment,
+			String guid, String rating, String ratingComment, String userTranscriptionData) throws SQLException {
+
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got request to store ratings ");
+			
+			if (userTranscriptionData != null && !userTranscriptionData.trim().equals("") ) {
+				PreparedStatement pstmtQuery = conn
+					.prepareStatement(storeUserTranscription);
+				pstmtQuery.setString(1, userTranscriptionData);
+				pstmtQuery.setString(2, guid);
+				pstmtQuery.executeUpdate();
+				pstmtQuery.close();
+			}
+
+			if (rating != null && !rating.trim().equals("") ) {
+				PreparedStatement pstmtQuery = conn
+					.prepareStatement(storeRatingAndComment);
+				pstmtQuery.setString(1, rating);
+				pstmtQuery.setString(2, ratingComment);
+				pstmtQuery.setString(3, idassignment);				
+				pstmtQuery.executeUpdate();
+				pstmtQuery.close();
+			}			
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
 	}
 
 }

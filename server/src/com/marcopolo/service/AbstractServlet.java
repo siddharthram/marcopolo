@@ -20,7 +20,6 @@ public abstract class AbstractServlet extends HttpServlet {
 
 	private static final long MAX_FILE_SIZE_IN_BYTES = 40000000l; // about 4 MB's
 
-	private Log log = LogFactory.getLog(AbstractServlet.class);
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -31,7 +30,6 @@ public abstract class AbstractServlet extends HttpServlet {
 
 	public void init() throws ServletException {
 		try {
-			log.debug("initalizing servlet");			
 			// initalize database access layer
 			DataAccess.init((Context) new InitialContext().lookup("java:comp/env"));
 		} catch (NamingException e) {
