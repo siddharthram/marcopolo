@@ -32,7 +32,7 @@
     NSString *messageText = @"";
     
     NSString *titleText = self.job.title;
-    NSString *transcribedText = self.job.transcription;
+    NSString *transcribedText = self.job.userTranscription;
 
     if ([titleText length] > 0) {
         if ([transcribedText length] > 0) {
@@ -72,7 +72,7 @@
     NSString *html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=%f; maximum-scale=4.0; user-scalable=1;\"/></head><body><img src=\"%@\" width=\"%f\"/></body></html>", width, self.job.imageKey, width - 16.0];
     [self.imageView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[XMImageCache cacheFolderPath]]];
     
-    NSString *transcribedText = self.job.transcription;
+    NSString *transcribedText = self.job.userTranscription;
     
     if ([transcribedText length] > 0) {
         self.transcribedTextView.text = transcribedText;
@@ -126,7 +126,7 @@
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"Sorry, we were unable to connect to your Evernote account." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alertView show];
         } else {
-            NSString *transcribedText = self.job.transcription;
+            NSString *transcribedText = self.job.userTranscription;
             if ([transcribedText length] <= 0) {
                 transcribedText = @"Transcription not yet available";
             }

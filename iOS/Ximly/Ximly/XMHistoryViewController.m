@@ -35,7 +35,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"History", @"History");
+        self.title = NSLocalizedString(@"Home", @"Home");
         [XMJobList sharedInstance];
     }
     return self;
