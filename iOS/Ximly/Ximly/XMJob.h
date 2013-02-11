@@ -62,6 +62,7 @@ typedef enum {
 @property (nonatomic, readonly) UIImage *thumbnail;
 @property (nonatomic, readonly) NSData *imageData;
 @property (nonatomic, readonly) NSString *durationSinceLastAction;
+@property (nonatomic, readonly) BOOL isPending;
 
 - (NSDictionary *)submissionMetaData;
 

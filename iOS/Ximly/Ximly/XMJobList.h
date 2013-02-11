@@ -16,6 +16,8 @@
 @interface XMJobList : NSObject
 
 @property (nonatomic, readonly) NSMutableArray *jobList;
+@property (nonatomic, readonly) NSMutableArray *pendingJobs;
+@property (nonatomic, readonly) NSMutableArray *finishedJobs;
 
 + (XMJobList *)sharedInstance;
 

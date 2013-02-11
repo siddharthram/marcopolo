@@ -69,6 +69,10 @@
 		24B2E06D16B3E43B0022DFAF /* badSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06C16B3E43B0022DFAF /* badSelected.png */; };
 		24B2E06F16B3E6EC0022DFAF /* goodSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06E16B3E6EC0022DFAF /* goodSelected.png */; };
 		24B2E07116B3F9400022DFAF /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E07016B3F9400022DFAF /* closeButton.png */; };
+		24F1A15C16C87279003E02C8 /* 073-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15A16C87279003E02C8 /* 073-Setting.png */; };
+		24F1A15D16C87279003E02C8 /* 073-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15B16C87279003E02C8 /* 073-Setting@2x.png */; };
+		24F1A16016C874C7003E02C8 /* camera-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15E16C874C7003E02C8 /* camera-gray.png */; };
+		24F1A16116C874C7003E02C8 /* camera-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15F16C874C7003E02C8 /* camera-green.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +166,10 @@
 		24B2E06C16B3E43B0022DFAF /* badSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badSelected.png; sourceTree = "<group>"; };
 		24B2E06E16B3E6EC0022DFAF /* goodSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goodSelected.png; sourceTree = "<group>"; };
 		24B2E07016B3F9400022DFAF /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
+		24F1A15A16C87279003E02C8 /* 073-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "073-Setting.png"; sourceTree = "<group>"; };
+		24F1A15B16C87279003E02C8 /* 073-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "073-Setting@2x.png"; sourceTree = "<group>"; };
+		24F1A15E16C874C7003E02C8 /* camera-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-gray.png"; sourceTree = "<group>"; };
+		24F1A15F16C874C7003E02C8 /* camera-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-green.png"; sourceTree = "<group>"; };
 		443383F986B54B62861349AB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		F23C08989CC04E6D986F4BB5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -251,6 +259,10 @@
 		2450229B16ADD7F100FA03B0 /* Ximly */ = {
 			isa = PBXGroup;
 			children = (
+				24F1A15E16C874C7003E02C8 /* camera-gray.png */,
+				24F1A15F16C874C7003E02C8 /* camera-green.png */,
+				24F1A15A16C87279003E02C8 /* 073-Setting.png */,
+				24F1A15B16C87279003E02C8 /* 073-Setting@2x.png */,
 				24794E5C16C0D48F00246922 /* part_startHere.png */,
 				2409380B16B9029F0045446F /* UIImage+XMAdditions.h */,
 				2409380C16B9029F0045446F /* UIImage+XMAdditions.m */,
@@ -453,6 +465,10 @@
 				2409380316B8D40E0045446F /* Icon@2x.png in Resources */,
 				24794E5D16C0D48F00246922 /* part_startHere.png in Resources */,
 				2419BE3916C250C000650F3B /* XMSettingsViewController.xib in Resources */,
+				24F1A15C16C87279003E02C8 /* 073-Setting.png in Resources */,
+				24F1A15D16C87279003E02C8 /* 073-Setting@2x.png in Resources */,
+				24F1A16016C874C7003E02C8 /* camera-gray.png in Resources */,
+				24F1A16116C874C7003E02C8 /* camera-green.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
