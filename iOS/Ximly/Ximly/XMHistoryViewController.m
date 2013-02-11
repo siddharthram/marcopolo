@@ -17,6 +17,7 @@
 #import "XMJobList.h"
 #import "XMUtilities.h"
 #import "XMXimlyHTTPClient.h"
+#import "XMSettingsViewController.h"
 #import "UIImageView+AFNetworking.h"
 
 #define kJobCellReuseIdentifier @"JobCellReuseIdentifier"
@@ -35,9 +36,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"History", @"History");
-        
         [XMJobList sharedInstance];
-
     }
     return self;
 }
@@ -62,16 +61,49 @@
 
     self.tableViewController.refreshControl = refreshControl;
     
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"073-Setting"] style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    
+    self.navigationItem.titleView = self.listSelector;
+    
     UINib *cellNib = [UINib nibWithNibName:@"XMHistoryTableViewCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:kJobCellReuseIdentifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobWasSubmitted:) name:XM_NOTIFICATION_JOB_SUBMITTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskUpdateCompleted:) name:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.selectedListSegmentIndex = [userDefaults integerForKey:@"LastHistoryList"];
+    [self setCurrentJobListFromSegmentIndex:self.selectedListSegmentIndex];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
+- (void)setCurrentJobListFromSegmentIndex:(NSInteger)index
+{
+    NSArray *oldJobList = self.currentJobList;
+    
+    switch (index) {
+        case 0:
+            self.currentJobList = [[XMJobList sharedInstance] jobList];
+            break;
+        case 1:
+            self.currentJobList = [[XMJobList sharedInstance] pendingJobs];
+            break;
+        case 2:
+            self.currentJobList = [[XMJobList sharedInstance] finishedJobs];
+            break;
+            
+        default:
+            break;
+    }
+    
+    if (self.currentJobList != oldJobList) {
+        [self.tableView reloadData];
+    }
 }
 
 - (void)reloadDataSource:(UIRefreshControl *)sender
@@ -101,7 +133,7 @@
 - (IBAction)showJobDetailForRow:(int)row
 {
     XMJobDetailViewController *jobDetailController = [[XMJobDetailViewController alloc] initWithNibName:@"XMJobDetailViewController" bundle:nil];
-    XMJob *theJob = [[XMJobList sharedInstance] jobAtIndex:row];
+    XMJob *theJob = [self.currentJobList objectAtIndex:row];
     jobDetailController.job = theJob;
     
     [self.navigationController pushViewController:jobDetailController animated:YES];
@@ -122,6 +154,15 @@
     [self.tableView reloadData];
 }
 
+- (IBAction)listSelectorValueChanged:(id)sender
+{
+    self.selectedListSegmentIndex = [self.listSelector selectedSegmentIndex];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:self.selectedListSegmentIndex forKey:@"LastHistoryList"];
+    
+    [self setCurrentJobListFromSegmentIndex:self.selectedListSegmentIndex];
+}
+
 #pragma mark - XMSubmission delegate methods
 
 - (void)submissionCancelled
@@ -139,7 +180,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[XMJobList sharedInstance] count];
+    return [self.currentJobList count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -154,7 +195,7 @@
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
-    XMJob *theJob = [[XMJobList sharedInstance] jobAtIndex:indexPath.row];
+    XMJob *theJob = [self.currentJobList objectAtIndex:indexPath.row];
     
     if (theJob.thumbnail) {
         cell.waitIndicator.hidden = YES;
@@ -178,7 +219,11 @@
     NSString *labelText = theJob.status;
     
     if (labelText) {
-        cell.label1.textColor = [UIColor redColor];
+        if ([theJob.status isEqualToString:kJobStatusTranscribedString]) {
+            cell.label1.textColor = [UIColor colorWithRed:0.0 green:.75 blue:0.0 alpha:1.0];
+        } else {
+            cell.label1.textColor = [UIColor redColor];
+        }
         cell.label1.font = [UIFont boldSystemFontOfSize:11.0];
         cell.label1.text = labelText;
         
@@ -203,6 +248,12 @@
     }
     
     return cell;
+}
+
+- (IBAction)showSettings
+{
+    XMSettingsViewController *settingsController = [[XMSettingsViewController alloc] initWithNibName:@"XMSettingsViewController" bundle:nil];
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 #pragma mark - UITableViewDelegate methods

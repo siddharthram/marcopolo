@@ -8,6 +8,7 @@
 
 #import "XMAppDelegate.h"
 #import "XMXimlyHTTPClient.h"
+#import "XMSettingsViewController.h"
 
 @implementation XMAppDelegate
 
@@ -18,8 +19,9 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     BOOL hasSeenInstructions = [userDefaults boolForKey:@"hasSeenInstructions"];
+    BOOL alwaysShowIntro = [userDefaults boolForKey:kShowIntroPrefKey];
     
-    if (!hasSeenInstructions) {
+    if (!hasSeenInstructions || alwaysShowIntro) {
         [self showIntroView];
     } else {
         [self showHistoryView];
