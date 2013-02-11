@@ -36,6 +36,8 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 - (NSString *)getAuthID;
 - (void)updateTasks;
 
+- (void)rateJob:(XMJob *)job;
+
 - (void)registerAPNSDeviceToken:(NSData *)token;
 
 - (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob;

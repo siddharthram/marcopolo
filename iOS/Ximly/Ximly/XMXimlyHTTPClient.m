@@ -169,6 +169,23 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     }];
 }
 
+- (void)rateJob:(XMJob *)job {
+    NSDictionary *parameters = @{kJobDeviceIDKey : [self getDeviceID],
+                                 kJobServerReqeustIDKey : [job.serverRequestID length] > 0 ? job.serverRequestID : @"",
+                                 kJobTranscriptionIDKey : [job.transcriptionID length] > 0 ? [NSNumber numberWithLongLong:[job.transcriptionID longLongValue]] : [NSDecimalNumber zero],
+                                 kJobRatingKey : [job.rating length] > 0 ? job.rating : @"",
+                                 kJobRatingCommentKey : [job.ratingComment length] > 0 ? job.ratingComment : @"",
+                                 kJobUserTranscriptionKey : [job.userTranscription length] > 0 ? job.userTranscription : @""};
+    [self requestPath:@"task/rate" method:@"POST" parameters:parameters
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Failed to get rate job");
+                  [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
+              }];
+}
+
 
 - (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob
 {
