@@ -32,6 +32,7 @@
 @dynamic thumbnailKey;
 @dynamic thumbnail;
 @dynamic durationSinceLastAction;
+@dynamic isPending;
 
 
 - (id)init
@@ -81,6 +82,12 @@
 - (void)setTranscription:(NSString *)value
 {
     [self.jobData setValue:value forKey:kJobTranscriptionKey];
+}
+
+- (BOOL)isPending
+{
+    NSNumber *status = [self.jobData valueForKey:kJobStatusKey];
+    return ([status intValue] == JobStatusProcessing);
 }
 
 - (NSString *)status
