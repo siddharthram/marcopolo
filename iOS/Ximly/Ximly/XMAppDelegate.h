@@ -11,6 +11,7 @@
 #import "XMHistoryViewController.h"
 #import "XMIntroViewController.h"
 #import "XMSubmissionViewController.h"
+#import "EvernoteSDK.h"
 
 #define kAPNSDeviceTokenKey         @"apnsDeviceId"
 

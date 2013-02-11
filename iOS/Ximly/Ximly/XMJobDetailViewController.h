@@ -10,6 +10,9 @@
 
 #import "XMJob.h"
 #import "XMRateJobViewController.h"
+#import "EvernoteSDK.h"
+#import "ENMLUtility.h"
+#import "NSData+EvernoteSDK.h"
 
 @interface XMJobDetailViewController : UIViewController
 
@@ -21,5 +24,6 @@
 
 - (IBAction)share:(id)sender;
 - (IBAction)rate:(id)sender;
+- (IBAction)saveToEvernote:(id)sender;
 
 @end
