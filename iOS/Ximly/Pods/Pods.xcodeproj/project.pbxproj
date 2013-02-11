@@ -1,352 +1,2951 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		027365C66D8E46498C4C534F /* AFPropertyListRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 88584D55B1AA41B99A646031 /* AFPropertyListRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		114FBA9C8B644F25B7DB253B /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D0522160B3D1410EA330239F /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		11AF054C16B5BDA300BADCE6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF054B16B5BDA300BADCE6 /* MobileCoreServices.framework */; };
-		11AF054F16B5BDAA00BADCE6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF054E16B5BDAA00BADCE6 /* SystemConfiguration.framework */; };
-		1459EBBF7C4141DBA69A65BA /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B66683ABC6E144DDB75D580E /* AFHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		153FB502E01245C280E9D07B /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C433E11BC3B84AA0BB15B983 /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		16D2E65AB13F41048D408DFC /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 554958FB9AA247BA90FF4F77 /* AFImageRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		204FF9A4A31B41FAB2CD874B /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B253A49CD9A7470B9C4E1297 /* AFURLConnectionOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3763A3ACBB42436A851A69F0 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B4A36CC50214F04A7E088F1 /* AFXMLRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		61DE09B563FA45B4BE628E64 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FC06049BE34B4299D2E451 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		69BD2C3214374D32B8D86745 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD46746BE04AFF8D5F5F42 /* AFNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		70D815518ACE495BB76B06C1 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = CEB25F3261A24ACB85F2EF42 /* AFHTTPRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E98B7E984914CEBBCC0CCD8 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA744D6A480B422F92B71A72 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9662BA5C768948CEA95AB4A4 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FFFB0C68335A41DEB127D71D /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		99639F3C782E460891CF7D19 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5320B3010A314E8AAA0B47C8 /* AFJSONRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		AFD49E5FE6EF4059AC1294BE /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = D56D5A5B00BF49589A410B34 /* UIImageView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B32D243C5EF549FABF58EE92 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7F3F598F340F8A3F8C45C /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B817ACA13E3442C7965ABF07 /* PodsDummy_Pods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6247D818156245A6AA18E746 /* PodsDummy_Pods.m */; };
-		CC0D6183414946169FF1F06B /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E47C9E7234C64F05831CD1EB /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		D5C7EED31409492C9D18FDA8 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0900C87124CCF8B8FCDEE /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DC6D2938D6C442AEAD052584 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = E262DAE58B7C47278517A066 /* AFJSONRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E5BC8D1AE2D44921A95DEE56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35161C24EA284F198A7CB4D1 /* Foundation.framework */; };
-		EFE94C5646CB4A10BEDCD896 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 373930BE9A1F4E3A91034C2C /* AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC6FF44B2C9E4B1AAE3001EB /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E076A89AA84755A4EC134F /* Flurry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-/* End PBXBuildFile section */
-
-/* Begin PBXFileReference section */
-		0AB0900C87124CCF8B8FCDEE /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFXMLRequestOperation.m; path = AFNetworking/AFNetworking/AFXMLRequestOperation.m; sourceTree = SOURCE_ROOT; };
-		0BD3E1C7264546DB9FD9DC8F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		11AF054B16B5BDA300BADCE6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		11AF054E16B5BDAA00BADCE6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		21FC06049BE34B4299D2E451 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFImageRequestOperation.m; path = AFNetworking/AFNetworking/AFImageRequestOperation.m; sourceTree = SOURCE_ROOT; };
-		2BD7F3F598F340F8A3F8C45C /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFPropertyListRequestOperation.m; path = AFNetworking/AFNetworking/AFPropertyListRequestOperation.m; sourceTree = SOURCE_ROOT; };
-		34E076A89AA84755A4EC134F /* Flurry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = FlurrySDK/Flurry/Flurry.h; sourceTree = SOURCE_ROOT; };
-		35161C24EA284F198A7CB4D1 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		373930BE9A1F4E3A91034C2C /* AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking/AFNetworking.h; sourceTree = SOURCE_ROOT; };
-		3B4A36CC50214F04A7E088F1 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFXMLRequestOperation.h; path = AFNetworking/AFNetworking/AFXMLRequestOperation.h; sourceTree = SOURCE_ROOT; };
-		4F99CA087DB642498E212557 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5320B3010A314E8AAA0B47C8 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFJSONRequestOperation.m; path = AFNetworking/AFNetworking/AFJSONRequestOperation.m; sourceTree = SOURCE_ROOT; };
-		554958FB9AA247BA90FF4F77 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFImageRequestOperation.h; path = AFNetworking/AFNetworking/AFImageRequestOperation.h; sourceTree = SOURCE_ROOT; };
-		6247D818156245A6AA18E746 /* PodsDummy_Pods.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PodsDummy_Pods.m; sourceTree = SOURCE_ROOT; };
-		7DCD46746BE04AFF8D5F5F42 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = AFNetworking/AFNetworking/AFNetworkActivityIndicatorManager.m; sourceTree = SOURCE_ROOT; };
-		88584D55B1AA41B99A646031 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFPropertyListRequestOperation.h; path = AFNetworking/AFNetworking/AFPropertyListRequestOperation.h; sourceTree = SOURCE_ROOT; };
-		9DD958032161450C8668731F /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = SOURCE_ROOT; };
-		AB1E2CC84DEB44E4BFBB3EC8 /* Pods-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-prefix.pch"; sourceTree = SOURCE_ROOT; };
-		B253A49CD9A7470B9C4E1297 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = AFNetworking/AFNetworking/AFURLConnectionOperation.h; sourceTree = SOURCE_ROOT; };
-		B66683ABC6E144DDB75D580E /* AFHTTPClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = AFNetworking/AFNetworking/AFHTTPClient.h; sourceTree = SOURCE_ROOT; };
-		C433E11BC3B84AA0BB15B983 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = AFNetworking/AFNetworking/AFNetworkActivityIndicatorManager.h; sourceTree = SOURCE_ROOT; };
-		CEB25F3261A24ACB85F2EF42 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFNetworking/AFHTTPRequestOperation.h; sourceTree = SOURCE_ROOT; };
-		D0522160B3D1410EA330239F /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "AFNetworking/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = SOURCE_ROOT; };
-		D56D5A5B00BF49589A410B34 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "AFNetworking/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = SOURCE_ROOT; };
-		E262DAE58B7C47278517A066 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFJSONRequestOperation.h; path = AFNetworking/AFNetworking/AFJSONRequestOperation.h; sourceTree = SOURCE_ROOT; };
-		E47C9E7234C64F05831CD1EB /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFNetworking/AFURLConnectionOperation.m; sourceTree = SOURCE_ROOT; };
-		FA744D6A480B422F92B71A72 /* AFHTTPClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = AFNetworking/AFNetworking/AFHTTPClient.m; sourceTree = SOURCE_ROOT; };
-		FFFB0C68335A41DEB127D71D /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = AFNetworking/AFNetworking/AFHTTPRequestOperation.m; sourceTree = SOURCE_ROOT; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		6CBBDFEB012F448F8C6D850E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				11AF054F16B5BDAA00BADCE6 /* SystemConfiguration.framework in Frameworks */,
-				11AF054C16B5BDA300BADCE6 /* MobileCoreServices.framework in Frameworks */,
-				E5BC8D1AE2D44921A95DEE56 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		15F74BFE354B48F9AA61683B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				35161C24EA284F198A7CB4D1 /* Foundation.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A83FBB21C5E24205A742E6B4 = {
-			isa = PBXGroup;
-			children = (
-				11AF054E16B5BDAA00BADCE6 /* SystemConfiguration.framework */,
-				11AF054B16B5BDA300BADCE6 /* MobileCoreServices.framework */,
-				DF7089B1A6FC4CA18EBCBCB2 /* Products */,
-				15F74BFE354B48F9AA61683B /* Frameworks */,
-				FE9AF37B84D948A6B4CAAD73 /* Pods */,
-				AEDC92294E2C47769601188D /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		AEDC92294E2C47769601188D /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B7CF97F29F9C4E199E42D3C6 /* Pods */,
-				6247D818156245A6AA18E746 /* PodsDummy_Pods.m */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		B7CF97F29F9C4E199E42D3C6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9DD958032161450C8668731F /* Pods-resources.sh */,
-				AB1E2CC84DEB44E4BFBB3EC8 /* Pods-prefix.pch */,
-				0BD3E1C7264546DB9FD9DC8F /* Pods.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		DF7089B1A6FC4CA18EBCBCB2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4F99CA087DB642498E212557 /* libPods.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E90736418C1B4307A5C616C5 /* FlurrySDK */ = {
-			isa = PBXGroup;
-			children = (
-				34E076A89AA84755A4EC134F /* Flurry.h */,
-			);
-			name = FlurrySDK;
-			sourceTree = "<group>";
-		};
-		ECA11F84EF0D4D93947CA067 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				B66683ABC6E144DDB75D580E /* AFHTTPClient.h */,
-				CEB25F3261A24ACB85F2EF42 /* AFHTTPRequestOperation.h */,
-				554958FB9AA247BA90FF4F77 /* AFImageRequestOperation.h */,
-				E262DAE58B7C47278517A066 /* AFJSONRequestOperation.h */,
-				C433E11BC3B84AA0BB15B983 /* AFNetworkActivityIndicatorManager.h */,
-				373930BE9A1F4E3A91034C2C /* AFNetworking.h */,
-				88584D55B1AA41B99A646031 /* AFPropertyListRequestOperation.h */,
-				B253A49CD9A7470B9C4E1297 /* AFURLConnectionOperation.h */,
-				3B4A36CC50214F04A7E088F1 /* AFXMLRequestOperation.h */,
-				D56D5A5B00BF49589A410B34 /* UIImageView+AFNetworking.h */,
-				FA744D6A480B422F92B71A72 /* AFHTTPClient.m */,
-				FFFB0C68335A41DEB127D71D /* AFHTTPRequestOperation.m */,
-				21FC06049BE34B4299D2E451 /* AFImageRequestOperation.m */,
-				5320B3010A314E8AAA0B47C8 /* AFJSONRequestOperation.m */,
-				7DCD46746BE04AFF8D5F5F42 /* AFNetworkActivityIndicatorManager.m */,
-				2BD7F3F598F340F8A3F8C45C /* AFPropertyListRequestOperation.m */,
-				E47C9E7234C64F05831CD1EB /* AFURLConnectionOperation.m */,
-				0AB0900C87124CCF8B8FCDEE /* AFXMLRequestOperation.m */,
-				D0522160B3D1410EA330239F /* UIImageView+AFNetworking.m */,
-			);
-			name = AFNetworking;
-			sourceTree = "<group>";
-		};
-		FE9AF37B84D948A6B4CAAD73 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				ECA11F84EF0D4D93947CA067 /* AFNetworking */,
-				E90736418C1B4307A5C616C5 /* FlurrySDK */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		643254ED3FAF4EF4BFE6588D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1459EBBF7C4141DBA69A65BA /* AFHTTPClient.h in Headers */,
-				70D815518ACE495BB76B06C1 /* AFHTTPRequestOperation.h in Headers */,
-				16D2E65AB13F41048D408DFC /* AFImageRequestOperation.h in Headers */,
-				DC6D2938D6C442AEAD052584 /* AFJSONRequestOperation.h in Headers */,
-				153FB502E01245C280E9D07B /* AFNetworkActivityIndicatorManager.h in Headers */,
-				EFE94C5646CB4A10BEDCD896 /* AFNetworking.h in Headers */,
-				027365C66D8E46498C4C534F /* AFPropertyListRequestOperation.h in Headers */,
-				204FF9A4A31B41FAB2CD874B /* AFURLConnectionOperation.h in Headers */,
-				3763A3ACBB42436A851A69F0 /* AFXMLRequestOperation.h in Headers */,
-				AFD49E5FE6EF4059AC1294BE /* UIImageView+AFNetworking.h in Headers */,
-				FC6FF44B2C9E4B1AAE3001EB /* Flurry.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
-/* Begin PBXNativeTarget section */
-		5AD790417E5B41CD811EE4CE /* Pods */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AAA848FC29CF49988839BB38 /* Build configuration list for PBXNativeTarget "Pods" */;
-			buildPhases = (
-				9F4E10ABEB1746BDBDBBA3AB /* Sources */,
-				6CBBDFEB012F448F8C6D850E /* Frameworks */,
-				643254ED3FAF4EF4BFE6588D /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Pods;
-			productName = Pods;
-			productReference = 4F99CA087DB642498E212557 /* libPods.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		01B830AD28B944009A4D1BC2 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastUpgradeCheck = 0450;
-			};
-			buildConfigurationList = 7A22C4874DCB4AAFB40D6EA3 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = A83FBB21C5E24205A742E6B4;
-			productRefGroup = DF7089B1A6FC4CA18EBCBCB2 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				5AD790417E5B41CD811EE4CE /* Pods */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		9F4E10ABEB1746BDBDBBA3AB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7E98B7E984914CEBBCC0CCD8 /* AFHTTPClient.m in Sources */,
-				9662BA5C768948CEA95AB4A4 /* AFHTTPRequestOperation.m in Sources */,
-				61DE09B563FA45B4BE628E64 /* AFImageRequestOperation.m in Sources */,
-				99639F3C782E460891CF7D19 /* AFJSONRequestOperation.m in Sources */,
-				69BD2C3214374D32B8D86745 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				B32D243C5EF549FABF58EE92 /* AFPropertyListRequestOperation.m in Sources */,
-				CC0D6183414946169FF1F06B /* AFURLConnectionOperation.m in Sources */,
-				D5C7EED31409492C9D18FDA8 /* AFXMLRequestOperation.m in Sources */,
-				114FBA9C8B644F25B7DB253B /* UIImageView+AFNetworking.m in Sources */,
-				B817ACA13E3442C7965ABF07 /* PodsDummy_Pods.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin XCBuildConfiguration section */
-		29923B5E6603436CBBE657EC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Release;
-		};
-		419751C422864CF9BC6A5A16 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BD3E1C7264546DB9FD9DC8F /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pods-prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = "";
-				PODS_HEADERS_SEARCH_PATHS = "${PODS_BUILD_HEADERS_SEARCH_PATHS}";
-				PODS_ROOT = "${SRCROOT}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		9F56987056CA4757BF431193 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BD3E1C7264546DB9FD9DC8F /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pods-prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = "";
-				PODS_HEADERS_SEARCH_PATHS = "${PODS_BUILD_HEADERS_SEARCH_PATHS}";
-				PODS_ROOT = "${SRCROOT}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		F659B356E93845549E3252B4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		7A22C4874DCB4AAFB40D6EA3 /* Build configuration list for PBXProject "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				29923B5E6603436CBBE657EC /* Release */,
-				F659B356E93845549E3252B4 /* Debug */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AAA848FC29CF49988839BB38 /* Build configuration list for PBXNativeTarget "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9F56987056CA4757BF431193 /* Release */,
-				419751C422864CF9BC6A5A16 /* Debug */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = 01B830AD28B944009A4D1BC2 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>02885BA92A6B4ECA87475D74</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E778707538974172A3319C40</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>03E453D2F96C4A83AAD5B871</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SSKeychain.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/SSKeychain/SSKeychain.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>0400394375FE4EC2973BF6C5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8BF4B91E792B480986813FDF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>06EBBFFDCD6948A49ABA1725</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFNetworking.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>071DE31C22824908883EF853</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSDate+EDAMAdditions.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/Utilities/NSDate+EDAMAdditions.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>071E3BC90016448897041337</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ENGCOAuth.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/cocoa-oauth/ENGCOAuth.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>084BC25F14E94EF19C388E3A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>86FCCCC831B84354A3804BD9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>09CE93EE639E42279CBFF2E1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2F7AB7E6551F416AA81A6F1B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>0A0EFB6A458349E3ADE6F5D0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TMemoryBuffer.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/transport/TMemoryBuffer.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>0C5C62C3CAFD4D47B25B9EE2</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastUpgradeCheck</key>
+				<string>0450</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>30BEBE8C126B45E6BEAE3912</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>40A664F26E64440D82C02FCC</string>
+			<key>productRefGroup</key>
+			<string>9A9C0C1399D74F76B91F1279</string>
+			<key>projectReferences</key>
+			<array/>
+			<key>targets</key>
+			<array>
+				<string>5683722233E14987AF7E12D4</string>
+			</array>
+		</dict>
+		<key>0DB4F31E98D448B3B6C950B6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TBinaryProtocol.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/protocol/TBinaryProtocol.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>0DC65BD334D941B3ADDD0569</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ENMLUtility.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/Utilities/ENMLUtility.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>0DD6F7D0AC8646D3BD8A00BB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TProtocolFactory.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/protocol/TProtocolFactory.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>0EC242180E0B436487803D4E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0DD6F7D0AC8646D3BD8A00BB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>1025A98B8CA84E9F92DF1425</key>
+		<dict>
+			<key>fileRef</key>
+			<string>967272829D35492CB6DD707D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>14761D753DAF40B98990939E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TProcessor.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/TProcessor.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>17DC4915131549B3A6D89172</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EDAMUserStore.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMUserStore.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1911F4A7502B478FA54DF04F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TException.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/TException.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1A2ED182E65C49EEAF678F30</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0DB4F31E98D448B3B6C950B6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>1AE5F98DCD3F48EBA1DC5C69</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4A77D49A994544EFBDC7D27F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>1BFDC898F6F040438A8D88D4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D013D28A9E1D4B71A1BA0866</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>1C1695938976425BA8AD2904</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TProtocolException.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/protocol/TProtocolException.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1CB31F471E3F42C79E0D77CF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>PodsDummy_Pods.m</string>
+			<key>path</key>
+			<string>PodsDummy_Pods.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1D72E3C4255F46DC8BE21B18</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2824D7AF4AD54D188CC26D79</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>21569D933873416986A00845</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ENAPI.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/internal/ENAPI.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>21EFCDFF2529480F9F4C44A8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ENGCOAuth.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/cocoa-oauth/ENGCOAuth.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>22F41402A4FB4BD8A8D5AAE6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ENConstants.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/ENConstants.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>23C91D81DF744BBB8ED2E71A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFJSONRequestOperation.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFJSONRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2824D7AF4AD54D188CC26D79</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFNetworkActivityIndicatorManager.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFNetworkActivityIndicatorManager.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2829A7E17580440985B457FF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Flurry.h</string>
+			<key>path</key>
+			<string>FlurrySDK/Flurry/Flurry.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2879B013F31341DF8095615A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C788BDF166DA49C68404B058</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>29124207FA2D44A0B942C62A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TObjective-C.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/TObjective-C.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>29A4163C63CA485BB2455FAF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>793C977EB2874AEA9DDB866F</string>
+				<string>1CB31F471E3F42C79E0D77CF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2AEDA994507E4F2EB65D0347</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods-prefix.pch</string>
+			<key>path</key>
+			<string>Pods-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2B462E6149024D09ADFA1E27</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EvernoteSession.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteSession.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2D3F146BD7EF42E58EDFACBD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>496B6741D1E84909847C2924</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>2D96A5C8E15C4DCB8678A091</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FF388908BDDB4A2AB7810BA7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2E7EF431FE4446D88E9CF732</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TProtocolException.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/protocol/TProtocolException.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2F7AB7E6551F416AA81A6F1B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ENConstants.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/ENConstants.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2F874089FF9A44CBBA8025F2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TMemoryBuffer.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/transport/TMemoryBuffer.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>30BEBE8C126B45E6BEAE3912</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>603985127AEB4B33833E6C84</string>
+				<string>E47EC0ADA47B4CCB82CCCD3E</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>317C4766A1E34E4B9D287ADF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EDAM.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAM.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>321E33C90D074B4ABD157DF7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFImageRequestOperation.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFImageRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>334DDA45CDCB4715A8107BE5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EvernoteNoteStore.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteNoteStore.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>339F03E2BF8240DF9D9F1A1C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.xcconfig</string>
+			<key>path</key>
+			<string>Pods.xcconfig</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>36618F4DF006485C88007DB7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0A0EFB6A458349E3ADE6F5D0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>373E5BB4896646EAAFF44F3E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A6746A14AB8F4F9B9DED4115</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>37E44D26097048F5A2E0D11E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TProtocol.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/protocol/TProtocol.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>38D8478291584680A31C81AB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>21EFCDFF2529480F9F4C44A8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>3ACBE400082D4F20A900616E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFNetworkActivityIndicatorManager.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFNetworkActivityIndicatorManager.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>3B770F72A13640DDBAD84760</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2B462E6149024D09ADFA1E27</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>3C05F09C68FC47B3AE5A175A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>37E44D26097048F5A2E0D11E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>3C4BBAEEED584EDBA2C6F2B0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4CCCACA6B2384BDDB5CA797E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>3D886B5A0CBE4E43870A6897</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>595C376BA44241088781A13C</string>
+				<string>45797755E57D4F86ABBC6B08</string>
+				<string>6898611FD1874F3996CAFCCE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>40788447AB964063800C3B45</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EDAMLimits.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMLimits.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>40A664F26E64440D82C02FCC</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9A9C0C1399D74F76B91F1279</string>
+				<string>2D96A5C8E15C4DCB8678A091</string>
+				<string>3D886B5A0CBE4E43870A6897</string>
+				<string>29A4163C63CA485BB2455FAF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>41793DC963124E8BA0B11855</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFHTTPClient.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFHTTPClient.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>419DCEF8F34F41ED9ADE8582</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSString+URLEncoding.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/NSString+URLEncoding/NSString+URLEncoding.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>420EA4D7DE8748BB99033140</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFXMLRequestOperation.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFXMLRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>42ADF127EDB047D2AC257C37</key>
+		<dict>
+			<key>fileRef</key>
+			<string>22F41402A4FB4BD8A8D5AAE6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>433B439A972D4409BC64BF18</key>
+		<dict>
+			<key>fileRef</key>
+			<string>17DC4915131549B3A6D89172</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>43772DDA3B244F3FA7CABCC9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B2D3E0DBA74948B7A2149211</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>4387985293BF4216B11163E8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods-resources.sh</string>
+			<key>path</key>
+			<string>Pods-resources.sh</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4409B3B9D1D94BD29FE2861D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FF388908BDDB4A2AB7810BA7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>45797755E57D4F86ABBC6B08</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>21EFCDFF2529480F9F4C44A8</string>
+				<string>E778707538974172A3319C40</string>
+				<string>419DCEF8F34F41ED9ADE8582</string>
+				<string>03E453D2F96C4A83AAD5B871</string>
+				<string>967272829D35492CB6DD707D</string>
+				<string>37E44D26097048F5A2E0D11E</string>
+				<string>1C1695938976425BA8AD2904</string>
+				<string>0DD6F7D0AC8646D3BD8A00BB</string>
+				<string>70CAAA8FFC6E4906A75DBA1A</string>
+				<string>B2D3E0DBA74948B7A2149211</string>
+				<string>1911F4A7502B478FA54DF04F</string>
+				<string>D013D28A9E1D4B71A1BA0866</string>
+				<string>29124207FA2D44A0B942C62A</string>
+				<string>14761D753DAF40B98990939E</string>
+				<string>D89FBC78247F42D5BCA3E8A7</string>
+				<string>C8EBD2149AE44490BBA67276</string>
+				<string>2F874089FF9A44CBBA8025F2</string>
+				<string>E4048B1DC1204ACBBC63E218</string>
+				<string>6207AADEC04941FFB875144E</string>
+				<string>317C4766A1E34E4B9D287ADF</string>
+				<string>D1D405A9AE7A48D5A058DE36</string>
+				<string>B17154E450DA4CCF9C9B2962</string>
+				<string>E8E976CFF11E4A03BB3DD3F4</string>
+				<string>950A4DD988D249FB8AA42618</string>
+				<string>17DC4915131549B3A6D89172</string>
+				<string>22F41402A4FB4BD8A8D5AAE6</string>
+				<string>99BA5A67D55A47B2B1337FC5</string>
+				<string>334DDA45CDCB4715A8107BE5</string>
+				<string>F88559A3916244D581C26991</string>
+				<string>2B462E6149024D09ADFA1E27</string>
+				<string>4A77D49A994544EFBDC7D27F</string>
+				<string>90758EC8214A4568BEB30D0F</string>
+				<string>21569D933873416986A00845</string>
+				<string>7DA6FBD7D06443A59F853286</string>
+				<string>A6746A14AB8F4F9B9DED4115</string>
+				<string>94CA6759DB3F4E40A1BC6DEF</string>
+				<string>0DC65BD334D941B3ADDD0569</string>
+				<string>D54FEFA14070435CA05F4698</string>
+				<string>AE50A70A46F14609BD81C54F</string>
+				<string>071E3BC90016448897041337</string>
+				<string>A353CAD4E8D544C593F99198</string>
+				<string>CD3BDB0362314C098EA312FB</string>
+				<string>A80AE17BB2464121AD27860D</string>
+				<string>0DB4F31E98D448B3B6C950B6</string>
+				<string>2E7EF431FE4446D88E9CF732</string>
+				<string>98E0D2148A3C4B059341E438</string>
+				<string>BDC103C9F0644C42944720EE</string>
+				<string>BD7764DB5EB84C65A144B9C7</string>
+				<string>917271850F494E5AA66E9E44</string>
+				<string>0A0EFB6A458349E3ADE6F5D0</string>
+				<string>673A40BCC9DE40BDA3F6101D</string>
+				<string>D883D5FA18F3486A8086BC4F</string>
+				<string>40788447AB964063800C3B45</string>
+				<string>8BF4B91E792B480986813FDF</string>
+				<string>CC7C30CD53C84649B57EE4CA</string>
+				<string>4635ECD2DC214CE8AC664A2C</string>
+				<string>2F7AB7E6551F416AA81A6F1B</string>
+				<string>57B70893217247A6A6AEB5C5</string>
+				<string>A136D2EDDE5F4AA18B2E6E68</string>
+				<string>4CCCACA6B2384BDDB5CA797E</string>
+				<string>F792A3FB9E79454A99852529</string>
+				<string>7905DF797042475299082FF5</string>
+				<string>A7ACEDF258B84E1EB1ED19A4</string>
+				<string>E9F0188C54BF49FFAC9285CE</string>
+				<string>DBAE5CFA5129472BA5CAB302</string>
+				<string>496B6741D1E84909847C2924</string>
+				<string>48A9AF29A46344F1897BBB28</string>
+				<string>C2CB2A5C7E8346B6A7FBF457</string>
+				<string>52628E5737EF486C85BA578D</string>
+				<string>071DE31C22824908883EF853</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Evernote-SDK-iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>45CDA60D149D4F37AF9784EC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4635ECD2DC214CE8AC664A2C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>4635ECD2DC214CE8AC664A2C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EDAMUserStore.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMUserStore.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>47B2DE83F06140ECB62DB8DF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFPropertyListRequestOperation.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFPropertyListRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>48A9AF29A46344F1897BBB28</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ENOAuthViewController.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/internal/ENOAuthViewController.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4959081C04FC44799306045C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>339F03E2BF8240DF9D9F1A1C</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_32_BIT)</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>DSTROOT</key>
+				<string>/tmp/xcodeproj.dst</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Pods-prefix.pch</string>
+				<key>GCC_VERSION</key>
+				<string>com.apple.compilers.llvm.clang.1_0</string>
+				<key>GCC_WARN_INHIBIT_ALL_WARNINGS</key>
+				<string>NO</string>
+				<key>INSTALL_PATH</key>
+				<string>$(BUILT_PRODUCTS_DIR)</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>6.0</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>PODS_HEADERS_SEARCH_PATHS</key>
+				<string>${PODS_BUILD_HEADERS_SEARCH_PATHS}</string>
+				<key>PODS_ROOT</key>
+				<string>${SRCROOT}</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>496B6741D1E84909847C2924</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ENCredentialStore.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/internal/ENCredentialStore.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4A77D49A994544EFBDC7D27F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EvernoteUserStore+Extras.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteUserStore+Extras.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4C46B13DD86E42A3B8B33755</key>
+		<dict>
+			<key>fileRef</key>
+			<string>57B70893217247A6A6AEB5C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>4CCCACA6B2384BDDB5CA797E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EvernoteSDK.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteSDK.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4E5AB9E2460749B69A8B1341</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D89FBC78247F42D5BCA3E8A7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>5006884B4B344A3D92237094</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libPods.a</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>52628E5737EF486C85BA578D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSData+EvernoteSDK.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/Utilities/NSData+EvernoteSDK.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>56659FF798BE4F49B64A33B8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>334DDA45CDCB4715A8107BE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>5683722233E14987AF7E12D4</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>E2857A3B75694161B3B932AF</string>
+			<key>buildPhases</key>
+			<array>
+				<string>66AA50A72FEB414D9DCF924F</string>
+				<string>5EC6BECC227A45DA9997338A</string>
+				<string>763E5F25FA214D58ACC8E27C</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>productName</key>
+			<string>Pods</string>
+			<key>productReference</key>
+			<string>5006884B4B344A3D92237094</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>57B70893217247A6A6AEB5C5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EvernoteNoteStore+Extras.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteNoteStore+Extras.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>595C376BA44241088781A13C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7C703126CA6E41888944F2C3</string>
+				<string>96519D9991944C9EA05AC4CE</string>
+				<string>89930262FEB148CA8F313D27</string>
+				<string>86FCCCC831B84354A3804BD9</string>
+				<string>2824D7AF4AD54D188CC26D79</string>
+				<string>06EBBFFDCD6948A49ABA1725</string>
+				<string>93728C42322E4BE79FA662F5</string>
+				<string>B51176DC9E9D436894FEB14C</string>
+				<string>420EA4D7DE8748BB99033140</string>
+				<string>C788BDF166DA49C68404B058</string>
+				<string>41793DC963124E8BA0B11855</string>
+				<string>F72F97FB6E49481CAFC24BC2</string>
+				<string>321E33C90D074B4ABD157DF7</string>
+				<string>23C91D81DF744BBB8ED2E71A</string>
+				<string>3ACBE400082D4F20A900616E</string>
+				<string>47B2DE83F06140ECB62DB8DF</string>
+				<string>DBD67068484647B0B5E36439</string>
+				<string>6BDAB1D5D4794C3F9A3DCDE9</string>
+				<string>E9B65F495CF640C3AC5D143A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>AFNetworking</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>59686106E122401583BD698C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A80AE17BB2464121AD27860D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>5EC6BECC227A45DA9997338A</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>4409B3B9D1D94BD29FE2861D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>603985127AEB4B33833E6C84</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict/>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>6107BFDAB76C4E0B898A4B43</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A7ACEDF258B84E1EB1ED19A4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>6207AADEC04941FFB875144E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TTransportException.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/transport/TTransportException.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>66AA50A72FEB414D9DCF924F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>F6CDD1CD7F7D4BC09BFC8C3A</string>
+				<string>AE2AFC8CF9AD4BF9A2B83765</string>
+				<string>7A467E89A75F4C53B15CAB4C</string>
+				<string>FDC152F8AB0B471E8B8D173C</string>
+				<string>7CAB738CBB5E462096A5A370</string>
+				<string>7D9FC2A22E454F1784CD31AE</string>
+				<string>8E5120DAD105469FB35AF269</string>
+				<string>FD50E15D82D94A6E88DB7929</string>
+				<string>85ED758402F54FF49D52AFE6</string>
+				<string>E5A4A6FAF9024DD0B4184762</string>
+				<string>A371A13D0E4D4982916018F3</string>
+				<string>7974DD7493384390BDE90749</string>
+				<string>59686106E122401583BD698C</string>
+				<string>1A2ED182E65C49EEAF678F30</string>
+				<string>FFE0FCD207E84DADB0D6CA42</string>
+				<string>C81692F04D244EB2AE1AEC16</string>
+				<string>C4C2E75ADE93487A85234F08</string>
+				<string>7F1FCE69A78E4DB2922E965D</string>
+				<string>687A3488785142BD82413318</string>
+				<string>36618F4DF006485C88007DB7</string>
+				<string>D658F03D02C24C51B585297D</string>
+				<string>96A7A874F90B40EA8C32D11A</string>
+				<string>A023E8CB18E3408DBF7FB717</string>
+				<string>0400394375FE4EC2973BF6C5</string>
+				<string>ADC80F77FA8F4DCBAA40C6A7</string>
+				<string>45CDA60D149D4F37AF9784EC</string>
+				<string>09CE93EE639E42279CBFF2E1</string>
+				<string>4C46B13DD86E42A3B8B33755</string>
+				<string>E3CCE77DE5FA404FAB9C31E4</string>
+				<string>3C4BBAEEED584EDBA2C6F2B0</string>
+				<string>8EF57EC2329B4D96BC1F3E94</string>
+				<string>7C4111ADC0B14AC497785E79</string>
+				<string>6107BFDAB76C4E0B898A4B43</string>
+				<string>D471CD6AFA6644FD8EF33A5B</string>
+				<string>BCD720BEEAB147A0A7E3E233</string>
+				<string>2D3F146BD7EF42E58EDFACBD</string>
+				<string>6E6E4A1C3F8E4181BD309101</string>
+				<string>8B27765B28584E49AD34D1FA</string>
+				<string>77ACD6F7EE6143A1AF08198A</string>
+				<string>C616D343CD534592A9D0E0D5</string>
+				<string>9723089A50D246708B481CD2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>673A40BCC9DE40BDA3F6101D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TTransportException.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/transport/TTransportException.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>687A3488785142BD82413318</key>
+		<dict>
+			<key>fileRef</key>
+			<string>917271850F494E5AA66E9E44</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>6898611FD1874F3996CAFCCE</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>2829A7E17580440985B457FF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>FlurrySDK</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6B1D8E8E44BF479F9EDEECF3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>317C4766A1E34E4B9D287ADF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>6BDAB1D5D4794C3F9A3DCDE9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFXMLRequestOperation.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFXMLRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>6C5DA81D231943848A803E7C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>70CAAA8FFC6E4906A75DBA1A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>6D79A37598DD42FD93B28369</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7DA6FBD7D06443A59F853286</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>6E6E4A1C3F8E4181BD309101</key>
+		<dict>
+			<key>fileRef</key>
+			<string>48A9AF29A46344F1897BBB28</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>6FB11B585AD2407580AFF83D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E8E976CFF11E4A03BB3DD3F4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>70CAAA8FFC6E4906A75DBA1A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TProtocolUtil.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/protocol/TProtocolUtil.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>71DBEAA7D48645CFA479AB68</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1C1695938976425BA8AD2904</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>763E5F25FA214D58ACC8E27C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>78C33046EAA44253BE433423</string>
+				<string>F92DB8782C9A4FB3A2938E94</string>
+				<string>9E26E23AC3D44CD597C081B4</string>
+				<string>084BC25F14E94EF19C388E3A</string>
+				<string>1D72E3C4255F46DC8BE21B18</string>
+				<string>AD3B75A605B24717B0C744B1</string>
+				<string>80002DC9074445068A3778AB</string>
+				<string>BF3A037B37EB440CAF01AA40</string>
+				<string>B15FB0D0E642456AB9A1E48C</string>
+				<string>2879B013F31341DF8095615A</string>
+				<string>38D8478291584680A31C81AB</string>
+				<string>02885BA92A6B4ECA87475D74</string>
+				<string>F24625222CAF4CE496D40A57</string>
+				<string>8B39D24055044F3C825A69B2</string>
+				<string>1025A98B8CA84E9F92DF1425</string>
+				<string>3C05F09C68FC47B3AE5A175A</string>
+				<string>71DBEAA7D48645CFA479AB68</string>
+				<string>0EC242180E0B436487803D4E</string>
+				<string>6C5DA81D231943848A803E7C</string>
+				<string>43772DDA3B244F3FA7CABCC9</string>
+				<string>BFB4B1A7C79A4DBCAAF9851F</string>
+				<string>1BFDC898F6F040438A8D88D4</string>
+				<string>7C80889418184ED2B5E9C864</string>
+				<string>C220AB11A4E04CB0A0737EC1</string>
+				<string>4E5AB9E2460749B69A8B1341</string>
+				<string>FFC325D3186B45D5B9EDEEB7</string>
+				<string>D1765E506D6143D4803AFECC</string>
+				<string>C622128041274EC38E5869A8</string>
+				<string>FB82EA8520C448BDB993EA90</string>
+				<string>6B1D8E8E44BF479F9EDEECF3</string>
+				<string>CE86F1501CD1434D97822B02</string>
+				<string>B3B59F7BA3094BD8B4E0FC12</string>
+				<string>6FB11B585AD2407580AFF83D</string>
+				<string>7FE8475453A4454BB72F61EA</string>
+				<string>433B439A972D4409BC64BF18</string>
+				<string>42ADF127EDB047D2AC257C37</string>
+				<string>E1E14042962E422E8B1D775D</string>
+				<string>56659FF798BE4F49B64A33B8</string>
+				<string>EA2322C46F2D4940A275D40F</string>
+				<string>3B770F72A13640DDBAD84760</string>
+				<string>1AE5F98DCD3F48EBA1DC5C69</string>
+				<string>FDD876A4DC694788B693255E</string>
+				<string>AA3DC1CC04A54CEEA6E98AA1</string>
+				<string>6D79A37598DD42FD93B28369</string>
+				<string>373E5BB4896646EAAFF44F3E</string>
+				<string>C2AC3D43ECCD4AB98D382E2C</string>
+				<string>A4D82866B37E4BD997AE98AE</string>
+				<string>A755064422784B80B91153DB</string>
+				<string>D57D9B902FCC4EF9AFCD5D03</string>
+				<string>A0CE222DD1B04A55BFFB68B0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>77ACD6F7EE6143A1AF08198A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52628E5737EF486C85BA578D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>78C33046EAA44253BE433423</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7C703126CA6E41888944F2C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>7905DF797042475299082FF5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EvernoteUserStore+Extras.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteUserStore+Extras.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>793C977EB2874AEA9DDB866F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4387985293BF4216B11163E8</string>
+				<string>2AEDA994507E4F2EB65D0347</string>
+				<string>339F03E2BF8240DF9D9F1A1C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7974DD7493384390BDE90749</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD3BDB0362314C098EA312FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>7A467E89A75F4C53B15CAB4C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>321E33C90D074B4ABD157DF7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>7C4111ADC0B14AC497785E79</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7905DF797042475299082FF5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>7C703126CA6E41888944F2C3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFHTTPClient.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFHTTPClient.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>7C80889418184ED2B5E9C864</key>
+		<dict>
+			<key>fileRef</key>
+			<string>29124207FA2D44A0B942C62A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>7CAB738CBB5E462096A5A370</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3ACBE400082D4F20A900616E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>7D9FC2A22E454F1784CD31AE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>47B2DE83F06140ECB62DB8DF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>7DA6FBD7D06443A59F853286</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ENCredentials.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/internal/ENCredentials.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>7F1FCE69A78E4DB2922E965D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BD7764DB5EB84C65A144B9C7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>7FE8475453A4454BB72F61EA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>950A4DD988D249FB8AA42618</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>80002DC9074445068A3778AB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>93728C42322E4BE79FA662F5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>85ED758402F54FF49D52AFE6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E9B65F495CF640C3AC5D143A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>86FCCCC831B84354A3804BD9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFJSONRequestOperation.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFJSONRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>89930262FEB148CA8F313D27</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFImageRequestOperation.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFImageRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>8B27765B28584E49AD34D1FA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C2CB2A5C7E8346B6A7FBF457</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>8B39D24055044F3C825A69B2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>03E453D2F96C4A83AAD5B871</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>8BF4B91E792B480986813FDF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EDAMNoteStore.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMNoteStore.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>8E5120DAD105469FB35AF269</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DBD67068484647B0B5E36439</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>8EF57EC2329B4D96BC1F3E94</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F792A3FB9E79454A99852529</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>90758EC8214A4568BEB30D0F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EvernoteUserStore.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteUserStore.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>917271850F494E5AA66E9E44</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>THTTPClient.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/transport/THTTPClient.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>93728C42322E4BE79FA662F5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFPropertyListRequestOperation.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFPropertyListRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>94CA6759DB3F4E40A1BC6DEF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ENOAuthViewController.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/internal/ENOAuthViewController.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>950A4DD988D249FB8AA42618</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EDAMTypes.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMTypes.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>96519D9991944C9EA05AC4CE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFHTTPRequestOperation.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFHTTPRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>967272829D35492CB6DD707D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TBinaryProtocol.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/protocol/TBinaryProtocol.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>96A7A874F90B40EA8C32D11A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D883D5FA18F3486A8086BC4F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>9723089A50D246708B481CD2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1CB31F471E3F42C79E0D77CF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>98E0D2148A3C4B059341E438</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TProtocolUtil.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/protocol/TProtocolUtil.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>99BA5A67D55A47B2B1337FC5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EvernoteNoteStore+Extras.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteNoteStore+Extras.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>9A9C0C1399D74F76B91F1279</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>5006884B4B344A3D92237094</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9E26E23AC3D44CD597C081B4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89930262FEB148CA8F313D27</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>A023E8CB18E3408DBF7FB717</key>
+		<dict>
+			<key>fileRef</key>
+			<string>40788447AB964063800C3B45</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>A0CE222DD1B04A55BFFB68B0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2829A7E17580440985B457FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>A136D2EDDE5F4AA18B2E6E68</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EvernoteNoteStore.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteNoteStore.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A353CAD4E8D544C593F99198</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSData+ENBase64.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/cocoa-oauth/NSData+ENBase64.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A371A13D0E4D4982916018F3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A353CAD4E8D544C593F99198</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>A4D82866B37E4BD997AE98AE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0DC65BD334D941B3ADDD0569</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>A6746A14AB8F4F9B9DED4115</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ENCredentialStore.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/internal/ENCredentialStore.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A755064422784B80B91153DB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D54FEFA14070435CA05F4698</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>A7ACEDF258B84E1EB1ED19A4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EvernoteUserStore.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteUserStore.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A80AE17BB2464121AD27860D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SSKeychain.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/SSKeychain/SSKeychain.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>AA3DC1CC04A54CEEA6E98AA1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>21569D933873416986A00845</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>AD3B75A605B24717B0C744B1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>06EBBFFDCD6948A49ABA1725</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>ADC80F77FA8F4DCBAA40C6A7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CC7C30CD53C84649B57EE4CA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>AE2AFC8CF9AD4BF9A2B83765</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F72F97FB6E49481CAFC24BC2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>AE50A70A46F14609BD81C54F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSDate+EDAMAdditions.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/Utilities/NSDate+EDAMAdditions.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B15FB0D0E642456AB9A1E48C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>420EA4D7DE8748BB99033140</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>B17154E450DA4CCF9C9B2962</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EDAMLimits.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMLimits.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B2D3E0DBA74948B7A2149211</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TApplicationException.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/TApplicationException.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B3B59F7BA3094BD8B4E0FC12</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B17154E450DA4CCF9C9B2962</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>B51176DC9E9D436894FEB14C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFURLConnectionOperation.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFURLConnectionOperation.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>BCD720BEEAB147A0A7E3E233</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DBAE5CFA5129472BA5CAB302</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>BD7764DB5EB84C65A144B9C7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TException.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/TException.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>BDC103C9F0644C42944720EE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TApplicationException.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/TApplicationException.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>BF3A037B37EB440CAF01AA40</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B51176DC9E9D436894FEB14C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>BFB4B1A7C79A4DBCAAF9851F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1911F4A7502B478FA54DF04F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>C220AB11A4E04CB0A0737EC1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>14761D753DAF40B98990939E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>C2AC3D43ECCD4AB98D382E2C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>94CA6759DB3F4E40A1BC6DEF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>C2CB2A5C7E8346B6A7FBF457</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ENMLUtility.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/Utilities/ENMLUtility.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>C4C2E75ADE93487A85234F08</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BDC103C9F0644C42944720EE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>C616D343CD534592A9D0E0D5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>071DE31C22824908883EF853</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>C622128041274EC38E5869A8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E4048B1DC1204ACBBC63E218</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>C788BDF166DA49C68404B058</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImageView+AFNetworking.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/UIImageView+AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>C81692F04D244EB2AE1AEC16</key>
+		<dict>
+			<key>fileRef</key>
+			<string>98E0D2148A3C4B059341E438</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>C8EBD2149AE44490BBA67276</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>THTTPClient.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/transport/THTTPClient.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>CC7C30CD53C84649B57EE4CA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EDAMTypes.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMTypes.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>CD3BDB0362314C098EA312FB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSString+URLEncoding.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/NSString+URLEncoding/NSString+URLEncoding.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>CE86F1501CD1434D97822B02</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D1D405A9AE7A48D5A058DE36</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>D013D28A9E1D4B71A1BA0866</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Thrift.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/Thrift.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>D1765E506D6143D4803AFECC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2F874089FF9A44CBBA8025F2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>D1D405A9AE7A48D5A058DE36</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EDAMErrors.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMErrors.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>D471CD6AFA6644FD8EF33A5B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E9F0188C54BF49FFAC9285CE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>D54FEFA14070435CA05F4698</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSData+EvernoteSDK.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/Utilities/NSData+EvernoteSDK.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>D57D9B902FCC4EF9AFCD5D03</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AE50A70A46F14609BD81C54F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>D658F03D02C24C51B585297D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>673A40BCC9DE40BDA3F6101D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>D883D5FA18F3486A8086BC4F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EDAMErrors.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMErrors.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>D89FBC78247F42D5BCA3E8A7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TProcessorFactory.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/TProcessorFactory.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>DBAE5CFA5129472BA5CAB302</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ENCredentials.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/internal/ENCredentials.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>DBD67068484647B0B5E36439</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFURLConnectionOperation.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFURLConnectionOperation.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>DD69AFA4322C45B9B71B7D44</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>339F03E2BF8240DF9D9F1A1C</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_32_BIT)</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DSTROOT</key>
+				<string>/tmp/xcodeproj.dst</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Pods-prefix.pch</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_VERSION</key>
+				<string>com.apple.compilers.llvm.clang.1_0</string>
+				<key>GCC_WARN_INHIBIT_ALL_WARNINGS</key>
+				<string>NO</string>
+				<key>INSTALL_PATH</key>
+				<string>$(BUILT_PRODUCTS_DIR)</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>6.0</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>PODS_HEADERS_SEARCH_PATHS</key>
+				<string>${PODS_BUILD_HEADERS_SEARCH_PATHS}</string>
+				<key>PODS_ROOT</key>
+				<string>${SRCROOT}</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>E1E14042962E422E8B1D775D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>99BA5A67D55A47B2B1337FC5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>E2857A3B75694161B3B932AF</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>4959081C04FC44799306045C</string>
+				<string>DD69AFA4322C45B9B71B7D44</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>E3CCE77DE5FA404FAB9C31E4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A136D2EDDE5F4AA18B2E6E68</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>E4048B1DC1204ACBBC63E218</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TTransport.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/Thrift/transport/TTransport.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>E47EC0ADA47B4CCB82CCCD3E</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict/>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>E5A4A6FAF9024DD0B4184762</key>
+		<dict>
+			<key>fileRef</key>
+			<string>071E3BC90016448897041337</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>E778707538974172A3319C40</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSData+ENBase64.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/3rdParty/cocoa-oauth/NSData+ENBase64.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>E8E976CFF11E4A03BB3DD3F4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EDAMNoteStore.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EDAM/EDAMNoteStore.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>E9B65F495CF640C3AC5D143A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIImageView+AFNetworking.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/UIImageView+AFNetworking.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>E9F0188C54BF49FFAC9285CE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ENAPI.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/internal/ENAPI.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>EA2322C46F2D4940A275D40F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F88559A3916244D581C26991</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>F24625222CAF4CE496D40A57</key>
+		<dict>
+			<key>fileRef</key>
+			<string>419DCEF8F34F41ED9ADE8582</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>F6CDD1CD7F7D4BC09BFC8C3A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>41793DC963124E8BA0B11855</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>F72F97FB6E49481CAFC24BC2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFHTTPRequestOperation.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking/AFHTTPRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>F792A3FB9E79454A99852529</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>EvernoteSession.m</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteSession.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>F88559A3916244D581C26991</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>EvernoteSDK.h</string>
+			<key>path</key>
+			<string>Evernote-SDK-iOS/evernote-sdk-ios/EvernoteSDK.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>F92DB8782C9A4FB3A2938E94</key>
+		<dict>
+			<key>fileRef</key>
+			<string>96519D9991944C9EA05AC4CE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>FB82EA8520C448BDB993EA90</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6207AADEC04941FFB875144E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>FD50E15D82D94A6E88DB7929</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6BDAB1D5D4794C3F9A3DCDE9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>FDC152F8AB0B471E8B8D173C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>23C91D81DF744BBB8ED2E71A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>FDD876A4DC694788B693255E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>90758EC8214A4568BEB30D0F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>FF388908BDDB4A2AB7810BA7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>FFC325D3186B45D5B9EDEEB7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C8EBD2149AE44490BBA67276</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>FFE0FCD207E84DADB0D6CA42</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2E7EF431FE4446D88E9CF732</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>0C5C62C3CAFD4D47B25B9EE2</string>
+</dict>
+</plist>
