@@ -250,7 +250,7 @@ public class DataAccess {
 
 	
 	private static String deleteExistingResponse = "delete from assignment_table where task_table_idtask in (select idtask from task_table where server_unique_guid = ?) ";
-	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = UNIX_TIMESTAMP(), task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
+	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = ?, task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
 	private static String getApnsId = "select * from device_table dt, task_table tt " +
 									  " where dt.iddevice = tt.device_table_iddevice and tt.server_unique_guid  = ?";
 
@@ -271,7 +271,8 @@ public class DataAccess {
 			// store new transcription
 			pstmtQuery = conn.prepareStatement(storeResponseQuery);
 			pstmtQuery.setString(1, response);
-			pstmtQuery.setString(2, guid);
+			pstmtQuery.setLong(2, System.currentTimeMillis());
+			pstmtQuery.setString(3, guid);
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
 			// get apns device id
