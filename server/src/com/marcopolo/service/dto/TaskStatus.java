@@ -3,7 +3,7 @@ package com.marcopolo.service.dto;
 public class TaskStatus {
 	private String serverUniqueRequestId, clientUniqueRequestId, imageUrl, transcriptionData, userTranscriptionData, rating, ratingComment;
 	private int status; // -1 error, 0 - submitted, 1 in progress, 2 completed
-	private long serverSubmissionTimeStamp, clientSubmitTimeStamp, trasncriptionTimeStamp, transcriptionId;
+	private long serverSubmissionTimeStamp, clientSubmitTimeStamp, transcriptionTimeStamp, transcriptionId;
 	
 	
 	public long getTranscriptionId() {
@@ -38,12 +38,12 @@ public class TaskStatus {
 		this.ratingComment = ratingComment;
 	}
 
-	public long getTrasncriptionTimeStamp() {
-		return trasncriptionTimeStamp;
+	public long getTranscriptionTimeStamp() {
+		return transcriptionTimeStamp;
 	}
 
-	public void setTrasncriptionTimeStamp(long trasncriptionTimeStamp) {
-		this.trasncriptionTimeStamp = trasncriptionTimeStamp;
+	public void setTranscriptionTimeStamp(long transcriptionTimeStamp) {
+		this.transcriptionTimeStamp = transcriptionTimeStamp;
 	}
 
 	public long getServerSubmissionTimeStamp() {

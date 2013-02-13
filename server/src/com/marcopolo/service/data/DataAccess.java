@@ -195,7 +195,7 @@ public class DataAccess {
 				if (rs.getString("completion_time") != null) {
 					ts.setTranscriptionId(rs.getLong("idassignment"));
 					ts.setStatus(2); // defualt is 0 which means submitted
-					ts.setTrasncriptionTimeStamp(rs.getLong("completion_time"));
+					ts.setTranscriptionTimeStamp(rs.getLong("completion_time"));
 					ts.setTranscriptionData(rs.getString("jobresult"));
 					ts.setRating(rs.getString("rating"));
 					ts.setRatingComment(rs.getString("rating_comment"));
@@ -254,7 +254,7 @@ public class DataAccess {
 	private static String getApnsId = "select * from device_table dt, task_table tt " +
 									  " where dt.iddevice = tt.device_table_iddevice and tt.server_unique_guid  = ?";
 
-	private static String copyUserTranscription = "update task_table set user_transcription = ? where server_unique_guid = ? and user_transcription is not null";
+	private static String copyUserTranscription = "update task_table set user_transcription = ? where server_unique_guid = ?";
 	
 	public static String submit(String guid, String response) throws SQLException {
 
