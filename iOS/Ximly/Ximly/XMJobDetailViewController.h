@@ -14,7 +14,14 @@
 #import "ENMLUtility.h"
 #import "NSData+EvernoteSDK.h"
 
-@interface XMJobDetailViewController : UIViewController
+@interface XMJobDetailViewController : UIViewController {
+    IBOutlet UIBarButtonItem *actionButton;
+    IBOutlet UIBarButtonItem *rateButton;
+    IBOutlet UIBarButtonItem *flexibleSpace;
+    IBOutlet UIBarButtonItem *sendToEvernoteButton;
+    IBOutlet UIBarButtonItem *sendingToEvernoteView;
+    IBOutlet UIToolbar *toolbar;
+}
 
 @property (nonatomic, strong) XMJob *job;
 @property (nonatomic, weak) IBOutlet UIWebView *imageView;

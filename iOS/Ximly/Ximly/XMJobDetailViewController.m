@@ -80,6 +80,8 @@
         self.titleLabel.text = @"Transcription not yet available";
         self.transcribedTextView.text = @"";
     }
+    
+    [self hideSendingToEvernoteUI];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -119,10 +121,20 @@
     // TODO - Write ratings to disk (create a singleton history list that we can read and write from disk anywhere in the app)
 }
 
+- (void)showSendingToEvernoteUI {
+    [toolbar setItems:[NSArray arrayWithObjects:actionButton, rateButton, flexibleSpace, sendingToEvernoteView, nil]];
+}
+
+- (void)hideSendingToEvernoteUI {
+    [toolbar setItems:[NSArray arrayWithObjects:actionButton, rateButton, flexibleSpace, sendToEvernoteButton, nil]];
+}
+
 - (IBAction)saveToEvernote:(id)sender {
+    [self showSendingToEvernoteUI];
     EvernoteSession *session = [EvernoteSession sharedSession];
     [session authenticateWithViewController:self completionHandler:^(NSError *error) {
         if (error || !session.isAuthenticated) {
+            [self hideSendingToEvernoteUI];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"Sorry, we were unable to connect to your Evernote account." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alertView show];
         } else {
@@ -151,12 +163,14 @@
             NSMutableArray* resources = [NSMutableArray arrayWithArray:@[resource]];
             EDAMNote *newNote = [[EDAMNote alloc] initWithGuid:nil title:titleText content:noteContent contentHash:nil contentLength:noteContent.length created:0 updated:0 deleted:0 active:YES updateSequenceNum:0 notebookGuid:nil tagGuids:nil resources:resources attributes:nil tagNames:nil];
             [[EvernoteNoteStore noteStore] createNote:newNote success:^(EDAMNote *note) {
+                [self hideSendingToEvernoteUI];
                 NSLog(@"Note created successfully.");
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your note was successfully sent to Evernote." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alertView show];
             } failure:^(NSError *error) {
+                [self hideSendingToEvernoteUI];
                 NSLog(@"Error creating note : %@",error);
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to send your note to Evernote." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Sorry, we were unable to send your note to Evernote. Error: %@", [error localizedDescription]] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alertView show];
             }];
         } 
