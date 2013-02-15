@@ -87,6 +87,7 @@
 										<string key="NSFrame">{{10, 8}, {51, 21}}</string>
 										<reference key="NSSuperview" ref="416766019"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="60227662"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<object class="NSColor" key="IBUIBackgroundColor" id="142147168">
 											<int key="NSColorSpace">3</int>
@@ -118,6 +119,7 @@
 										<string key="NSFrame">{{63, 9}, {20, 20}}</string>
 										<reference key="NSSuperview" ref="416766019"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<reference key="IBUIBackgroundColor" ref="142147168"/>
 										<bool key="IBUIOpaque">NO</bool>
@@ -129,6 +131,7 @@
 								<string key="NSFrame">{{215, 3}, {93, 38}}</string>
 								<reference key="NSSuperview" ref="723830856"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="915836567"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="142147168"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -137,7 +140,7 @@
 						<string key="NSFrame">{{0, 460}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="416766019"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
