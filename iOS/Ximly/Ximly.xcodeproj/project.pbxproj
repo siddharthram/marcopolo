@@ -263,7 +263,6 @@
 		2450229B16ADD7F100FA03B0 /* Ximly */ = {
 			isa = PBXGroup;
 			children = (
-				24794E5C16C0D48F00246922 /* part_startHere.png */,
 				2409380B16B9029F0045446F /* UIImage+XMAdditions.h */,
 				2409380C16B9029F0045446F /* UIImage+XMAdditions.m */,
 				245022A416ADD7F100FA03B0 /* XMAppDelegate.h */,
@@ -314,6 +313,7 @@
 				245022B216ADD7F100FA03B0 /* first@2x.png */,
 				24B2E06916B3E1EF0022DFAF /* good.png */,
 				24B2E06E16B3E6EC0022DFAF /* goodSelected.png */,
+				24794E5C16C0D48F00246922 /* part_startHere.png */,
 				24A782C016B4F6A00091AB46 /* sample1.jpg */,
 				24A782C116B4F6A10091AB46 /* sample2.jpg */,
 				24A782C216B4F6A10091AB46 /* sample3.jpg */,
