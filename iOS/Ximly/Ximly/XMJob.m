@@ -9,6 +9,7 @@
 #import "XMJob.h"
 
 #import "XMImageCache.h"
+#import "XMUtilities.h"
 #import "XMXimlyHTTPClient.h"
 #import "AFImageRequestOperation.h"
 
@@ -101,6 +102,13 @@
     NSNumber *status = [self.jobData valueForKey:kJobStatusKey];
     return ([status intValue] == JobStatusProcessing);
 }
+
+- (BOOL)isDone
+{
+    NSNumber *status = [self.jobData valueForKey:kJobStatusKey];
+    return ([status intValue] == JobStatusTranscribed);
+}
+
 
 - (NSString *)status
 {
@@ -309,11 +317,10 @@
 {
     NSString *dateString = @"";
     
-    NSDate *timeToUse = self.transcriptionTime ? self.transcriptionTime : self.submissionTime;
+    NSDate *dateToUse = self.transcriptionTime ? self.transcriptionTime : self.submissionTime;
     
-    if (timeToUse) {
-        // TODO - proper date formatting...we want values like "26 min ago"
-        dateString = [timeToUse description];
+    if (dateToUse) {
+        dateString = [XMUtilities timeAgoFromUnixTime:[dateToUse timeIntervalSince1970]];
     }
     
     return dateString;
