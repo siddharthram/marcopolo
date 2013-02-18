@@ -14,4 +14,6 @@
 
 + (CGFloat)heightOfScreen;
 
++ (NSString *)timeAgoFromUnixTime:(double)seconds;
+
 @end

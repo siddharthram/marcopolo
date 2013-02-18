@@ -56,33 +56,41 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    CALayer *boxLayer = self.imageView.layer;
-    boxLayer.cornerRadius = 14.0;
-    boxLayer.masksToBounds = YES;
-    boxLayer.borderWidth = 4;
-    boxLayer.borderColor = [[UIColor blackColor] CGColor];
+    [self redisplay:YES];
+    [self hideSendingToEvernoteUI];
+}
 
+- (void)redisplay:(BOOL)reloadImage
+{
+    if (reloadImage) {
+        CALayer *boxLayer = self.imageView.layer;
+        boxLayer.cornerRadius = 14.0;
+        boxLayer.masksToBounds = YES;
+        boxLayer.borderWidth = 4;
+        boxLayer.borderColor = [[UIColor blackColor] CGColor];
+        
+        /*
+         NSURL *url = [NSURL fileURLWithPath:[XMImageCache cacheFilePathForKey:self.job.imageKey]];
+         [self.imageView loadRequest:[NSURLRequest requestWithURL:url]];
+         */
+        
+        CGFloat width = self.imageView.frame.size.width;
+        NSString *html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=%f; maximum-scale=4.0; user-scalable=1;\"/></head><body><img src=\"%@\" width=\"%f\"/></body></html>", width, self.job.imageKey, width - 16.0];
+        [self.imageView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[XMImageCache cacheFolderPath]]];
+    }
+    
     NSString *titleText = self.job.title;
-    self.title = titleText ? titleText : @"Untitled";
+    self.title = [titleText length] > 0 ? titleText : @"Untitled";
     
-    /*
-    NSURL *url = [NSURL fileURLWithPath:[XMImageCache cacheFilePathForKey:self.job.imageKey]];
-    [self.imageView loadRequest:[NSURLRequest requestWithURL:url]];
-    */
-    CGFloat width = self.imageView.frame.size.width;
-    NSString *html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=%f; maximum-scale=4.0; user-scalable=1;\"/></head><body><img src=\"%@\" width=\"%f\"/></body></html>", width, self.job.imageKey, width - 16.0];
-    [self.imageView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[XMImageCache cacheFolderPath]]];
-    
-    NSString *transcribedText = self.job.userTranscription;
-    
-    if ([transcribedText length] > 0) {
-        self.transcribedTextView.text = transcribedText;
+    if (self.job.isDone) {
+        NSString *transcribedText = self.job.userTranscription;
+        self.transcribedTextView.text = [transcribedText length] > 0 ? transcribedText : @"";
+        rateButton.enabled = YES;
     } else {
         self.titleLabel.text = @"Transcription not yet available";
         self.transcribedTextView.text = @"";
+        rateButton.enabled = NO;
     }
-    
-    [self hideSendingToEvernoteUI];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -120,8 +128,6 @@
     self.rateJobViewController.view.frame = rateJobFrame;
     
     [self.view addSubview:self.rateJobViewController.view];
-    
-    // TODO - Write ratings to disk (create a singleton history list that we can read and write from disk anywhere in the app)
 }
 
 - (void)showSendingToEvernoteUI {

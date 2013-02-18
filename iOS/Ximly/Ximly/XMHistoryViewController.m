@@ -197,11 +197,10 @@
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XMHistoryTableViewCell *cell = (XMHistoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kJobCellReuseIdentifier];
-
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     XMJob *theJob = [self.currentJobList objectAtIndex:indexPath.row];
+    
+ //   cell.contentView.backgroundColor = [UIColor underPageBackgroundColor];
     
     if (theJob.thumbnail) {
         cell.waitIndicator.hidden = YES;
@@ -251,6 +250,17 @@
         cell.label2.text = labelText ? labelText : @"";
         
         cell.label3.text = @"";
+    }
+    
+    NSString *ratingStr = theJob.rating;
+    if ([ratingStr length] > 0) {
+        if ([ratingStr isEqualToString:kJobRatingGood]) {
+            cell.ratingImageView.image = [UIImage imageNamed:@"017-ThumbsUp"];
+        } else {
+            cell.ratingImageView.image = [UIImage imageNamed:@"018-ThumbsDown"];
+        }
+    } else {
+        cell.ratingImageView.image = nil;
     }
     
     return cell;

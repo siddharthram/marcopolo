@@ -14,6 +14,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *label1;
 @property (nonatomic, weak) IBOutlet UILabel *label2;
 @property (nonatomic, weak) IBOutlet UILabel *label3;
+@property (nonatomic, weak) IBOutlet UIImageView *ratingImageView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *waitIndicator;
 
 @end
