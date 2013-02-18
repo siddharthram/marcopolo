@@ -11,6 +11,7 @@
 #import "XMImageCache.h"
 #import "XMJobList.h"
 #import "XMXimlyHTTPClient.h"
+#import "Flurry.h"
 
 @interface XMSettingsViewController ()
 
@@ -93,6 +94,7 @@
 
 - (IBAction)deleteCache:(id)sender
 {
+    [Flurry logEvent:@"Delete cache"];
     [[XMJobList sharedInstance] removeAllJobs];
     [[XMJobList sharedInstance] writeToDisk];
     [XMImageCache deleteCache];

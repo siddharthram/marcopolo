@@ -9,6 +9,7 @@
 #import "XMJobDetailViewController.h"
 
 #import "XMImageCache.h"
+#import "Flurry.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -97,6 +98,7 @@
 
 - (IBAction)share:(id)sender
 {
+    [Flurry logEvent:@"Share tapped"];
     NSArray *postItems = @[self.job.image, [self getMessageForSharing]];
     
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]
@@ -108,6 +110,7 @@
 
 - (IBAction)rate:(id)sender
 {
+    [Flurry logEvent:@"Rate tapped"];
     self.rateJobViewController = [[XMRateJobViewController alloc] initWithNibName:@"XMRateJobViewController" bundle:nil];
     self.rateJobViewController.job = self.job;
     
@@ -130,14 +133,17 @@
 }
 
 - (IBAction)saveToEvernote:(id)sender {
+    [Flurry logEvent:@"Evernote tapped"];
     [self showSendingToEvernoteUI];
     EvernoteSession *session = [EvernoteSession sharedSession];
     [session authenticateWithViewController:self completionHandler:^(NSError *error) {
         if (error || !session.isAuthenticated) {
+            [Flurry logEvent:@"Evernote connect failed"];
             [self hideSendingToEvernoteUI];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"Sorry, we were unable to connect to your Evernote account." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alertView show];
         } else {
+            [Flurry logEvent:@"Evernote connect success"];
             NSString *transcribedText = self.job.userTranscription;
             if ([transcribedText length] <= 0) {
                 transcribedText = @"Transcription not yet available";
@@ -162,11 +168,13 @@
             NSMutableArray* resources = [NSMutableArray arrayWithArray:@[resource]];
             EDAMNote *newNote = [[EDAMNote alloc] initWithGuid:nil title:titleText content:noteContent contentHash:nil contentLength:noteContent.length created:0 updated:0 deleted:0 active:YES updateSequenceNum:0 notebookGuid:nil tagGuids:nil resources:resources attributes:nil tagNames:nil];
             [[EvernoteNoteStore noteStore] createNote:newNote success:^(EDAMNote *note) {
+                [Flurry logEvent:@"Evernote send note success"];
                 [self hideSendingToEvernoteUI];
                 NSLog(@"Note created successfully.");
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your note was successfully sent to Evernote." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alertView show];
             } failure:^(NSError *error) {
+                [Flurry logEvent:@"Evernote send note failed"];
                 [self hideSendingToEvernoteUI];
                 NSLog(@"Error creating note : %@",error);
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Sorry, we were unable to send your note to Evernote. Error: %@", error] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];

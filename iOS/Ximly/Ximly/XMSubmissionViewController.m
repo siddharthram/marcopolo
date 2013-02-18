@@ -11,6 +11,7 @@
 #import "XMImageCache.h"
 #import "XMXimlyHTTPClient.h"
 #import "UIImage+XMAdditions.h"
+#import "Flurry.h"
 
 #define kMaxImageDimension      500
 
@@ -80,12 +81,15 @@
     if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
         switch (buttonIndex) {
             case 0:
+                [Flurry logEvent:@"Submit Photo: Camera"];
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 break;
             case 1:
+                [Flurry logEvent:@"Submit Photo: Roll"];
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 break;
             case 2:
+                [Flurry logEvent:@"Submit Photo: Cancel"];
                 cancelled = YES;
                 break;
             default:
@@ -94,9 +98,11 @@
     } else {
         switch (buttonIndex) {
             case 0:
+                [Flurry logEvent:@"Submit Photo: Roll"];
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 break;
             case 1:
+                [Flurry logEvent:@"Submit Photo: Cancel"];
                 cancelled = YES;
                 break;
             default:
@@ -116,6 +122,7 @@
 
 - (void)submitToCloud
 {
+    [Flurry logEvent:@"Submit Photo to Cloud"];
     if (!self.pickedImage) {
         return;
     }
@@ -150,6 +157,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [Flurry logEvent:@"Cancel Image Picker"];
     [picker dismissViewControllerAnimated:YES completion:nil];
     self.view.hidden = YES;
     [self.view removeFromSuperview];

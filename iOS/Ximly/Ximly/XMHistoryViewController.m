@@ -19,6 +19,7 @@
 #import "XMXimlyHTTPClient.h"
 #import "XMSettingsViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "Flurry.h"
 
 #define kJobCellReuseIdentifier @"JobCellReuseIdentifier"
 
@@ -88,12 +89,15 @@
     
     switch (index) {
         case 0:
+            [Flurry logEvent:@"Select all jobs"];
             self.currentJobList = [[XMJobList sharedInstance] jobList];
             break;
         case 1:
+            [Flurry logEvent:@"Select pending jobs"];
             self.currentJobList = [[XMJobList sharedInstance] pendingJobs];
             break;
         case 2:
+            [Flurry logEvent:@"Select finished jobs"];
             self.currentJobList = [[XMJobList sharedInstance] finishedJobs];
             break;
             
@@ -126,12 +130,14 @@
 
 - (IBAction)doSubmit:(id)sender
 {
+    [Flurry logEvent:@"Tap camera button"];
     XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showSubmissionViewWithDelegate:self];
 }
 
 - (IBAction)showJobDetailForRow:(int)row
 {
+    [Flurry logEvent:@"Tap on task"];
     XMJobDetailViewController *jobDetailController = [[XMJobDetailViewController alloc] initWithNibName:@"XMJobDetailViewController" bundle:nil];
     XMJob *theJob = [self.currentJobList objectAtIndex:row];
     jobDetailController.job = theJob;
@@ -252,6 +258,7 @@
 
 - (IBAction)showSettings
 {
+    [Flurry logEvent:@"Show settings"];
     XMSettingsViewController *settingsController = [[XMSettingsViewController alloc] initWithNibName:@"XMSettingsViewController" bundle:nil];
     [self.navigationController pushViewController:settingsController animated:YES];
 }

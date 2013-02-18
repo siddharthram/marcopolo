@@ -12,6 +12,7 @@
 #import "XMJobList.h"
 #import "XMUtilities.h"
 #import "XMXimlyHTTPClient.h"
+#import "Flurry.h"
 
 @interface XMRateJobViewController ()
 
@@ -96,6 +97,7 @@
 
 - (IBAction)rateAsGood:(id)sender
 {
+    [Flurry logEvent:@"Rate good"];
     if ([self.rating length] == 0) {
         self.rating = kJobRatingGood;
         [UIView animateWithDuration:.3 animations:^(void){[self drawRatingBox]; [self.commentTextView becomeFirstResponder];}];
@@ -108,6 +110,7 @@
 
 - (IBAction)rateAsBad:(id)sender
 {
+    [Flurry logEvent:@"Rate bad"];
     if ([self.rating length] == 0) {
         self.rating = kJobRatingBad;
         [UIView animateWithDuration:.3 animations:^(void){[self drawRatingBox]; [self.commentTextView becomeFirstResponder];}];
