@@ -52,6 +52,7 @@
                            consumerSecret:CONSUMER_SECRET];
     
     [Flurry startSession:@"ZVKPTTGDRS7GRHHQ9CCR"];
+    [Flurry setSessionReportsOnPauseEnabled:YES];
     
     return YES;
 }
