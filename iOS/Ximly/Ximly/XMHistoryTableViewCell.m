@@ -32,6 +32,11 @@
 {
     [super layoutSubviews];
     
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1.0] CGColor], nil];
+    [self.layer insertSublayer:gradient atIndex:0];
+    
     CALayer *boxLayer = self.thumbnailView.layer;
     boxLayer.cornerRadius = 6.0;
     boxLayer.masksToBounds = YES;
