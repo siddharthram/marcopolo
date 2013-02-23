@@ -56,6 +56,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editJob)];
+    
     [self redisplay:YES];
     [self hideSendingToEvernoteUI];
 }
@@ -188,6 +190,20 @@
             }];
         } 
     }];
+}
+
+- (void)editJob
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)];
+    
+    [UIView animateWithDuration:.3 animations:^(void){
+        self.transcribedTextView.editable = YES;
+    }];
+}
+
+- (void)save
+{
+    
 }
 
 @end
