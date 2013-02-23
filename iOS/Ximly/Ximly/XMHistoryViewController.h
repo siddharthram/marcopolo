@@ -10,7 +10,7 @@
 
 #import "XMSubmissionViewController.h"
 
-@interface XMHistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, XMSubmissionDelegate>
+@interface XMHistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, XMSubmissionDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSArray *currentJobList;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -18,6 +18,7 @@
 @property (nonatomic, assign) BOOL isReloading;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *listSelector;
 @property (nonatomic, assign) NSInteger selectedListSegmentIndex;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 
 - (IBAction)doSubmit:(id)sender;
 
