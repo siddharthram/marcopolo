@@ -270,6 +270,7 @@
 
 - (IBAction)showSettings
 {
+    [self.searchBar resignFirstResponder];
     [Flurry logEvent:@"Show settings"];
     XMSettingsViewController *settingsController = [[XMSettingsViewController alloc] initWithNibName:@"XMSettingsViewController" bundle:nil];
     [self.navigationController pushViewController:settingsController animated:YES];
@@ -286,12 +287,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.searchBar resignFirstResponder];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self showJobDetailForRow:indexPath.row];
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+    [self.searchBar resignFirstResponder];
     [self showJobDetailForRow:indexPath.row];
 }
 
@@ -305,6 +308,11 @@
     if ([searchText length] == 0) {
         [searchBar performSelector:@selector(resignFirstResponder) withObject:nil afterDelay:0.01];
     }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
 }
 
 @end
