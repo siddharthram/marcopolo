@@ -181,7 +181,7 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
                   [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  NSLog(@"Failed to get rate job");
+                  NSLog(@"Failed to rate job");
                   [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
               }];
 }

@@ -65,7 +65,7 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"073-Setting"] style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
     
-    self.navigationItem.titleView = self.listSelector;
+//    self.navigationItem.titleView = self.listSelector;
     
     UINib *cellNib = [UINib nibWithNibName:@"XMHistoryTableViewCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:kJobCellReuseIdentifier];
@@ -75,6 +75,8 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     self.selectedListSegmentIndex = [userDefaults integerForKey:@"LastHistoryList"];
     [self setCurrentJobListFromSegmentIndex:self.selectedListSegmentIndex];
+    
+    self.tableView.tableHeaderView = self.searchBar;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -292,4 +294,13 @@
 {
     [self showJobDetailForRow:indexPath.row];
 }
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    self.currentJobList = [[XMJobList sharedInstance] listFilteredBy:searchText];
+    [self.tableView reloadData];
+}
+
 @end
