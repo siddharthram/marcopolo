@@ -301,6 +301,10 @@
 {
     self.currentJobList = [[XMJobList sharedInstance] listFilteredBy:searchText];
     [self.tableView reloadData];
+    
+    if ([searchText length] == 0) {
+        [searchBar performSelector:@selector(resignFirstResponder) withObject:nil afterDelay:0.01];
+    }
 }
 
 @end
