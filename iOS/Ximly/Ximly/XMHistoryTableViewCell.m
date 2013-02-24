@@ -53,8 +53,8 @@
     backdropShadowLayer.cornerRadius = 5.0;
     backdropShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
     backdropShadowLayer.shadowOpacity = 0.4;
-    backdropShadowLayer.shadowRadius = 5.0;
-    backdropShadowLayer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+    backdropShadowLayer.shadowRadius = 2.0;
+    backdropShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
 
 }
 
