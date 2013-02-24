@@ -24,6 +24,8 @@
 }
 
 @property (nonatomic, strong) XMJob *job;
+@property (nonatomic, weak) IBOutlet UIView *backdrop;
+@property (nonatomic, weak) IBOutlet UIView *backdropShadow;
 @property (nonatomic, weak) IBOutlet UIWebView *imageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UITextView *transcribedTextView;
