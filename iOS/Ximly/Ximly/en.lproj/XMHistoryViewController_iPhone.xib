@@ -200,6 +200,7 @@
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<int key="IBUIContentMode">3</int>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBShowsCancelButton">YES</bool>
 				<object class="NSColor" key="IBTintColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
