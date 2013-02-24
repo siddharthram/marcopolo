@@ -309,15 +309,25 @@
 {
     self.currentJobList = [[XMJobList sharedInstance] listFilteredBy:searchText];
     [self.tableView reloadData];
-    
+   /*
     if ([searchText length] == 0) {
         [searchBar performSelector:@selector(resignFirstResponder) withObject:nil afterDelay:0.01];
     }
+    */
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
+    searchBar.text = @"";
+    self.currentJobList = [[XMJobList sharedInstance] listFilteredBy:searchBar.text];
+    [self.tableView reloadData];
     [searchBar resignFirstResponder];
 }
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
 
 @end
