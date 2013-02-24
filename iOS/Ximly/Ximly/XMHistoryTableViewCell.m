@@ -31,17 +31,31 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+    /*
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1.0] CGColor], nil];
     [self.layer insertSublayer:gradient atIndex:0];
-    
+    */
     CALayer *boxLayer = self.thumbnailView.layer;
-    boxLayer.cornerRadius = 6.0;
+    boxLayer.cornerRadius = 3.0;
     boxLayer.masksToBounds = YES;
-    boxLayer.borderWidth = 3;
-    boxLayer.borderColor = [[UIColor blackColor] CGColor];
+    boxLayer.borderWidth = 1;
+    boxLayer.borderColor = [[UIColor brownColor] CGColor];
+    
+    CALayer *backdropLayer = self.backdrop.layer;
+    backdropLayer.cornerRadius = 5.0;
+    backdropLayer.masksToBounds = YES;
+    backdropLayer.borderWidth = 1;
+    backdropLayer.borderColor = [[UIColor lightGrayColor] CGColor];
+
+    CALayer *backdropShadowLayer = self.backdropShadow.layer;
+    backdropShadowLayer.cornerRadius = 5.0;
+    backdropShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    backdropShadowLayer.shadowOpacity = 0.4;
+    backdropShadowLayer.shadowRadius = 5.0;
+    backdropShadowLayer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+
 }
 
 @end

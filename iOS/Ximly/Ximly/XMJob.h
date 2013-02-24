@@ -35,8 +35,8 @@ typedef enum {
 } JobStatus;
 
 #define kJobStatusNoneString          @""
-#define kJobStatusProcessingString    @"PROCESSING"
-#define kJobStatusTranscribedString   @"DONE!"
+#define kJobStatusProcessingString    @"SUBMITTED"
+#define kJobStatusTranscribedString   @"TRANSCRIBED"
 
 
 
