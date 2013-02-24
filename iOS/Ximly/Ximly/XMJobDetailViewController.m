@@ -58,6 +58,25 @@
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editJob)];
     
+    CALayer *boxLayer = self.imageView.layer;
+    boxLayer.cornerRadius = 5.0;
+    boxLayer.masksToBounds = YES;
+    boxLayer.borderWidth = 1;
+    boxLayer.borderColor = [[UIColor brownColor] CGColor];
+    
+    CALayer *backdropLayer = self.backdrop.layer;
+    backdropLayer.cornerRadius = 5.0;
+    backdropLayer.masksToBounds = YES;
+    backdropLayer.borderWidth = 2;
+    backdropLayer.borderColor = [[UIColor lightGrayColor] CGColor];
+    
+    CALayer *backdropShadowLayer = self.backdropShadow.layer;
+    backdropShadowLayer.cornerRadius = 5.0;
+    backdropShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    backdropShadowLayer.shadowOpacity = 0.6;
+    backdropShadowLayer.shadowRadius = 5.0;
+    backdropShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    
     [self redisplay:YES];
     [self hideSendingToEvernoteUI];
 }
@@ -65,31 +84,28 @@
 - (void)redisplay:(BOOL)reloadImage
 {
     if (reloadImage) {
-        CALayer *boxLayer = self.imageView.layer;
-        boxLayer.cornerRadius = 14.0;
-        boxLayer.masksToBounds = YES;
-        boxLayer.borderWidth = 4;
-        boxLayer.borderColor = [[UIColor blackColor] CGColor];
-        
+      
         /*
          NSURL *url = [NSURL fileURLWithPath:[XMImageCache cacheFilePathForKey:self.job.imageKey]];
          [self.imageView loadRequest:[NSURLRequest requestWithURL:url]];
          */
         
         CGFloat width = self.imageView.frame.size.width;
-        NSString *html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=%f; maximum-scale=4.0; user-scalable=1;\"/></head><body><img src=\"%@\" width=\"%f\"/></body></html>", width, self.job.imageKey, width - 16.0];
+
+        NSString *html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=%f; maximum-scale=4.0; user-scalable=1;\"/></head><body leftmargin=\"0px\" topmargin=\"0px\" marginwidth=\"0px\" marginheight=\"0px\"><img src=\"%@\" width=\"%f\"/></body></html>", width, self.job.imageKey, width];
         [self.imageView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[XMImageCache cacheFolderPath]]];
     }
     
-    NSString *titleText = self.job.title;
-    self.title = [titleText length] > 0 ? titleText : @"Untitled";
+    NSString *titleText = self.job.userTranscription;
+    self.title = [titleText length] > 0 ? titleText : @"";
     
     if (self.job.isDone) {
+        self.titleLabel.hidden = YES;
         NSString *transcribedText = self.job.userTranscription;
         self.transcribedTextView.text = [transcribedText length] > 0 ? transcribedText : @"";
         rateButton.enabled = YES;
     } else {
-        self.titleLabel.text = @"Transcription not yet available";
+        self.titleLabel.hidden = NO;
         self.transcribedTextView.text = @"";
         rateButton.enabled = NO;
     }
