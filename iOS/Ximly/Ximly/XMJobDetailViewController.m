@@ -62,7 +62,14 @@
     boxLayer.cornerRadius = 5.0;
     boxLayer.masksToBounds = YES;
     boxLayer.borderWidth = 1;
-    boxLayer.borderColor = [[UIColor brownColor] CGColor];
+    boxLayer.borderColor = [[UIColor darkGrayColor] CGColor];
+    
+    CALayer *boxShadowLayer = self.imageShadowView.layer;
+    boxShadowLayer.cornerRadius = 5.0;
+    boxShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    boxShadowLayer.shadowOpacity = 0.8;
+    boxShadowLayer.shadowRadius = 5.0;
+    boxShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
     
     CALayer *backdropLayer = self.backdrop.layer;
     backdropLayer.cornerRadius = 5.0;
@@ -76,6 +83,13 @@
     backdropShadowLayer.shadowOpacity = 0.6;
     backdropShadowLayer.shadowRadius = 5.0;
     backdropShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    
+    CALayer *textShadowView = self.transcribedTextShadowView.layer;
+ //   textShadowView.cornerRadius = 5.0;
+    textShadowView.shadowColor = [[UIColor darkGrayColor] CGColor];
+    textShadowView.shadowOpacity = 0.8;
+    textShadowView.shadowRadius = 5.0;
+    textShadowView.shadowOffset = CGSizeMake(2.0f, 2.0f);
     
     [self redisplay:YES];
     [self hideSendingToEvernoteUI];

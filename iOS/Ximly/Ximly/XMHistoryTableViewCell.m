@@ -41,7 +41,14 @@
     boxLayer.cornerRadius = 3.0;
     boxLayer.masksToBounds = YES;
     boxLayer.borderWidth = 1;
-    boxLayer.borderColor = [[UIColor brownColor] CGColor];
+    boxLayer.borderColor = [[UIColor darkGrayColor] CGColor];
+    
+    CALayer *boxShadowLayer = self.thumbnailShadowView.layer;
+    boxShadowLayer.cornerRadius = 3.0;
+    boxShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    boxShadowLayer.shadowOpacity = 0.7;
+    boxShadowLayer.shadowRadius = 3.0;
+    boxShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
     
     CALayer *backdropLayer = self.backdrop.layer;
     backdropLayer.cornerRadius = 5.0;
