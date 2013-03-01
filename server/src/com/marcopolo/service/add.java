@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.marcopolo.notification.Notify;
 import com.marcopolo.service.aws.S3StoreImage;
 import com.marcopolo.service.data.DataAccess;
 import com.marcopolo.service.dto.PostRequest;
@@ -129,6 +130,8 @@ public class add extends AbstractServlet {
 			}
 			if (!postReq.isValid()) {
 				throw new Exception("Parameters not set.");
+			} else {
+				Notify.notifyTranscribers();
 			}
 
 		} else {
