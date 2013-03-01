@@ -49,6 +49,8 @@
     boxShadowLayer.shadowOpacity = 0.7;
     boxShadowLayer.shadowRadius = 3.0;
     boxShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.thumbnailShadowView.bounds cornerRadius:3.0];
+    boxShadowLayer.shadowPath = path.CGPath;
     
     CALayer *backdropLayer = self.backdrop.layer;
     backdropLayer.cornerRadius = 5.0;
@@ -62,6 +64,8 @@
     backdropShadowLayer.shadowOpacity = 0.4;
     backdropShadowLayer.shadowRadius = 2.0;
     backdropShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    path = [UIBezierPath bezierPathWithRoundedRect:self.backdropShadow.bounds cornerRadius:5.0];
+    backdropShadowLayer.shadowPath = path.CGPath;
 
 }
 
