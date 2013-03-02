@@ -227,19 +227,30 @@
     NSString *labelText = theJob.status;
     
     if (labelText) {
+ //       cell.label1.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.0f];
+        
+        CGSize textSize = [labelText sizeWithFont:cell.label1.font];
+        CGRect label1Frame = cell.label1.frame;
+        label1Frame.size = CGSizeMake(textSize.width+10.0, label1Frame.size.height);
+        cell.label1.frame = label1Frame;
         if ([theJob.status isEqualToString:kJobStatusTranscribedString]) {
-            cell.label1.textColor = [UIColor colorWithRed:0.0 green:.5 blue:0.0 alpha:1.0];
-
+            cell.label1.backgroundColor = [UIColor colorWithRed:0.0 green:.5 blue:0.0 alpha:1.0];
+            
         } else {
-            cell.label1.textColor = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
+            cell.label1.backgroundColor = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
         }
-                
-        cell.label1.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.0f];
         cell.label1.text = labelText;
+
+        CALayer *boxLayer = cell.label1.layer;
+        boxLayer.cornerRadius = 2.0;
+        boxLayer.masksToBounds = YES;
+        // boxLayer.borderWidth = 0;
+        // boxLayer.borderColor = [[UIColor darkGrayColor] CGColor];
+        // boxLayer.shouldRasterize = YES;
         
         labelText = theJob.userTranscription;
     //    cell.label2.textColor = [UIColor colorWithRed:0.2 green:.2 blue:0.2 alpha:1.0];
-        cell.label2.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f];
+//        cell.label2.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f];
         cell.label2.text = labelText ? labelText : @"";
         
         labelText = theJob.durationSinceLastAction;
@@ -262,9 +273,11 @@
     NSString *ratingStr = theJob.rating;
     if ([ratingStr length] > 0) {
         if ([ratingStr isEqualToString:kJobRatingGood]) {
-            cell.ratingImageView.image = [UIImage imageNamed:@"017-ThumbsUp"];
+           cell.ratingImageView.image = [UIImage imageNamed:@"up_gray"];
+       //  cell.ratingImageView.image = [UIImage imageNamed:@"017-ThumbsUp"];
         } else {
-            cell.ratingImageView.image = [UIImage imageNamed:@"018-ThumbsDown"];
+            cell.ratingImageView.image = [UIImage imageNamed:@"down_gray"];
+         //  cell.ratingImageView.image = [UIImage imageNamed:@"018-ThumbsDown"];
         }
     } else {
         cell.ratingImageView.image = nil;

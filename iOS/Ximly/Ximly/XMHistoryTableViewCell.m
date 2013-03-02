@@ -38,25 +38,31 @@
     [self.layer insertSublayer:gradient atIndex:0];
     */
     CALayer *boxLayer = self.thumbnailView.layer;
-    boxLayer.cornerRadius = 3.0;
-    boxLayer.masksToBounds = YES;
+    boxLayer.masksToBounds = NO;
+//    boxLayer.cornerRadius = 3.0;
     boxLayer.borderWidth = 1;
     boxLayer.borderColor = [[UIColor darkGrayColor] CGColor];
+
+//    boxLayer.shouldRasterize = YES;
+
     
-    CALayer *boxShadowLayer = self.thumbnailShadowView.layer;
-    boxShadowLayer.cornerRadius = 3.0;
-    boxShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
-    boxShadowLayer.shadowOpacity = 0.7;
-    boxShadowLayer.shadowRadius = 3.0;
-    boxShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.thumbnailShadowView.bounds cornerRadius:3.0];
-    boxShadowLayer.shadowPath = path.CGPath;
+//    CALayer *boxShadowLayer = self.thumbnailShadowView.layer;
+//    boxShadowLayer.cornerRadius = 3.0;
+    boxLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    boxLayer.shadowOpacity = 0.7;
+//    boxShadowLayer.shadowRadius = 3.0;
+    boxLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.thumbnailView.bounds cornerRadius:3.0];
+    boxLayer.shadowPath = path.CGPath;
+    
+
     
     CALayer *backdropLayer = self.backdrop.layer;
     backdropLayer.cornerRadius = 5.0;
     backdropLayer.masksToBounds = YES;
     backdropLayer.borderWidth = 1;
     backdropLayer.borderColor = [[UIColor lightGrayColor] CGColor];
+//    backdropLayer.shouldRasterize = YES;
 
     CALayer *backdropShadowLayer = self.backdropShadow.layer;
     backdropShadowLayer.cornerRadius = 5.0;
