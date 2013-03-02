@@ -231,7 +231,7 @@
         
         CGSize textSize = [labelText sizeWithFont:cell.label1.font];
         CGRect label1Frame = cell.label1.frame;
-        label1Frame.size = CGSizeMake(textSize.width+10.0, label1Frame.size.height);
+        label1Frame.size = CGSizeMake(textSize.width+8.0, textSize.height+2.0);
         cell.label1.frame = label1Frame;
         if ([theJob.status isEqualToString:kJobStatusTranscribedString]) {
             cell.label1.backgroundColor = [UIColor colorWithRed:0.0 green:.5 blue:0.0 alpha:1.0];
