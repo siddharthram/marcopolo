@@ -123,6 +123,7 @@ public class add extends AbstractServlet {
 						String imageUrl = S3StoreImage.storeS3File(presp.getServerUniqueRequestId(), pngData);
 						presp.setImageUrl(imageUrl);
 						DataAccess.storeRequestData(postReq, presp);
+						Notify.notifyTranscribers();
 					} else {
 						throw new Exception("All parameters not sent.");
 					}
@@ -130,10 +131,8 @@ public class add extends AbstractServlet {
 			}
 			if (!postReq.isValid()) {
 				throw new Exception("Parameters not set.");
-			} else {
-				Notify.notifyTranscribers();
-			}
-
+			} 
+			
 		} else {
 			// upload is not multipart
 			throw new Exception("Invalid request. Not multipart.");

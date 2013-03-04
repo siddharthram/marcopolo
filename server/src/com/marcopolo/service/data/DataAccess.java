@@ -22,6 +22,7 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 public class DataAccess {
 	private final static String AWS_DATASOURCE_NAME = "jdbc/marcopoloaws";
 	private final static int MAX_FREE_TASKS = 5;
+	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 300000l;// 5 mins in millisec
 	private static DataSource _dataSource;
 
 	private static Log log = LogFactory.getLog(DataAccess.class);
@@ -41,8 +42,10 @@ public class DataAccess {
 			try {
 				_dataSource = (DataSource) env.lookup(AWS_DATASOURCE_NAME);
 				if (_dataSource == null) {
-					log.error("Could not find datasource name " + AWS_DATASOURCE_NAME);
-					throw new ServletException("'" + AWS_DATASOURCE_NAME + "' datasources can not be found");
+					log.error("Could not find datasource name "
+							+ AWS_DATASOURCE_NAME);
+					throw new ServletException("'" + AWS_DATASOURCE_NAME
+							+ "' datasources can not be found");
 				}
 				// }
 			} catch (NamingException e) {
@@ -179,7 +182,7 @@ public class DataAccess {
 					&& !taskReq.getTaskId().trim().equals("")) {
 				pstmtQuery.setString(2, taskReq.getTaskId());
 			}
-			
+
 			ResultSet rs = pstmtQuery.executeQuery();
 			while (rs.next()) {
 				TaskStatus ts = new TaskStatus();
@@ -214,11 +217,11 @@ public class DataAccess {
 		return taskStatusResponse;
 	}
 
-
 	private static String updateRegisterRow = "update device_table set apns_device_id = ? where device_id = ?";
 	private static String addRegisterRow = "insert into device_table (device_id, apns_device_id, free_tasks_left) values(?,?,?)";
-	
-	public static void register(String ximlyDeviceId, String apnsDeviceId) throws SQLException {
+
+	public static void register(String ximlyDeviceId, String apnsDeviceId)
+			throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
 		try {
@@ -229,8 +232,8 @@ public class DataAccess {
 			pstmtQuery.setString(2, ximlyDeviceId);
 			int rows = pstmtQuery.executeUpdate();
 			pstmtQuery.close();
-			
-			if (rows ==0) {
+
+			if (rows == 0) {
 				pstmtQuery = conn.prepareStatement(addRegisterRow);
 				pstmtQuery.setString(1, ximlyDeviceId);
 				pstmtQuery.setString(2, apnsDeviceId);
@@ -248,15 +251,15 @@ public class DataAccess {
 
 	}
 
-	
 	private static String deleteExistingResponse = "delete from assignment_table where task_table_idtask in (select idtask from task_table where server_unique_guid = ?) ";
 	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = ?, task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
-	private static String getApnsId = "select * from device_table dt, task_table tt " +
-									  " where dt.iddevice = tt.device_table_iddevice and tt.server_unique_guid  = ?";
+	private static String getApnsId = "select * from device_table dt, task_table tt "
+			+ " where dt.iddevice = tt.device_table_iddevice and tt.server_unique_guid  = ?";
 
 	private static String copyUserTranscription = "update task_table set user_transcription = ? where server_unique_guid = ?";
-	
-	public static String submit(String guid, String response) throws SQLException {
+
+	public static String submit(String guid, String response)
+			throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
 		String apnsId = "";
@@ -276,8 +279,7 @@ public class DataAccess {
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
 			// get apns device id
-			pstmtQuery =  conn
-					.prepareStatement(getApnsId);
+			pstmtQuery = conn.prepareStatement(getApnsId);
 			pstmtQuery.setString(1, guid);
 			ResultSet rs = pstmtQuery.executeQuery();
 			if (rs.next()) {
@@ -290,9 +292,7 @@ public class DataAccess {
 			pstmtQuery.setString(2, guid);
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
-			
-			
-			
+
 		} finally {
 			try {
 				conn.close();
@@ -304,10 +304,86 @@ public class DataAccess {
 
 	}
 
-	private static String allOpenTasksQuery = "select * from task_table tt " + 
-												"join device_table dt on dt.iddevice = tt.device_table_iddevice " + 
-												"left outer join assignment_table at on tt.idtask = at.task_table_idtask " + 
-												"where at.completion_time is null ";
+	private static String getTaskByServerGuidQuery = "select * from task_table where server_unique_guid = ? ";
+
+	public static TaskStatusResponse getTaskByServerGuid(TaskStatusRequest taskReq) throws SQLException {
+
+		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got request for all overdue tasks ");
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(getTaskByServerGuidQuery);
+			pstmtQuery.setString(1, taskReq.getTaskId());
+
+			ResultSet rs = pstmtQuery.executeQuery();
+			while (rs.next()) {
+				TaskStatus ts = new TaskStatus();
+				ts.setImageUrl(rs.getString("image_url"));
+				ts.setClientUniqueRequestId(rs
+						.getString("client_unique_guid"));
+				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
+				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
+				ts.setServerSubmissionTimeStamp(rs
+						.getLong("server_submit_time"));
+				taskStatusResponse.addTaskStatus(ts);
+			}
+			rs.close();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return taskStatusResponse;
+	}
+	
+	
+	
+	private static String getOverDueTaskQuery = "select * from task_table tt "
+			+ "left outer join assignment_table at on tt.idtask = at.task_table_idtask "
+			+ "where at.idassignment is null and server_submit_time < ? ";
+
+	public static TaskStatusResponse getOverDueOpenTasks() throws SQLException {
+
+		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got request for all overdue tasks ");
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(getOverDueTaskQuery);
+			
+			pstmtQuery.setLong(1, System.currentTimeMillis() - MAX_OVERDUE_INTERVAL_IN_MILSEC); 
+			ResultSet rs = pstmtQuery.executeQuery();
+			while (rs.next()) {
+				TaskStatus ts = new TaskStatus();
+				ts.setImageUrl(rs.getString("tt.image_url"));
+				ts.setClientUniqueRequestId(rs
+						.getString("tt.client_unique_guid"));
+				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
+				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
+				ts.setServerSubmissionTimeStamp(rs
+						.getLong("server_submit_time"));
+				taskStatusResponse.addTaskStatus(ts);
+			}
+			rs.close();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return taskStatusResponse;
+	}
+
+	private static String allOpenTasksQuery = "select * from task_table tt "
+			+ "join device_table dt on dt.iddevice = tt.device_table_iddevice "
+			+ "left outer join assignment_table at on tt.idtask = at.task_table_idtask "
+			+ "where at.completion_time is null ";
 
 	public static TaskStatusResponse getAllOpen() throws SQLException {
 
@@ -344,32 +420,34 @@ public class DataAccess {
 
 	private static String storeUserTranscription = "update task_table set user_transcription = ? where server_unique_guid = ? ";
 	private static String storeRatingAndComment = "update assignment_table set rating = ?, rating_comment = ? where idassignment= ? ";
-	
+
 	public static void rate(String ximlyDeviceId, String idassignment,
-			String guid, String rating, String ratingComment, String userTranscriptionData) throws SQLException {
+			String guid, String rating, String ratingComment,
+			String userTranscriptionData) throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
 		try {
 			log.debug("Got request to store ratings ");
-			
-			if (userTranscriptionData != null && !userTranscriptionData.trim().equals("") ) {
+
+			if (userTranscriptionData != null
+					&& !userTranscriptionData.trim().equals("")) {
 				PreparedStatement pstmtQuery = conn
-					.prepareStatement(storeUserTranscription);
+						.prepareStatement(storeUserTranscription);
 				pstmtQuery.setString(1, userTranscriptionData);
 				pstmtQuery.setString(2, guid);
 				pstmtQuery.executeUpdate();
 				pstmtQuery.close();
 			}
 
-			if (rating != null && !rating.trim().equals("") ) {
+			if (rating != null && !rating.trim().equals("")) {
 				PreparedStatement pstmtQuery = conn
-					.prepareStatement(storeRatingAndComment);
+						.prepareStatement(storeRatingAndComment);
 				pstmtQuery.setString(1, rating);
 				pstmtQuery.setString(2, ratingComment);
-				pstmtQuery.setString(3, idassignment);				
+				pstmtQuery.setString(3, idassignment);
 				pstmtQuery.executeUpdate();
 				pstmtQuery.close();
-			}			
+			}
 		} finally {
 			try {
 				conn.close();

@@ -15,6 +15,18 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		<servlet-class>com.marcopolo.service.add</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>submitOverDue</servlet-name>
+		<servlet-class>com.marcopolo.service.submitOverDue</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>taskByGuid</servlet-name>
+		<servlet-class>com.marcopolo.service.taskByGuid</servlet-class>
+	</servlet>	
+	<servlet>
+		<servlet-name>testsmsapi</servlet-name>
+		<servlet-class>com.marcopolo.service.testsmsapi</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>rate</servlet-name>
 		<servlet-class>com.marcopolo.service.rate</servlet-class>
 	</servlet>
@@ -38,6 +50,19 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	<servlet-mapping>
 		<servlet-name>add</servlet-name>
 		<url-pattern>/task/new</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>testsmsapi</servlet-name>
+		<url-pattern>/task/testsmsapi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>submitOverDue</servlet-name>
+		<url-pattern>/task/submitOverDue</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>taskByGuid</servlet-name>
+		<url-pattern>/task/taskByGuid</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>register</servlet-name>
