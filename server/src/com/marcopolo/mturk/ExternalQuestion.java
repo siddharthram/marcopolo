@@ -29,7 +29,7 @@ public class ExternalQuestion {
 
 	private static RequesterService service = null;;
 	private static HITProperties hitProps = null;;
-	
+
 	// Defining the location of the file containing the QAP and the properties
 	// of the HIT
 	private static String hitPropertiesFile = "/hit.properties";
@@ -38,15 +38,16 @@ public class ExternalQuestion {
 
 	// transcription server url
 	private static String baseTranscriptionURL = "http://ximly.herokuapp.com/tasks/";
-	
+
 	public static void init(String path) throws IOException {
-		service = new RequesterService(new PropertiesClientConfig(path + mturkProperties));
-		InputStream in = new FileInputStream(path + hitPropertiesFile);  
+		service = new RequesterService(new PropertiesClientConfig(path
+				+ mturkProperties));
+		InputStream in = new FileInputStream(path + hitPropertiesFile);
 		Properties propfile = new Properties();
 		propfile.load(in);
 		hitProps = new HITProperties(propfile);
 	}
-	
+
 	/**
 	 * Check to see if your account has sufficient funds
 	 * 
@@ -69,7 +70,7 @@ public class ExternalQuestion {
 	 */
 	public static String submitMturkJob(TaskStatus taskStatus, String price) {
 		String resp = "Something bad happened. Check logs";
-		
+
 		try {
 			// Loading the HIT properties file. HITProperties is a helper class
 			// that contains the
@@ -79,26 +80,36 @@ public class ExternalQuestion {
 			// without recompiling your code.
 			// In this sample, the qualification is defined in the properties
 			// file.
-		
+
 			double mturkPrice = 0d;
 			try {
+				if (price == null) {
+					throw new NumberFormatException("price not specified ");
+				}
 				mturkPrice = Double.parseDouble(price);
 				// do not go above max reward
 				if (mturkPrice > maxReward) {
 					throw new NumberFormatException("Max price exceeded");
 				}
 			} catch (NumberFormatException e) {
-				System.out.println(e.getLocalizedMessage() + " Invalid mturk price '" + price + "'. So setting to default value");
+				System.out.println(e.getLocalizedMessage()
+						+ " Invalid mturk price '" + price
+						+ "'. So setting to default value");
 				mturkPrice = hitProps.getRewardAmount();
 			}
-			
-			//System.out.println("mturk price '" + mturkPrice + "' and maxreward=" + maxReward);
-			
+
+			// System.out.println("mturk price '" + mturkPrice +
+			// "' and maxreward=" + maxReward);
+
 			String externalQuestion = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExternalQuestion xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd\">"
-					+ "<ExternalURL>" +
-					baseTranscriptionURL + taskStatus.getServerUniqueRequestId() + "/preview?imageUrl=" + URLEncoder.encode(taskStatus.getImageUrl(), "UTF-8") +
-					"</ExternalURL>"
-					+ "<FrameHeight>600</FrameHeight>" + "</ExternalQuestion>";
+					+ "<ExternalURL>"
+					+ baseTranscriptionURL
+					+ taskStatus.getServerUniqueRequestId()
+					+ "/preview?imageUrl="
+					+ URLEncoder.encode(taskStatus.getImageUrl(), "UTF-8")
+					+ "</ExternalURL>"
+					+ "<FrameHeight>600</FrameHeight>"
+					+ "</ExternalQuestion>";
 
 			HITQuestion question = new HITQuestion();
 			question.setQuestion(externalQuestion);
@@ -109,7 +120,7 @@ public class ExternalQuestion {
 			// thrown.
 			// This method is extremely useful in debugging your QAP. Use it
 			// often.
-			//QAPValidator.validate(question.getQuestion());
+			// QAPValidator.validate(question.getQuestion());
 
 			// Create a HIT using the properties and question files
 			HIT hit = service.createHIT(
@@ -124,12 +135,13 @@ public class ExternalQuestion {
 					hitProps.getQualificationRequirements(), null // responseGroup
 					);
 
-			resp =  "Created HIT: " + hit.getHITId() + " with price " + mturkPrice;
+			resp = "Created HIT: " + hit.getHITId() + " with price "
+					+ mturkPrice;
 			resp += "\nYou may see your HIT with HITTypeId '"
 					+ hit.getHITTypeId() + "' here: ";
-			resp += "\n" +  service.getWebsiteURL()
-					+ "/mturk/preview?groupId=" + hit.getHITTypeId();
-			resp += "\n" + "question url submitted was " + externalQuestion; 
+			resp += "\n" + service.getWebsiteURL() + "/mturk/preview?groupId="
+					+ hit.getHITTypeId();
+			resp += "\n" + "question url submitted was " + externalQuestion;
 		} catch (Exception e) {
 			resp = e.getLocalizedMessage();
 		}

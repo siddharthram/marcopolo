@@ -31,7 +31,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tomcat-juli-adapters.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tomcat-juli.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/google-voice-java-1.14-java6.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jaxen-1.1.3.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jtidy.jar"/>
