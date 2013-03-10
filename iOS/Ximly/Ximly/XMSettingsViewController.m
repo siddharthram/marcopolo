@@ -103,4 +103,26 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
 }
 
+- (IBAction)emailDeviceID:(id)sender
+{
+
+        if ([MFMailComposeViewController canSendMail]) {
+            
+            MFMailComposeViewController *emailEditor = [MFMailComposeViewController new];
+            
+            [emailEditor setSubject:@"Ximly device id"];
+            [emailEditor setMessageBody:[[XMXimlyHTTPClient sharedClient] getDeviceID] isHTML:NO];
+            emailEditor.mailComposeDelegate = self;
+            [self presentViewController:emailEditor animated:YES completion:nil];
+        } 
+
+}
+
+#pragma mark - Mail composer delegate method
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

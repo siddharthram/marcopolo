@@ -74,6 +74,7 @@
 		24B2E06D16B3E43B0022DFAF /* badSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06C16B3E43B0022DFAF /* badSelected.png */; };
 		24B2E06F16B3E6EC0022DFAF /* goodSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06E16B3E6EC0022DFAF /* goodSelected.png */; };
 		24B2E07116B3F9400022DFAF /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E07016B3F9400022DFAF /* closeButton.png */; };
+		24B3A51016ED37B400C6B5F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */; };
 		24F1A15C16C87279003E02C8 /* 073-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15A16C87279003E02C8 /* 073-Setting.png */; };
 		24F1A15D16C87279003E02C8 /* 073-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15B16C87279003E02C8 /* 073-Setting@2x.png */; };
 		24F1A16016C874C7003E02C8 /* camera-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15E16C874C7003E02C8 /* camera-gray.png */; };
@@ -178,6 +179,7 @@
 		24B2E06C16B3E43B0022DFAF /* badSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badSelected.png; sourceTree = "<group>"; };
 		24B2E06E16B3E6EC0022DFAF /* goodSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goodSelected.png; sourceTree = "<group>"; };
 		24B2E07016B3F9400022DFAF /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
+		24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		24F1A15A16C87279003E02C8 /* 073-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "073-Setting.png"; sourceTree = "<group>"; };
 		24F1A15B16C87279003E02C8 /* 073-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "073-Setting@2x.png"; sourceTree = "<group>"; };
 		24F1A15E16C874C7003E02C8 /* camera-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-gray.png"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24B3A51016ED37B400C6B5F4 /* MessageUI.framework in Frameworks */,
 				2409380A16B8EF9C0045446F /* Security.framework in Frameworks */,
 				11AF054A16B5BD3900BADCE6 /* SystemConfiguration.framework in Frameworks */,
 				11AF054716B5BD2200BADCE6 /* MobileCoreServices.framework in Frameworks */,
@@ -237,6 +240,7 @@
 		2450228616ADD7F100FA03B0 = {
 			isa = PBXGroup;
 			children = (
+				24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */,
 				2409380916B8EF9C0045446F /* Security.framework */,
 				11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */,
 				11AF054616B5BD2200BADCE6 /* MobileCoreServices.framework */,

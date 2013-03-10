@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+
 
 #define kShowIntroPrefKey   @"ShowIntroPrefKey"
 #define kDeviceIDPrefKey    @"DeviceIDPrefKey"
 
-@interface XMSettingsViewController : UIViewController
+@interface XMSettingsViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UISwitch       *showIntroSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch       *deviceIDSwitch;
@@ -21,5 +23,7 @@
 - (IBAction)showIntroSwitchChanged;
 - (IBAction)deviceIDSwitchChanged;
 - (IBAction)deleteCache:(id)sender;
+
+- (IBAction)emailDeviceID:(id)sender;
 
 @end
