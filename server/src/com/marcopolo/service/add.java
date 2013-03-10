@@ -25,8 +25,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.marcopolo.mturk.ExternalQuestion;
 import com.marcopolo.notification.Notify;
 import com.marcopolo.service.aws.S3StoreImage;
+import com.marcopolo.service.data.Cache;
 import com.marcopolo.service.data.DataAccess;
 import com.marcopolo.service.dto.PostRequest;
 import com.marcopolo.service.dto.PostResponse;
@@ -48,6 +50,16 @@ public class add extends AbstractServlet {
 	public add() {
 		super();
 	}
+	
+	public void init() throws ServletException {
+		try {
+			super.init();
+			Cache.loadDeviceExclusionIds();
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -123,7 +135,10 @@ public class add extends AbstractServlet {
 						String imageUrl = S3StoreImage.storeS3File(presp.getServerUniqueRequestId(), pngData);
 						presp.setImageUrl(imageUrl);
 						DataAccess.storeRequestData(postReq, presp);
-						Notify.notifyTranscribers();
+						// if device id is in exclusion list then do not send notification
+						if (!Cache.isExcludedFromNotification(postReq.getDeviceId())) {
+							Notify.notifyTranscribers();
+						}
 					} else {
 						throw new Exception("All parameters not sent.");
 					}

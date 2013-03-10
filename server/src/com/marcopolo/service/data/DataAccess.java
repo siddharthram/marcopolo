@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -304,6 +305,36 @@ public class DataAccess {
 
 	}
 
+	
+	// find device ids for which we don't want to send notification
+	private static String deviceExclusionQuery = "select device_id from device_table where send_notification = 0";
+
+	public static ArrayList<String> getExcludedDevices()
+			throws SQLException {
+
+		ArrayList<String> excludedDeviceIds = new ArrayList<String>();
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got excluded device list request");
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(deviceExclusionQuery);
+			ResultSet rs = pstmtQuery.executeQuery();
+			while (rs.next()) {
+				excludedDeviceIds.add(rs.getString("device_id"));
+			}
+			rs.close();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return excludedDeviceIds;
+
+	}
+	
 	private static String getTaskByServerGuidQuery = "select * from task_table where server_unique_guid = ? ";
 
 	public static TaskStatusResponse getTaskByServerGuid(TaskStatusRequest taskReq) throws SQLException {
@@ -342,9 +373,16 @@ public class DataAccess {
 	
 	
 	
-	private static String getOverDueTaskQuery = "select * from task_table tt "
-			+ "left outer join assignment_table at on tt.idtask = at.task_table_idtask "
-			+ "where at.idassignment is null and server_submit_time < ? ";
+	/**
+	 * Used for submitting overdue tasks to aws
+	 * @return
+	 * @throws SQLException
+	 */
+	private static String getOverDueTaskQuery = "select * from task_table tt " + 
+		      " 	join device_table dt on tt.device_table_iddevice = dt.iddevice " +
+		      " 	left outer join assignment_table at on tt.idtask = at.task_table_idtask" +
+		      " 	where at.idassignment is null  and dt.send_notification = 1" +
+		      " and server_submit_time < ? ";
 
 	public static TaskStatusResponse getOverDueOpenTasks() throws SQLException {
 
@@ -380,11 +418,19 @@ public class DataAccess {
 		return taskStatusResponse;
 	}
 
+	
+	/**
+	 * 
+	 * Used by transcription website
+	 * @return
+	 * @throws SQLException
+	 */
 	private static String allOpenTasksQuery = "select * from task_table tt "
 			+ "join device_table dt on dt.iddevice = tt.device_table_iddevice "
 			+ "left outer join assignment_table at on tt.idtask = at.task_table_idtask "
 			+ "where at.completion_time is null ";
 
+	
 	public static TaskStatusResponse getAllOpen() throws SQLException {
 
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();

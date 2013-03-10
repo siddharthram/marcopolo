@@ -57,11 +57,12 @@ public class submitOverDue extends AbstractServlet {
 		StringBuilder resp = new StringBuilder();
 		try {
 			taskStatusResponse  = DataAccess.getOverDueOpenTasks();
+			String turkprice = request.getParameter("turkprice");
 			ArrayList<TaskStatus> overdueTasks = taskStatusResponse.getTaskStatuses();
 			for (Iterator<TaskStatus> taskIter = overdueTasks.iterator(); taskIter
 					.hasNext();) {
 				TaskStatus taskStatus = (TaskStatus) taskIter.next();
-				resp.append(ExternalQuestion.submitMturkJob(taskStatus.getServerUniqueRequestId()));
+				resp.append(ExternalQuestion.submitMturkJob(taskStatus, turkprice));
 				resp.append("\n================================================\n");
 			}
 			

@@ -30,18 +30,5 @@ public class SendNotification {
 		
 	}
 	
-	public void test() {
-/*		APS aps = new APS();
-		aps.setAlert(PropertyReader
-				.getProperty(Constants.URBANAIRSHIPPUSHMESSAGE));
-		Push p = new Push();
-		p.setAps(aps);
-		p.addDeviceToken(deviceToken);
-		p.addPayloadValue("Id", new Integer(Id).toString());
-		UrbanAirshipClient client = new UrbanAirshipClient(
-				PropertyReader.getProperty(Constants.URBANAIRSHIPUSERNAME),
-				PropertyReader.getProperty(Constants.USERBANAIRSHIPPASSWORD));
-		client.sendPushNotifications(p);
-*/	}
 
 }

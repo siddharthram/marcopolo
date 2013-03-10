@@ -3,6 +3,7 @@ package com.marcopolo.mturk;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.Properties;
 
 import com.amazonaws.mturk.addon.HITProperties;
@@ -10,6 +11,7 @@ import com.amazonaws.mturk.addon.HITQuestion;
 import com.amazonaws.mturk.requester.HIT;
 import com.amazonaws.mturk.service.axis.RequesterService;
 import com.amazonaws.mturk.util.PropertiesClientConfig;
+import com.marcopolo.service.dto.TaskStatus;
 
 /**
  * The Best Image sample application will create a HIT asking a worker to choose
@@ -32,14 +34,15 @@ public class ExternalQuestion {
 	// of the HIT
 	private static String hitPropertiesFile = "/hit.properties";
 	private static String mturkProperties = "/mturk.properties";
+	private static final double maxReward = 0.25d; // in cents
 
 	// transcription server url
-	private static String baseTranscriptionURL = "http://ximly.herokuapp.com?serverUniqueRequestId=";
+	private static String baseTranscriptionURL = "http://ximly.herokuapp.com/tasks/";
 	
 	public static void init(String path) throws IOException {
 		service = new RequesterService(new PropertiesClientConfig(path + mturkProperties));
-		Properties propfile = new Properties();
 		InputStream in = new FileInputStream(path + hitPropertiesFile);  
+		Properties propfile = new Properties();
 		propfile.load(in);
 		hitProps = new HITProperties(propfile);
 	}
@@ -64,8 +67,9 @@ public class ExternalQuestion {
 	 *            preview file will be generated and the HIT will be created on
 	 *            Mechanical Turk.
 	 */
-	public static String submitMturkJob(String serverGuid) {
+	public static String submitMturkJob(TaskStatus taskStatus, String price) {
 		String resp = "Something bad happened. Check logs";
+		
 		try {
 			// Loading the HIT properties file. HITProperties is a helper class
 			// that contains the
@@ -76,9 +80,23 @@ public class ExternalQuestion {
 			// In this sample, the qualification is defined in the properties
 			// file.
 		
+			double mturkPrice = 0d;
+			try {
+				mturkPrice = Double.parseDouble(price);
+				// do not go above max reward
+				if (mturkPrice > maxReward) {
+					throw new NumberFormatException("Max price exceeded");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println(e.getLocalizedMessage() + " Invalid mturk price '" + price + "'. So setting to default value");
+				mturkPrice = hitProps.getRewardAmount();
+			}
+			
+			//System.out.println("mturk price '" + mturkPrice + "' and maxreward=" + maxReward);
+			
 			String externalQuestion = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExternalQuestion xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd\">"
 					+ "<ExternalURL>" +
-					baseTranscriptionURL + serverGuid + 
+					baseTranscriptionURL + taskStatus.getServerUniqueRequestId() + "/preview?imageUrl=" + URLEncoder.encode(taskStatus.getImageUrl(), "UTF-8") +
 					"</ExternalURL>"
 					+ "<FrameHeight>600</FrameHeight>" + "</ExternalQuestion>";
 
@@ -99,18 +117,19 @@ public class ExternalQuestion {
 					hitProps.getTitle(),
 					hitProps.getDescription(),
 					hitProps.getKeywords(), // keywords
-					question.getQuestion(), hitProps.getRewardAmount(),
+					question.getQuestion(), mturkPrice,
 					hitProps.getAssignmentDuration(),
 					hitProps.getAutoApprovalDelay(), hitProps.getLifetime(),
 					hitProps.getMaxAssignments(), hitProps.getAnnotation(), // requesterAnnotation
 					hitProps.getQualificationRequirements(), null // responseGroup
 					);
 
-			resp =  "Created HIT: " + hit.getHITId();
+			resp =  "Created HIT: " + hit.getHITId() + " with price " + mturkPrice;
 			resp += "\nYou may see your HIT with HITTypeId '"
 					+ hit.getHITTypeId() + "' here: ";
 			resp += "\n" +  service.getWebsiteURL()
 					+ "/mturk/preview?groupId=" + hit.getHITTypeId();
+			resp += "\n" + "question url submitted was " + externalQuestion; 
 		} catch (Exception e) {
 			resp = e.getLocalizedMessage();
 		}
