@@ -52,6 +52,8 @@
     } else {
         self.showIntroSwitch.on = NO;
     }
+    
+    self.currentDeviceIDLabel.text = [[XMXimlyHTTPClient sharedClient] getDeviceID];
 
 }
 

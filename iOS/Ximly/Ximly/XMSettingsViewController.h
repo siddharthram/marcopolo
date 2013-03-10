@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UISwitch       *showIntroSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch       *deviceIDSwitch;
 @property (nonatomic, weak) IBOutlet UITextField    *deviceIDField;
+@property (nonatomic, weak) IBOutlet UILabel        *currentDeviceIDLabel;
 
 - (IBAction)showIntroSwitchChanged;
 - (IBAction)deviceIDSwitchChanged;
