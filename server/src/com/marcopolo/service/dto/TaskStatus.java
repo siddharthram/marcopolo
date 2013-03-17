@@ -4,7 +4,7 @@ public class TaskStatus {
 	private String serverUniqueRequestId, clientUniqueRequestId, imageUrl, transcriptionData, userTranscriptionData, rating, ratingComment;
 	private int status; // -1 error, 0 - submitted, 1 in progress, 2 completed
 	private long serverSubmissionTimeStamp, clientSubmitTimeStamp, transcriptionTimeStamp, transcriptionId;
-	
+
 	
 	public long getTranscriptionId() {
 		return transcriptionId;

@@ -36,6 +36,5 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jtidy.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/aws-mturk-dataschema.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/aws-mturk-wsdl.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/MarcoPoloTwilio"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

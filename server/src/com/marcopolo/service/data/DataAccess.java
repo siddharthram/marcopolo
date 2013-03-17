@@ -23,7 +23,9 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 public class DataAccess {
 	private final static String AWS_DATASOURCE_NAME = "jdbc/marcopoloaws";
 	private final static int MAX_FREE_TASKS = 5;
-	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 300000l;// 5 mins in millisec
+	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 300000l;// 5 mins
+																		// in
+																		// millisec
 	private static DataSource _dataSource;
 
 	private static Log log = LogFactory.getLog(DataAccess.class);
@@ -57,9 +59,9 @@ public class DataAccess {
 	}
 
 	private static String freeTaskQuery = "select iddevice, free_tasks_left from device_table where device_id = ?";
-	private static String insertDeviceRow = "insert into device_table (device_id, free_tasks_left) values(?,?)";
+	private static String insertDeviceRow = "insert into device_table (device_id, free_tasks_left, is_internal_device) values(?,?, 0)";
 
-	private static String insertTask = "insert into task_table (image_url, server_submit_time, device_table_iddevice, server_unique_guid, client_unique_guid, client_submit_time) values(?, ?, ?, ?, ?, ?)";
+	private static String insertTask = "insert into task_table (image_url, server_submit_time, device_table_iddevice, server_unique_guid, client_unique_guid, client_submit_time, status) values(?, ?, ?, ?, ?, ?, 0)";
 	private static String updateCount = "update device_table set free_tasks_left = (free_tasks_left-1) where device_id = ?";
 
 	/**
@@ -195,10 +197,10 @@ public class DataAccess {
 				ts.setServerSubmissionTimeStamp(rs
 						.getLong("server_submit_time"));
 				ts.setUserTranscriptionData(rs.getString("user_transcription"));
+				ts.setStatus(rs.getInt("tt.status"));
 				// check if task completed
-				if (rs.getString("completion_time") != null) {
+				if (ts.getStatus() == 2) {
 					ts.setTranscriptionId(rs.getLong("idassignment"));
-					ts.setStatus(2); // defualt is 0 which means submitted
 					ts.setTranscriptionTimeStamp(rs.getLong("completion_time"));
 					ts.setTranscriptionData(rs.getString("jobresult"));
 					ts.setRating(rs.getString("rating"));
@@ -219,7 +221,7 @@ public class DataAccess {
 	}
 
 	private static String updateRegisterRow = "update device_table set apns_device_id = ? where device_id = ?";
-	private static String addRegisterRow = "insert into device_table (device_id, apns_device_id, free_tasks_left) values(?,?,?)";
+	private static String addRegisterRow = "insert into device_table (device_id, apns_device_id, free_tasks_left, is_internal_device) values(?,?,?, 0)";
 
 	public static void register(String ximlyDeviceId, String apnsDeviceId)
 			throws SQLException {
@@ -257,7 +259,7 @@ public class DataAccess {
 	private static String getApnsId = "select * from device_table dt, task_table tt "
 			+ " where dt.iddevice = tt.device_table_iddevice and tt.server_unique_guid  = ?";
 
-	private static String copyUserTranscription = "update task_table set user_transcription = ? where server_unique_guid = ?";
+	private static String copyUserTranscription = "update task_table set user_transcription = ?, status = 2 where server_unique_guid = ?";
 
 	public static String submit(String guid, String response)
 			throws SQLException {
@@ -305,12 +307,10 @@ public class DataAccess {
 
 	}
 
-	
 	// find device ids for which we don't want to send notification
-	private static String deviceExclusionQuery = "select device_id from device_table where send_notification = 0";
+	private static String deviceExclusionQuery = "select device_id from device_table where is_internal_device = 1";
 
-	public static ArrayList<String> getExcludedDevices()
-			throws SQLException {
+	public static ArrayList<String> getExcludedDevices() throws SQLException {
 
 		ArrayList<String> excludedDeviceIds = new ArrayList<String>();
 		Connection conn = _dataSource.getConnection();
@@ -334,10 +334,11 @@ public class DataAccess {
 		return excludedDeviceIds;
 
 	}
-	
+
 	private static String getTaskByServerGuidQuery = "select * from task_table where server_unique_guid = ? ";
 
-	public static TaskStatusResponse getTaskByServerGuid(TaskStatusRequest taskReq) throws SQLException {
+	public static TaskStatusResponse getTaskByServerGuid(
+			TaskStatusRequest taskReq) throws SQLException {
 
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		Connection conn = _dataSource.getConnection();
@@ -351,6 +352,62 @@ public class DataAccess {
 			while (rs.next()) {
 				TaskStatus ts = new TaskStatus();
 				ts.setImageUrl(rs.getString("image_url"));
+				ts.setStatus(rs.getInt("status"));
+				ts.setClientUniqueRequestId(rs.getString("client_unique_guid"));
+				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
+				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
+				ts.setServerSubmissionTimeStamp(rs
+						.getLong("server_submit_time"));
+				taskStatusResponse.addTaskStatus(ts);
+			}
+			rs.close();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return taskStatusResponse;
+	}
+
+	/**
+	 * Used for submitting overdue tasks to aws
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+
+	private static String blockOverDueTasks = "update task_table tt join device_table dt on tt.device_table_iddevice = dt.iddevice " + 
+											  "set tt.status = ?, tt.assigned_to = 'mturk' where dt.is_internal_device = 0 and tt.server_submit_time < ?";
+	private static String getOverDueTaskQuery = "select * from task_table where status = 10";
+	private static String lockTaskQuery = "update task_table set status = 1 where status = 10";
+	
+	public static TaskStatusResponse getOverDueOpenTasks() throws SQLException {
+
+		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got request for all overdue tasks ");
+			// first blocking all the exteral overdue tasks pending for more than 5 mins
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(blockOverDueTasks);
+			pstmtQuery.setInt(1, 10); // put a temporary block by setting 10
+			pstmtQuery.setLong(2, System.currentTimeMillis()
+					- MAX_OVERDUE_INTERVAL_IN_MILSEC);
+			pstmtQuery.executeUpdate(); 
+			pstmtQuery.close();
+			
+			// now read the open jobs and submit
+			pstmtQuery = conn
+					.prepareStatement(getOverDueTaskQuery);
+
+			ResultSet rs = pstmtQuery.executeQuery();
+			while (rs.next()) {
+				TaskStatus ts = new TaskStatus();
+				ts.setImageUrl(rs.getString("image_url"));
+				ts.setStatus(rs.getInt("status"));
 				ts.setClientUniqueRequestId(rs
 						.getString("client_unique_guid"));
 				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
@@ -361,53 +418,13 @@ public class DataAccess {
 			}
 			rs.close();
 			pstmtQuery.close();
-		} finally {
-			try {
-				conn.close();
-			} catch (Exception e) {
-				log.error("Error closing connection", e);
-			}
-		}
-		return taskStatusResponse;
-	}
-	
-	
-	
-	/**
-	 * Used for submitting overdue tasks to aws
-	 * @return
-	 * @throws SQLException
-	 */
-	private static String getOverDueTaskQuery = "select * from task_table tt " + 
-		      " 	join device_table dt on tt.device_table_iddevice = dt.iddevice " +
-		      " 	left outer join assignment_table at on tt.idtask = at.task_table_idtask" +
-		      " 	where at.idassignment is null  and dt.send_notification = 1" +
-		      " and server_submit_time < ? ";
-
-	public static TaskStatusResponse getOverDueOpenTasks() throws SQLException {
-
-		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
-		Connection conn = _dataSource.getConnection();
-		try {
-			log.debug("Got request for all overdue tasks ");
-			PreparedStatement pstmtQuery = conn
-					.prepareStatement(getOverDueTaskQuery);
 			
-			pstmtQuery.setLong(1, System.currentTimeMillis() - MAX_OVERDUE_INTERVAL_IN_MILSEC); 
-			ResultSet rs = pstmtQuery.executeQuery();
-			while (rs.next()) {
-				TaskStatus ts = new TaskStatus();
-				ts.setImageUrl(rs.getString("tt.image_url"));
-				ts.setClientUniqueRequestId(rs
-						.getString("tt.client_unique_guid"));
-				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
-				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
-				ts.setServerSubmissionTimeStamp(rs
-						.getLong("server_submit_time"));
-				taskStatusResponse.addTaskStatus(ts);
-			}
-			rs.close();
+			// lock the tasks finally
+			pstmtQuery = conn
+					.prepareStatement(lockTaskQuery);
+			pstmtQuery.executeUpdate(); 
 			pstmtQuery.close();
+			
 		} finally {
 			try {
 				conn.close();
@@ -418,19 +435,20 @@ public class DataAccess {
 		return taskStatusResponse;
 	}
 
-	
 	/**
 	 * 
 	 * Used by transcription website
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
-	private static String allOpenTasksQuery = "select * from task_table tt "
-			+ "join device_table dt on dt.iddevice = tt.device_table_iddevice "
-			+ "left outer join assignment_table at on tt.idtask = at.task_table_idtask "
-			+ "where at.completion_time is null ";
+	private static String allOpenTasksQuery = "select * from task_table where status = 0"; // states
+																							// -
+																							// open-0,
+																							// locked-1,
+																							// transcribed-2
+																							// temporary lock when submitting to turk
 
-	
 	public static TaskStatusResponse getAllOpen() throws SQLException {
 
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
@@ -443,9 +461,9 @@ public class DataAccess {
 			ResultSet rs = pstmtQuery.executeQuery();
 			while (rs.next()) {
 				TaskStatus ts = new TaskStatus();
-				ts.setImageUrl(rs.getString("tt.image_url"));
-				ts.setClientUniqueRequestId(rs
-						.getString("tt.client_unique_guid"));
+				ts.setImageUrl(rs.getString("image_url"));
+				ts.setClientUniqueRequestId(rs.getString("client_unique_guid"));
+				ts.setStatus(rs.getInt("status"));
 				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs
@@ -494,6 +512,29 @@ public class DataAccess {
 				pstmtQuery.executeUpdate();
 				pstmtQuery.close();
 			}
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+	}
+
+	
+	private static String lockTaskByServerGuidQuery = "update task_table set status = 1, assigned_to = ? where server_unique_guid = ? ";
+	
+	public static void lockTaskByServerGuid(TaskStatusRequest tsr, String emailId) throws SQLException  {
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got request to lock task by guid " + tsr.getTaskId());
+
+				PreparedStatement pstmtQuery = conn
+						.prepareStatement(lockTaskByServerGuidQuery);
+				pstmtQuery.setString(1, emailId);
+				pstmtQuery.setString(2, tsr.getTaskId());
+				pstmtQuery.executeUpdate();
+				pstmtQuery.close();
 		} finally {
 			try {
 				conn.close();

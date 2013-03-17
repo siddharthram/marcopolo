@@ -19,6 +19,10 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		<servlet-class>com.marcopolo.service.submitOverDue</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>lock</servlet-name>
+		<servlet-class>com.marcopolo.service.lock</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>taskByGuid</servlet-name>
 		<servlet-class>com.marcopolo.service.taskByGuid</servlet-class>
 	</servlet>	
@@ -59,7 +63,10 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		<servlet-name>submitOverDue</servlet-name>
 		<url-pattern>/task/submitOverDue</url-pattern>
 	</servlet-mapping>
-	
+	<servlet-mapping>
+		<servlet-name>lock</servlet-name>
+		<url-pattern>/task/lock</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>taskByGuid</servlet-name>
 		<url-pattern>/task/taskByGuid</url-pattern>
