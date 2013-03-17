@@ -380,7 +380,7 @@ public class DataAccess {
 	 */
 
 	private static String blockOverDueTasks = "update task_table tt join device_table dt on tt.device_table_iddevice = dt.iddevice " + 
-											  "set tt.status = ?, tt.assigned_to = 'mturk' where dt.is_internal_device = 0 and tt.server_submit_time < ?";
+											  "set tt.status = ?, tt.assigned_to = 'mturk' where dt.is_internal_device = 0 and tt.status = 0 and tt.server_submit_time < ?";
 	private static String getOverDueTaskQuery = "select * from task_table where status = 10";
 	private static String lockTaskQuery = "update task_table set status = 1 where status = 10";
 	
