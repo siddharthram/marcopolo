@@ -126,13 +126,25 @@
     if (!self.pickedImage) {
         return;
     }
+        
+    if ([XMPurchaseManager freeTranscriptionsRemaining] > 0) {
+        [self submitToCloudWithFreeTranscription:YES];
+    } else if ([XMPurchaseManager paidTranscriptionsRemaining] > 0){
+        [self submitToCloudWithFreeTranscription:NO];
+    } else {
+        [self askUserToPurchaseTranscriptions];
+    }
     
+}
+
+- (void)submitToCloudWithFreeTranscription:(BOOL)useFreeTranscription
+{
     self.view.hidden = YES;
     [self.view removeFromSuperview];
     
     XMJob *theJob = [XMJob new];
     theJob.requestID = [XMXimlyHTTPClient newRequestID];
-    theJob.status = kJobStatusProcessingString;
+    theJob.status = kJobStatusOpenString;
     theJob.submissionTime = [NSDate date];
     
     NSData *imageData = [XMImageCache saveImage:self.pickedImage forJob:theJob];
@@ -141,8 +153,73 @@
     [self.delegate jobSubmitted:theJob];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
     [[XMXimlyHTTPClient sharedClient] submitImage:imageData forJob:theJob];
+    if (useFreeTranscription) {
+        [XMPurchaseManager modifyFreeTranscriptionsRemaining:-1];
+    } else {
+        [XMPurchaseManager modifyPaidTranscriptionsRemaining:-1];
+    }
 }
 
+- (void)askUserToPurchaseTranscriptions
+{
+    if ([[XMPurchaseManager sharedInstance] isPurchasingEnabled]) {
+        [[XMPurchaseManager sharedInstance] setDelegate:self];
+        self.isFetchingProducts = YES;
+        [[XMPurchaseManager sharedInstance] fetchProducts];
+    }
+}
+
+
+- (void)didFetchProducts:(NSDictionary *)products
+{
+    if ([products count] == 3) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Buy Transcriptions" message:@"Please make a purchase to continue using the app." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"5-pack @ $3.99", @"20-pack @ $13.99", @"100-pack @ $49.99", nil];
+        [alertView show];
+    }
+}
+
+- (void)failedToStartPurchase
+{
+    //TODO
+}
+
+- (void)didProcessTransactionSuccessfully
+{
+    [self submitToCloudWithFreeTranscription:NO];    
+}
+
+- (void)didProcessTransactionUnsuccessfully
+{
+    //TODO
+}
+
+- (void)didProcessTransactionWithAppleError:(NSError *)error
+{
+    //TODO
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	switch (buttonIndex) {
+        case 0:
+            break;
+            
+        case 1:
+            [[XMPurchaseManager sharedInstance] purchaseLevel1Product];
+            break;
+            
+        case 2:
+            [[XMPurchaseManager sharedInstance] purchaseLevel2Product];
+            break;
+            
+        case 3:
+            [[XMPurchaseManager sharedInstance] purchaseLevel3Product];
+            break;
+            
+        default:
+            break;
+    }
+}
 
 #pragma mark - UIImagePickerControllerDelegate
 

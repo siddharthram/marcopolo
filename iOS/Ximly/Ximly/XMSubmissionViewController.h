@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XMPurchaseManager.h"
 
 #import "XMJob.h"
 
@@ -18,12 +19,13 @@
 @end
 
 
-@interface XMSubmissionViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface XMSubmissionViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, XMPurchaseManagerDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) NSObject<XMSubmissionDelegate> *delegate;
 
 @property (strong, nonatomic) UIActionSheet *photoSourceSelectionSheet;
 @property (strong, nonatomic) UIImage *pickedImage;
+@property (assign) BOOL isFetchingProducts;
 
 - (void)startSubmissionWithDelegate:(NSObject<XMSubmissionDelegate> *)submissionDelegate;
 

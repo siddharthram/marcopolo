@@ -15,6 +15,7 @@
 
 @interface XMSettingsViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
+@property (nonatomic, weak) IBOutlet UILabel        *numTranscriptionsLabel;
 @property (nonatomic, weak) IBOutlet UISwitch       *showIntroSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch       *deviceIDSwitch;
 @property (nonatomic, weak) IBOutlet UITextField    *deviceIDField;

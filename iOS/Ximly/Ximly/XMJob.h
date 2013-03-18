@@ -30,12 +30,14 @@
 
 
 typedef enum {
-    JobStatusProcessing       = 0,
-    JobStatusTranscribed      = 2,
+    JobStatusOpen             = 0,
+    JobStatusLocked           = 1,
+    JobStatusTranscribed      = 2
 } JobStatus;
 
 #define kJobStatusNoneString          @""
-#define kJobStatusProcessingString    @"SUBMITTED"
+#define kJobStatusOpenString    @"SUBMITTED"
+#define kJobStatusLockedString  @"TRANSCRIBING"
 #define kJobStatusTranscribedString   @"TRANSCRIBED"
 
 
