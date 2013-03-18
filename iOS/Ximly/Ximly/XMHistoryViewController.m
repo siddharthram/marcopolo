@@ -233,11 +233,11 @@
         CGRect label1Frame = cell.label1.frame;
         label1Frame.size = CGSizeMake(textSize.width+7.0, textSize.height+2.0);
         cell.label1.frame = label1Frame;
-        if ([theJob.status isEqualToString:kJobStatusTranscribedString]) {
-            cell.label1.backgroundColor = [UIColor colorWithRed:0.0 green:.5 blue:0.0 alpha:1.0];
-            
-        } else {
+        if ([theJob.status isEqualToString:kJobStatusOpenString]) {
             cell.label1.backgroundColor = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
+        } else {
+            cell.label1.backgroundColor = [UIColor colorWithRed:0.0 green:.5 blue:0.0 alpha:1.0];
+
         }
         cell.label1.text = labelText;
 
