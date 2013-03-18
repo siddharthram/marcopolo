@@ -57,6 +57,8 @@
 		2486249416AE7D0100DDCA75 /* XMJobDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2486249216AE7D0100DDCA75 /* XMJobDetailViewController.xib */; };
 		2486249716AFDAB900DDCA75 /* XMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2486249616AFDAB800DDCA75 /* XMImageCache.m */; };
 		248624A416AFEFFB00DDCA75 /* XMUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 248624A316AFEFFB00DDCA75 /* XMUtilities.m */; };
+		2487D76716F641BC00C31039 /* XMPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2487D76616F641BC00C31039 /* XMPurchaseManager.m */; };
+		2487D76916F659DE00C31039 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2487D76816F659DE00C31039 /* StoreKit.framework */; };
 		248A4CC516ADEA2F0042B46C /* XMIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */; };
 		248A4CC616ADEA2F0042B46C /* XMIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */; };
 		248A4CEA16AE1FE20042B46C /* XMXimlyHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A4CE916AE1FE20042B46C /* XMXimlyHTTPClient.m */; };
@@ -157,6 +159,9 @@
 		2486249616AFDAB800DDCA75 /* XMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMImageCache.m; sourceTree = "<group>"; };
 		248624A216AFEFFB00DDCA75 /* XMUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMUtilities.h; sourceTree = "<group>"; };
 		248624A316AFEFFB00DDCA75 /* XMUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMUtilities.m; sourceTree = "<group>"; };
+		2487D76516F641BC00C31039 /* XMPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPurchaseManager.h; sourceTree = "<group>"; };
+		2487D76616F641BC00C31039 /* XMPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPurchaseManager.m; sourceTree = "<group>"; };
+		2487D76816F659DE00C31039 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		248A4CC216ADEA2E0042B46C /* XMIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMIntroViewController.h; sourceTree = "<group>"; };
 		248A4CC316ADEA2E0042B46C /* XMIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMIntroViewController.m; sourceTree = "<group>"; };
 		248A4CC416ADEA2E0042B46C /* XMIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMIntroViewController.xib; sourceTree = "<group>"; };
@@ -195,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2487D76916F659DE00C31039 /* StoreKit.framework in Frameworks */,
 				24B3A51016ED37B400C6B5F4 /* MessageUI.framework in Frameworks */,
 				2409380A16B8EF9C0045446F /* Security.framework in Frameworks */,
 				11AF054A16B5BD3900BADCE6 /* SystemConfiguration.framework in Frameworks */,
@@ -240,6 +246,7 @@
 		2450228616ADD7F100FA03B0 = {
 			isa = PBXGroup;
 			children = (
+				2487D76816F659DE00C31039 /* StoreKit.framework */,
 				24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */,
 				2409380916B8EF9C0045446F /* Security.framework */,
 				11AF054916B5BD3900BADCE6 /* SystemConfiguration.framework */,
@@ -300,6 +307,8 @@
 				2486249216AE7D0100DDCA75 /* XMJobDetailViewController.xib */,
 				24A782A516B47E6A0091AB46 /* XMJobList.h */,
 				24A782A616B47E6A0091AB46 /* XMJobList.m */,
+				2487D76516F641BC00C31039 /* XMPurchaseManager.h */,
+				2487D76616F641BC00C31039 /* XMPurchaseManager.m */,
 				24B2E04A16B3D21E0022DFAF /* XMRateJobViewController.h */,
 				24B2E04B16B3D21E0022DFAF /* XMRateJobViewController.m */,
 				24B2E04C16B3D21E0022DFAF /* XMRateJobViewController.xib */,
@@ -565,6 +574,7 @@
 				2409380816B8E8B40045446F /* SFHFKeychainUtils.m in Sources */,
 				2409380D16B9029F0045446F /* UIImage+XMAdditions.m in Sources */,
 				2419BE3816C250C000650F3B /* XMSettingsViewController.m in Sources */,
+				2487D76716F641BC00C31039 /* XMPurchaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

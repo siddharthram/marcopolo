@@ -128,10 +128,6 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     return errorMessage;
 }
 
-// If you want to use a particular device ID for testing purposes, set the value for kXMTextDeviceID here
-
-#define kXMKeychainService      @"XMKeychainService"
-#define kXMKeychainDeviceIDKey  @"XMKeychainDeviceIDKey"
 
 - (NSString *)getDeviceID {
     

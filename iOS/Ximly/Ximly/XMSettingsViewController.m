@@ -10,6 +10,7 @@
 
 #import "XMImageCache.h"
 #import "XMJobList.h"
+#import "XMPurchaseManager.h"
 #import "XMXimlyHTTPClient.h"
 #import "Flurry.h"
 
@@ -55,6 +56,12 @@
     
     self.currentDeviceIDLabel.text = [[XMXimlyHTTPClient sharedClient] getDeviceID];
 
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

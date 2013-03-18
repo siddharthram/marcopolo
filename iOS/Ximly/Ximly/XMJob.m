@@ -100,7 +100,8 @@
 - (BOOL)isPending
 {
     NSNumber *status = [self.jobData valueForKey:kJobStatusKey];
-    return ([status intValue] == JobStatusProcessing);
+    int statusInt = [status intValue];
+    return ((statusInt == JobStatusOpen) || (statusInt == JobStatusLocked));
 }
 
 - (BOOL)isDone
@@ -117,8 +118,12 @@
     
     if (status) {
         switch ([status intValue]) {
-            case JobStatusProcessing:
-                statusStr = kJobStatusProcessingString;
+            case JobStatusOpen:
+                statusStr = kJobStatusOpenString;
+                break;
+                
+            case JobStatusLocked:
+                statusStr = kJobStatusLockedString;
                 break;
                 
             case JobStatusTranscribed:
@@ -138,10 +143,12 @@
 {
     NSNumber *newStatus = nil;
     
-    if ([value isEqualToString:kJobStatusProcessingString]) {
-        newStatus = [NSNumber numberWithInt:JobStatusProcessing];
-    } else if ([value isEqualToString:kJobStatusTranscribedString]) {
+    if ([value isEqualToString:kJobStatusTranscribedString]) {
         newStatus = [NSNumber numberWithInt:JobStatusTranscribed];
+    } else if ([value isEqualToString:kJobStatusOpenString]) {
+        newStatus = [NSNumber numberWithInt:JobStatusOpen];
+    } else if ([value isEqualToString:kJobStatusLockedString]) {
+        newStatus = [NSNumber numberWithInt:JobStatusLocked];
     }
     
     [self.jobData setValue:newStatus forKey:kJobStatusKey];
