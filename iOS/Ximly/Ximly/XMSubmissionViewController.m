@@ -14,6 +14,7 @@
 #import "Flurry.h"
 
 #define kMaxImageDimension      500
+#define kPurchaseSuccessfulAlertTitle   @"Purchase Successful!"            // TODO: Put in strings file
 
 
 
@@ -162,7 +163,7 @@
 
 - (void)askUserToPurchaseTranscriptions
 {
-    if ([[XMPurchaseManager sharedInstance] isPurchasingEnabled]) {
+    if ([XMPurchaseManager isPurchasingEnabled]) {
         [[XMPurchaseManager sharedInstance] setDelegate:self];
         self.isFetchingProducts = YES;
         [[XMPurchaseManager sharedInstance] fetchProducts];
@@ -173,7 +174,13 @@
 - (void)didFetchProducts:(NSDictionary *)products
 {
     if ([products count] == 3) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Buy Transcriptions" message:@"Please make a purchase to continue using the app." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"5-pack @ $3.99", @"20-pack @ $13.99", @"100-pack @ $49.99", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Buy Transcriptions"
+                                                            message:@"Please make a purchase to continue using the app."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:[NSString stringWithFormat:@"5-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts]      objectForKey:kLevel1ProductCode] price] stringValue]],
+                                                                    [NSString stringWithFormat:@"20-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]],
+                                                                    [NSString stringWithFormat:@"100-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel3ProductCode] price] stringValue]], nil];
         [alertView show];
     }
 }
@@ -183,41 +190,71 @@
     //TODO
 }
 
-- (void)didProcessTransactionSuccessfully
+- (void)didProcessTransactionSuccessfully:(int)numPurchased
 {
-    [self submitToCloudWithFreeTranscription:NO];    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kPurchaseSuccessfulAlertTitle
+                                                        message:[NSString stringWithFormat:@"%d transcriptions purchased.  One will be used to process the current photo.", numPurchased]
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alertView show];
 }
 
 - (void)didProcessTransactionUnsuccessfully
 {
-    //TODO
+    [self alertUserToFailedPurchase];
 }
 
 - (void)didProcessTransactionWithAppleError:(NSError *)error
 {
-    //TODO
+    NSString *errorMsg = [NSString stringWithFormat:@"Purchase: Apple Error with code:%d", error.code];
+    NSLog(@"%@", errorMsg);
+    
+    switch (error.code)  {
+        case SKErrorUnknown:
+        case SKErrorPaymentCancelled:
+            // Do nothing
+            break;
+        default:
+            // TODO
+            break;
+    }
+}
+
+-(void)alertUserToFailedPurchase
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Purchase Failed"
+                                                         message:@"Please make sure your payment information on iTunes is up-to-date and try again later."
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+    [alertView show];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	switch (buttonIndex) {
-        case 0:
-            break;
-            
-        case 1:
-            [[XMPurchaseManager sharedInstance] purchaseLevel1Product];
-            break;
-            
-        case 2:
-            [[XMPurchaseManager sharedInstance] purchaseLevel2Product];
-            break;
-            
-        case 3:
-            [[XMPurchaseManager sharedInstance] purchaseLevel3Product];
-            break;
-            
-        default:
-            break;
+    if ([alertView.title isEqualToString:kPurchaseSuccessfulAlertTitle]) {
+        [self submitToCloudWithFreeTranscription:NO];
+    } else {
+        switch (buttonIndex) {
+            case 0:
+                break;
+                
+            case 1:
+                [[XMPurchaseManager sharedInstance] purchaseLevel1Product];
+                break;
+                
+            case 2:
+                [[XMPurchaseManager sharedInstance] purchaseLevel2Product];
+                break;
+                
+            case 3:
+                [[XMPurchaseManager sharedInstance] purchaseLevel3Product];
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 

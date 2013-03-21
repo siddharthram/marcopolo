@@ -8,6 +8,8 @@
 #import "SFHFKeychainUtils.h"
 #import "XMXimlyHTTPClient.h"
 
+#define kInAppPurchasePrefKey     @"InAppPurchasePrefKey"
+
 #define kFreeStartCount     @"5"
 
 static BOOL _observingTransactions = NO;
@@ -24,6 +26,7 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
 
 @implementation XMPurchaseManager
 
+
 + (XMPurchaseManager *)sharedInstance {
     dispatch_once(&onceToken, ^{
         _sharedInstance = [[XMPurchaseManager alloc] init];
@@ -32,6 +35,17 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
     return _sharedInstance;
 }
 
++ (BOOL)isPurchasingEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchasePrefKey];
+}
+
++ (void)setIsPurchasingEnabled:(BOOL)value
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:value forKey:kInAppPurchasePrefKey];
+    [userDefaults synchronize];
+}
 
 + (int)transcriptionsRemaining
 {
@@ -45,6 +59,10 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
 
 + (int)transcriptionsRemainingOfType:(NSString *)transcriptionType
 {
+    if (![self isPurchasingEnabled]) {
+        return 1000000;
+    }
+    
     NSError *error;
     
     NSString *countStr = [SFHFKeychainUtils getPasswordForUsername:transcriptionType andServiceName:kXMKeychainService error:&error];
@@ -103,6 +121,13 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
     return [self modifyTranscriptionsRemainingOfType:kXMKeychainPaidTranscriptionCount increment:increment];
 }
 
++ (void)deleteTranscriptionCounts
+{
+    NSError *error = nil;
+    [SFHFKeychainUtils deleteItemForUsername:kXMKeychainFreeTranscriptionCount andServiceName:kXMKeychainService error:&error];
+    [SFHFKeychainUtils deleteItemForUsername:kXMKeychainPaidTranscriptionCount andServiceName:kXMKeychainService error:&error];
+}
+
 - (void)cleanup
 {
     [self stopObservingTransactions];
@@ -111,16 +136,9 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
     _sharedInstance = nil;
 }
 
-- (BOOL)isPurchasingEnabled
-{
-    NSString *bundleId = [NSBundle mainBundle].bundleIdentifier;
-    return [bundleId isEqualToString:@"com.ximly.ximlydev"];
-}
-
-
 - (void)startObservingTransactions
 {
-    if ([self isPurchasingEnabled] && !_observingTransactions) {
+    if ([XMPurchaseManager isPurchasingEnabled] && !_observingTransactions) {
         _observingTransactions = YES;
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     }
@@ -134,7 +152,7 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
 
 - (void)fetchProducts
 {
-    if ([self isPurchasingEnabled]) {
+    if ([XMPurchaseManager isPurchasingEnabled]) {
         self.listOfProducts = [NSMutableDictionary dictionaryWithCapacity:3];
         NSSet *productIdentifiers = [NSSet setWithObjects:kLevel1ProductCode, kLevel2ProductCode, kLevel3ProductCode,nil ];
         productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
@@ -178,7 +196,7 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
 
 - (void)purchaseProductWithCode:(NSString *)productCode
 {
-    if ([self isPurchasingEnabled]) {
+    if ([XMPurchaseManager isPurchasingEnabled]) {
         SKProduct * product = [self.listOfProducts objectForKey:productCode];
         if (product) {
             if ([SKPaymentQueue canMakePayments]) {
@@ -284,7 +302,7 @@ static int POS(char c)
     return pictemp;
 }
 
-- (BOOL)enablePurchasedProduct:(NSString *)productCode
+- (int)enablePurchasedProduct:(NSString *)productCode
 {
     int increment = 0;
     
@@ -297,7 +315,7 @@ static int POS(char c)
     }
                 
     [XMPurchaseManager modifyPaidTranscriptionsRemaining:increment];
-    return (increment > 0);
+    return increment;
 }
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
@@ -321,13 +339,13 @@ static int POS(char c)
             return;
         }
         
-        BOOL increment = [self enablePurchasedProduct:[purchaseInfoDict objectForKey:@"product-id"]];
+        int increment = [self enablePurchasedProduct:[purchaseInfoDict objectForKey:@"product-id"]];
         
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
         [self stopObservingTransactions];
         
         if (increment > 0) {
-            [self.delegate didProcessTransactionSuccessfully];
+            [self.delegate didProcessTransactionSuccessfully:increment];
         } else {
             [self.delegate didProcessTransactionUnsuccessfully];
         }
