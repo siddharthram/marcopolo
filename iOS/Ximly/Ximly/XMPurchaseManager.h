@@ -19,7 +19,7 @@
 @optional
 - (void)didFetchProducts:(NSDictionary *)products;
 - (void)failedToStartPurchase;
-- (void)didProcessTransactionSuccessfully;
+- (void)didProcessTransactionSuccessfully:(int)numPurchased;
 - (void)didProcessTransactionUnsuccessfully;
 - (void)didProcessTransactionWithAppleError:(NSError *)error;
 @end
@@ -34,14 +34,14 @@
 
 + (XMPurchaseManager *)sharedInstance;
 
-- (BOOL)isPurchasingEnabled;
-
++ (BOOL)isPurchasingEnabled;
++ (void)setIsPurchasingEnabled:(BOOL)value;
 + (int)transcriptionsRemaining;
 + (int)freeTranscriptionsRemaining;
 + (int)paidTranscriptionsRemaining;
 + (int)modifyFreeTranscriptionsRemaining:(int)increment;
 + (int)modifyPaidTranscriptionsRemaining:(int)increment;
-
++ (void)deleteTranscriptionCounts;
 
 - (void)startObservingTransactions;
 - (void)stopObservingTransactions;

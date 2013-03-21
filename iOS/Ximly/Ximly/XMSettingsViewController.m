@@ -54,6 +54,14 @@
         self.showIntroSwitch.on = NO;
     }
     
+    BOOL inAppPurchaseEnabled = [XMPurchaseManager isPurchasingEnabled];
+    
+    if (inAppPurchaseEnabled) {
+        self.inAppPurchaseSwitch.on = YES;
+    } else {
+        self.inAppPurchaseSwitch.on = NO;
+    }
+    
     self.currentDeviceIDLabel.text = [[XMXimlyHTTPClient sharedClient] getDeviceID];
 
 }
@@ -85,6 +93,12 @@
     [userDefaults synchronize];
 }
 
+- (IBAction)inAppPurchaseSwitchChanged
+{
+    [XMPurchaseManager setIsPurchasingEnabled:self.inAppPurchaseSwitch.on];
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
+}
+
 - (IBAction)deviceIDSwitchChanged
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -108,6 +122,12 @@
     [[XMJobList sharedInstance] writeToDisk];
     [XMImageCache deleteCache];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
+}
+
+- (IBAction)resetTranscriptionCounts:(id)sender
+{
+    [XMPurchaseManager deleteTranscriptionCounts];
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
 }
 
 - (IBAction)emailDeviceID:(id)sender
