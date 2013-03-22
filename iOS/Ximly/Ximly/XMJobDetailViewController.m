@@ -58,8 +58,19 @@
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editJob)];
     
+    [self hideSendingToEvernoteUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self redisplay:YES];
+}
+
+- (void)redisplay:(BOOL)reloadImage
+{
     CALayer *boxLayer = self.imageView.layer;
-    boxLayer.cornerRadius = 5.0;
+    //  boxLayer.cornerRadius = 5.0;
     boxLayer.masksToBounds = YES;
     boxLayer.borderWidth = 1;
     boxLayer.borderColor = [[UIColor darkGrayColor] CGColor];
@@ -68,35 +79,40 @@
     boxShadowLayer.cornerRadius = 5.0;
     boxShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
     boxShadowLayer.shadowOpacity = 0.8;
-    boxShadowLayer.shadowRadius = 5.0;
-    boxShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    boxShadowLayer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.imageShadowView.bounds cornerRadius:5.0];
+    boxShadowLayer.shadowPath = path.CGPath;
     
-    CALayer *backdropLayer = self.backdrop.layer;
-    backdropLayer.cornerRadius = 5.0;
-    backdropLayer.masksToBounds = YES;
-    backdropLayer.borderWidth = 2;
-    backdropLayer.borderColor = [[UIColor lightGrayColor] CGColor];
+    /*
+     CALayer *backdropLayer = self.backdrop.layer;
+     backdropLayer.cornerRadius = 5.0;
+     backdropLayer.masksToBounds = YES;
+     backdropLayer.borderWidth = 2;
+     backdropLayer.borderColor = [[UIColor lightGrayColor] CGColor];
+     
+     CALayer *backdropShadowLayer = self.backdropShadow.layer;
+     backdropShadowLayer.cornerRadius = 5.0;
+     backdropShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
+     backdropShadowLayer.shadowOpacity = 0.6;
+     backdropShadowLayer.shadowRadius = 5.0;
+     backdropShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+     
+     CALayer *textShadowView = self.transcribedTextShadowView.layer;
+     //   textShadowView.cornerRadius = 5.0;
+     textShadowView.shadowColor = [[UIColor darkGrayColor] CGColor];
+     textShadowView.shadowOpacity = 0.8;
+     textShadowView.shadowRadius = 5.0;
+     textShadowView.shadowOffset = CGSizeMake(2.0f, 2.0f);
+     */
     
-    CALayer *backdropShadowLayer = self.backdropShadow.layer;
-    backdropShadowLayer.cornerRadius = 5.0;
-    backdropShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
-    backdropShadowLayer.shadowOpacity = 0.6;
-    backdropShadowLayer.shadowRadius = 5.0;
-    backdropShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    CALayer *textShadowLayer = self.transcribedTextShadowView.layer;
+    textShadowLayer.cornerRadius = 5,0;
+    textShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    textShadowLayer.shadowOpacity = 0.8;
+    textShadowLayer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    path = [UIBezierPath bezierPathWithRect:self.transcribedTextShadowView.bounds];
+    textShadowLayer.shadowPath = path.CGPath;
     
-    CALayer *textShadowView = self.transcribedTextShadowView.layer;
- //   textShadowView.cornerRadius = 5.0;
-    textShadowView.shadowColor = [[UIColor darkGrayColor] CGColor];
-    textShadowView.shadowOpacity = 0.8;
-    textShadowView.shadowRadius = 5.0;
-    textShadowView.shadowOffset = CGSizeMake(2.0f, 2.0f);
-    
-    [self redisplay:YES];
-    [self hideSendingToEvernoteUI];
-}
-
-- (void)redisplay:(BOOL)reloadImage
-{
     if (reloadImage) {
       
         /*
@@ -125,9 +141,9 @@
     }
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [self.imageView reload];
+    [self redisplay:YES];
 }
 
 - (void)didReceiveMemoryWarning
