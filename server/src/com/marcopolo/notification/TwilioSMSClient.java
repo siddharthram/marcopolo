@@ -7,7 +7,6 @@ import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.TwilioRestResponse;
 import com.twilio.sdk.resource.factory.SmsFactory;
 import com.twilio.sdk.resource.instance.Account;
-import com.twilio.sdk.verbs.TwiMLException;
 
 public class TwilioSMSClient {
 	private static final String ACCOUNT_SID = "ACf12c09a36402a19385cff7db34daeb32";
@@ -24,22 +23,6 @@ public class TwilioSMSClient {
 
 	private static final String FROMNUMBER = "(408) 469-4835";
 
-	public static void main(final String[] args) throws TwilioRestException,
-			TwiMLException {
-		
-		double a = Double.parseDouble("0.30");
-		double b = .25;
-		if (b > a) {
-			System.out.println(" b is greater " + b );
-		} else {
-			System.out.println(" a is greater " + a );
-		}
-		
-		
-		//sendSMS("4083732688");
-
-	}
-
 	public static void sendSMS(String phoneNumber) throws TwilioRestException {
 
 		final Map<String, String> smsParams = new HashMap<String, String>();
@@ -55,6 +38,15 @@ public class TwilioSMSClient {
 			System.out.println(resp.getResponseText());
 		}
 
+	}
+	
+	public static void main(String[] args) {
+		try {
+			sendSMS("6503195789");
+		} catch (TwilioRestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -8855,3 +8855,214 @@ main DEBUG tsccm.ThreadSafeClientConnManager - Released connection is not reusab
 main DEBUG tsccm.ConnPoolByRoute - Releasing connection [{s}->https://api.twilio.com][null]
 main DEBUG conn.DefaultClientConnection - Connection 0.0.0.0:62644<->174.129.254.101:443 closed
 main DEBUG tsccm.ConnPoolByRoute - Notifying no-one, there are no waiting threads
+main DEBUG tsccm.ThreadSafeClientConnManager - Get connection: {s}->https://api.twilio.com, timeout = 10000
+main DEBUG tsccm.ConnPoolByRoute - [{s}->https://api.twilio.com] total kept alive: 0, total issued: 0, total allocated: 0 out of 20
+main DEBUG tsccm.ConnPoolByRoute - No free connections [{s}->https://api.twilio.com][null]
+main DEBUG tsccm.ConnPoolByRoute - Available capacity: 10 out of 10 [{s}->https://api.twilio.com][null]
+main DEBUG tsccm.ConnPoolByRoute - Creating new connection [{s}->https://api.twilio.com]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to api.twilio.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: UNCHALLENGED
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/SMS/Messages.json HTTP/1.1
+main DEBUG http.wire - >> "POST /2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/SMS/Messages.json HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "X-Twilio-Client: java-3.3.13[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: twilio-java/3.3.13[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/json[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 77[\r][\n]"
+main DEBUG http.wire - >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+main DEBUG http.wire - >> "Host: api.twilio.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/SMS/Messages.json HTTP/1.1
+main DEBUG http.headers - >> X-Twilio-Client: java-3.3.13
+main DEBUG http.headers - >> User-Agent: twilio-java/3.3.13
+main DEBUG http.headers - >> Accept: application/json
+main DEBUG http.headers - >> Content-Length: 77
+main DEBUG http.headers - >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+main DEBUG http.headers - >> Host: api.twilio.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.wire - >> "Body=new+image+available+to+transcribe.&To=6503195789&From=%28408%29+469-4835"
+main DEBUG http.wire - << "HTTP/1.1 401 Unauthorized[\r][\n]"
+main DEBUG http.wire - << "Server: nginx[\r][\n]"
+main DEBUG http.wire - << "Date: Sun, 24 Mar 2013 00:32:52 GMT[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/json[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 111[\r][\n]"
+main DEBUG http.wire - << "Connection: close[\r][\n]"
+main DEBUG http.wire - << "WWW-Authenticate: Basic realm="Twilio API"[\r][\n]"
+main DEBUG http.wire - << "Etag: [\r][\n]"
+main DEBUG http.wire - << "Last-Modified: [\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 401 Unauthorized
+main DEBUG http.headers - << HTTP/1.1 401 Unauthorized
+main DEBUG http.headers - << Server: nginx
+main DEBUG http.headers - << Date: Sun, 24 Mar 2013 00:32:52 GMT
+main DEBUG http.headers - << Content-Type: application/json
+main DEBUG http.headers - << Content-Length: 111
+main DEBUG http.headers - << Connection: close
+main DEBUG http.headers - << WWW-Authenticate: Basic realm="Twilio API"
+main DEBUG http.headers - << Etag: 
+main DEBUG http.headers - << Last-Modified: 
+main DEBUG client.DefaultHttpClient - api.twilio.com:443 requested authentication
+main DEBUG client.TargetAuthenticationStrategy - Authentication schemes in the order of preference: [negotiate, Kerberos, NTLM, Digest, Basic]
+main DEBUG client.TargetAuthenticationStrategy - Challenge for negotiate authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for Kerberos authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for NTLM authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for Digest authentication scheme not available
+main DEBUG client.DefaultHttpClient - Selected authentication options: [BASIC]
+main DEBUG conn.DefaultClientConnection - Connection 0.0.0.0:58971<->174.129.254.101:443 closed
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to api.twilio.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: CHALLENGED
+main DEBUG protocol.RequestTargetAuthentication - Generating response to an authentication challenge using basic scheme
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 2 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/SMS/Messages.json HTTP/1.1
+main DEBUG http.wire - >> "POST /2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/SMS/Messages.json HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "X-Twilio-Client: java-3.3.13[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: twilio-java/3.3.13[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/json[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 77[\r][\n]"
+main DEBUG http.wire - >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+main DEBUG http.wire - >> "Host: api.twilio.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic QUNmMTJjMDlhMzY0MDJhMTkzODVjZmY3ZGIzNGRhZWIzMjoxOTllOTA3NmY3MDE5ZTdmZDFhYzkwMzAzMWU0OGFlYg==[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/SMS/Messages.json HTTP/1.1
+main DEBUG http.headers - >> X-Twilio-Client: java-3.3.13
+main DEBUG http.headers - >> User-Agent: twilio-java/3.3.13
+main DEBUG http.headers - >> Accept: application/json
+main DEBUG http.headers - >> Content-Length: 77
+main DEBUG http.headers - >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+main DEBUG http.headers - >> Host: api.twilio.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> Authorization: Basic QUNmMTJjMDlhMzY0MDJhMTkzODVjZmY3ZGIzNGRhZWIzMjoxOTllOTA3NmY3MDE5ZTdmZDFhYzkwMzAzMWU0OGFlYg==
+main DEBUG http.wire - >> "Body=new+image+available+to+transcribe.&To=6503195789&From=%28408%29+469-4835"
+main DEBUG http.wire - << "HTTP/1.1 201 Created[\r][\n]"
+main DEBUG http.wire - << "Server: nginx[\r][\n]"
+main DEBUG http.wire - << "Date: Sun, 24 Mar 2013 00:32:53 GMT[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/json[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 504[\r][\n]"
+main DEBUG http.wire - << "Connection: close[\r][\n]"
+main DEBUG http.wire - << "Etag: [\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 201 Created
+main DEBUG http.headers - << HTTP/1.1 201 Created
+main DEBUG http.headers - << Server: nginx
+main DEBUG http.headers - << Date: Sun, 24 Mar 2013 00:32:53 GMT
+main DEBUG http.headers - << Content-Type: application/json
+main DEBUG http.headers - << Content-Length: 504
+main DEBUG http.headers - << Connection: close
+main DEBUG http.headers - << Etag: 
+main DEBUG client.TargetAuthenticationStrategy - Caching 'basic' auth scheme for https://api.twilio.com:443
+main DEBUG http.wire - << "{"sid":"SM2e3996ed1570e53d64e48901e42868b2","date_created":"Sun, 24 Mar 2013 00:32:53 +0000","date_updated":"Sun, 24 Mar 2013 00:32:53 +0000","date_sent":null,"account_sid":"ACf12c09a36402a19385cff7db34daeb32","to":"+16503195789","from":"+14084694835","body":"new image available to transcribe.","status":"queued","direction":"outbound-api","api_version":"2010-04-01","price":null,"uri":"\/2010-04-01\/Accounts\/ACf12c09a36402a19385cff7db34daeb32\/SMS\/Messages\/SM2e3996ed1570e53d64e48901e42868b2.json"}"
+main DEBUG conn.DefaultClientConnection - Connection 0.0.0.0:58972<->174.129.254.101:443 shut down
+main DEBUG tsccm.ThreadSafeClientConnManager - Released connection is not reusable.
+main DEBUG tsccm.ConnPoolByRoute - Releasing connection [{s}->https://api.twilio.com][null]
+main DEBUG conn.DefaultClientConnection - Connection 0.0.0.0:58972<->174.129.254.101:443 closed
+main DEBUG tsccm.ConnPoolByRoute - Notifying no-one, there are no waiting threads
+main DEBUG tsccm.ThreadSafeClientConnManager - Get connection: {s}->https://api.twilio.com, timeout = 10000
+main DEBUG tsccm.ConnPoolByRoute - [{s}->https://api.twilio.com] total kept alive: 0, total issued: 0, total allocated: 0 out of 20
+main DEBUG tsccm.ConnPoolByRoute - No free connections [{s}->https://api.twilio.com][null]
+main DEBUG tsccm.ConnPoolByRoute - Available capacity: 10 out of 10 [{s}->https://api.twilio.com][null]
+main DEBUG tsccm.ConnPoolByRoute - Creating new connection [{s}->https://api.twilio.com]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to api.twilio.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: UNCHALLENGED
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: GET /2010-04-01/Accounts HTTP/1.1
+main DEBUG http.wire - >> "GET /2010-04-01/Accounts HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "X-Twilio-Client: java-3.3.13[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: twilio-java/3.3.13[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/json[\r][\n]"
+main DEBUG http.wire - >> "Host: api.twilio.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> GET /2010-04-01/Accounts HTTP/1.1
+main DEBUG http.headers - >> X-Twilio-Client: java-3.3.13
+main DEBUG http.headers - >> User-Agent: twilio-java/3.3.13
+main DEBUG http.headers - >> Accept: application/json
+main DEBUG http.headers - >> Host: api.twilio.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.wire - << "HTTP/1.1 401 UNAUTHORIZED[\r][\n]"
+main DEBUG http.wire - << "Server: nginx[\r][\n]"
+main DEBUG http.wire - << "Date: Sun, 24 Mar 2013 00:32:54 GMT[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/xml[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 232[\r][\n]"
+main DEBUG http.wire - << "Connection: close[\r][\n]"
+main DEBUG http.wire - << "WWW-Authenticate: Basic realm="Twilio API"[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 401 UNAUTHORIZED
+main DEBUG http.headers - << HTTP/1.1 401 UNAUTHORIZED
+main DEBUG http.headers - << Server: nginx
+main DEBUG http.headers - << Date: Sun, 24 Mar 2013 00:32:54 GMT
+main DEBUG http.headers - << Content-Type: application/xml
+main DEBUG http.headers - << Content-Length: 232
+main DEBUG http.headers - << Connection: close
+main DEBUG http.headers - << WWW-Authenticate: Basic realm="Twilio API"
+main DEBUG client.DefaultHttpClient - api.twilio.com:443 requested authentication
+main DEBUG client.TargetAuthenticationStrategy - Authentication schemes in the order of preference: [negotiate, Kerberos, NTLM, Digest, Basic]
+main DEBUG client.TargetAuthenticationStrategy - Challenge for negotiate authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for Kerberos authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for NTLM authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for Digest authentication scheme not available
+main DEBUG client.DefaultHttpClient - Selected authentication options: [BASIC]
+main DEBUG conn.DefaultClientConnection - Connection 0.0.0.0:58973<->174.129.254.101:443 closed
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to api.twilio.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: CHALLENGED
+main DEBUG protocol.RequestTargetAuthentication - Generating response to an authentication challenge using basic scheme
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 2 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: GET /2010-04-01/Accounts HTTP/1.1
+main DEBUG http.wire - >> "GET /2010-04-01/Accounts HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "X-Twilio-Client: java-3.3.13[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: twilio-java/3.3.13[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/json[\r][\n]"
+main DEBUG http.wire - >> "Host: api.twilio.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic QUNmMTJjMDlhMzY0MDJhMTkzODVjZmY3ZGIzNGRhZWIzMjoxOTllOTA3NmY3MDE5ZTdmZDFhYzkwMzAzMWU0OGFlYg==[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> GET /2010-04-01/Accounts HTTP/1.1
+main DEBUG http.headers - >> X-Twilio-Client: java-3.3.13
+main DEBUG http.headers - >> User-Agent: twilio-java/3.3.13
+main DEBUG http.headers - >> Accept: application/json
+main DEBUG http.headers - >> Host: api.twilio.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> Authorization: Basic QUNmMTJjMDlhMzY0MDJhMTkzODVjZmY3ZGIzNGRhZWIzMjoxOTllOTA3NmY3MDE5ZTdmZDFhYzkwMzAzMWU0OGFlYg==
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/xml[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2012[\r][\n]"
+main DEBUG http.wire - << "Connection: close[\r][\n]"
+main DEBUG http.wire - << "date: Sun, 24 Mar 2013 00:32:55 GMT[\r][\n]"
+main DEBUG http.wire - << "x-shenanigans: none[\r][\n]"
+main DEBUG http.wire - << "server: nginx[\r][\n]"
+main DEBUG http.wire - << "Access-Control-Allow-Origin: https://www.twilio.com[\r][\n]"
+main DEBUG http.wire - << "X-Powered-By: AT-5000[\r][\n]"
+main DEBUG http.wire - << "X-Shenanigans: none[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: application/xml
+main DEBUG http.headers - << Content-Length: 2012
+main DEBUG http.headers - << Connection: close
+main DEBUG http.headers - << date: Sun, 24 Mar 2013 00:32:55 GMT
+main DEBUG http.headers - << x-shenanigans: none
+main DEBUG http.headers - << server: nginx
+main DEBUG http.headers - << Access-Control-Allow-Origin: https://www.twilio.com
+main DEBUG http.headers - << X-Powered-By: AT-5000
+main DEBUG http.headers - << X-Shenanigans: none
+main DEBUG client.TargetAuthenticationStrategy - Caching 'basic' auth scheme for https://api.twilio.com:443
+main DEBUG http.wire - << "<?xml version='1.0' encoding='UTF-8'?>[\n]"
+main DEBUG http.wire - << "<TwilioResponse><Accounts page="0" numpages="1" pagesize="50" total="1" start="0" end="0" uri="/2010-04-01/Accounts" firstpageuri="/2010-04-01/Accounts" previouspageuri="" nextpageuri="" lastpageuri="/2010-04-01/Accounts"><Account><Sid>ACf12c09a36402a19385cff7db34daeb32</Sid><OwnerAccountSid>ACf12c09a36402a19385cff7db34daeb32</OwnerAccountSid><FriendlyName>siddharthram@gmail.com's Account</FriendlyName><Status>active</Status><DateCreated>Fri, 08 Mar 2013 14:53:19 +0000</DateCreated><DateUpdated>Sun, 10 Mar 2013 19:15:47 +0000</DateUpdated><AuthToken>199e9076f7019e7fd1ac903031e48aeb</AuthToken><Type>Trial</Type><Uri>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32</Uri><SubresourceUris><AuthorizedConnectApps>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/AuthorizedConnectApps</AuthorizedConnectApps><AvailablePhoneNumbers>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/AvailablePhoneNumbers</AvailablePhoneNumbers><Calls>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/Calls</Calls><Conferences>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/Conferences</Conferences><ConnectApps>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/ConnectApps</ConnectApps><IncomingPhoneNumbers>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/IncomingPhoneNumbers</IncomingPhoneNumbers><Notifications>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/Notifications</Notifications><OutgoingCallerIds>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/OutgoingCallerIds</OutgoingCallerIds><Recordings>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/Recordings</Recordings><Sandbox>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/Sandbox</Sandbox><SMSMessages>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/SMS/Messages</SMSMessages><Transcriptions>/2010-04-01/Accounts/ACf12c09a36402a19385cff7db34daeb32/Transcriptions</Transcriptions></SubresourceUris></Account></Accounts></TwilioResponse>"
+main DEBUG conn.DefaultClientConnection - Connection 0.0.0.0:58974<->174.129.254.101:443 shut down
+main DEBUG tsccm.ThreadSafeClientConnManager - Released connection is not reusable.
+main DEBUG tsccm.ConnPoolByRoute - Releasing connection [{s}->https://api.twilio.com][null]
+main DEBUG conn.DefaultClientConnection - Connection 0.0.0.0:58974<->174.129.254.101:443 closed
+main DEBUG tsccm.ConnPoolByRoute - Notifying no-one, there are no waiting threads

@@ -14,16 +14,7 @@ import com.amazonaws.mturk.util.PropertiesClientConfig;
 import com.marcopolo.service.dto.TaskStatus;
 
 /**
- * The Best Image sample application will create a HIT asking a worker to choose
- * the best image of three given a set of criteria.
- * 
- * mturk.properties must be found in the current file path.
- * 
- * The following concepts are covered: - Using the <FormattedContent>
- * functionality in QAP - File based QAP and HIT properties HIT loading -
- * Validating the correctness of QAP - Using a basic system qualification -
- * Previewing the HIT as HTML
- * 
+ * Submit external question to turk
  */
 public class ExternalQuestion {
 

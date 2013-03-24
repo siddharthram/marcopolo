@@ -543,5 +543,56 @@ public class DataAccess {
 			}
 		}
 	}
+	private static String notificationSMSQuery = "select sms from notification where sms is not null";
+	public static ArrayList<String> getNotificationSmses() throws SQLException {
+		ArrayList<String> smsIds = new ArrayList<String>();
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got notification email list request");
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(notificationSMSQuery);
+			ResultSet rs = pstmtQuery.executeQuery();
+			while (rs.next()) {
+				smsIds.add(rs.getString("sms"));
+			}
+			rs.close();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return smsIds;
+	}
+
+	
+	private static String notificationEmailQuery = "select email from notification where email is not null";
+
+	public static ArrayList<String> getNotificationEmails() throws SQLException {
+
+		ArrayList<String> emailIds = new ArrayList<String>();
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got notification email list request");
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(notificationEmailQuery);
+			ResultSet rs = pstmtQuery.executeQuery();
+			while (rs.next()) {
+				emailIds.add(rs.getString("email"));
+			}
+			rs.close();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return emailIds;
+
+	}
 
 }

@@ -3,14 +3,30 @@ package com.marcopolo.service.data;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import urbanairship.Devices;
-
 public class Cache {
-	private static ArrayList<String> deviceIdsToExclude = new ArrayList<String>();
+	private static ArrayList<String> deviceIdsToExclude = null;
+	private static ArrayList<String> notificationSMS = null;
+	private static ArrayList<String> notificationEmail = null;
 
 	public static void loadDeviceExclusionIds() {
 		try {
 			deviceIdsToExclude = DataAccess.getExcludedDevices();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void loadNotificationEmails() {
+		try {
+			notificationEmail = DataAccess.getNotificationEmails();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void loadNotificationSmses() {
+		try {
+			notificationSMS = DataAccess.getNotificationSmses();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -28,5 +44,25 @@ public class Cache {
 			}
 		}
 		return retVal;
+	}
+	
+
+	public static ArrayList<String> getDeviceIdsToExclude() {
+		return deviceIdsToExclude;
+	}
+
+	public static ArrayList<String> getNotificationSMS() {
+		return notificationSMS;
+	}
+
+	public static ArrayList<String> getNotificationEmail() {
+		return notificationEmail;
+	}
+
+	public static void loadAll() {
+		loadDeviceExclusionIds();
+		loadNotificationEmails();
+		loadNotificationSmses();
+		
 	}
 }

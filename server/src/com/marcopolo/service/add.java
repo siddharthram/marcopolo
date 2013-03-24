@@ -54,7 +54,7 @@ public class add extends AbstractServlet {
 	public void init() throws ServletException {
 		try {
 			super.init();
-			Cache.loadDeviceExclusionIds();
+			Cache.loadAll();
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
