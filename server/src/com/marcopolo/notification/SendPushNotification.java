@@ -1,11 +1,11 @@
-package com.marcopolo.service;
+package com.marcopolo.notification;
 
 import urbanairship.APS;
 import urbanairship.Device;
 import urbanairship.Push;
 import urbanairship.UrbanAirshipClient;
 
-public class SendNotification {
+public class SendPushNotification {
 
 	private static UrbanAirshipClient client = new UrbanAirshipClient(
 			"45KzZ2wDRuikd5c6eSzG2g", "O9Y_D6gVRn2XwdwCf2PeTA");

@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.marcopolo.notification.SendPushNotification;
 import com.marcopolo.service.data.DataAccess;
 import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
@@ -51,7 +52,7 @@ public class submit extends AbstractServlet {
 			if (guid != null && !guid.trim().equals("")) {
 				String apnsDeviceId = DataAccess.submit(guid, transcript);
 				if (apnsDeviceId != null && !apnsDeviceId.equals("")) {
-					SendNotification.sendPushNotification(apnsDeviceId, guid);
+					SendPushNotification.sendPushNotification(apnsDeviceId, guid);
 				} else {
 					log.debug("No apns id found so not sending push notification");
 				}
