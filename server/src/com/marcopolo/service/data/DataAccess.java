@@ -61,7 +61,7 @@ public class DataAccess {
 	private static String freeTaskQuery = "select iddevice, free_tasks_left from device_table where device_id = ?";
 	private static String insertDeviceRow = "insert into device_table (device_id, free_tasks_left, is_internal_device) values(?,?, 0)";
 
-	private static String insertTask = "insert into task_table (image_url, server_submit_time, device_table_iddevice, server_unique_guid, client_unique_guid, client_submit_time, status) values(?, ?, ?, ?, ?, ?, 0)";
+	private static String insertTask = "insert into task_table (image_url, server_submit_time, device_table_iddevice, server_unique_guid, client_unique_guid, client_submit_time, status, requestedResponseFormat) values(?, ?, ?, ?, ?, ?, 0, ?)";
 	private static String updateCount = "update device_table set free_tasks_left = (free_tasks_left-1) where device_id = ?";
 
 	/**
@@ -136,6 +136,7 @@ public class DataAccess {
 				pstmtInsert.setString(4, presp.getServerUniqueRequestId());
 				pstmtInsert.setString(5, preq.getClientRequestId());
 				pstmtInsert.setLong(6, preq.getClientSubmitTimeStamp());
+				pstmtInsert.setString(7, preq.getRequestedResponseFormat());
 				pstmtInsert.executeUpdate();
 				pstmtInsert.close();
 				// reduce the count
@@ -198,6 +199,7 @@ public class DataAccess {
 						.getLong("server_submit_time"));
 				ts.setUserTranscriptionData(rs.getString("user_transcription"));
 				ts.setStatus(rs.getInt("tt.status"));
+				ts.setRequestedResponseFormat(rs.getString("tt.requestedResponseFormat"));
 				// check if task completed
 				if (ts.getStatus() == 2) {
 					ts.setTranscriptionId(rs.getLong("idassignment"));
@@ -205,6 +207,7 @@ public class DataAccess {
 					ts.setTranscriptionData(rs.getString("jobresult"));
 					ts.setRating(rs.getString("rating"));
 					ts.setRatingComment(rs.getString("rating_comment"));
+					ts.setAttachmentUrl(rs.getString("attachment_url"));
 				}
 				taskStatusResponse.addTaskStatus(ts);
 			}
@@ -255,13 +258,13 @@ public class DataAccess {
 	}
 
 	private static String deleteExistingResponse = "delete from assignment_table where task_table_idtask in (select idtask from task_table where server_unique_guid = ?) ";
-	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = ?, task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
+	private static String storeResponseQuery = "insert into assignment_table set jobresult = ?, cost = 0, completion_time = ?, attachment_url = ?, task_table_idtask = (select idtask from task_table where server_unique_guid = ?) ";
 	private static String getApnsId = "select * from device_table dt, task_table tt "
 			+ " where dt.iddevice = tt.device_table_iddevice and tt.server_unique_guid  = ?";
 
 	private static String copyUserTranscription = "update task_table set user_transcription = ?, status = 2 where server_unique_guid = ?";
 
-	public static String submit(String guid, String response)
+	public static String submit(String guid, String response, String attachmentUrl)
 			throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
@@ -278,7 +281,8 @@ public class DataAccess {
 			pstmtQuery = conn.prepareStatement(storeResponseQuery);
 			pstmtQuery.setString(1, response);
 			pstmtQuery.setLong(2, System.currentTimeMillis());
-			pstmtQuery.setString(3, guid);
+			pstmtQuery.setString(3, attachmentUrl);
+			pstmtQuery.setString(4, guid);
 			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
 			// get apns device id
@@ -358,6 +362,7 @@ public class DataAccess {
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs
 						.getLong("server_submit_time"));
+				ts.setRequestedResponseFormat(rs.getString("requestedResponseFormat"));
 				taskStatusResponse.addTaskStatus(ts);
 			}
 			rs.close();
@@ -414,6 +419,7 @@ public class DataAccess {
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs
 						.getLong("server_submit_time"));
+				ts.setRequestedResponseFormat(rs.getString("requestedResponseFormat"));
 				taskStatusResponse.addTaskStatus(ts);
 			}
 			rs.close();
@@ -468,6 +474,7 @@ public class DataAccess {
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs
 						.getLong("server_submit_time"));
+				ts.setRequestedResponseFormat(rs.getString("requestedResponseFormat"));
 				taskStatusResponse.addTaskStatus(ts);
 			}
 			rs.close();

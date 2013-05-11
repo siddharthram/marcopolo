@@ -124,6 +124,9 @@ public class add extends AbstractServlet {
 					if ("urgency".equals(name)) {
 						postReq.setUrgency(item.getString());
 					}
+					if ("requestedResponseFormat".equals(name)) {
+						postReq.setRequestedResponseFormat(item.getString());
+					}
 				} else {
 					String fileName = item.getName();
 					postReq.setFileName(fileName);
@@ -132,7 +135,7 @@ public class add extends AbstractServlet {
 					// store file on S3
 					if (postReq.isValid()) {
 						// sendEmail(postReq, pngData, "image/png");
-						String imageUrl = S3StoreImage.storeS3File(presp.getServerUniqueRequestId(), pngData);
+						String imageUrl = S3StoreImage.storeS3pngFile(presp.getServerUniqueRequestId(), pngData);
 						presp.setImageUrl(imageUrl);
 						DataAccess.storeRequestData(postReq, presp);
 						// if device id is in exclusion list then do not send notification

@@ -98,6 +98,9 @@ public class ExternalQuestion {
 					+ taskStatus.getServerUniqueRequestId()
 					+ "/preview?imageUrl="
 					+ URLEncoder.encode(taskStatus.getImageUrl(), "UTF-8")
+					+ "&"
+					+ "requestedResponseFormat=" 
+					+ taskStatus.getRequestedResponseFormat()
 					+ "</ExternalURL>"
 					+ "<FrameHeight>600</FrameHeight>"
 					+ "</ExternalQuestion>";

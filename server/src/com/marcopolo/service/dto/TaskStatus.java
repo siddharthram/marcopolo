@@ -1,7 +1,7 @@
 package com.marcopolo.service.dto;
 
 public class TaskStatus {
-	private String serverUniqueRequestId, clientUniqueRequestId, imageUrl, transcriptionData, userTranscriptionData, rating, ratingComment;
+	private String serverUniqueRequestId, clientUniqueRequestId, imageUrl, transcriptionData, userTranscriptionData, requestedResponseFormat, rating, ratingComment, attachmentUrl;
 	private int status; // -1 error, 0 - submitted, 1 in progress, 2 completed
 	private long serverSubmissionTimeStamp, clientSubmitTimeStamp, transcriptionTimeStamp, transcriptionId;
 
@@ -100,6 +100,22 @@ public class TaskStatus {
 
 	public void setTranscriptionData(String transcriptionData) {
 		this.transcriptionData = transcriptionData;
+	}
+
+	public String getAttachmentUrl() {
+		return attachmentUrl;
+	}
+
+	public void setAttachmentUrl(String attachmentUrl) {
+		this.attachmentUrl = attachmentUrl;
+	}
+
+	public String getRequestedResponseFormat() {
+		return requestedResponseFormat;
+	}
+
+	public void setRequestedResponseFormat(String requestedResponseFormat) {
+		this.requestedResponseFormat = requestedResponseFormat;
 	}
 
 }
