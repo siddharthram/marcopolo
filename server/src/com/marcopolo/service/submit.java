@@ -59,12 +59,13 @@ public class submit extends AbstractServlet {
 		try {
 			TaskStatusRequest tsr = new TaskStatusRequest();
 			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+			//System.out.println("submit api form type is isMultipart=" + isMultipart);
 			if (isMultipart) {
 				// Create a factory for disk-based file items
 				FileItemFactory factory = new DiskFileItemFactory();
 				// Create a new file upload handler
 				ServletFileUpload upload = new ServletFileUpload(factory);
-
+				
 				// limit the file upload size
 				upload.setFileSizeMax(MAX_FILE_SIZE_IN_BYTES);
 				List<FileItem> items = upload.parseRequest(request);
@@ -84,9 +85,11 @@ public class submit extends AbstractServlet {
 						long sizeInBytes = item.getSize();
 						byte[] attachmentData = item.get();
 						// store file on S3
+						//System.out.println("submit api guid is =" + guid);
 						if (guid != null && !guid.equals("")) {
 							attachmentUrl = S3StoreImage.storeS3pptFile(guid,
 									attachmentData);
+							//System.out.println("attachmentUrl=" + attachmentUrl);
 						}
 					}
 				}
@@ -109,6 +112,7 @@ public class submit extends AbstractServlet {
 
 		} catch (Exception ex) {
 			log.error("Error when submitting", ex);
+			System.out.println(ex);
 			throw new ServletException(ex);
 		}
 		response.setContentType("application/json");

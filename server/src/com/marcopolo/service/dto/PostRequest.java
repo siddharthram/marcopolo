@@ -1,6 +1,7 @@
 package com.marcopolo.service.dto;
 
 
+
 public class PostRequest {
 	private String auth_id, deviceId, urgency, fileName, clientRequestId, requestedResponseFormat;
 	private long serverSubmissionTimeStamp, clientSubmitTimeStamp;
@@ -51,7 +52,11 @@ public class PostRequest {
 		return requestedResponseFormat;
 	}
 	public void setRequestedResponseFormat(String requestedResponseFormat) {
-		this.requestedResponseFormat = requestedResponseFormat;
+		if (RequestedFormatTypeEnum.isMember(requestedResponseFormat)) {
+			this.requestedResponseFormat = requestedResponseFormat;
+		} else {
+			this.requestedResponseFormat = RequestedFormatTypeEnum.TXT.toString();
+		}
 	}
 	public boolean hasImage() {
 		boolean retVal = true;
