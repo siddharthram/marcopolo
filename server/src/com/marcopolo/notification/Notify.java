@@ -42,13 +42,13 @@ public class Notify {
 	
 	public static void sendEmail(ArrayList<String> emails) {
 		final Email email = new Email();
-		email.setFromAddress("Ximly", "ximly12@gmail.com");
+		email.setFromAddress("Ximly", "ximlynotification@gmail.com");
 		email.setSubject("New Transcription available.");
 		for (Iterator<String> emailIter = emails.iterator(); emailIter.hasNext();) {
 			String emailAdd = (String) emailIter.next();
 			email.addRecipient("Transcriber", emailAdd, RecipientType.BCC);
 		}
 		email.setText("A new trascription is available. Please log into http://ximly.herokuapp.com/users/sign_in to start transcribing.");
-		new Mailer("smtp.gmail.com", 587, "ximly12@gmail.com", "marcopolo12", TransportStrategy.SMTP_TLS).sendMail(email);
+		new Mailer("smtp.gmail.com", 587, "ximlynotification@gmail.com", "n26pCqIzjPIS0oqiJ1xw", TransportStrategy.SMTP_TLS).sendMail(email);
 	}
 }
