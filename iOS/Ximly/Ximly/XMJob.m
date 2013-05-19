@@ -36,6 +36,10 @@
 @dynamic thumbnail;
 @dynamic durationSinceLastAction;
 @dynamic isPending;
+@dynamic requestedResponseFormat;
+@dynamic attachmentUrl;
+@dynamic attachmentKey;
+
 
 
 - (id)init
@@ -291,7 +295,7 @@
     NSString *imageKey = self.imageKey;
     
     if ([imageKey length] > 0) {
-        return [XMImageCache loadImageDataForKey:imageKey];
+        return [XMImageCache loadAttachmentDataForKey:imageKey];
     }
     return nil;
 }
@@ -316,6 +320,31 @@
     return [NSString stringWithFormat:@"%@%@", self.requestID, @"_thumb"];
 }
 
+- (NSString *)requestedResponseFormat
+{
+    return [self.jobData valueForKey:kJobReqeustedResponseFormat];
+}
+
+- (void)setRequestedResponseFormat:(NSString *)value
+{
+    [self.jobData setValue:value forKey:kJobReqeustedResponseFormat];
+}
+
+- (NSString *)attachmentUrl
+{
+    return [self.jobData valueForKey:KJobAttachmentUrl];
+}
+
+- (void)setAttachmentUrl:(NSString *)value
+{
+    [self.jobData setValue:value forKey:KJobAttachmentUrl];
+}
+
+- (NSString *)attachmentKey
+{
+    return [NSString stringWithFormat:@"%@.pptx", self.requestID];
+}
+
 - (void)populateObjectFromServerJSON:(NSDictionary *)serverJSON {
     self.jobData = [NSMutableDictionary dictionaryWithDictionary:serverJSON];
 }
@@ -335,7 +364,7 @@
 
 - (NSDictionary *)submissionMetaData
 {
-    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, kJobAuthIDKey : [[XMXimlyHTTPClient sharedClient] getAuthID], kJobDeviceIDKey : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[self submissionTimeInMs]], kJobUrgencyKey : @"0"} ;
+    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, kJobAuthIDKey : [[XMXimlyHTTPClient sharedClient] getAuthID], kJobDeviceIDKey : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[self submissionTimeInMs]], kJobUrgencyKey : @"0", kJobReqeustedResponseFormat : self.requestedResponseFormat} ;
     
     return metaData;
 }
