@@ -205,7 +205,6 @@
 										<string key="NSFrame">{{63, 9}, {20, 20}}</string>
 										<reference key="NSSuperview" ref="416766019"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<reference key="IBUIBackgroundColor" ref="142147168"/>
 										<bool key="IBUIOpaque">NO</bool>
@@ -265,6 +264,19 @@
 								<reference key="IBUIToolbar" ref="723830856"/>
 							</object>
 						</array>
+					</object>
+					<object class="IBUIWebView" id="662015575">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{12, 230}, {296, 218}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC45MwA</bytes>
+						</object>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 64}, {320, 504}}</string>
@@ -399,6 +411,14 @@
 					<int key="connectionID">65</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">attachmentView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="662015575"/>
+					</object>
+					<int key="connectionID">67</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">share:</string>
 						<reference key="source" ref="334882850"/>
@@ -441,6 +461,7 @@
 							<reference ref="71049810"/>
 							<reference ref="291283374"/>
 							<reference ref="443927111"/>
+							<reference ref="662015575"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -539,6 +560,11 @@
 						<reference key="object" ref="443927111"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">66</int>
+						<reference key="object" ref="662015575"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -560,13 +586,14 @@
 				<string key="54.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="60.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="62.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="66.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">67</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -594,6 +621,7 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="actionButton">UIBarButtonItem</string>
+						<string key="attachmentView">UIWebView</string>
 						<string key="backdrop">UIView</string>
 						<string key="backdropShadow">UIView</string>
 						<string key="flexibleSpace">UIBarButtonItem</string>
@@ -611,6 +639,10 @@
 						<object class="IBToOneOutletInfo" key="actionButton">
 							<string key="name">actionButton</string>
 							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="attachmentView">
+							<string key="name">attachmentView</string>
+							<string key="candidateClassName">UIWebView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="backdrop">
 							<string key="name">backdrop</string>

@@ -27,6 +27,9 @@
 #define kJobImageKey                    @"imageKey"
 #define kJobThumbnailKey                @"thumbnailKey"
 #define kJobUrgencyKey                  @"urgency"
+#define kJobReqeustedResponseFormat     @"requestedResponseFormat"
+#define KJobAttachmentUrl               @"attachmentUrl"
+
 
 
 typedef enum {
@@ -70,6 +73,9 @@ typedef enum {
 @property (nonatomic, readonly) NSString *durationSinceLastAction;
 @property (nonatomic, readonly) BOOL isPending;
 @property (nonatomic, readonly) BOOL isDone;
+@property (nonatomic, readwrite) NSString *requestedResponseFormat;
+@property (nonatomic, readwrite) NSString *attachmentUrl;
+@property (nonatomic, readonly) NSString *attachmentKey;
 
 
 - (NSDictionary *)submissionMetaData;

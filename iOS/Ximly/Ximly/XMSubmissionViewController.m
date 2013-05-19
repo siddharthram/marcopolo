@@ -16,7 +16,7 @@
 #define kMaxImageDimension      500
 #define kPurchaseSuccessfulAlertTitle   @"Purchase Successful!"            // TODO: Put in strings file
 
-
+#define kRequestFormatActionSheetTitle @"Make me a ..."
 
 @interface XMSubmissionViewController ()
 
@@ -73,51 +73,71 @@
         return;
     }
 
-	UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-	imagePicker.delegate = self;
-    imagePicker.allowsEditing = NO;
-    
-    BOOL cancelled = NO;
-    
-    if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
+    if ([actionSheet.title isEqualToString:kRequestFormatActionSheetTitle]) {
         switch (buttonIndex) {
             case 0:
-                [Flurry logEvent:@"Submit Photo: Camera"];
-                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                self.requestPPTSlide = NO;
+                [self submitToCloud];
                 break;
             case 1:
-                [Flurry logEvent:@"Submit Photo: Roll"];
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                self.requestPPTSlide = YES;
+                [self submitToCloud];
                 break;
             case 2:
-                [Flurry logEvent:@"Submit Photo: Cancel"];
-                cancelled = YES;
+                self.view.hidden = YES;
+                [self.view removeFromSuperview];
+                [self.delegate submissionCancelled];
                 break;
             default:
                 break;
         };
     } else {
-        switch (buttonIndex) {
-            case 0:
-                [Flurry logEvent:@"Submit Photo: Roll"];
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                break;
-            case 1:
-                [Flurry logEvent:@"Submit Photo: Cancel"];
-                cancelled = YES;
-                break;
-            default:
-                break;
-        };
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = NO;
         
-    }
-    
-    if (cancelled == YES) {
-        self.view.hidden = YES;
-        [self.view removeFromSuperview];
-        [self.delegate submissionCancelled];
-    } else {
-        [self presentViewController:imagePicker animated:YES completion:nil];
+        BOOL cancelled = NO;
+        
+        if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
+            switch (buttonIndex) {
+                case 0:
+                    [Flurry logEvent:@"Submit Photo: Camera"];
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 1:
+                    [Flurry logEvent:@"Submit Photo: Roll"];
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                case 2:
+                    [Flurry logEvent:@"Submit Photo: Cancel"];
+                    cancelled = YES;
+                    break;
+                default:
+                    break;
+            };
+        } else {
+            switch (buttonIndex) {
+                case 0:
+                    [Flurry logEvent:@"Submit Photo: Roll"];
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                case 1:
+                    [Flurry logEvent:@"Submit Photo: Cancel"];
+                    cancelled = YES;
+                    break;
+                default:
+                    break;
+            };
+            
+        }
+        
+        if (cancelled == YES) {
+            self.view.hidden = YES;
+            [self.view removeFromSuperview];
+            [self.delegate submissionCancelled];
+        } else {
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }
     }
 }
 
@@ -147,6 +167,7 @@
     theJob.requestID = [XMXimlyHTTPClient newRequestID];
     theJob.status = kJobStatusOpenString;
     theJob.submissionTime = [NSDate date];
+    theJob.requestedResponseFormat = self.requestPPTSlide ? @"ppt" : @"txt";
     
     NSData *imageData = [XMImageCache saveImage:self.pickedImage forJob:theJob];
     self.pickedImage = nil;
@@ -266,7 +287,13 @@
     
     self.pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    [self submitToCloud];
+    self.requestFormatActionSheet = [[UIActionSheet alloc] initWithTitle:kRequestFormatActionSheetTitle
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Text transcript", @"PowerPoint slide", nil];
+    
+    [self.requestFormatActionSheet showInView:self.view];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

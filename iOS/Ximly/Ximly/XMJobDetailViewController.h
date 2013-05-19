@@ -31,6 +31,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UITextView *transcribedTextView;
 @property (nonatomic, weak) IBOutlet UIImageView *transcribedTextShadowView;
+@property (nonatomic, strong) IBOutlet UIWebView *attachmentView;
 @property (nonatomic, strong) XMRateJobViewController *rateJobViewController;
 
 - (IBAction)share:(id)sender;
