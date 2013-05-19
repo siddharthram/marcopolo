@@ -231,4 +231,14 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     [self enqueueHTTPRequestOperation:operation];
 }
 
+- (void)fetchAttachmentWithURL:(NSURL *)url
+                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+    [operation setCompletionBlockWithSuccess:success failure:failure];
+    [self enqueueHTTPRequestOperation:operation];
+}
+
 @end

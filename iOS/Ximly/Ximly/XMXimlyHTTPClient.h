@@ -49,4 +49,8 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+- (void)fetchAttachmentWithURL:(NSURL *)url
+                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

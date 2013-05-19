@@ -8,7 +8,9 @@
 
 #import "XMJobDetailViewController.h"
 
+#import "XMAttachmentCache.h"
 #import "XMImageCache.h"
+#import "XMXimlyHTTPClient.h"
 #import "Flurry.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -120,11 +122,34 @@
          [self.imageView loadRequest:[NSURLRequest requestWithURL:url]];
          */
         
+        if (self.job.attachmentUrl) {
+            if ([XMAttachmentCache cacheFileExistsForKey:self.job.attachmentKey]) {
+                NSString *filePath = [XMAttachmentCache cacheFilePathForKey:self.job.attachmentKey];
+                NSURL *url = [NSURL fileURLWithPath:filePath];
+                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                [self.attachmentView loadRequest:request];
+            } else {
+                __weak XMJobDetailViewController *weakSelf = self;
+                [[XMXimlyHTTPClient sharedClient] fetchAttachmentWithURL:[NSURL URLWithString:self.job.attachmentUrl]
+                                                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                                     [XMAttachmentCache saveAttachmentData:(NSData *)responseObject withKey:weakSelf.job.attachmentKey];
+                                                                     NSString *filePath = [XMAttachmentCache cacheFilePathForKey:weakSelf.job.attachmentKey];
+                                                                     NSURL *url = [NSURL fileURLWithPath:filePath];
+                                                                     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                                                                     [weakSelf.attachmentView loadRequest:request];
+                                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                 }];
+            }
+        } else {
+            [self.attachmentView removeFromSuperview];
+        }
+        
         CGFloat width = self.imageView.frame.size.width;
-
+        
         NSString *html = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"width=%f; maximum-scale=4.0; user-scalable=1;\"/></head><body leftmargin=\"0px\" topmargin=\"0px\" marginwidth=\"0px\" marginheight=\"0px\"><img src=\"%@\" width=\"%f\"/></body></html>", width, self.job.imageKey, width];
         [self.imageView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[XMImageCache cacheFolderPath]]];
     }
+
     
     NSString *titleText = self.job.userTranscription;
     self.title = [titleText length] > 0 ? titleText : @"";
