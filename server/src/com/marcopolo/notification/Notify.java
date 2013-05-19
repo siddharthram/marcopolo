@@ -16,12 +16,15 @@ public class Notify {
 
 	public static void main(String[] args) {
 
-		Notify.notifyTranscribers();
-	}
+//		Notify.notifyTranscribers();
+/*		ArrayList<String> emails = new ArrayList<String>();
+		emails.add("mukesh_agg@hotmail.com");
+		Notify.sendAWSEmail(emails);
+*/	}
 
 	public static void notifyTranscribers() {
 		sendSMS(Cache.getNotificationSMS());
-		sendEmail(Cache.getNotificationEmail());
+		sendAWSEmail(Cache.getNotificationEmail());
 	}
 	
 	public static void sendSMS(ArrayList<String> smsAddresses) {
@@ -39,8 +42,21 @@ public class Notify {
 		}
 		
 	}
+
+	public static void sendAWSEmail(ArrayList<String> emails) {
+		final Email email = new Email();
+		email.setFromAddress("Ximly", "ximlynotification@gmail.com");
+		email.setSubject("New Transcription available.");
+		for (Iterator<String> emailIter = emails.iterator(); emailIter.hasNext();) {
+			String emailAdd = (String) emailIter.next();
+			email.addRecipient("Transcriber", emailAdd, RecipientType.BCC);
+		}
+		email.setText("A new trascription is available. Please log into http://ximly.herokuapp.com/users/sign_in to start transcribing.");
+		new Mailer("email-smtp.us-east-1.amazonaws.com", 587, "AKIAJ54BVQ2QQYKQCK5Q", "AuEozWpJ6pv/nzsOqPiuWw+xrFlE50tw1JSA5NGRHKbg", TransportStrategy.SMTP_TLS).sendMail(email);
+	}
+
 	
-	public static void sendEmail(ArrayList<String> emails) {
+	public static void sendGmailEmail(ArrayList<String> emails) {
 		final Email email = new Email();
 		email.setFromAddress("Ximly", "ximlynotification@gmail.com");
 		email.setSubject("New Transcription available.");
