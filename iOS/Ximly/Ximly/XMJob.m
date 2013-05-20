@@ -345,6 +345,16 @@
     return [NSString stringWithFormat:@"%@.pptx", self.requestID];
 }
 
+- (NSData *)attachment
+{
+    NSString *attachmentKey = self.attachmentKey;
+    
+    if ([attachmentKey length] > 0) {
+        return [XMAttachmentCache loadAttachmentDataForKey:attachmentKey];
+    }
+    return nil;
+}
+
 - (void)populateObjectFromServerJSON:(NSDictionary *)serverJSON {
     self.jobData = [NSMutableDictionary dictionaryWithDictionary:serverJSON];
 }

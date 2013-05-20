@@ -122,7 +122,7 @@
          [self.imageView loadRequest:[NSURLRequest requestWithURL:url]];
          */
         
-        if (self.job.attachmentUrl) {
+        if ([self.job.attachmentUrl length] > 0) {
             if ([XMAttachmentCache cacheFileExistsForKey:self.job.attachmentKey]) {
                 NSString *filePath = [XMAttachmentCache cacheFilePathForKey:self.job.attachmentKey];
                 NSURL *url = [NSURL fileURLWithPath:filePath];
@@ -180,7 +180,14 @@
 - (IBAction)share:(id)sender
 {
     [Flurry logEvent:@"Share tapped"];
-    NSArray *postItems = @[self.job.image, [self getMessageForSharing]];
+    
+    NSArray *postItems = nil;
+    
+    if ([self.job.attachmentUrl length] > 0) {
+        postItems = @[self.job.attachment, [self getMessageForSharing]];
+    } else {
+        postItems = @[self.job.image, [self getMessageForSharing]];
+    }
     
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]
                                             initWithActivityItems:postItems
