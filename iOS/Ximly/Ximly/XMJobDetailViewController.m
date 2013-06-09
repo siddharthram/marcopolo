@@ -238,8 +238,13 @@
         } else {
             [Flurry logEvent:@"Evernote connect success"];
             NSString *transcribedText = self.job.userTranscription;
-            if ([transcribedText length] <= 0) {
-                transcribedText = @"Transcription not yet available";
+            if (self.job.attachmentUrl.length > 0) {
+                transcribedText = @"Transcription attached.";
+            }
+            else {
+                if ([transcribedText length] <= 0) {
+                    transcribedText = @"Transcription not yet available.";
+                }
             }
             
             NSString *titleText = self.job.title ? self.job.title : @"Untitled";
@@ -247,6 +252,20 @@
             NSData *dataHash = [self.job.imageData md5];
             EDAMData *edamData = [[EDAMData alloc] initWithBodyHash:dataHash size:self.job.imageData.length body:self.job.imageData];
             EDAMResource* resource = [[EDAMResource alloc] initWithGuid:nil noteGuid:nil data:edamData mime:@"image/jpeg" width:0 height:0 duration:0 active:0 recognition:0 attributes:nil updateSequenceNum:0 alternateData:nil];
+            
+            EDAMResource *attachmentResource = nil;
+            NSString *attachmentContent = @"";
+            if (self.job.attachmentUrl.length > 0) {
+                NSString *attachmentMime = @"application/vnd.openxmlformats-officedocument.presentationml.presentation";
+                if ([[self.job.attachmentUrl pathExtension] isEqualToString:@"ppt"]) {
+                    attachmentMime = @"application/vnd.ms-powerpoint";
+                }
+                attachmentContent = [NSString stringWithFormat:@"%@", [ENMLUtility mediaTagWithDataHash:[self.job.attachment md5] mime:attachmentMime]];
+                EDAMData *attachmentEdamData = [[EDAMData alloc] initWithBodyHash:[self.job.attachment md5] size:self.job.attachment.length body:self.job.attachment];
+                EDAMResourceAttributes *attachmentEDAMResourceAttributes = [[EDAMResourceAttributes alloc] init];
+                attachmentEDAMResourceAttributes.fileName = @"Transcription";
+                attachmentResource = [[EDAMResource alloc] initWithGuid:nil noteGuid:nil data:attachmentEdamData mime:attachmentMime width:0 height:0 duration:0 active:0 recognition:0 attributes:attachmentEDAMResourceAttributes updateSequenceNum:0 alternateData:nil];
+            }
             NSString *noteContent = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                                      "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"
                                      "<en-note>"
@@ -257,20 +276,28 @@
                                      "<br />"
                                      "<br />"
                                      "%@"
-                                     "</en-note>",titleText, transcribedText, [ENMLUtility mediaTagWithDataHash:dataHash mime:@"image/jpeg"]];
+                                     "<br />"
+                                     "<br />"
+                                     "%@"
+                                     "</en-note>",titleText, transcribedText, [ENMLUtility mediaTagWithDataHash:dataHash mime:@"image/jpeg"], attachmentContent];
+            
             NSMutableArray* resources = [NSMutableArray arrayWithArray:@[resource]];
+            if (attachmentResource != nil) {
+                [resources addObject:attachmentResource];
+            }
+            
             EDAMNote *newNote = [[EDAMNote alloc] initWithGuid:nil title:titleText content:noteContent contentHash:nil contentLength:noteContent.length created:0 updated:0 deleted:0 active:YES updateSequenceNum:0 notebookGuid:nil tagGuids:nil resources:resources attributes:nil tagNames:nil];
             [[EvernoteNoteStore noteStore] createNote:newNote success:^(EDAMNote *note) {
                 [Flurry logEvent:@"Evernote send note success"];
                 [self hideSendingToEvernoteUI];
                 NSLog(@"Note created successfully.");
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your note was successfully sent to Evernote." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your transcription was successfully sent to Evernote." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alertView show];
             } failure:^(NSError *error) {
                 [Flurry logEvent:@"Evernote send note failed"];
                 [self hideSendingToEvernoteUI];
                 NSLog(@"Error creating note : %@",error);
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Sorry, we were unable to send your note to Evernote. Error: %@", error] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Sorry, we were unable to send your transcription to Evernote. Error: %@", error] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alertView show];
             }];
         } 
