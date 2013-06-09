@@ -8,6 +8,7 @@
 
 #import "XMJobDetailViewController.h"
 
+#import <MessageUI/MFMailComposeViewController.h>
 #import "XMAttachmentCache.h"
 #import "XMImageCache.h"
 #import "XMXimlyHTTPClient.h"
@@ -182,16 +183,22 @@
     [Flurry logEvent:@"Share tapped"];
     
     NSArray *postItems = nil;
+    NSArray *activityTypesToExclude = nil;
     
     if ([self.job.attachmentUrl length] > 0) {
-        postItems = @[self.job.attachment, [self getMessageForSharing]];
+        postItems = @[[NSURL fileURLWithPath:[XMAttachmentCache cacheFilePathForKey:self.job.attachmentKey]]];
+        activityTypesToExclude = [MFMailComposeViewController canSendMail] ? @[UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypePostToWeibo, UIActivityTypeMessage, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll] : @[UIActivityTypeMail, UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypePostToWeibo, UIActivityTypeMessage, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+
     } else {
         postItems = @[self.job.image, [self getMessageForSharing]];
+        activityTypesToExclude = [MFMailComposeViewController canSendMail] ? nil : @[UIActivityTypeMail];
     }
     
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]
                                             initWithActivityItems:postItems
                                             applicationActivities:nil];
+    
+                     activityVC.excludedActivityTypes = activityTypesToExclude;
     
     [self presentViewController:activityVC animated:YES completion:nil];
 }
