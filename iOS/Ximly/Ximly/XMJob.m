@@ -342,7 +342,13 @@
 
 - (NSString *)attachmentKey
 {
-    return [NSString stringWithFormat:@"%@.pptx", self.requestID];
+    NSString *fileExtension = [self.attachmentUrl pathExtension];
+    
+    if ([fileExtension length] == 0) {
+        fileExtension = @"pptx";
+    }
+    
+    return [NSString stringWithFormat:@"%@.%@", self.requestID, fileExtension];
 }
 
 - (NSData *)attachment
