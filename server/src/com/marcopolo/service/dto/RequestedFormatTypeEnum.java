@@ -1,7 +1,7 @@
 package com.marcopolo.service.dto;
 
 public enum RequestedFormatTypeEnum {
-	TXT("txt"), PPT("ppt");
+	TXT("txt"), PPT("ppt"), PPTX("pptx");
 
 	private String value;
 

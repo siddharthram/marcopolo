@@ -40,11 +40,11 @@ public class S3StoreImage {
 		return returnUrl;
 	}
 
-	public static String storeS3pptFile(String uuid, byte[] data) {
-		String returnUrl = "https://s3.amazonaws.com/" + bucketName + "/" + uuid + ".ppt";
+	public static String storeS3AttachmentFile(String uuid, byte[] data, String fileExtension) {
+		String returnUrl = "https://s3.amazonaws.com/" + bucketName + "/" + uuid + "." + fileExtension;
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(
 				awsAccessKeyId, key));
-		putObject(s3, bucketName, uuid + ".ppt", data);
+		putObject(s3, bucketName, uuid + "." + fileExtension, data);
 		return returnUrl;
 	}
 

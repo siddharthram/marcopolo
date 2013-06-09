@@ -25,6 +25,7 @@ import com.marcopolo.notification.SendPushNotification;
 import com.marcopolo.service.aws.S3StoreImage;
 import com.marcopolo.service.data.Cache;
 import com.marcopolo.service.data.DataAccess;
+import com.marcopolo.service.dto.RequestedFormatTypeEnum;
 import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
@@ -55,12 +56,14 @@ public class submit extends AbstractServlet {
 		String guid = null;
 		String transcript = null;
 		String attachmentUrl = null;
+		String attachmentFileExtension = "pptx";
 
 		try {
 			TaskStatusRequest tsr = new TaskStatusRequest();
 			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 			//System.out.println("submit api form type is isMultipart=" + isMultipart);
 			if (isMultipart) {
+				System.out.println("got multipart request");
 				// Create a factory for disk-based file items
 				FileItemFactory factory = new DiskFileItemFactory();
 				// Create a new file upload handler
@@ -76,20 +79,30 @@ public class submit extends AbstractServlet {
 						String name = item.getFieldName();
 						if ("serverUniqueRequestId".equals(name)) {
 							guid = item.getString();
+							System.out.println("serverUniqueRequestId=" + guid);
 						}
 						if ("output".equals(name)) {
 							transcript = item.getString();
+							System.out.println("output=" + transcript);
+						}
+						if ("attachmentFileExtension".equals(name)) {
+							String fileext = item.getString();
+							if (RequestedFormatTypeEnum.isMember(fileext)) {
+								attachmentFileExtension = fileext; 
+							}
+							System.out.println("attachmentFileExtension=" + attachmentFileExtension);
 						}
 					} else {
 						String fileName = item.getName();
 						long sizeInBytes = item.getSize();
+						System.out.println("filename=" + fileName + " and size=" + sizeInBytes);
+						
 						byte[] attachmentData = item.get();
 						// store file on S3
-						//System.out.println("submit api guid is =" + guid);
 						if (guid != null && !guid.equals("")) {
-							attachmentUrl = S3StoreImage.storeS3pptFile(guid,
-									attachmentData);
-							//System.out.println("attachmentUrl=" + attachmentUrl);
+							attachmentUrl = S3StoreImage.storeS3AttachmentFile(guid,
+									attachmentData, attachmentFileExtension);
+							System.out.println("attachmentUrl=" + attachmentUrl);
 						}
 					}
 				}
@@ -98,6 +111,9 @@ public class submit extends AbstractServlet {
 				transcript = request.getParameter("output");
 			}
 			log.debug("Got parameters as serverUniqueRequestId='" + guid
+					+ "' and output='" + transcript + "'");
+
+			System.out.println("Got parameters as serverUniqueRequestId='" + guid
 					+ "' and output='" + transcript + "'");
 
 			if (guid != null && !guid.trim().equals("")) {
