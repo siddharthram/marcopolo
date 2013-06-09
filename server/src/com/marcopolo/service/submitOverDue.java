@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.amazonaws.mturk.requester.HIT;
 import com.marcopolo.mturk.ExternalQuestion;
 import com.marcopolo.service.data.DataAccess;
 import com.marcopolo.service.dto.TaskStatus;
@@ -62,7 +63,17 @@ public class submitOverDue extends AbstractServlet {
 			for (Iterator<TaskStatus> taskIter = overdueTasks.iterator(); taskIter
 					.hasNext();) {
 				TaskStatus taskStatus = (TaskStatus) taskIter.next();
-				resp.append(ExternalQuestion.submitMturkJob(taskStatus, turkprice));
+				try {
+					HIT hit = ExternalQuestion.submitMturkJob(taskStatus, turkprice);
+					// store hit ids in table
+					DataAccess.updateHitId(taskStatus.getServerUniqueRequestId(), hit.getHITId());
+					resp.append("Created HIT: " + hit.getHITId() + " with price " + hit.getReward().toString());
+					resp.append("\nYou may see your HIT with HITTypeId '" + hit.getHITTypeId() + "' here: ");
+					resp.append("\n" +  "/mturk/preview?groupId=" + hit.getHITTypeId());
+				} catch (Exception e) {
+					resp.append("Error when creating hit for task with ServerUniqueRequestId=" + taskStatus.getServerUniqueRequestId());
+					resp.append("\nAnd error is " + e.getLocalizedMessage());
+				}
 				resp.append("\n================================================\n");
 			}
 			

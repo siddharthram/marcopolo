@@ -199,7 +199,9 @@ public class DataAccess {
 						.getLong("server_submit_time"));
 				ts.setUserTranscriptionData(rs.getString("user_transcription"));
 				ts.setStatus(rs.getInt("tt.status"));
-				ts.setRequestedResponseFormat(rs.getString("tt.requestedResponseFormat"));
+				ts.setRequestedResponseFormat(rs
+						.getString("tt.requestedResponseFormat"));
+				ts.setTurkHitId(rs.getString("tt.turk_hitid"));
 				// check if task completed
 				if (ts.getStatus() == 2) {
 					ts.setTranscriptionId(rs.getLong("idassignment"));
@@ -221,6 +223,87 @@ public class DataAccess {
 			}
 		}
 		return taskStatusResponse;
+	}
+
+	/**
+	 * Get all jobs which are submitted to turk but not yet transcribed
+	 * 
+	 * @param serverUniqueRequestId
+	 * @param hitId
+	 * @throws SQLException
+	 */
+
+	// status is 1 for jobs which are already submitted to turk or taken by
+	// independent worker. assigned_to will have 'mturk' for turk jobs
+
+	private static String getOpenTurkTasks = "select * from task_table where status = 1 and assigned_to = 'mturk'";
+
+	public static TaskStatusResponse getOpenTurkTasks()
+			throws SQLException {
+
+		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got register request");
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(getOpenTurkTasks);
+			ResultSet rs = pstmtQuery.executeQuery();
+			while (rs.next()) {
+				TaskStatus ts = new TaskStatus();
+				ts.setImageUrl(rs.getString("image_url"));
+				ts.setStatus(rs.getInt("status"));
+				ts.setClientUniqueRequestId(rs
+						.getString("client_unique_guid"));
+				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
+				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
+				ts.setServerSubmissionTimeStamp(rs
+						.getLong("server_submit_time"));
+				ts.setRequestedResponseFormat(rs.getString("requestedResponseFormat"));
+				ts.setTurkHitId(rs.getString("turk_hitid"));
+				taskStatusResponse.addTaskStatus(ts);
+				
+			}
+			rs.close();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return taskStatusResponse;
+	}
+
+	/**
+	 * Store turk hit id in database along with the task
+	 * 
+	 * @param serverUniqueRequestId
+	 * @param hitId
+	 * @throws SQLException
+	 */
+
+	private static String updateHitId = "update task_table set turk_hitid = ? where server_unique_guid = ?";
+
+	public static void updateHitId(String serverUniqueRequestId, String hitId)
+			throws SQLException {
+
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got register request");
+			PreparedStatement pstmtQuery = conn.prepareStatement(updateHitId);
+			pstmtQuery.setString(1, hitId);
+			pstmtQuery.setString(2, serverUniqueRequestId);
+			pstmtQuery.executeUpdate();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+
 	}
 
 	private static String updateRegisterRow = "update device_table set apns_device_id = ? where device_id = ?";
@@ -264,8 +347,8 @@ public class DataAccess {
 
 	private static String copyUserTranscription = "update task_table set user_transcription = ?, status = 2 where server_unique_guid = ?";
 
-	public static String submit(String guid, String response, String attachmentUrl)
-			throws SQLException {
+	public static String submit(String guid, String response,
+			String attachmentUrl) throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
 		String apnsId = "";
@@ -362,7 +445,9 @@ public class DataAccess {
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs
 						.getLong("server_submit_time"));
-				ts.setRequestedResponseFormat(rs.getString("requestedResponseFormat"));
+				ts.setRequestedResponseFormat(rs
+						.getString("requestedResponseFormat"));
+				ts.setTurkHitId(rs.getString("turk_hitid"));
 				taskStatusResponse.addTaskStatus(ts);
 			}
 			rs.close();
@@ -384,53 +469,54 @@ public class DataAccess {
 	 * @throws SQLException
 	 */
 
-	private static String blockOverDueTasks = "update task_table tt join device_table dt on tt.device_table_iddevice = dt.iddevice " + 
-											  "set tt.status = ?, tt.assigned_to = 'mturk' where dt.is_internal_device = 0 and tt.status = 0 and tt.server_submit_time < ?";
+	private static String blockOverDueTasks = "update task_table tt join device_table dt on tt.device_table_iddevice = dt.iddevice "
+			+ "set tt.status = ?, tt.assigned_to = 'mturk' where dt.is_internal_device = 0 and tt.status = 0 and tt.server_submit_time < ?";
 	private static String getOverDueTaskQuery = "select * from task_table where status = 10";
 	private static String lockTaskQuery = "update task_table set status = 1 where status = 10";
-	
+
 	public static TaskStatusResponse getOverDueOpenTasks() throws SQLException {
 
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		Connection conn = _dataSource.getConnection();
 		try {
 			log.debug("Got request for all overdue tasks ");
-			// first blocking all the exteral overdue tasks pending for more than 5 mins
+			// first blocking all the exteral overdue tasks pending for more
+			// than 5 mins
 			PreparedStatement pstmtQuery = conn
 					.prepareStatement(blockOverDueTasks);
 			pstmtQuery.setInt(1, 10); // put a temporary block by setting 10
 			pstmtQuery.setLong(2, System.currentTimeMillis()
 					- MAX_OVERDUE_INTERVAL_IN_MILSEC);
-			pstmtQuery.executeUpdate(); 
+			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
-			
+
 			// now read the open jobs and submit
-			pstmtQuery = conn
-					.prepareStatement(getOverDueTaskQuery);
+			pstmtQuery = conn.prepareStatement(getOverDueTaskQuery);
 
 			ResultSet rs = pstmtQuery.executeQuery();
 			while (rs.next()) {
 				TaskStatus ts = new TaskStatus();
 				ts.setImageUrl(rs.getString("image_url"));
 				ts.setStatus(rs.getInt("status"));
-				ts.setClientUniqueRequestId(rs
-						.getString("client_unique_guid"));
+				ts.setClientUniqueRequestId(rs.getString("client_unique_guid"));
 				ts.setServerUniqueRequestId(rs.getString("server_unique_guid"));
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs
 						.getLong("server_submit_time"));
-				ts.setRequestedResponseFormat(rs.getString("requestedResponseFormat"));
+				ts.setRequestedResponseFormat(rs
+						.getString("requestedResponseFormat"));
+				ts.setTurkHitId(rs.getString("turk_hitid"));
 				taskStatusResponse.addTaskStatus(ts);
+
 			}
 			rs.close();
 			pstmtQuery.close();
-			
+
 			// lock the tasks finally
-			pstmtQuery = conn
-					.prepareStatement(lockTaskQuery);
-			pstmtQuery.executeUpdate(); 
+			pstmtQuery = conn.prepareStatement(lockTaskQuery);
+			pstmtQuery.executeUpdate();
 			pstmtQuery.close();
-			
+
 		} finally {
 			try {
 				conn.close();
@@ -453,7 +539,12 @@ public class DataAccess {
 																							// open-0,
 																							// locked-1,
 																							// transcribed-2
-																							// temporary lock when submitting to turk
+																							// temporary
+																							// lock
+																							// when
+																							// submitting
+																							// to
+																							// turk
 
 	public static TaskStatusResponse getAllOpen() throws SQLException {
 
@@ -474,7 +565,9 @@ public class DataAccess {
 				ts.setClientSubmitTimeStamp(rs.getLong("client_submit_time"));
 				ts.setServerSubmissionTimeStamp(rs
 						.getLong("server_submit_time"));
-				ts.setRequestedResponseFormat(rs.getString("requestedResponseFormat"));
+				ts.setRequestedResponseFormat(rs
+						.getString("requestedResponseFormat"));
+				ts.setTurkHitId(rs.getString("turk_hitid"));
 				taskStatusResponse.addTaskStatus(ts);
 			}
 			rs.close();
@@ -528,20 +621,20 @@ public class DataAccess {
 		}
 	}
 
-	
 	private static String lockTaskByServerGuidQuery = "update task_table set status = 1, assigned_to = ? where server_unique_guid = ? ";
-	
-	public static void lockTaskByServerGuid(TaskStatusRequest tsr, String emailId) throws SQLException  {
+
+	public static void lockTaskByServerGuid(TaskStatusRequest tsr,
+			String emailId) throws SQLException {
 		Connection conn = _dataSource.getConnection();
 		try {
 			log.debug("Got request to lock task by guid " + tsr.getTaskId());
 
-				PreparedStatement pstmtQuery = conn
-						.prepareStatement(lockTaskByServerGuidQuery);
-				pstmtQuery.setString(1, emailId);
-				pstmtQuery.setString(2, tsr.getTaskId());
-				pstmtQuery.executeUpdate();
-				pstmtQuery.close();
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(lockTaskByServerGuidQuery);
+			pstmtQuery.setString(1, emailId);
+			pstmtQuery.setString(2, tsr.getTaskId());
+			pstmtQuery.executeUpdate();
+			pstmtQuery.close();
 		} finally {
 			try {
 				conn.close();
@@ -550,7 +643,9 @@ public class DataAccess {
 			}
 		}
 	}
+
 	private static String notificationSMSQuery = "select sms from notification where sms is not null";
+
 	public static ArrayList<String> getNotificationSmses() throws SQLException {
 		ArrayList<String> smsIds = new ArrayList<String>();
 		Connection conn = _dataSource.getConnection();
@@ -574,7 +669,6 @@ public class DataAccess {
 		return smsIds;
 	}
 
-	
 	private static String notificationEmailQuery = "select email from notification where email is not null";
 
 	public static ArrayList<String> getNotificationEmails() throws SQLException {

@@ -3,6 +3,7 @@ package com.marcopolo.mturk;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Properties;
 
@@ -58,88 +59,77 @@ public class ExternalQuestion {
 	 *            The filename of the preview file to be generated. If null, no
 	 *            preview file will be generated and the HIT will be created on
 	 *            Mechanical Turk.
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static String submitMturkJob(TaskStatus taskStatus, String price) {
+	public static HIT submitMturkJob(TaskStatus taskStatus, String price) throws UnsupportedEncodingException {
 		String resp = "Something bad happened. Check logs";
+		HIT hit = null;
+		// Loading the HIT properties file. HITProperties is a helper class
+		// that contains the
+		// properties of the HIT defined in the external file. This feature
+		// allows you to define
+		// the HIT attributes externally as a file and be able to modify it
+		// without recompiling your code.
+		// In this sample, the qualification is defined in the properties
+		// file.
 
+		double mturkPrice = 0d;
 		try {
-			// Loading the HIT properties file. HITProperties is a helper class
-			// that contains the
-			// properties of the HIT defined in the external file. This feature
-			// allows you to define
-			// the HIT attributes externally as a file and be able to modify it
-			// without recompiling your code.
-			// In this sample, the qualification is defined in the properties
-			// file.
-
-			double mturkPrice = 0d;
-			try {
-				if (price == null) {
-					throw new NumberFormatException("price not specified ");
-				}
-				mturkPrice = Double.parseDouble(price);
-				// do not go above max reward
-				if (mturkPrice > maxReward) {
-					throw new NumberFormatException("Max price exceeded");
-				}
-			} catch (NumberFormatException e) {
-				System.out.println(e.getLocalizedMessage()
-						+ " Invalid mturk price '" + price
-						+ "'. So setting to default value");
-				mturkPrice = hitProps.getRewardAmount();
+			if (price == null) {
+				throw new NumberFormatException("price not specified ");
 			}
-
-			// System.out.println("mturk price '" + mturkPrice +
-			// "' and maxreward=" + maxReward);
-
-			String externalQuestion = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExternalQuestion xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd\">"
-					+ "<ExternalURL>"
-					+ baseTranscriptionURL
-					+ taskStatus.getServerUniqueRequestId()
-					+ "/preview?imageUrl="
-					+ URLEncoder.encode(taskStatus.getImageUrl(), "UTF-8")
-					+ "&amp;"
-					+ "requestedResponseFormat=" 
-					+ taskStatus.getRequestedResponseFormat()
-					+ "</ExternalURL>"
-					+ "<FrameHeight>600</FrameHeight>"
-					+ "</ExternalQuestion>";
-
-			HITQuestion question = new HITQuestion();
-			question.setQuestion(externalQuestion);
-
-			// Validate the question (QAP) against the XSD Schema before making
-			// the call.
-			// If there is an error in the question, ValidationException gets
-			// thrown.
-			// This method is extremely useful in debugging your QAP. Use it
-			// often.
-			// QAPValidator.validate(question.getQuestion());
-
-			// Create a HIT using the properties and question files
-			HIT hit = service.createHIT(
-					null, // HITTypeId
-					hitProps.getTitle(),
-					hitProps.getDescription(),
-					hitProps.getKeywords(), // keywords
-					question.getQuestion(), mturkPrice,
-					hitProps.getAssignmentDuration(),
-					hitProps.getAutoApprovalDelay(), hitProps.getLifetime(),
-					hitProps.getMaxAssignments(), hitProps.getAnnotation(), // requesterAnnotation
-					hitProps.getQualificationRequirements(), null // responseGroup
-					);
-
-			resp = "Created HIT: " + hit.getHITId() + " with price "
-					+ mturkPrice;
-			resp += "\nYou may see your HIT with HITTypeId '"
-					+ hit.getHITTypeId() + "' here: ";
-			resp += "\n" + service.getWebsiteURL() + "/mturk/preview?groupId="
-					+ hit.getHITTypeId();
-			resp += "\n" + "question url submitted was " + externalQuestion;
-		} catch (Exception e) {
-			resp = e.getLocalizedMessage();
+			mturkPrice = Double.parseDouble(price);
+			// do not go above max reward
+			if (mturkPrice > maxReward) {
+				throw new NumberFormatException("Max price exceeded");
+			}
+		} catch (NumberFormatException e) {
+			System.out.println(e.getLocalizedMessage()
+					+ " Invalid mturk price '" + price
+					+ "'. So setting to default value");
+			mturkPrice = hitProps.getRewardAmount();
 		}
-		return resp;
+
+		// System.out.println("mturk price '" + mturkPrice +
+		// "' and maxreward=" + maxReward);
+
+		String externalQuestion = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExternalQuestion xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd\">"
+				+ "<ExternalURL>"
+				+ baseTranscriptionURL
+				+ taskStatus.getServerUniqueRequestId()
+				+ "/preview?imageUrl="
+				+ URLEncoder.encode(taskStatus.getImageUrl(), "UTF-8")
+				+ "&amp;"
+				+ "requestedResponseFormat="
+				+ taskStatus.getRequestedResponseFormat()
+				+ "</ExternalURL>"
+				+ "<FrameHeight>600</FrameHeight>" + "</ExternalQuestion>";
+
+		HITQuestion question = new HITQuestion();
+		question.setQuestion(externalQuestion);
+
+		// Validate the question (QAP) against the XSD Schema before making
+		// the call.
+		// If there is an error in the question, ValidationException gets
+		// thrown.
+		// This method is extremely useful in debugging your QAP. Use it
+		// often.
+		// QAPValidator.validate(question.getQuestion());
+
+		// Create a HIT using the properties and question files
+		hit = service.createHIT(
+				null, // HITTypeId
+				hitProps.getTitle(),
+				hitProps.getDescription(),
+				hitProps.getKeywords(), // keywords
+				question.getQuestion(), mturkPrice,
+				hitProps.getAssignmentDuration(),
+				hitProps.getAutoApprovalDelay(), hitProps.getLifetime(),
+				hitProps.getMaxAssignments(), hitProps.getAnnotation(), // requesterAnnotation
+				hitProps.getQualificationRequirements(), null // responseGroup
+				);
+
+		return hit;
 	}
 
 }

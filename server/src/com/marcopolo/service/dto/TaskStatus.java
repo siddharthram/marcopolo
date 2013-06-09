@@ -4,7 +4,7 @@ public class TaskStatus {
 	private String serverUniqueRequestId, clientUniqueRequestId, imageUrl, transcriptionData, userTranscriptionData, requestedResponseFormat, rating, ratingComment, attachmentUrl;
 	private int status; // -1 error, 0 - submitted, 1 in progress, 2 completed
 	private long serverSubmissionTimeStamp, clientSubmitTimeStamp, transcriptionTimeStamp, transcriptionId;
-
+	private String turkHitId;
 	
 	public long getTranscriptionId() {
 		return transcriptionId;
@@ -116,6 +116,14 @@ public class TaskStatus {
 
 	public void setRequestedResponseFormat(String requestedResponseFormat) {
 		this.requestedResponseFormat = requestedResponseFormat;
+	}
+
+	public String getTurkHitId() {
+		return turkHitId;
+	}
+
+	public void setTurkHitId(String turkHitId) {
+		this.turkHitId = turkHitId;
 	}
 
 }
