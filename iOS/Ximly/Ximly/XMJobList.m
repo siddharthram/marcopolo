@@ -24,6 +24,9 @@ static NSString     *_dataFilePath = nil;
 @interface XMJobList ()
 
 @property (nonatomic, readwrite) NSMutableArray *jobList;
+@property (nonatomic, readwrite) NSMutableArray *pendingJobs;
+@property (nonatomic, readwrite) NSMutableArray *finishedJobs;
+
 
 @end
 
@@ -96,6 +99,21 @@ static NSString     *_dataFilePath = nil;
     [self.jobList sortUsingDescriptors:sortDescriptors];
 }
 
+- (void)generateSublists
+{
+    self.pendingJobs = [NSMutableArray arrayWithCapacity:10];
+    self.finishedJobs = [NSMutableArray arrayWithCapacity:[self.jobList count]];
+
+    
+    for (XMJob *job in self.jobList) {
+        if (job.isPending) {
+            [self.pendingJobs addObject:job];
+        } else {
+            [self.finishedJobs addObject:job];
+        }
+    }
+}
+
 - (void)readFromDisk
 {
     
@@ -126,6 +144,8 @@ static NSString     *_dataFilePath = nil;
         job.jobData = jobData;
         [self.jobList addObject:job];
     }
+    
+    [self generateSublists];
     
     if (saveTestData) {
         [self writeToDisk];
@@ -178,6 +198,8 @@ static NSString     *_dataFilePath = nil;
 
     [self sortUsingDescriptors:[self defaultSortDescriptors]];
     
+    [self generateSublists];
+    
     [self writeToDisk];
 }
 
@@ -193,4 +215,24 @@ static NSString     *_dataFilePath = nil;
     }
 }
 
+- (NSArray *)listFilteredBy:(NSString *)filterString
+{
+    if ([filterString length] == 0) {
+        return self.jobList;
+    }
+    
+    if ([self.lastFilterString isEqualToString:filterString]) {
+        return self.lastFilteredList;
+    }
+    
+    NSArray *listToFilter = self.jobList;
+    if (self.lastFilterString && [filterString hasPrefix:self.lastFilterString]) {
+        listToFilter = self.lastFilteredList;
+    }
+        
+    self.lastFilteredList = [listToFilter filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"status contains[cd] %@ OR title contains[cd] %@ OR userTranscription contains[cd] %@ OR durationSinceLastAction contains[cd] %@", filterString, filterString, filterString, filterString]];
+    self.lastFilterString = filterString;
+    
+    return self.lastFilteredList;
+}
 @end

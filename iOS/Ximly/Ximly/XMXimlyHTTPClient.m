@@ -128,10 +128,6 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     return errorMessage;
 }
 
-// If you want to use a particular device ID for testing purposes, set the value for kXMTextDeviceID here
-
-#define kXMKeychainService      @"XMKeychainService"
-#define kXMKeychainDeviceIDKey  @"XMKeychainDeviceIDKey"
 
 - (NSString *)getDeviceID {
     
@@ -167,6 +163,23 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
         NSLog(@"Failed to get file list");
         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
     }];
+}
+
+- (void)rateJob:(XMJob *)job {
+    NSDictionary *parameters = @{kJobDeviceIDKey : [self getDeviceID],
+                                 kJobServerReqeustIDKey : [job.serverRequestID length] > 0 ? job.serverRequestID : @"",
+                                 kJobTranscriptionIDKey : [job.transcriptionID length] > 0 ? [NSNumber numberWithLongLong:[job.transcriptionID longLongValue]] : [NSDecimalNumber zero],
+                                 kJobRatingKey : [job.rating length] > 0 ? job.rating : @"",
+                                 kJobRatingCommentKey : [job.ratingComment length] > 0 ? job.ratingComment : @"",
+                                 kJobUserTranscriptionKey : [job.userTranscription length] > 0 ? job.userTranscription : @""};
+    [self requestPath:@"task/rate" method:@"POST" parameters:parameters
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Failed to rate job");
+                  [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
+              }];
 }
 
 
@@ -214,6 +227,16 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
 {
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
+    [operation setCompletionBlockWithSuccess:success failure:failure];
+    [self enqueueHTTPRequestOperation:operation];
+}
+
+- (void)fetchAttachmentWithURL:(NSURL *)url
+                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     [operation setCompletionBlockWithSuccess:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
 }

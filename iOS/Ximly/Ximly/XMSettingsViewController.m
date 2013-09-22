@@ -10,7 +10,9 @@
 
 #import "XMImageCache.h"
 #import "XMJobList.h"
+#import "XMPurchaseManager.h"
 #import "XMXimlyHTTPClient.h"
+#import "Flurry.h"
 
 @interface XMSettingsViewController ()
 
@@ -51,7 +53,23 @@
     } else {
         self.showIntroSwitch.on = NO;
     }
+    
+    BOOL inAppPurchaseEnabled = [XMPurchaseManager isPurchasingEnabled];
+    
+    if (inAppPurchaseEnabled) {
+        self.inAppPurchaseSwitch.on = YES;
+    } else {
+        self.inAppPurchaseSwitch.on = NO;
+    }
+    
+    self.currentDeviceIDLabel.text = [[XMXimlyHTTPClient sharedClient] getDeviceID];
 
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -75,6 +93,12 @@
     [userDefaults synchronize];
 }
 
+- (IBAction)inAppPurchaseSwitchChanged
+{
+    [XMPurchaseManager setIsPurchasingEnabled:self.inAppPurchaseSwitch.on];
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
+}
+
 - (IBAction)deviceIDSwitchChanged
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -93,10 +117,39 @@
 
 - (IBAction)deleteCache:(id)sender
 {
+    [Flurry logEvent:@"Delete cache"];
     [[XMJobList sharedInstance] removeAllJobs];
     [[XMJobList sharedInstance] writeToDisk];
     [XMImageCache deleteCache];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
+}
+
+- (IBAction)resetTranscriptionCounts:(id)sender
+{
+    [XMPurchaseManager deleteTranscriptionCounts];
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
+}
+
+- (IBAction)emailDeviceID:(id)sender
+{
+
+        if ([MFMailComposeViewController canSendMail]) {
+            
+            MFMailComposeViewController *emailEditor = [MFMailComposeViewController new];
+            
+            [emailEditor setSubject:@"Ximly device id"];
+            [emailEditor setMessageBody:[[XMXimlyHTTPClient sharedClient] getDeviceID] isHTML:NO];
+            emailEditor.mailComposeDelegate = self;
+            [self presentViewController:emailEditor animated:YES completion:nil];
+        } 
+
+}
+
+#pragma mark - Mail composer delegate method
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -11,6 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "XMJobList.h"
 #import "XMUtilities.h"
+#import "XMXimlyHTTPClient.h"
+#import "Flurry.h"
 
 @interface XMRateJobViewController ()
 
@@ -95,9 +97,10 @@
 
 - (IBAction)rateAsGood:(id)sender
 {
+    [Flurry logEvent:@"Rate good"];
     if ([self.rating length] == 0) {
         self.rating = kJobRatingGood;
-        [UIView animateWithDuration:.3 animations:^(void){[self drawRatingBox];}];
+        [UIView animateWithDuration:.3 animations:^(void){[self drawRatingBox]; [self.commentTextView becomeFirstResponder];}];
     } else {
         self.rating = kJobRatingGood;
         self.goodButton.selected = YES;
@@ -107,9 +110,10 @@
 
 - (IBAction)rateAsBad:(id)sender
 {
+    [Flurry logEvent:@"Rate bad"];
     if ([self.rating length] == 0) {
         self.rating = kJobRatingBad;
-        [UIView animateWithDuration:.3 animations:^(void){[self drawRatingBox];}];
+        [UIView animateWithDuration:.3 animations:^(void){[self drawRatingBox]; [self.commentTextView becomeFirstResponder];}];
     } else {
         self.rating = kJobRatingBad;
         self.goodButton.selected = NO;
@@ -132,7 +136,8 @@
 {
     self.job.rating = self.rating;
     self.job.ratingComment = self.commentTextView.text;
-    [[XMJobList sharedInstance] writeToDisk];
+    [[XMXimlyHTTPClient sharedClient] rateJob:self.job];
+    [[XMJobList sharedInstance] writeToDisk];  // TODO - get data back from the cloud or mark record as local if call to cloud fails
     [self.view removeFromSuperview];
 }
 

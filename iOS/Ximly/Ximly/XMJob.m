@@ -9,10 +9,11 @@
 #import "XMJob.h"
 
 #import "XMImageCache.h"
+#import "XMUtilities.h"
 #import "XMXimlyHTTPClient.h"
 #import "AFImageRequestOperation.h"
 
-#define kNumberOfFields 12
+#define kNumberOfFields 14
 
 @implementation XMJob 
 
@@ -20,10 +21,12 @@
 @dynamic serverRequestID;
 @dynamic title;
 @dynamic transcription;
+@dynamic userTranscription;
 @dynamic status;
 @dynamic submissionTime;
 @dynamic serverSubmissionTime;
 @dynamic transcriptionTime;
+@dynamic transcriptionID;
 @dynamic rating;
 @dynamic ratingComment;
 @dynamic imageURL;
@@ -32,6 +35,11 @@
 @dynamic thumbnailKey;
 @dynamic thumbnail;
 @dynamic durationSinceLastAction;
+@dynamic isPending;
+@dynamic requestedResponseFormat;
+@dynamic attachmentUrl;
+@dynamic attachmentKey;
+
 
 
 - (id)init
@@ -83,6 +91,30 @@
     [self.jobData setValue:value forKey:kJobTranscriptionKey];
 }
 
+- (NSString *)userTranscription
+{
+    return [self.jobData valueForKey:kJobUserTranscriptionKey];
+}
+
+- (void)setUserTranscription:(NSString *)value
+{
+    [self.jobData setValue:value forKey:kJobUserTranscriptionKey];
+}
+
+- (BOOL)isPending
+{
+    NSNumber *status = [self.jobData valueForKey:kJobStatusKey];
+    int statusInt = [status intValue];
+    return ((statusInt == JobStatusOpen) || (statusInt == JobStatusLocked));
+}
+
+- (BOOL)isDone
+{
+    NSNumber *status = [self.jobData valueForKey:kJobStatusKey];
+    return ([status intValue] == JobStatusTranscribed);
+}
+
+
 - (NSString *)status
 {
     NSString *statusStr = kJobStatusNoneString;
@@ -90,8 +122,12 @@
     
     if (status) {
         switch ([status intValue]) {
-            case JobStatusProcessing:
-                statusStr = kJobStatusProcessingString;
+            case JobStatusOpen:
+                statusStr = kJobStatusOpenString;
+                break;
+                
+            case JobStatusLocked:
+                statusStr = kJobStatusLockedString;
                 break;
                 
             case JobStatusTranscribed:
@@ -111,10 +147,12 @@
 {
     NSNumber *newStatus = nil;
     
-    if ([value isEqualToString:kJobStatusProcessingString]) {
-        newStatus = [NSNumber numberWithInt:JobStatusProcessing];
-    } else if ([value isEqualToString:kJobStatusTranscribedString]) {
+    if ([value isEqualToString:kJobStatusTranscribedString]) {
         newStatus = [NSNumber numberWithInt:JobStatusTranscribed];
+    } else if ([value isEqualToString:kJobStatusOpenString]) {
+        newStatus = [NSNumber numberWithInt:JobStatusOpen];
+    } else if ([value isEqualToString:kJobStatusLockedString]) {
+        newStatus = [NSNumber numberWithInt:JobStatusLocked];
     }
     
     [self.jobData setValue:newStatus forKey:kJobStatusKey];
@@ -185,6 +223,16 @@
     return [timeNum doubleValue];
 }
 
+- (NSString *)transcriptionID
+{
+    NSNumber *idNum = [self.jobData valueForKey:kJobTranscriptionIDKey];
+    return [idNum stringValue];}
+
+- (void)setTranscriptionID:(NSString *)value
+{
+    [self.jobData setValue:[NSNumber numberWithLongLong:[value longLongValue]] forKey:kJobTranscriptionIDKey];
+}
+
 - (NSString *)rating
 {
     return [self.jobData valueForKey:kJobRatingKey];
@@ -247,7 +295,7 @@
     NSString *imageKey = self.imageKey;
     
     if ([imageKey length] > 0) {
-        return [XMImageCache loadImageDataForKey:imageKey];
+        return [XMImageCache loadAttachmentDataForKey:imageKey];
     }
     return nil;
 }
@@ -272,6 +320,47 @@
     return [NSString stringWithFormat:@"%@%@", self.requestID, @"_thumb"];
 }
 
+- (NSString *)requestedResponseFormat
+{
+    return [self.jobData valueForKey:kJobReqeustedResponseFormat];
+}
+
+- (void)setRequestedResponseFormat:(NSString *)value
+{
+    [self.jobData setValue:value forKey:kJobReqeustedResponseFormat];
+}
+
+- (NSString *)attachmentUrl
+{
+    return [self.jobData valueForKey:KJobAttachmentUrl];
+}
+
+- (void)setAttachmentUrl:(NSString *)value
+{
+    [self.jobData setValue:value forKey:KJobAttachmentUrl];
+}
+
+- (NSString *)attachmentKey
+{
+    NSString *fileExtension = [self.attachmentUrl pathExtension];
+    
+    if ([fileExtension length] == 0) {
+        fileExtension = @"pptx";
+    }
+    
+    return [NSString stringWithFormat:@"%@.%@", self.requestID, fileExtension];
+}
+
+- (NSData *)attachment
+{
+    NSString *attachmentKey = self.attachmentKey;
+    
+    if ([attachmentKey length] > 0) {
+        return [XMAttachmentCache loadAttachmentDataForKey:attachmentKey];
+    }
+    return nil;
+}
+
 - (void)populateObjectFromServerJSON:(NSDictionary *)serverJSON {
     self.jobData = [NSMutableDictionary dictionaryWithDictionary:serverJSON];
 }
@@ -280,11 +369,10 @@
 {
     NSString *dateString = @"";
     
-    NSDate *timeToUse = self.transcriptionTime ? self.transcriptionTime : self.submissionTime;
+    NSDate *dateToUse = self.transcriptionTime ? self.transcriptionTime : self.submissionTime;
     
-    if (timeToUse) {
-        // TODO - proper date formatting...we want values like "26 min ago"
-        dateString = [timeToUse description];
+    if (dateToUse) {
+        dateString = [XMUtilities timeAgoFromUnixTime:[dateToUse timeIntervalSince1970]];
     }
     
     return dateString;
@@ -292,7 +380,7 @@
 
 - (NSDictionary *)submissionMetaData
 {
-    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, kJobAuthIDKey : [[XMXimlyHTTPClient sharedClient] getAuthID], kJobDeviceIDKey : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[self submissionTimeInMs]], kJobUrgencyKey : @"0"} ;
+    NSDictionary *metaData = @{kJobRequestIDKey : self.requestID, kJobAuthIDKey : [[XMXimlyHTTPClient sharedClient] getAuthID], kJobDeviceIDKey : [[XMXimlyHTTPClient sharedClient] getDeviceID], kJobSubmissionTimeKey : [NSString stringWithFormat:@"%lld", (long long)[self submissionTimeInMs]], kJobUrgencyKey : @"0", kJobReqeustedResponseFormat : self.requestedResponseFormat} ;
     
     return metaData;
 }

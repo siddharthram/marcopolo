@@ -32,4 +32,23 @@
     return screenSize.height;
 }
 
+// Based on http://stackoverflow.com/questions/10075898/ios-friendly-nsdate-format
++ (NSString *)timeAgoFromUnixTime:(double)seconds
+{
+    double difference = [[NSDate date] timeIntervalSince1970] - seconds;
+    NSMutableArray *periods = [NSMutableArray arrayWithObjects:@"second", @"minute", @"hour", @"day", @"week", @"month", @"year", nil];
+    NSArray *lengths = [NSArray arrayWithObjects:@60, @60, @24, @7, @4.35, @12, @10000000, nil];
+    int j = 0;
+    for(j=0; difference >= [[lengths objectAtIndex:j] doubleValue]; j++)
+    {
+        difference /= [[lengths objectAtIndex:j] doubleValue];
+    }
+    difference = roundl(difference);
+    if(difference != 1)
+    {
+        [periods insertObject:[[periods objectAtIndex:j] stringByAppendingString:@"s"] atIndex:j];
+    }
+    return [NSString stringWithFormat:@"%li %@%@", (long)difference, [periods objectAtIndex:j], @" ago"];
+}
+
 @end

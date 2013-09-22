@@ -11,10 +11,12 @@
 #import "XMImageCache.h"
 #import "XMXimlyHTTPClient.h"
 #import "UIImage+XMAdditions.h"
+#import "Flurry.h"
 
 #define kMaxImageDimension      500
+#define kPurchaseSuccessfulAlertTitle   @"Purchase Successful!"            // TODO: Put in strings file
 
-
+#define kRequestFormatActionSheetTitle @"Make me a ..."
 
 @interface XMSubmissionViewController ()
 
@@ -71,62 +73,101 @@
         return;
     }
 
-	UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-	imagePicker.delegate = self;
-    imagePicker.allowsEditing = NO;
-    
-    BOOL cancelled = NO;
-    
-    if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
+    if ([actionSheet.title isEqualToString:kRequestFormatActionSheetTitle]) {
         switch (buttonIndex) {
             case 0:
-                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                self.requestPPTSlide = NO;
+                [self submitToCloud];
                 break;
             case 1:
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                self.requestPPTSlide = YES;
+                [self submitToCloud];
                 break;
             case 2:
-                cancelled = YES;
+                self.view.hidden = YES;
+                [self.view removeFromSuperview];
+                [self.delegate submissionCancelled];
                 break;
             default:
                 break;
         };
     } else {
-        switch (buttonIndex) {
-            case 0:
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                break;
-            case 1:
-                cancelled = YES;
-                break;
-            default:
-                break;
-        };
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = NO;
         
-    }
-    
-    if (cancelled == YES) {
-        self.view.hidden = YES;
-        [self.view removeFromSuperview];
-        [self.delegate submissionCancelled];
-    } else {
-        [self presentViewController:imagePicker animated:YES completion:nil];
+        BOOL cancelled = NO;
+        
+        if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
+            switch (buttonIndex) {
+                case 0:
+                    [Flurry logEvent:@"Submit Photo: Camera"];
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 1:
+                    [Flurry logEvent:@"Submit Photo: Roll"];
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                case 2:
+                    [Flurry logEvent:@"Submit Photo: Cancel"];
+                    cancelled = YES;
+                    break;
+                default:
+                    break;
+            };
+        } else {
+            switch (buttonIndex) {
+                case 0:
+                    [Flurry logEvent:@"Submit Photo: Roll"];
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                case 1:
+                    [Flurry logEvent:@"Submit Photo: Cancel"];
+                    cancelled = YES;
+                    break;
+                default:
+                    break;
+            };
+            
+        }
+        
+        if (cancelled == YES) {
+            self.view.hidden = YES;
+            [self.view removeFromSuperview];
+            [self.delegate submissionCancelled];
+        } else {
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }
     }
 }
 
 - (void)submitToCloud
 {
+    [Flurry logEvent:@"Submit Photo to Cloud"];
     if (!self.pickedImage) {
         return;
     }
+        
+    if ([XMPurchaseManager freeTranscriptionsRemaining] > 0) {
+        [self submitToCloudWithFreeTranscription:YES];
+    } else if ([XMPurchaseManager paidTranscriptionsRemaining] > 0){
+        [self submitToCloudWithFreeTranscription:NO];
+    } else {
+        [self askUserToPurchaseTranscriptions];
+    }
     
+}
+
+- (void)submitToCloudWithFreeTranscription:(BOOL)useFreeTranscription
+{
     self.view.hidden = YES;
     [self.view removeFromSuperview];
     
     XMJob *theJob = [XMJob new];
     theJob.requestID = [XMXimlyHTTPClient newRequestID];
-    theJob.status = kJobStatusProcessingString;
+    theJob.status = kJobStatusOpenString;
     theJob.submissionTime = [NSDate date];
+    theJob.requestedResponseFormat = self.requestPPTSlide ? @"ppt" : @"txt";
     
     NSData *imageData = [XMImageCache saveImage:self.pickedImage forJob:theJob];
     self.pickedImage = nil;
@@ -134,8 +175,109 @@
     [self.delegate jobSubmitted:theJob];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
     [[XMXimlyHTTPClient sharedClient] submitImage:imageData forJob:theJob];
+    if (useFreeTranscription) {
+        [XMPurchaseManager modifyFreeTranscriptionsRemaining:-1];
+    } else {
+        [XMPurchaseManager modifyPaidTranscriptionsRemaining:-1];
+    }
 }
 
+- (void)askUserToPurchaseTranscriptions
+{
+    if ([XMPurchaseManager isPurchasingEnabled]) {
+        [[XMPurchaseManager sharedInstance] setDelegate:self];
+        self.isFetchingProducts = YES;
+        [[XMPurchaseManager sharedInstance] fetchProducts];
+    }
+}
+
+
+- (void)didFetchProducts:(NSDictionary *)products
+{
+    if ([products count] == 3) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Buy Transcriptions"
+                                                            message:@"Please make a purchase to continue using the app."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:[NSString stringWithFormat:@"5-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts]      objectForKey:kLevel1ProductCode] price] stringValue]],
+                                                                    [NSString stringWithFormat:@"20-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]],
+                                                                    [NSString stringWithFormat:@"100-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel3ProductCode] price] stringValue]], nil];
+        [alertView show];
+    }
+}
+
+- (void)failedToStartPurchase
+{
+    //TODO
+}
+
+- (void)didProcessTransactionSuccessfully:(int)numPurchased
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kPurchaseSuccessfulAlertTitle
+                                                        message:[NSString stringWithFormat:@"%d transcriptions purchased.  One will be used to process the current photo.", numPurchased]
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (void)didProcessTransactionUnsuccessfully
+{
+    [self alertUserToFailedPurchase];
+}
+
+- (void)didProcessTransactionWithAppleError:(NSError *)error
+{
+    NSString *errorMsg = [NSString stringWithFormat:@"Purchase: Apple Error with code:%d", error.code];
+    NSLog(@"%@", errorMsg);
+    
+    switch (error.code)  {
+        case SKErrorUnknown:
+        case SKErrorPaymentCancelled:
+            // Do nothing
+            break;
+        default:
+            // TODO
+            break;
+    }
+}
+
+-(void)alertUserToFailedPurchase
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Purchase Failed"
+                                                         message:@"Please make sure your payment information on iTunes is up-to-date and try again later."
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+    [alertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([alertView.title isEqualToString:kPurchaseSuccessfulAlertTitle]) {
+        [self submitToCloudWithFreeTranscription:NO];
+    } else {
+        switch (buttonIndex) {
+            case 0:
+                break;
+                
+            case 1:
+                [[XMPurchaseManager sharedInstance] purchaseLevel1Product];
+                break;
+                
+            case 2:
+                [[XMPurchaseManager sharedInstance] purchaseLevel2Product];
+                break;
+                
+            case 3:
+                [[XMPurchaseManager sharedInstance] purchaseLevel3Product];
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
 
 #pragma mark - UIImagePickerControllerDelegate
 
@@ -145,11 +287,18 @@
     
     self.pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    [self submitToCloud];
+    self.requestFormatActionSheet = [[UIActionSheet alloc] initWithTitle:kRequestFormatActionSheetTitle
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Text transcript", @"PowerPoint slide", nil];
+    
+    [self.requestFormatActionSheet showInView:self.view];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [Flurry logEvent:@"Cancel Image Picker"];
     [picker dismissViewControllerAnimated:YES completion:nil];
     self.view.hidden = YES;
     [self.view removeFromSuperview];

@@ -11,6 +11,7 @@
 #import "XMAppDelegate.h"
 #import "XMHistoryViewController.h"
 #import "XMUtilities.h"
+#import "Flurry.h"
 
 @interface XMIntroViewController ()
 
@@ -92,12 +93,14 @@
 
 - (void)submissionCancelled
 {
+    [Flurry logEvent:@"Intro cancelled"];
     XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showHistoryView];
 }
 
 - (void)jobSubmitted:(XMJob *)job
 {
+    [Flurry logEvent:@"Intro submit task"];
     XMAppDelegate *appDelegate = (XMAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate showHistoryView];
 }

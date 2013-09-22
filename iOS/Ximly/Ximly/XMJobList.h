@@ -16,6 +16,10 @@
 @interface XMJobList : NSObject
 
 @property (nonatomic, readonly) NSMutableArray *jobList;
+@property (nonatomic, readonly) NSMutableArray *pendingJobs;
+@property (nonatomic, readonly) NSMutableArray *finishedJobs;
+@property (nonatomic, strong) NSString *lastFilterString;
+@property (nonatomic, strong) NSArray *lastFilteredList;
 
 + (XMJobList *)sharedInstance;
 
@@ -31,5 +35,7 @@
 
 - (void)readFromDisk;
 - (void)writeToDisk;
+
+- (NSArray *)listFilteredBy:(NSString *)filterString;
 
 @end

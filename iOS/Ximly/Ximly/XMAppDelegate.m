@@ -9,6 +9,7 @@
 #import "XMAppDelegate.h"
 #import "XMXimlyHTTPClient.h"
 #import "XMSettingsViewController.h"
+#import "Flurry.h"
 
 @implementation XMAppDelegate
 
@@ -36,6 +37,23 @@
         [self alertUserToUpdatedJobs:remoteNotif.userInfo];
     }
     
+    // Initial development is done on the sandbox service
+    // Change this to BootstrapServerBaseURLStringUS to use the production Evernote service
+    // Change this to BootstrapServerBaseURLStringCN to use the Yinxiang Biji production service
+    // BootstrapServerBaseURLStringSandbox does not support the  Yinxiang Biji service
+    NSString *EVERNOTE_HOST = BootstrapServerBaseURLStringUS;
+    
+    NSString *CONSUMER_KEY = @"sidgidwani";
+    NSString *CONSUMER_SECRET = @"2983be5f158d8a7e";
+    
+    // set up Evernote session singleton
+    [EvernoteSession setSharedSessionHost:EVERNOTE_HOST
+                              consumerKey:CONSUMER_KEY
+                           consumerSecret:CONSUMER_SECRET];
+    
+    [Flurry startSession:@"ZVKPTTGDRS7GRHHQ9CCR"];
+    [Flurry setSessionReportsOnPauseEnabled:YES];
+    
     return YES;
 }
 
@@ -44,10 +62,12 @@
 	NSLog(@"My token is: %@", deviceToken);
     self.apnsDeviceToken = deviceToken;
     [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:self.apnsDeviceToken];
+    [Flurry logEvent:@"Accept Push Notifications"];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
+    [Flurry logEvent:@"Decline Push Notifications"];
 	NSLog(@"Failed to get token, error: %@", error);
 
 }
@@ -55,6 +75,7 @@
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 	NSLog(@"Got Notification%@",userInfo);
 	if ( application.applicationState == UIApplicationStateActive ){
+        [Flurry logEvent:@"Receive push: App open"];
 		// App was in forefront
 		[[XMXimlyHTTPClient sharedClient] updateTasks];
         if (self.historyViewController && self.historyNavController && (self.window.rootViewController == self.historyNavController) && (self.historyNavController.visibleViewController == self.historyNavController)) {
@@ -64,6 +85,7 @@
     }
     else
     {
+        [Flurry logEvent:@"Open with Push"];
         // App was just brought from background to forefront
         // We call '[[XMXimlyHTTPClient sharedClient] updateTasks]' in applicationDidBecomeActive: so there's nothing to do here
     }
@@ -119,6 +141,14 @@
     [self.submissionViewController startSubmissionWithDelegate:submissionDelegate];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    BOOL canHandle = NO;
+    if ([[NSString stringWithFormat:@"en-%@", [[EvernoteSession sharedSession] consumerKey]] isEqualToString:[url scheme]] == YES) {
+        canHandle = [[EvernoteSession sharedSession] canHandleOpenURL:url];
+    }
+    return canHandle;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -129,6 +159,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [Flurry logEvent:@"App closed"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -140,6 +171,10 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [[XMXimlyHTTPClient sharedClient] updateTasks];
+    
+    [[EvernoteSession sharedSession] handleDidBecomeActive];
+    
+    [Flurry logEvent:@"App launched"];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

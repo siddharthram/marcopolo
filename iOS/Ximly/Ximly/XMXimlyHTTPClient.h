@@ -8,6 +8,9 @@
 
 #import "AFHTTPClient.h"
 
+#define kXMKeychainService      @"XMKeychainService"
+#define kXMKeychainDeviceIDKey  @"XMKeychainDeviceIDKey"
+
 #define XM_NOTIFICATION_JOB_SUBMITTED               @"XM_NOTIFICATION_JOB_SUBMITTED"
 #define XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED    @"XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED"
 #define XM_NOTIFICATION_JOB_SUBMISSION_FAILED       @"XM_NOTIFICATION_JOB_SUBMISSION_FAILED"
@@ -36,11 +39,17 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 - (NSString *)getAuthID;
 - (void)updateTasks;
 
+- (void)rateJob:(XMJob *)job;
+
 - (void)registerAPNSDeviceToken:(NSData *)token;
 
 - (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob;
 
 - (void)fetchImageWithURL:(NSURL *)url
+                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)fetchAttachmentWithURL:(NSURL *)url
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
