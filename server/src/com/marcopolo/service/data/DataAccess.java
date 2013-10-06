@@ -621,7 +621,8 @@ public class DataAccess {
 	 * @throws SQLException
 	 */
 
-	private static String receiptValidation = "insert ignore into purchase_history_table (deviceId, producs_table_idproducts, apple_transaction_id, purchase_time) values (?, ?, ?, ?)";
+	private static String receiptValidation = "select * from purchase_history_table where apple_transaction_id = ?";
+	private static String receiptUpdate = "insert into purchase_history_table (deviceId, producs_table_idproducts, apple_transaction_id, purchase_time) values (?, ?, ?, ?)";
 	private static String productPurchase = "update device_table set free_tasks_left = (free_tasks_left + (select imagesLeft from Products_table where appleProductId = ?)) where device_id = ?";
 
 	public static PurchaseResponse purchase(String deviceId, String productId, String transactionId) throws SQLException {
@@ -635,34 +636,43 @@ public class DataAccess {
 		Connection conn = _dataSource.getConnection();
 		try {
 			// check if purchase was already made
-			PreparedStatement pstmtQuery = conn
-					.prepareStatement(receiptValidation);
-			pstmtQuery.setString(1, deviceId);
-			pstmtQuery.setString(2, productId);
-			pstmtQuery.setString(3, transactionId);
-			pstmtQuery.setLong(4, System.currentTimeMillis());
-			int rowsInserted = pstmtQuery.executeUpdate();
+			PreparedStatement pstmtQuery = conn.prepareStatement(receiptValidation);
+			pstmtQuery.setString(1, transactionId);
+			ResultSet rs = pstmtQuery.executeQuery();
+			if (rs.next()) {
+				// there is already a row for that transaction id, so it has already been used
+				presp.setStatus(-2); 
+			} 
+			rs.close();
 			pstmtQuery.close();
 			
-			if (rowsInserted == 1) {
+			// proceed only if transaction id is not already present
+			if (presp.getStatus() != -2) {
 				// if there no previous purchase then update the row			
 				log.debug("purchase request for device id " + deviceId + " and product " + productId);
 				pstmtQuery = conn
 						.prepareStatement(productPurchase);
 				pstmtQuery.setString(1, productId);
 				pstmtQuery.setString(2, deviceId);
-				pstmtQuery.executeQuery();
+				pstmtQuery.executeUpdate();
 				pstmtQuery.close();
 				presp.setStatus(0); // successfully updated the purchase
-			} else if (rowsInserted == 0) {
-				// if there is already a row
-				presp.setStatus(-2); // successfully updated the purchase
-			}
+				
+				// insert the row for receipt after purchase
+				pstmtQuery = conn
+						.prepareStatement(receiptUpdate);
+				pstmtQuery.setString(1, deviceId);
+				pstmtQuery.setString(2, productId);
+				pstmtQuery.setString(3, transactionId);
+				pstmtQuery.setLong(4, System.currentTimeMillis());
+				int rowsInserted = pstmtQuery.executeUpdate();
+				pstmtQuery.close();
+			} 
 			
 			// get the list of free tasks
 			pstmtQuery = conn.prepareStatement(freeTaskQuery);
 			pstmtQuery.setString(1, deviceId);
-			ResultSet rs = pstmtQuery.executeQuery();
+			rs = pstmtQuery.executeQuery();
 			if (rs.next()) {
 				presp.setImagesLeft(rs.getInt(2));
 			} 

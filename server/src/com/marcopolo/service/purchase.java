@@ -17,8 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import com.marcopolo.service.apple.ApplePayments;
 import com.marcopolo.service.data.DataAccess;
 import com.marcopolo.service.dto.ProductsResponse;
-import com.marcopolo.service.dto.TaskStatusRequest;
-import com.marcopolo.service.dto.TaskStatusResponse;
+import com.marcopolo.service.dto.PurchaseResponse;
 
 
 
@@ -46,7 +45,8 @@ public class purchase extends AbstractServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/xml");
-		ProductsResponse productsResponse = new ProductsResponse();
+		PurchaseResponse purchaseResponse = new PurchaseResponse();
+		
 		try {
 			String deviceId = request.getParameter("deviceId");
 			String productId = request.getParameter("product_id");
@@ -57,7 +57,7 @@ public class purchase extends AbstractServlet {
 							transactionId != null && !transactionId.trim().equals("")
 					) {
 				if (ApplePayments.isReceiptGenuine(receipt)) {
-						DataAccess.purchase(deviceId, productId, transactionId);
+					purchaseResponse = DataAccess.purchase(deviceId, productId, transactionId);
 				}
 			}
 		} catch (Exception ex) {
@@ -68,8 +68,8 @@ public class purchase extends AbstractServlet {
 		Gson gson = new Gson();
 		
 
-		Type postRespType = new TypeToken<ProductsResponse>() {}.getType();
-		writer.println(gson.toJson(productsResponse, postRespType));
+		Type purchaseRespType = new TypeToken<PurchaseResponse>() {}.getType();
+		writer.println(gson.toJson(purchaseResponse, purchaseRespType));
 		gson = null;
 	}
 

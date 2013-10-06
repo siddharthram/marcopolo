@@ -3,7 +3,7 @@ package com.marcopolo.service.dto;
 public class PurchaseResponse {
 	
 	private String  product_id, transaction_id, deviceId;
-	private int status; // -1 error, 0 - success, -2 - already purchased
+	private int status = -1; // -1 error, 0 - success, -2 - already purchased
 	private int imagesLeft;
 	
 	public String getProduct_id() {
