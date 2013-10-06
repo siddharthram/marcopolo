@@ -138,6 +138,7 @@
         }
     }
     [self.window addSubview:self.submissionViewController.view];
+//    [self.submissionViewController askUserToPurchaseTranscriptions];
     [self.submissionViewController startSubmissionWithDelegate:submissionDelegate];
 }
 

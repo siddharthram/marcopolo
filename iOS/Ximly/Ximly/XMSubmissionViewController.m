@@ -199,8 +199,8 @@
                                                             message:@"Please make a purchase to continue using the app."
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:[NSString stringWithFormat:@"5-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts]      objectForKey:kLevel1ProductCode] price] stringValue]],
-                                                                    [NSString stringWithFormat:@"20-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]],
+                                                  otherButtonTitles:[NSString stringWithFormat:@"20-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts]      objectForKey:kLevel1ProductCode] price] stringValue]],
+                                                                    [NSString stringWithFormat:@"50-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]],
                                                                     [NSString stringWithFormat:@"100-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel3ProductCode] price] stringValue]], nil];
         [alertView show];
     }
@@ -284,7 +284,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    
+
     self.pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     self.requestFormatActionSheet = [[UIActionSheet alloc] initWithTitle:kRequestFormatActionSheetTitle
@@ -293,7 +293,7 @@
                                                    destructiveButtonTitle:nil
                                                         otherButtonTitles:@"Text transcript", @"PowerPoint slide", nil];
     
-    [self.requestFormatActionSheet showInView:self.view];
+    [self.requestFormatActionSheet performSelector:@selector(showInView:) withObject:self.view afterDelay:0];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

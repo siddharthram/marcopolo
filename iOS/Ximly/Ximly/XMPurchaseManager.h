@@ -7,9 +7,9 @@
 #import <UIKit/UIKit.h>
 #import <StoreKit/StoreKit.h>
 
-#define kLevel1ProductCode  @"com.ximly.product.level1.01"
-#define kLevel2ProductCode  @"com.ximly.product.level2.01"
-#define kLevel3ProductCode  @"com.ximly.product.level3.01"
+#define kLevel1ProductCode  @"com.ximly.small.test"
+#define kLevel2ProductCode  @"com.ximly.medium.test"
+#define kLevel3ProductCode  @"com.ximly.large.test"
 
 #define kXMKeychainFreeTranscriptionCount @"XMKeychainFreeTranscriptionCount"
 #define kXMKeychainPaidTranscriptionCount @"XMKeychainPaidTranscriptionCount"
