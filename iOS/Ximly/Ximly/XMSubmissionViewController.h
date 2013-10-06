@@ -31,5 +31,6 @@
 
 
 - (void)startSubmissionWithDelegate:(NSObject<XMSubmissionDelegate> *)submissionDelegate;
+- (void)askUserToPurchaseTranscriptions;
 
 @end

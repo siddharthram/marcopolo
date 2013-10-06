@@ -37,6 +37,7 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
 
 + (BOOL)isPurchasingEnabled
 {
+//    return YES;
     return [[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchasePrefKey];
 }
 
@@ -307,9 +308,9 @@ static int POS(char c)
     int increment = 0;
     
     if ([productCode isEqualToString:kLevel1ProductCode]) {
-        increment = 5;
-    } else if ([productCode isEqualToString:kLevel2ProductCode]) {
         increment = 20;
+    } else if ([productCode isEqualToString:kLevel2ProductCode]) {
+        increment = 50;
     } else if ([productCode isEqualToString:kLevel3ProductCode]) {
         increment = 100;
     }
@@ -338,6 +339,10 @@ static int POS(char c)
             [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
             return;
         }
+        
+        NSString * base64Enc = [self Base64Encode:transaction.transactionReceipt];
+
+        NSLog(@"Receipt data:  %@", base64Enc);
         
         int increment = [self enablePurchasedProduct:[purchaseInfoDict objectForKey:@"product-id"]];
         
