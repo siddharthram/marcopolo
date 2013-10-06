@@ -21,7 +21,7 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 
 
 /**
- * Servlet implementation class add
+ * Servlet implementation class to list all tasks from a device
  */
 public class task extends AbstractServlet {
 	private static final long serialVersionUID = 1L;

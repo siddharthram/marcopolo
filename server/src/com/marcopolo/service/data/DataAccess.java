@@ -16,6 +16,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.marcopolo.service.dto.PostRequest;
 import com.marcopolo.service.dto.PostResponse;
+import com.marcopolo.service.dto.Product;
+import com.marcopolo.service.dto.ProductsResponse;
+import com.marcopolo.service.dto.PurchaseResponse;
 import com.marcopolo.service.dto.TaskStatus;
 import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
@@ -113,15 +116,15 @@ public class DataAccess {
 			}
 
 			// check if task can be submitted
-			if (freeTasksLeft > MAX_FREE_TASKS) {
+			if (freeTasksLeft < 1) {
 				// set 'sorry quota exceeded' response
 				presp.setResponseCode(-1);
-				presp.setResponseText("Free quota exceeded");
+				presp.setResponseText("Quota exceeded");
 				log.debug("Max free tasks " + freeTasksLeft + " exceeded for "
 						+ preq.getDeviceId());
 			} else {
 
-				log.debug("Free tasks " + freeTasksLeft + " left for for "
+				log.debug("Tasks " + freeTasksLeft + " left for for "
 						+ preq.getDeviceId());
 				// private static String insertTask =
 				// "insert into task_table (image_url, sumbit_time, device_table_iddevice, unique_guid) values(?, ?, ?, ?)";
@@ -150,7 +153,7 @@ public class DataAccess {
 				presp.setResponseText("Success");
 			}
 
-			presp.setFreeImagesLeft(freeTasksLeft);
+			presp.setImagesLeft(freeTasksLeft);
 		} finally {
 			try {
 				conn.close();
@@ -200,6 +203,8 @@ public class DataAccess {
 				ts.setUserTranscriptionData(rs.getString("user_transcription"));
 				ts.setStatus(rs.getInt("tt.status"));
 				ts.setRequestedResponseFormat(rs.getString("tt.requestedResponseFormat"));
+				// set the number of tasks
+				taskStatusResponse.setImagesLeft(rs.getInt("free_tasks_left"));
 				// check if task completed
 				if (ts.getStatus() == 2) {
 					ts.setTranscriptionId(rs.getLong("idassignment"));
@@ -572,6 +577,106 @@ public class DataAccess {
 			}
 		}
 		return smsIds;
+	}
+
+	private static String listProductsQuery = "select * from Products_table where active != -1";
+
+	public static ProductsResponse getProducts() throws SQLException {
+
+		ProductsResponse products = new ProductsResponse();
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got products list request");
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(listProductsQuery);
+			ResultSet rs = pstmtQuery.executeQuery();
+			while (rs.next()) {
+				Product prd = new Product();
+				prd.setProductId(rs.getString("idProducts"));
+				prd.setAppleProductId(rs.getString("appleProductId"));
+				prd.setPrice(rs.getBigDecimal("price"));
+				prd.setImagesLeft(rs.getInt("imagesLeft"));
+				products.addProduct(prd);
+			}
+			rs.close();
+			pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return products;
+
+	}
+
+	/**
+	 * 
+	 * Add transcripts after a purchase
+	 * @param deviceId
+	 * @param productId
+	 * @param transactionId
+	 * @return object with status and freetasks
+	 * @throws SQLException
+	 */
+
+	private static String receiptValidation = "insert ignore into purchase_history_table (deviceId, producs_table_idproducts, apple_transaction_id, purchase_time) values (?, ?, ?, ?)";
+	private static String productPurchase = "update device_table set free_tasks_left = (free_tasks_left + (select imagesLeft from Products_table where appleProductId = ?)) where device_id = ?";
+
+	public static PurchaseResponse purchase(String deviceId, String productId, String transactionId) throws SQLException {
+
+		PurchaseResponse presp = new PurchaseResponse();
+		presp.setTransaction_id(transactionId);
+		presp.setProduct_id(productId);
+		presp.setDeviceId(deviceId);
+		presp.setStatus(-1);// initialize to error
+		
+		Connection conn = _dataSource.getConnection();
+		try {
+			// check if purchase was already made
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(receiptValidation);
+			pstmtQuery.setString(1, deviceId);
+			pstmtQuery.setString(2, productId);
+			pstmtQuery.setString(3, transactionId);
+			pstmtQuery.setLong(4, System.currentTimeMillis());
+			int rowsInserted = pstmtQuery.executeUpdate();
+			pstmtQuery.close();
+			
+			if (rowsInserted == 1) {
+				// if there no previous purchase then update the row			
+				log.debug("purchase request for device id " + deviceId + " and product " + productId);
+				pstmtQuery = conn
+						.prepareStatement(productPurchase);
+				pstmtQuery.setString(1, productId);
+				pstmtQuery.setString(2, deviceId);
+				pstmtQuery.executeQuery();
+				pstmtQuery.close();
+				presp.setStatus(0); // successfully updated the purchase
+			} else if (rowsInserted == 0) {
+				// if there is already a row
+				presp.setStatus(-2); // successfully updated the purchase
+			}
+			
+			// get the list of free tasks
+			pstmtQuery = conn.prepareStatement(freeTaskQuery);
+			pstmtQuery.setString(1, deviceId);
+			ResultSet rs = pstmtQuery.executeQuery();
+			if (rs.next()) {
+				presp.setImagesLeft(rs.getInt(2));
+			} 
+			rs.close();
+			pstmtQuery.close();
+			
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+		return presp;
 	}
 
 	

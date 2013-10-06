@@ -18,7 +18,6 @@ import com.marcopolo.service.data.DataAccess;
 public abstract class AbstractServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final long MAX_FILE_SIZE_IN_BYTES = 40000000l; // about 4 MB's
 	
 	/**
 	 * @see HttpServlet#HttpServlet()

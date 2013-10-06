@@ -30,7 +30,7 @@ import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
 /**
- * Servlet implementation class add
+ * Servlet implementation class to submit the transcription (from turks)
  */
 public class submit extends AbstractServlet {
 	private static final long serialVersionUID = 1L;

@@ -21,7 +21,7 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 
 
 /**
- * Servlet implementation class add
+ * Servlet implementation class to send tasks over to turk
  */
 public class submitOverDue extends AbstractServlet {
 	private static final long serialVersionUID = 1L;

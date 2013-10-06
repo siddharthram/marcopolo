@@ -2,16 +2,16 @@ package com.marcopolo.service.dto;
 
 public class PostResponse {
 	public String serverUniqueRequestId;
-	public int freeImagesLeft;
+	public int imagesLeft;
 	public int responseCode;
 	public String responseText;
 	public String imageUrl;
 	
-	public int getFreeImagesLeft() {
-		return freeImagesLeft;
+	public int getImagesLeft() {
+		return imagesLeft;
 	}
-	public void setFreeImagesLeft(int freeImagesLeft) {
-		this.freeImagesLeft = freeImagesLeft;
+	public void setImagesLeft(int imagesLeft) {
+		this.imagesLeft = imagesLeft;
 	}
 	public int getResponseCode() {
 		return responseCode;

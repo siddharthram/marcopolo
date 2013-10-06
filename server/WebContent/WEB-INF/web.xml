@@ -23,6 +23,14 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		<servlet-class>com.marcopolo.service.lock</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>product</servlet-name>
+		<servlet-class>com.marcopolo.service.product</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>purchase</servlet-name>
+		<servlet-class>com.marcopolo.service.purchase</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>taskByGuid</servlet-name>
 		<servlet-class>com.marcopolo.service.taskByGuid</servlet-class>
 	</servlet>	
@@ -58,6 +66,14 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	<servlet-mapping>
 		<servlet-name>testsmsapi</servlet-name>
 		<url-pattern>/task/testsmsapi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>product</servlet-name>
+		<url-pattern>/product/list</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>purchase</servlet-name>
+		<url-pattern>/product/purchase</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>submitOverDue</servlet-name>

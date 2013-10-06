@@ -8,7 +8,7 @@ import urbanairship.UrbanAirshipClient;
 public class SendPushNotification {
 
 	private static UrbanAirshipClient client = new UrbanAirshipClient(
-			"45KzZ2wDRuikd5c6eSzG2g", "O9Y_D6gVRn2XwdwCf2PeTA");
+			"atnfkp1eSF6D0JWxACQQKA", "HNycfmlVTZKEpJbPDbkEvQ");
 
 	public static void main(String[] args) {
 

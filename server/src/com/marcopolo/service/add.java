@@ -35,7 +35,7 @@ import com.marcopolo.service.dto.PostResponse;
 
 
 /**
- * Servlet implementation class add
+ * Servlet implementation class add a new task
  */
 public class add extends AbstractServlet {
 	private static final long serialVersionUID = 1L;

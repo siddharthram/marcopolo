@@ -32,7 +32,7 @@ import com.marcopolo.service.dto.PostResponse;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
 /**
- * Servlet implementation class add
+ * Servlet implementation class get list of all open tasks
  */
 public class open extends AbstractServlet {
 	private static final long serialVersionUID = 1L;

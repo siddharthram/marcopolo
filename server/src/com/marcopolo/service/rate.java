@@ -19,7 +19,7 @@ import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
 /**
- * Servlet implementation class register
+ * Servlet implementation class to rate the transcription
  */
 public class rate extends AbstractServlet {
 	private static final long serialVersionUID = 1L;

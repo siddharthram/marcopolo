@@ -14,23 +14,27 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.marcopolo.service.apple.ApplePayments;
 import com.marcopolo.service.data.DataAccess;
+import com.marcopolo.service.dto.ProductsResponse;
 import com.marcopolo.service.dto.TaskStatusRequest;
 import com.marcopolo.service.dto.TaskStatusResponse;
 
+
+
 /**
- * Servlet implementation class register (a new device)
+ * Servlet implementation class to list all tasks from a device
  */
-public class register extends AbstractServlet {
+public class purchase extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
 
-	private Log log = LogFactory.getLog(register.class);
+	private Log log = LogFactory.getLog(purchase.class);
 	
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public register() {
+	public purchase() {
 		super();
 	}
 
@@ -41,27 +45,31 @@ public class register extends AbstractServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
+		response.setContentType("text/xml");
+		ProductsResponse productsResponse = new ProductsResponse();
 		try {
-			
-			TaskStatusRequest tsr = new TaskStatusRequest();
-			String ximlyDeviceId = request.getParameter("deviceId");
-			String phoneDeviceId = request.getParameter("apnsDeviceId");
-			log.debug("Got parameters for register as deviceId='" + ximlyDeviceId + "' and apnsDeviceId ='" + phoneDeviceId + "'");
-			if (ximlyDeviceId != null && !ximlyDeviceId.trim().equals("") && phoneDeviceId != null && !phoneDeviceId.trim().equals("")) {
-				DataAccess.register(ximlyDeviceId, phoneDeviceId);
-			} else {
-				throw new Exception("Required parameters not sent for registration");
+			String deviceId = request.getParameter("deviceId");
+			String productId = request.getParameter("product_id");
+			String transactionId = request.getParameter("transaction_id");
+			String receipt = request.getParameter("receipt_data");
+			if (deviceId != null && !deviceId.trim().equals("") &&
+					productId != null && !productId.trim().equals("") &&
+							transactionId != null && !transactionId.trim().equals("")
+					) {
+				if (ApplePayments.isReceiptGenuine(receipt)) {
+						DataAccess.purchase(deviceId, productId, transactionId);
+				}
 			}
 		} catch (Exception ex) {
-			log.error("Error when registring", ex);
 			throw new ServletException(ex);
 		}
 		response.setContentType("application/json");
 		PrintWriter writer = response.getWriter();
 		Gson gson = new Gson();
-		Type postRespType = new TypeToken<TaskStatusResponse>() {}.getType();
-		writer.println(gson.toJson(taskStatusResponse, postRespType));
+		
+
+		Type postRespType = new TypeToken<ProductsResponse>() {}.getType();
+		writer.println(gson.toJson(productsResponse, postRespType));
 		gson = null;
 	}
 

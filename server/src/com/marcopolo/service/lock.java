@@ -21,7 +21,7 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 
 
 /**
- * Servlet implementation class add
+ * Servlet implementation class lock a task 
  */
 public class lock extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
