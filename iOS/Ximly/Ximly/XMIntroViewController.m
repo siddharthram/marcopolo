@@ -72,7 +72,7 @@
     return YES;
 }
 
--(NSInteger)supportedInterfaceOrientations{
+-(NSUInteger)supportedInterfaceOrientations{
     
     //    UIInterfaceOrientationMaskLandscape;
     //    24
