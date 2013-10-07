@@ -33,6 +33,9 @@
 {
     [super viewDidLoad];
     
+    self.purchaseLevel1Button.enabled = NO;
+    self.purchaseLevel2Button.enabled = NO;
+    self.purchaseLevel3Button.enabled = NO;
     [[XMPurchaseManager sharedInstance] setDelegate:self];
     [[XMPurchaseManager sharedInstance] fetchProducts];
 
@@ -155,13 +158,15 @@
 - (IBAction)purchaseLevel3Product
 {
     [[XMPurchaseManager sharedInstance] setDelegate:self];
-    [[XMPurchaseManager sharedInstance] purchaseLevel1Product];
+    [[XMPurchaseManager sharedInstance] purchaseLevel3Product];
 }
 
 
 - (void)didFetchProducts:(NSDictionary *)products
 {
-    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMXimlyHTTPClient getImagesLeft]];
+    self.purchaseLevel1Button.enabled = YES;
+    self.purchaseLevel2Button.enabled = YES;
+    self.purchaseLevel3Button.enabled = YES;
 }
 
 - (void)failedToStartPurchase

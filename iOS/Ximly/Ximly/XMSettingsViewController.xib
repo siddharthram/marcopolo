@@ -8,6 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XMSettingsViewController">
             <connections>
                 <outlet property="numTranscriptionsLabel" destination="44" id="45"/>
+                <outlet property="purchaseLevel1Button" destination="z1c-ZE-tAY" id="dWg-cd-Lg6"/>
+                <outlet property="purchaseLevel2Button" destination="Vec-K7-TDX" id="1UL-MH-cSY"/>
+                <outlet property="purchaseLevel3Button" destination="buy-p9-g48" id="El2-ln-X3A"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -25,7 +28,7 @@
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="44">
                     <rect key="frame" x="170" y="168" width="77" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -37,6 +40,9 @@
                     <state key="normal" title="Buy 5-pack">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="purchaseLevel1Product" destination="-1" eventType="touchUpInside" id="AAL-cm-IQh"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vec-K7-TDX">
                     <rect key="frame" x="111" y="290" width="98" height="33"/>
@@ -45,6 +51,9 @@
                     <state key="normal" title="Buy 20-pack">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="purchaseLevel2Product" destination="-1" eventType="touchUpInside" id="8SM-3t-pif"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="buy-p9-g48">
                     <rect key="frame" x="106" y="331" width="108" height="33"/>
@@ -53,6 +62,9 @@
                     <state key="normal" title="Buy 100-pack">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="purchaseLevel3Product" destination="-1" eventType="touchUpInside" id="XBZ-e8-nhO"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

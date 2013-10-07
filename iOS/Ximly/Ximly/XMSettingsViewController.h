@@ -22,8 +22,11 @@
 @property (nonatomic, weak) IBOutlet UITextField    *deviceIDField;
 @property (nonatomic, weak) IBOutlet UILabel        *currentDeviceIDLabel;
 
+@property (nonatomic, weak) IBOutlet UIButton        *purchaseLevel1Button;
+@property (nonatomic, weak) IBOutlet UIButton        *purchaseLevel2Button;
+@property (nonatomic, weak) IBOutlet UIButton        *purchaseLevel3Button;
+
 - (IBAction)showIntroSwitchChanged;
-- (IBAction)inAppPurchaseSwitchChanged;
 - (IBAction)deviceIDSwitchChanged;
 - (IBAction)deleteCache:(id)sender;
 - (IBAction)emailDeviceID:(id)sender;
