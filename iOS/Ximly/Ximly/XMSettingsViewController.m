@@ -32,9 +32,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[XMPurchaseManager sharedInstance] setDelegate:self];
+    [[XMPurchaseManager sharedInstance] fetchProducts];
+
     // Do any additional setup after loading the view from its nib.
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	NSString *deviceID = [userDefaults stringForKey:kDeviceIDPrefKey];
+    
+    self.navigationItem.title = @"Transcriptions";
     
     if ([deviceID length] > 0) {
         self.deviceIDSwitch.on = YES;
@@ -69,7 +75,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMXimlyHTTPClient getImagesLeft]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -93,11 +99,6 @@
     [userDefaults synchronize];
 }
 
-- (IBAction)inAppPurchaseSwitchChanged
-{
-    [XMPurchaseManager setIsPurchasingEnabled:self.inAppPurchaseSwitch.on];
-    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
-}
 
 - (IBAction)deviceIDSwitchChanged
 {
@@ -124,12 +125,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
 }
 
-- (IBAction)resetTranscriptionCounts:(id)sender
-{
-    [XMPurchaseManager deleteTranscriptionCounts];
-    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMPurchaseManager transcriptionsRemaining]];
-}
-
 - (IBAction)emailDeviceID:(id)sender
 {
 
@@ -143,6 +138,55 @@
             [self presentViewController:emailEditor animated:YES completion:nil];
         } 
 
+}
+
+- (IBAction)purchaseLevel1Product
+{
+    [[XMPurchaseManager sharedInstance] setDelegate:self];
+    [[XMPurchaseManager sharedInstance] purchaseLevel1Product];
+}
+
+- (IBAction)purchaseLevel2Product
+{
+    [[XMPurchaseManager sharedInstance] setDelegate:self];
+    [[XMPurchaseManager sharedInstance] purchaseLevel2Product];
+}
+
+- (IBAction)purchaseLevel3Product
+{
+    [[XMPurchaseManager sharedInstance] setDelegate:self];
+    [[XMPurchaseManager sharedInstance] purchaseLevel1Product];
+}
+
+
+- (void)didFetchProducts:(NSDictionary *)products
+{
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMXimlyHTTPClient getImagesLeft]];
+}
+
+- (void)failedToStartPurchase
+{
+    //TODO
+}
+
+- (void)didProcessTransactionSuccessfully:(int)numAvailable
+{
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMXimlyHTTPClient getImagesLeft]];
+}
+
+- (void)didProcessTransactionUnsuccessfully
+{
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMXimlyHTTPClient getImagesLeft]];
+}
+
+- (void)didProcessTransactionWithAppleError:(NSError *)error
+{
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMXimlyHTTPClient getImagesLeft]];
+}
+
+- (void)didProcessTransactionWithXimlyError:(int)errorCode
+{
+    self.numTranscriptionsLabel.text = [NSString stringWithFormat:@"%d",[XMXimlyHTTPClient getImagesLeft]];
 }
 
 #pragma mark - Mail composer delegate method

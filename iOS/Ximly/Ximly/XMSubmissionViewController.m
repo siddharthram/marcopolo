@@ -148,17 +148,15 @@
         return;
     }
         
-    if ([XMPurchaseManager freeTranscriptionsRemaining] > 0) {
-        [self submitToCloudWithFreeTranscription:YES];
-    } else if ([XMPurchaseManager paidTranscriptionsRemaining] > 0){
-        [self submitToCloudWithFreeTranscription:NO];
+    if ([XMXimlyHTTPClient getImagesLeft] > 0) {
+        [self _submitToCloud];
     } else {
         [self askUserToPurchaseTranscriptions];
     }
     
 }
 
-- (void)submitToCloudWithFreeTranscription:(BOOL)useFreeTranscription
+- (void)_submitToCloud
 {
     self.view.hidden = YES;
     [self.view removeFromSuperview];
@@ -175,11 +173,6 @@
     [self.delegate jobSubmitted:theJob];
     [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMITTED object:theJob];
     [[XMXimlyHTTPClient sharedClient] submitImage:imageData forJob:theJob];
-    if (useFreeTranscription) {
-        [XMPurchaseManager modifyFreeTranscriptionsRemaining:-1];
-    } else {
-        [XMPurchaseManager modifyPaidTranscriptionsRemaining:-1];
-    }
 }
 
 - (void)askUserToPurchaseTranscriptions
@@ -199,8 +192,8 @@
                                                             message:@"Please make a purchase to continue using the app."
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:[NSString stringWithFormat:@"20-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts]      objectForKey:kLevel1ProductCode] price] stringValue]],
-                                                                    [NSString stringWithFormat:@"50-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]],
+                                                  otherButtonTitles:[NSString stringWithFormat:@"5-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts]      objectForKey:kLevel1ProductCode] price] stringValue]],
+                                                                    [NSString stringWithFormat:@"20-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]],
                                                                     [NSString stringWithFormat:@"100-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel3ProductCode] price] stringValue]], nil];
         [alertView show];
     }
@@ -211,10 +204,11 @@
     //TODO
 }
 
-- (void)didProcessTransactionSuccessfully:(int)numPurchased
+- (void)didProcessTransactionSuccessfully:(int)numAvailable
 {
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kPurchaseSuccessfulAlertTitle
-                                                        message:[NSString stringWithFormat:@"%d transcriptions purchased.  One will be used to process the current photo.", numPurchased]
+                                                        message:[NSString stringWithFormat:@"Purchase successful.  You have %d transcriptions left.  One will be used to process the current photo.", numAvailable]
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
@@ -242,6 +236,11 @@
     }
 }
 
+- (void)didProcessTransactionWithXimlyError:(int)errorCode
+{
+    // TODO
+}
+
 -(void)alertUserToFailedPurchase
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Purchase Failed"
@@ -255,7 +254,7 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if ([alertView.title isEqualToString:kPurchaseSuccessfulAlertTitle]) {
-        [self submitToCloudWithFreeTranscription:NO];
+        [self _submitToCloud];
     } else {
         switch (buttonIndex) {
             case 0:

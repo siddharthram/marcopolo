@@ -37,8 +37,7 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
 
 + (BOOL)isPurchasingEnabled
 {
-//    return YES;
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchasePrefKey];
+    return YES;
 }
 
 + (void)setIsPurchasingEnabled:(BOOL)value
@@ -48,86 +47,8 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
     [userDefaults synchronize];
 }
 
-+ (int)transcriptionsRemaining
-{
-    int paidRemaining = [self paidTranscriptionsRemaining];
-    if (paidRemaining > 0) {
-        return paidRemaining;
-    } else {
-        return [self freeTranscriptionsRemaining];
-    }
-}
-
-+ (int)transcriptionsRemainingOfType:(NSString *)transcriptionType
-{
-    if (![self isPurchasingEnabled]) {
-        return 1000000;
-    }
-    
-    NSError *error;
-    
-    NSString *countStr = [SFHFKeychainUtils getPasswordForUsername:transcriptionType andServiceName:kXMKeychainService error:&error];
-    
-    if (!countStr) { 
-        if ([transcriptionType isEqualToString:kXMKeychainFreeTranscriptionCount]) {
-            countStr = kFreeStartCount;
-            [SFHFKeychainUtils storeUsername:transcriptionType andPassword:countStr forServiceName:kXMKeychainService updateExisting:YES error:&error];
-        } else {
-            return 0;
-        }
-    }
-    
-    return [countStr intValue];
-}
-
-+ (int)freeTranscriptionsRemaining
-{
-    return [self transcriptionsRemainingOfType:kXMKeychainFreeTranscriptionCount];
-}
-
-+ (int)paidTranscriptionsRemaining
-{
-    return [self transcriptionsRemainingOfType:kXMKeychainPaidTranscriptionCount];
-}
-
-+ (int)modifyTranscriptionsRemainingOfType:(NSString *)transcriptionType increment:(int)increment
-{
-    int oldCount = [self transcriptionsRemainingOfType:transcriptionType];
-    
-    if (increment == 0) {
-        return oldCount;
-    }
-    
-    int newCount = oldCount + increment;
-    NSString *newCountStr = [NSString stringWithFormat:@"%d", newCount];
-    
-    NSError *error;
-    [SFHFKeychainUtils storeUsername:transcriptionType andPassword:newCountStr forServiceName:kXMKeychainService updateExisting:YES error:&error];
-    
-    if (!error) {
-        return newCount;
-    } else {
-        return [self transcriptionsRemainingOfType:transcriptionType];
-    }
-}
-
-+ (int)modifyFreeTranscriptionsRemaining:(int)increment
-{ 
-    return [self modifyTranscriptionsRemainingOfType:kXMKeychainFreeTranscriptionCount increment:increment];
-}
 
 
-+ (int)modifyPaidTranscriptionsRemaining:(int)increment
-{
-    return [self modifyTranscriptionsRemainingOfType:kXMKeychainPaidTranscriptionCount increment:increment];
-}
-
-+ (void)deleteTranscriptionCounts
-{
-    NSError *error = nil;
-    [SFHFKeychainUtils deleteItemForUsername:kXMKeychainFreeTranscriptionCount andServiceName:kXMKeychainService error:&error];
-    [SFHFKeychainUtils deleteItemForUsername:kXMKeychainPaidTranscriptionCount andServiceName:kXMKeychainService error:&error];
-}
 
 - (void)cleanup
 {
@@ -303,21 +224,6 @@ static int POS(char c)
     return pictemp;
 }
 
-- (int)enablePurchasedProduct:(NSString *)productCode
-{
-    int increment = 0;
-    
-    if ([productCode isEqualToString:kLevel1ProductCode]) {
-        increment = 20;
-    } else if ([productCode isEqualToString:kLevel2ProductCode]) {
-        increment = 50;
-    } else if ([productCode isEqualToString:kLevel3ProductCode]) {
-        increment = 100;
-    }
-                
-    [XMPurchaseManager modifyPaidTranscriptionsRemaining:increment];
-    return increment;
-}
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
 {
@@ -340,20 +246,21 @@ static int POS(char c)
             return;
         }
         
-        NSString * base64Enc = [self Base64Encode:transaction.transactionReceipt];
 
-        NSLog(@"Receipt data:  %@", base64Enc);
+        NSString * receiptData = [self Base64Encode:transaction.transactionReceipt];
+        NSString *deviceID = [[XMXimlyHTTPClient sharedClient] getDeviceID];
+        NSString *productID = [purchaseInfoDict objectForKey:@"product-id"];
+        NSString *txnID = [purchaseInfoDict objectForKey:@"transaction-id"];
         
-        int increment = [self enablePurchasedProduct:[purchaseInfoDict objectForKey:@"product-id"]];
+        NSDictionary *purchaseData = @{@"deviceId" : deviceID, @"product_id" : productID, @"transaction_id" : txnID, @"receipt_data" : receiptData};
+        NSLog(@"Purchase data:  %@", purchaseData);
+
+        [[XMXimlyHTTPClient sharedClient] submitPurchase:purchaseData purchaseDelegate:self.delegate];
         
+        // TODO - move this after success has registered
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
         [self stopObservingTransactions];
         
-        if (increment > 0) {
-            [self.delegate didProcessTransactionSuccessfully:increment];
-        } else {
-            [self.delegate didProcessTransactionUnsuccessfully];
-        }
     }
 }
 
