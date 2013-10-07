@@ -332,12 +332,12 @@
 
 - (NSString *)attachmentUrl
 {
-    return [self.jobData valueForKey:KJobAttachmentUrl];
+    return [self.jobData valueForKey:kJobAttachmentUrl];
 }
 
 - (void)setAttachmentUrl:(NSString *)value
 {
-    [self.jobData setValue:value forKey:KJobAttachmentUrl];
+    [self.jobData setValue:value forKey:kJobAttachmentUrl];
 }
 
 - (NSString *)attachmentKey

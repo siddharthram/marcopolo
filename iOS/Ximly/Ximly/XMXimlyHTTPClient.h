@@ -7,16 +7,21 @@
 //
 
 #import "AFHTTPClient.h"
+#import "XMPurchaseManager.h"
 
 #define kXMKeychainService      @"XMKeychainService"
 #define kXMKeychainDeviceIDKey  @"XMKeychainDeviceIDKey"
+#define kXMKeychainImagesLeftKey    @"XMKeychainImagesLeftKey"
 
 #define XM_NOTIFICATION_JOB_SUBMITTED               @"XM_NOTIFICATION_JOB_SUBMITTED"
 #define XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED    @"XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED"
 #define XM_NOTIFICATION_JOB_SUBMISSION_FAILED       @"XM_NOTIFICATION_JOB_SUBMISSION_FAILED"
 #define XM_NOTIFICATION_TASK_UPDATE_DONE            @"XM_NOTIFICATION_TASK_UPDATE_DONE"
 
+#define kImagePurchaseStatus    @"status"
+
 @class XMJob;
+
 
 typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error);
 
@@ -25,6 +30,9 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 + (XMXimlyHTTPClient *)sharedClient;
 
 + (NSString *)newRequestID;
+
++ (int)getImagesLeft;
++ (void)setImagesLeft:(int)imagesLeft;
 
 - (void)cancelAndClean;
 
@@ -52,5 +60,7 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 - (void)fetchAttachmentWithURL:(NSURL *)url
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)submitPurchase:(NSDictionary *)purchaseData purchaseDelegate:(NSObject <XMPurchaseManagerDelegate> *)purchaseDelegate;
 
 @end
