@@ -28,8 +28,9 @@
 #define kJobThumbnailKey                @"thumbnailKey"
 #define kJobUrgencyKey                  @"urgency"
 #define kJobReqeustedResponseFormat     @"requestedResponseFormat"
-#define KJobAttachmentUrl               @"attachmentUrl"
+#define kJobAttachmentUrl               @"attachmentUrl"
 
+#define kImagesLeft                     @"imagesLeft"
 
 
 typedef enum {

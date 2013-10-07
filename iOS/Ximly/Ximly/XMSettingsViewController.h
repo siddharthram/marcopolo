@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-
+#import "XMPurchaseManager.h"
 
 #define kShowIntroPrefKey   @"ShowIntroPrefKey"
 #define kDeviceIDPrefKey    @"DeviceIDPrefKey"
 
-@interface XMSettingsViewController : UIViewController <MFMailComposeViewControllerDelegate>
+@interface XMSettingsViewController : UIViewController <MFMailComposeViewControllerDelegate, XMPurchaseManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel        *numTranscriptionsLabel;
 @property (nonatomic, weak) IBOutlet UISwitch       *showIntroSwitch;
@@ -26,7 +26,10 @@
 - (IBAction)inAppPurchaseSwitchChanged;
 - (IBAction)deviceIDSwitchChanged;
 - (IBAction)deleteCache:(id)sender;
-- (IBAction)resetTranscriptionCounts:(id)sender;
 - (IBAction)emailDeviceID:(id)sender;
+
+- (IBAction)purchaseLevel1Product;
+- (IBAction)purchaseLevel2Product;
+- (IBAction)purchaseLevel3Product;
 
 @end

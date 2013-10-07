@@ -18,11 +18,13 @@
 #import "SFHFKeychainUtils.h"
 
 
+
 static NSString *_deviceID = nil;
 
 static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyxn2kkh.elasticbeanstalk.com/";
 
 @implementation XMXimlyHTTPClient
+
 
 + (XMXimlyHTTPClient *)sharedClient {
     static XMXimlyHTTPClient *_sharedClient = nil;
@@ -146,6 +148,22 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     return _deviceID;
 }
 
++ (int)getImagesLeft
+{
+    NSError *error;
+    NSString *imagesLeftString = [SFHFKeychainUtils getPasswordForUsername:kXMKeychainImagesLeftKey andServiceName:kXMKeychainService error:&error];
+    
+    return ([imagesLeftString length] > 0) ? [imagesLeftString intValue] : 0;
+}
+
++ (void)setImagesLeft:(int)imagesLeft
+{
+    NSError *error;
+    [SFHFKeychainUtils storeUsername:kXMKeychainImagesLeftKey andPassword:[NSString stringWithFormat:@"%i", imagesLeft] forServiceName:kXMKeychainService updateExisting:YES error:&error];
+}
+
+
+
 - (NSString *)getAuthID {
     return @"_";
 }
@@ -157,6 +175,8 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
         NSArray *taskStatusesArray = [responseDict objectForKey:@"taskStatuses"];
         [[XMJobList sharedInstance] mergeInJobsData:taskStatusesArray];
         [[XMJobList sharedInstance] submitUnsubmittedJobs];
+        NSNumber *numLeft = [responseDict objectForKey:kImagesLeft];
+        [XMXimlyHTTPClient setImagesLeft:[numLeft intValue]];
         [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_TASK_UPDATE_DONE object:nil];
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -182,7 +202,34 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
               }];
 }
 
-
+- (void)submitPurchase:(NSDictionary *)purchaseData purchaseDelegate:(NSObject <XMPurchaseManagerDelegate> *)purchaseDelegate
+{
+    [self requestPath:@"product/purchase" method:@"POST" parameters:purchaseData
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  NSDictionary *responseDict = (NSDictionary *)responseObject;
+                  NSNumber *status = [responseDict objectForKey:kImagePurchaseStatus];
+                  if (status) {
+                      NSNumber *numLeft = [responseDict objectForKey:kImagesLeft];
+                      [XMXimlyHTTPClient setImagesLeft:[numLeft intValue]];
+                      int statusCode = [status intValue];
+                      switch (statusCode) {
+                          case 0:
+                              [purchaseDelegate didProcessTransactionSuccessfully:[numLeft intValue]];
+                              break;
+                          case -1:
+                          case -2:
+                          default:
+                              [purchaseDelegate didProcessTransactionWithXimlyError:statusCode];
+                              break;
+                      }
+                  } else {
+                      [purchaseDelegate didProcessTransactionUnsuccessfully];
+                  }
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  [purchaseDelegate didProcessTransactionUnsuccessfully];
+              }];
+}
 - (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob
 {
     NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"task/new" parameters:[theJob submissionMetaData] constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
@@ -193,9 +240,12 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDict = (NSDictionary *)responseObject;
         NSNumber *responseCode = [responseDict valueForKey:@"responseCode"];
+        NSNumber *numLeft = [responseDict objectForKey:kImagesLeft];
+        [XMXimlyHTTPClient setImagesLeft:[numLeft intValue]];
         if ([responseCode isEqualToNumber:[NSDecimalNumber zero]]) {
             theJob.imageURL = [responseDict valueForKey:kJobImageURLKey];
-            theJob.serverRequestID = [responseDict valueForKey:kJobServerReqeustIDKey]; 
+            theJob.serverRequestID = [responseDict valueForKey:kJobServerReqeustIDKey];
+
             [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_SUCCEEDED object:theJob];
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:XM_NOTIFICATION_JOB_SUBMISSION_FAILED object:theJob];
