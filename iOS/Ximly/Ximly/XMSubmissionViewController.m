@@ -282,9 +282,10 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    self.pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+
     [picker dismissViewControllerAnimated:YES completion:nil];
 
-    self.pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     self.requestFormatActionSheet = [[UIActionSheet alloc] initWithTitle:kRequestFormatActionSheetTitle
                                                                  delegate:self
@@ -292,7 +293,7 @@
                                                    destructiveButtonTitle:nil
                                                         otherButtonTitles:@"Text transcript", @"PowerPoint slide", nil];
     
-    [self.requestFormatActionSheet performSelector:@selector(showInView:) withObject:self.view afterDelay:0];
+    [self.requestFormatActionSheet performSelector:@selector(showInView:) withObject:self.view afterDelay:0.01];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
