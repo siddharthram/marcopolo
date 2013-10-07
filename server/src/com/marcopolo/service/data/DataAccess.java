@@ -622,7 +622,7 @@ public class DataAccess {
 	 */
 
 	private static String receiptValidation = "select * from purchase_history_table where apple_transaction_id = ?";
-	private static String receiptUpdate = "insert into purchase_history_table (deviceId, producs_table_idproducts, apple_transaction_id, purchase_time) values (?, ?, ?, ?)";
+	private static String receiptUpdate = "insert into purchase_history_table (idpurchase_history_table, deviceId, producs_table_idproducts, apple_transaction_id, purchase_time) values (null, ?, ?, ?, ?)";
 	private static String productPurchase = "update device_table set free_tasks_left = (free_tasks_left + (select imagesLeft from Products_table where appleProductId = ?)) where device_id = ?";
 
 	public static PurchaseResponse purchase(String deviceId, String productId, String transactionId) throws SQLException {
