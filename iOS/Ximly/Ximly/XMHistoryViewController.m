@@ -78,6 +78,10 @@
     [self setCurrentJobListFromSegmentIndex:self.selectedListSegmentIndex];
     
     self.tableView.tableHeaderView = self.searchBar;
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
