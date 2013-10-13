@@ -47,7 +47,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-							
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -64,7 +64,13 @@
     self.tableViewController.refreshControl = refreshControl;
     
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"073-Setting"] style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    } else {
+        self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    }
     
 //    self.navigationItem.titleView = self.listSelector;
     
