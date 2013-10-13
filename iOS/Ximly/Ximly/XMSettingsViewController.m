@@ -72,6 +72,10 @@
     }
     
     self.currentDeviceIDLabel.text = [[XMXimlyHTTPClient sharedClient] getDeviceID];
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 
 }
 - (void)viewWillAppear:(BOOL)animated

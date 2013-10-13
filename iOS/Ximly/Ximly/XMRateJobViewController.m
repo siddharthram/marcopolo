@@ -57,6 +57,10 @@
 											 selector:@selector(keyboardDidHide:)
 												 name:UIKeyboardDidHideNotification
 											   object:nil];
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 }
 
 - (void)drawRatingBox

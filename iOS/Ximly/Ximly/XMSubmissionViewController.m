@@ -50,6 +50,10 @@
         [self.photoSourceSelectionSheet addButtonWithTitle:@"Photo Library"];
     }
     [self.photoSourceSelectionSheet addButtonWithTitle:@"Cancel"];
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 }
 
 - (void)startSubmissionWithDelegate:(NSObject<XMSubmissionDelegate> *)submissionDelegate
