@@ -140,6 +140,7 @@
 		245022D716ADD7F100FA03B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		245022D916ADD7F100FA03B0 /* XimlyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XimlyTests.h; sourceTree = "<group>"; };
 		245022DA16ADD7F100FA03B0 /* XimlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XimlyTests.m; sourceTree = "<group>"; };
+		245F07B1180B4BFD005E53AC /* ximlydev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ximlydev.entitlements; sourceTree = "<group>"; };
 		2473EF1016B7D2F900885451 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		2473EF1116B7D2F900885451 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		2473EF1216B7D2F900885451 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -287,6 +288,7 @@
 		2450229B16ADD7F100FA03B0 /* Ximly */ = {
 			isa = PBXGroup;
 			children = (
+				245F07B1180B4BFD005E53AC /* ximlydev.entitlements */,
 				2409380B16B9029F0045446F /* UIImage+XMAdditions.h */,
 				2409380C16B9029F0045446F /* UIImage+XMAdditions.m */,
 				245022A416ADD7F100FA03B0 /* XMAppDelegate.h */,
@@ -447,6 +449,19 @@
 				CLASSPREFIX = XM;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Young-Kyu Yoo";
+				TargetAttributes = {
+					2450229016ADD7F100FA03B0 = {
+						DevelopmentTeam = EC4N8FHE7U;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = 2450228B16ADD7F100FA03B0 /* Build configuration list for PBXProject "Ximly" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -717,12 +732,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 443383F986B54B62861349AB /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Ximly/ximlydev.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ximly/Ximly-Prefix.pch";
 				INFOPLIST_FILE = "Ximly/Ximly-Info.plist";
-				PRODUCT_NAME = ximlydev;
+				PRODUCT_NAME = Ximly;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
@@ -733,12 +749,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 443383F986B54B62861349AB /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Ximly/ximlydev.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ximly/Ximly-Prefix.pch";
 				INFOPLIST_FILE = "Ximly/Ximly-Info.plist";
-				PRODUCT_NAME = ximlydev;
+				PRODUCT_NAME = Ximly;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;

@@ -171,6 +171,10 @@
     self.purchaseLevel1Button.enabled = YES;
     self.purchaseLevel2Button.enabled = YES;
     self.purchaseLevel3Button.enabled = YES;
+    [self.purchaseLevel1Button setTitle:[NSString stringWithFormat:@"Buy 5-Pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel1ProductCode] price] stringValue]] forState:UIControlStateNormal];
+    [self.purchaseLevel2Button setTitle:[NSString stringWithFormat:@"Buy 20-Pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]] forState:UIControlStateNormal];
+    [self.purchaseLevel3Button setTitle:[NSString stringWithFormat:@"Buy 100-Pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel3ProductCode] price] stringValue]] forState:UIControlStateNormal];
+    
 }
 
 - (void)failedToStartPurchase
