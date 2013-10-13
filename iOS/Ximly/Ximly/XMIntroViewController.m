@@ -44,6 +44,10 @@
     } else {
         self.backgroundImageView.image = [UIImage imageNamed:@"Default-568h@2x.png"];
     }
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
  
 }
 
