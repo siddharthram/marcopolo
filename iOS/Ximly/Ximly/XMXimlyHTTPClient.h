@@ -61,6 +61,5 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-- (void)submitPurchase:(NSDictionary *)purchaseData purchaseDelegate:(NSObject <XMPurchaseManagerDelegate> *)purchaseDelegate;
 
 @end
