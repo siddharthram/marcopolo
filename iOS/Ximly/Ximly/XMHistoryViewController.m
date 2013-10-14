@@ -83,6 +83,12 @@
     self.selectedListSegmentIndex = [userDefaults integerForKey:@"LastHistoryList"];
     [self setCurrentJobListFromSegmentIndex:self.selectedListSegmentIndex];
     
+    if ([self tableView:self.tableView numberOfRowsInSection:0] == 0) {
+        self.zeroStateLabel.hidden = NO;
+    } else {
+        self.zeroStateLabel.hidden = YES;
+    }
+    
     self.tableView.tableHeaderView = self.searchBar;
     
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
@@ -199,7 +205,11 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.currentJobList count];
+    int numRows =[self.currentJobList count];
+    if (numRows > 0) {
+        self.zeroStateLabel.hidden = YES;
+    }
+    return numRows;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

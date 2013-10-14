@@ -11,6 +11,7 @@
                 <outlet property="searchBar" destination="59" id="60"/>
                 <outlet property="tableView" destination="24" id="42"/>
                 <outlet property="view" destination="1" id="3"/>
+                <outlet property="zeroStateLabel" destination="0vE-CH-K3Z" id="zKz-n0-jAy"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -48,6 +49,13 @@
                         <action selector="doSubmit:" destination="-1" eventType="touchUpInside" id="56"/>
                     </connections>
                 </button>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the camera button to take a picture of your whiteboard.  We'll transcribe the text for you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0vE-CH-K3Z">
+                    <rect key="frame" x="28" y="131" width="265" height="127"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>

@@ -30,9 +30,6 @@
 #define kJobReqeustedResponseFormat     @"requestedResponseFormat"
 #define kJobAttachmentUrl               @"attachmentUrl"
 
-#define kImagesLeft                     @"imagesLeft"
-
-
 typedef enum {
     JobStatusOpen             = 0,
     JobStatusLocked           = 1,
