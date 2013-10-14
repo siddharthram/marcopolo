@@ -202,34 +202,6 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
               }];
 }
 
-- (void)submitPurchase:(NSDictionary *)purchaseData purchaseDelegate:(NSObject <XMPurchaseManagerDelegate> *)purchaseDelegate
-{
-    [self requestPath:@"product/purchase" method:@"POST" parameters:purchaseData
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  NSDictionary *responseDict = (NSDictionary *)responseObject;
-                  NSNumber *status = [responseDict objectForKey:kImagePurchaseStatus];
-                  if (status) {
-                      NSNumber *numLeft = [responseDict objectForKey:kImagesLeft];
-                      [XMXimlyHTTPClient setImagesLeft:[numLeft intValue]];
-                      int statusCode = [status intValue];
-                      switch (statusCode) {
-                          case 0:
-                              [purchaseDelegate didProcessTransactionSuccessfully:[numLeft intValue]];
-                              break;
-                          case -1:
-                          case -2:
-                          default:
-                              [purchaseDelegate didProcessTransactionWithXimlyError:statusCode];
-                              break;
-                      }
-                  } else {
-                      [purchaseDelegate didProcessTransactionUnsuccessfully];
-                  }
-              }
-              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [purchaseDelegate didProcessTransactionUnsuccessfully];
-              }];
-}
 - (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob
 {
     NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"task/new" parameters:[theJob submissionMetaData] constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {

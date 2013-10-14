@@ -14,6 +14,8 @@
 #define kXMKeychainFreeTranscriptionCount @"XMKeychainFreeTranscriptionCount"
 #define kXMKeychainPaidTranscriptionCount @"XMKeychainPaidTranscriptionCount"
 
+#define kImagesLeft                     @"imagesLeft"
+
 @protocol XMPurchaseManagerDelegate
 
 @optional

@@ -21,6 +21,7 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
 @interface XMPurchaseManager ()
 
 - (void)purchaseProductWithCode:(NSString *)productCode;
+- (void)submitPurchase:(NSDictionary *)purchaseData transaction:(SKPaymentTransaction *)transaction;
 
 @end
 
@@ -46,9 +47,6 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
     [userDefaults setBool:value forKey:kInAppPurchasePrefKey];
     [userDefaults synchronize];
 }
-
-
-
 
 - (void)cleanup
 {
@@ -122,9 +120,9 @@ void* base64_decode(const char* s, size_t* data_len_ptr);
         SKProduct * product = [self.listOfProducts objectForKey:productCode];
         if (product) {
             if ([SKPaymentQueue canMakePayments]) {
+                [self startObservingTransactions];
                 SKPayment *payment =  [SKPayment paymentWithProduct:product];
                 if (payment) {
-                    [self startObservingTransactions];
                     [[SKPaymentQueue defaultQueue] addPayment:payment];
                 }
             } else {
@@ -245,9 +243,8 @@ static int POS(char c)
             [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
             return;
         }
-        
 
-        NSString * receiptData = [self Base64Encode:transaction.transactionReceipt];
+        NSString *receiptData = [self Base64Encode:transaction.transactionReceipt];
         NSString *deviceID = [[XMXimlyHTTPClient sharedClient] getDeviceID];
         NSString *productID = [purchaseInfoDict objectForKey:@"product-id"];
         NSString *txnID = [purchaseInfoDict objectForKey:@"transaction-id"];
@@ -255,14 +252,55 @@ static int POS(char c)
         NSDictionary *purchaseData = @{@"deviceId" : deviceID, @"product_id" : productID, @"transaction_id" : txnID, @"receipt_data" : receiptData};
         NSLog(@"Purchase data:  %@", purchaseData);
 
-        [[XMXimlyHTTPClient sharedClient] submitPurchase:purchaseData purchaseDelegate:self.delegate];
-        
-        // TODO - move this after success has registered
-        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-        [self stopObservingTransactions];
-        
+        [self submitPurchase:purchaseData transaction:transaction];
     }
 }
+
+- (void)submitPurchase:(NSDictionary *)purchaseData transaction:(SKPaymentTransaction *)transaction
+{
+    [[XMXimlyHTTPClient sharedClient] requestPath:@"product/purchase" method:@"POST" parameters:purchaseData
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  NSDictionary *responseDict = (NSDictionary *)responseObject;
+                  NSNumber *status = [responseDict objectForKey:kImagePurchaseStatus];
+                  if (status) {
+                      NSNumber *numLeft = [responseDict objectForKey:kImagesLeft];
+                      [XMXimlyHTTPClient setImagesLeft:[numLeft intValue]];
+                      int statusCode = [status intValue];
+                      switch (statusCode) {
+                          case 0:
+                              [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                              if ([self.delegate respondsToSelector:@selector(didProcessTransactionSuccessfully:)]) {
+                                  [self.delegate didProcessTransactionSuccessfully:[numLeft intValue]];
+                              }
+                              break;
+                          case -2:
+                              // We tried to send an old receipt up to our server again
+                              [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                              if ([self.delegate respondsToSelector:@selector(didProcessTransactionWithXimlyError:)]) {
+                                  [self.delegate didProcessTransactionWithXimlyError:statusCode];
+                              }
+                              break;
+                          case -1:
+                          default:
+                              if ([self.delegate respondsToSelector:@selector(didProcessTransactionWithXimlyError:)]) {
+                                  [self.delegate didProcessTransactionWithXimlyError:statusCode];
+                              }
+                              break;
+                      }
+                  } else {
+                      if ([self.delegate respondsToSelector:@selector(didProcessTransactionUnsuccessfully)]) {
+                          [self.delegate didProcessTransactionUnsuccessfully];
+                      }
+                  }
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  if ([self.delegate respondsToSelector:@selector(didProcessTransactionUnsuccessfully)]) {
+                      [self.delegate didProcessTransactionUnsuccessfully];
+                  }
+              }];
+}
+
+
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
