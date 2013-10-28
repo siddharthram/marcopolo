@@ -43,13 +43,11 @@ public class register extends AbstractServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
 		try {
-			
-			TaskStatusRequest tsr = new TaskStatusRequest();
 			String ximlyDeviceId = request.getParameter("deviceId");
 			String phoneDeviceId = request.getParameter("apnsDeviceId");
 			log.debug("Got parameters for register as deviceId='" + ximlyDeviceId + "' and apnsDeviceId ='" + phoneDeviceId + "'");
-			if (ximlyDeviceId != null && !ximlyDeviceId.trim().equals("") && phoneDeviceId != null && !phoneDeviceId.trim().equals("")) {
-				DataAccess.register(ximlyDeviceId, phoneDeviceId);
+			if (ximlyDeviceId != null && !ximlyDeviceId.trim().equals("")) {
+				taskStatusResponse = DataAccess.register(ximlyDeviceId, phoneDeviceId);
 			} else {
 				throw new Exception("Required parameters not sent for registration");
 			}

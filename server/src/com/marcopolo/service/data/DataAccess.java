@@ -229,29 +229,35 @@ public class DataAccess {
 	}
 
 	private static String updateRegisterRow = "update device_table set apns_device_id = ? where device_id = ?";
-	private static String addRegisterRow = "insert into device_table (device_id, apns_device_id, free_tasks_left, is_internal_device) values(?,?,?, 0)";
+	private static String addRegisterRow = "insert into device_table (device_id, apns_device_id, free_tasks_left, is_internal_device) values(?,?,?, 0) on DUPLICATE KEY UPDATE apns_device_id = ?";
 
-	public static void register(String ximlyDeviceId, String apnsDeviceId)
+	public static TaskStatusResponse register(String ximlyDeviceId, String apnsDeviceId)
 			throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
+		TaskStatusResponse resp = new TaskStatusResponse();
 		try {
 			log.debug("Got register request");
-			PreparedStatement pstmtQuery = conn
-					.prepareStatement(updateRegisterRow);
-			pstmtQuery.setString(1, apnsDeviceId);
-			pstmtQuery.setString(2, ximlyDeviceId);
-			int rows = pstmtQuery.executeUpdate();
-			pstmtQuery.close();
+			int rows = 0;
+			PreparedStatement pstmtQuery = null;
+			if (null != apnsDeviceId && !("".equals(apnsDeviceId.trim()))) {
+				pstmtQuery = conn.prepareStatement(updateRegisterRow);
+				pstmtQuery.setString(1, apnsDeviceId);
+				pstmtQuery.setString(2, ximlyDeviceId);
+				rows = pstmtQuery.executeUpdate();
+				pstmtQuery.close();
+			}
 
 			if (rows == 0) {
 				pstmtQuery = conn.prepareStatement(addRegisterRow);
 				pstmtQuery.setString(1, ximlyDeviceId);
 				pstmtQuery.setString(2, apnsDeviceId);
 				pstmtQuery.setInt(3, MAX_FREE_TASKS);
+				pstmtQuery.setString(4, apnsDeviceId);
 				pstmtQuery.executeUpdate();
 				pstmtQuery.close();
 			}
+			resp.setImagesLeft(getFreeTasks(ximlyDeviceId, conn));
 		} finally {
 			try {
 				conn.close();
@@ -259,6 +265,7 @@ public class DataAccess {
 				log.error("Error closing connection", e);
 			}
 		}
+		return resp;
 
 	}
 
@@ -668,16 +675,7 @@ public class DataAccess {
 				int rowsInserted = pstmtQuery.executeUpdate();
 				pstmtQuery.close();
 			} 
-			
-			// get the list of free tasks
-			pstmtQuery = conn.prepareStatement(freeTaskQuery);
-			pstmtQuery.setString(1, deviceId);
-			rs = pstmtQuery.executeQuery();
-			if (rs.next()) {
-				presp.setImagesLeft(rs.getInt(2));
-			} 
-			rs.close();
-			pstmtQuery.close();
+			presp.setImagesLeft(getFreeTasks(deviceId, conn));
 			
 		} finally {
 			try {
@@ -687,6 +685,22 @@ public class DataAccess {
 			}
 		}
 		return presp;
+	}
+
+	private static int getFreeTasks(String deviceId, Connection conn) throws SQLException {
+		PreparedStatement pstmtQuery;
+		ResultSet rs;
+		int freeImagesLeft = 0;
+		// get the list of free tasks
+		pstmtQuery = conn.prepareStatement(freeTaskQuery);
+		pstmtQuery.setString(1, deviceId);
+		rs = pstmtQuery.executeQuery();
+		if (rs.next()) {
+			freeImagesLeft  = rs.getInt(2);
+		} 
+		rs.close();
+		pstmtQuery.close();
+		return freeImagesLeft;
 	}
 
 	
