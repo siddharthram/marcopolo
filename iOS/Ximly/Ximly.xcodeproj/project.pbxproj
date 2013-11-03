@@ -16,6 +16,8 @@
 		2409380D16B9029F0045446F /* UIImage+XMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2409380C16B9029F0045446F /* UIImage+XMAdditions.m */; };
 		2419BE3816C250C000650F3B /* XMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2419BE3616C250C000650F3B /* XMSettingsViewController.m */; };
 		2419BE3916C250C000650F3B /* XMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2419BE3716C250C000650F3B /* XMSettingsViewController.xib */; };
+		2429D9941825F85400A33113 /* buyingcredits.png in Resources */ = {isa = PBXBuildFile; fileRef = 2429D9921825F85400A33113 /* buyingcredits.png */; };
+		2429D9951825F85400A33113 /* buyingcredits@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2429D9931825F85400A33113 /* buyingcredits@2x.png */; };
 		2436CBF816DB4CB100969BFF /* white_parchment_paper_background_1800x1600.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2436CBF716DB4CB100969BFF /* white_parchment_paper_background_1800x1600.jpg */; };
 		2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229516ADD7F100FA03B0 /* UIKit.framework */; };
 		2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
@@ -108,8 +110,10 @@
 		2419BE3516C250C000650F3B /* XMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMSettingsViewController.h; sourceTree = "<group>"; };
 		2419BE3616C250C000650F3B /* XMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMSettingsViewController.m; sourceTree = "<group>"; };
 		2419BE3716C250C000650F3B /* XMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMSettingsViewController.xib; sourceTree = "<group>"; };
+		2429D9921825F85400A33113 /* buyingcredits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buyingcredits.png; sourceTree = "<group>"; };
+		2429D9931825F85400A33113 /* buyingcredits@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buyingcredits@2x.png"; sourceTree = "<group>"; };
 		2436CBF716DB4CB100969BFF /* white_parchment_paper_background_1800x1600.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white_parchment_paper_background_1800x1600.jpg; sourceTree = "<group>"; };
-		2450229116ADD7F100FA03B0 /* ximlydev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ximlydev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2450229116ADD7F100FA03B0 /* Ximly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ximly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2450229516ADD7F100FA03B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2450229716ADD7F100FA03B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2450229916ADD7F100FA03B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -267,7 +271,7 @@
 		2450229216ADD7F100FA03B0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2450229116ADD7F100FA03B0 /* ximlydev.app */,
+				2450229116ADD7F100FA03B0 /* Ximly.app */,
 				245022CC16ADD7F100FA03B0 /* XimlyTests.octest */,
 			);
 			name = Products;
@@ -364,6 +368,8 @@
 		2450229C16ADD7F100FA03B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2429D9921825F85400A33113 /* buyingcredits.png */,
+				2429D9931825F85400A33113 /* buyingcredits@2x.png */,
 				2473EF1016B7D2F900885451 /* Icon-72.png */,
 				2473EF1116B7D2F900885451 /* Icon-Small-50.png */,
 				2473EF1216B7D2F900885451 /* Icon-Small.png */,
@@ -418,7 +424,7 @@
 			);
 			name = Ximly;
 			productName = Ximly;
-			productReference = 2450229116ADD7F100FA03B0 /* ximlydev.app */;
+			productReference = 2450229116ADD7F100FA03B0 /* Ximly.app */;
 			productType = "com.apple.product-type.application";
 		};
 		245022CB16ADD7F100FA03B0 /* XimlyTests */ = {
@@ -507,9 +513,11 @@
 				24B2E06D16B3E43B0022DFAF /* badSelected.png in Resources */,
 				24B2E06F16B3E6EC0022DFAF /* goodSelected.png in Resources */,
 				24B2E07116B3F9400022DFAF /* closeButton.png in Resources */,
+				2429D9951825F85400A33113 /* buyingcredits@2x.png in Resources */,
 				24A782C416B4F6A20091AB46 /* sample1.jpg in Resources */,
 				24A782C516B4F6A20091AB46 /* sample2.jpg in Resources */,
 				24A782C616B4F6A20091AB46 /* sample3.jpg in Resources */,
+				2429D9941825F85400A33113 /* buyingcredits.png in Resources */,
 				24A782C716B4F6A20091AB46 /* sample4.jpg in Resources */,
 				2473EF1616B7D2F900885451 /* Icon-72.png in Resources */,
 				2473EF1716B7D2F900885451 /* Icon-Small-50.png in Resources */,
