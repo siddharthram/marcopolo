@@ -17,6 +17,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
+    if (![XMXimlyHTTPClient isRegistered]) {
+        self.isLaunching = YES;
+        [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:nil delegate:nil];
+    }
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     BOOL hasSeenInstructions = [userDefaults boolForKey:@"hasSeenInstructions"];
@@ -61,7 +66,7 @@
 {
 	NSLog(@"My token is: %@", deviceToken);
     self.apnsDeviceToken = deviceToken;
-    [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:self.apnsDeviceToken];
+    [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:self.apnsDeviceToken delegate:nil];
     [Flurry logEvent:@"Accept Push Notifications"];
 }
 
@@ -172,6 +177,12 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if (!self.isLaunching && ![XMXimlyHTTPClient isRegistered]) {
+        [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:nil delegate:nil];
+    } else {
+        self.isLaunching = NO;
+    }
+    
     [[XMXimlyHTTPClient sharedClient] updateTasks];
     
     [[EvernoteSession sharedSession] handleDidBecomeActive];

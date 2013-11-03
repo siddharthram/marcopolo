@@ -25,6 +25,7 @@
 @property (strong, nonatomic) XMHistoryViewController *historyViewController;
 @property (strong, nonatomic) XMSubmissionViewController *submissionViewController;
 @property (strong, nonatomic) NSData *apnsDeviceToken;
+@property (assign, nonatomic) BOOL isLaunching;
 
 - (void)showIntroView;
 - (void)showSubmissionViewWithDelegate:(NSObject<XMSubmissionDelegate> *)submissionDelegate;

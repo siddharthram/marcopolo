@@ -33,9 +33,34 @@
 {
     [super viewDidLoad];
     
+    self.purchaseLevel1Button.layer.cornerRadius = 3;
+    self.purchaseLevel2Button.layer.cornerRadius = 3;
+    self.purchaseLevel3Button.layer.cornerRadius = 3;
+    self.purchaseLevel1Button.layer.borderWidth = 2;
+    self.purchaseLevel2Button.layer.borderWidth = 2;
+    self.purchaseLevel3Button.layer.borderWidth = 2;
+    self.purchaseLevel1Button.layer.borderColor = [UIColor colorWithRed:53.0/255.0 green:177.0/255.0 blue:235.0/255.0 alpha:1.0].CGColor;
+    self.purchaseLevel2Button.layer.borderColor = [UIColor colorWithRed:53.0/255.0 green:177.0/255.0 blue:235.0/255.0 alpha:1.0].CGColor;
+    self.purchaseLevel3Button.layer.borderColor = [UIColor colorWithRed:53.0/255.0 green:177.0/255.0 blue:235.0/255.0 alpha:1.0].CGColor;
+
     self.purchaseLevel1Button.enabled = NO;
     self.purchaseLevel2Button.enabled = NO;
     self.purchaseLevel3Button.enabled = NO;
+    self.plus1Label.hidden = YES;
+    self.plus2Label.hidden = YES;
+    self.plus3Label.hidden = YES;
+    self.number1Label.hidden = YES;
+    self.number2Label.hidden = YES;
+    self.number3Label.hidden = YES;
+    self.credits1Label.hidden = YES;
+    self.credits2Label.hidden = YES;
+    self.credits3Label.hidden = YES;
+    self.price1Label.hidden = YES;
+    self.price2Label.hidden = YES;
+    self.price3Label.hidden = YES;
+    self.off2Label.hidden = YES;
+    self.off3Label.hidden = YES;
+
     [[XMPurchaseManager sharedInstance] setDelegate:self];
     [[XMPurchaseManager sharedInstance] fetchProducts];
 
@@ -97,6 +122,22 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationIsPortrait(UIInterfaceOrientationMaskPortrait|| UIInterfaceOrientationMaskPortraitUpsideDown);
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationIsPortrait(UIInterfaceOrientationPortrait|| UIInterfaceOrientationPortraitUpsideDown);
+    
 }
 
 - (IBAction)showIntroSwitchChanged
@@ -171,9 +212,32 @@
     self.purchaseLevel1Button.enabled = YES;
     self.purchaseLevel2Button.enabled = YES;
     self.purchaseLevel3Button.enabled = YES;
-    [self.purchaseLevel1Button setTitle:[NSString stringWithFormat:@"Buy 5-Pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel1ProductCode] price] stringValue]] forState:UIControlStateNormal];
-    [self.purchaseLevel2Button setTitle:[NSString stringWithFormat:@"Buy 20-Pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]] forState:UIControlStateNormal];
-    [self.purchaseLevel3Button setTitle:[NSString stringWithFormat:@"Buy 100-Pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel3ProductCode] price] stringValue]] forState:UIControlStateNormal];
+    [self.purchaseLevel1Button setTitle:@"" forState:UIControlStateNormal];
+    [self.purchaseLevel2Button setTitle:@"" forState:UIControlStateNormal];
+    [self.purchaseLevel3Button setTitle:@"" forState:UIControlStateNormal];
+    
+    self.plus1Label.hidden = NO;
+    self.plus2Label.hidden = NO;
+    self.plus3Label.hidden = NO;
+    self.number1Label.hidden = NO;
+    self.number2Label.hidden = NO;
+    self.number3Label.hidden = NO;
+    self.credits1Label.hidden = NO;
+    self.credits2Label.hidden = NO;
+    self.credits3Label.hidden = NO;
+    self.price1Label.hidden = NO;
+    self.price2Label.hidden = NO;
+    self.price3Label.hidden = NO;
+    NSString *price1 = [NSString stringWithFormat:@"$%@",[[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel1ProductCode] price] stringValue]];
+    NSString *price2 = [NSString stringWithFormat:@"$%@",[[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]];
+    NSString *price3 = [NSString stringWithFormat:@"$%@",[[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel3ProductCode] price] stringValue]];
+    self.price1Label.text = price1;
+    self.price2Label.text = price2;
+    self.price3Label.text = price3;
+    if ([price1 isEqualToString:@"$4.99"] && [price2 isEqualToString:@"$17.99"] && [price3 isEqualToString:@"$79.99"]) {
+        self.off2Label.hidden = NO;
+        self.off3Label.hidden = NO;
+    }
     
 }
 

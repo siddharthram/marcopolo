@@ -20,6 +20,14 @@
 
 #define kImagePurchaseStatus    @"status"
 
+@protocol XMXimlyHTTPClientDelegate
+
+- (void)requestSucceeded;
+- (void)requestFailed;
+
+@end
+
+
 @class XMJob;
 
 
@@ -49,7 +57,10 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 
 - (void)rateJob:(XMJob *)job;
 
-- (void)registerAPNSDeviceToken:(NSData *)token;
+- (void)registerAPNSDeviceToken:(NSData *)token delegate:(NSObject<XMXimlyHTTPClientDelegate> *)delegate;
+
++ (BOOL)isRegistered;
++ (void)setIsRegistered:(BOOL)isRegistered;
 
 - (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob;
 

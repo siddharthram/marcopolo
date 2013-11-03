@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "XMPurchaseManager.h"
+#import "XMXimlyHTTPClient.h"
 
 #import "XMJob.h"
 
@@ -19,7 +20,7 @@
 @end
 
 
-@interface XMSubmissionViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, XMPurchaseManagerDelegate, UIAlertViewDelegate>
+@interface XMSubmissionViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, XMPurchaseManagerDelegate, XMXimlyHTTPClientDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) NSObject<XMSubmissionDelegate> *delegate;
 

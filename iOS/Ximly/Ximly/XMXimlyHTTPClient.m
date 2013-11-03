@@ -148,6 +148,22 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     return _deviceID;
 }
 
+#define kXMKeychainRegistrationKey @"kXMKeychainRegistrationKey"
+
++ (BOOL)isRegistered
+{
+    NSError *error;
+    NSString *isRegisteredStr = [SFHFKeychainUtils getPasswordForUsername:kXMKeychainRegistrationKey andServiceName:kXMKeychainService error:&error];
+    return isRegisteredStr && [isRegisteredStr isEqualToString:@"YES"];
+}
+
++ (void)setIsRegistered:(BOOL)isRegistered
+{
+    NSError *error;
+    [SFHFKeychainUtils storeUsername:kXMKeychainRegistrationKey andPassword:(isRegistered ? @"YES" : @"NO") forServiceName:kXMKeychainService updateExisting:YES error:&error];
+    
+}
+
 + (int)getImagesLeft
 {
     NSError *error;
@@ -229,17 +245,29 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     [self enqueueHTTPRequestOperation:operation];
 }
 
-- (void)registerAPNSDeviceToken:(NSData *)token
+- (void)registerAPNSDeviceToken:(NSData *)token delegate:(NSObject<XMXimlyHTTPClientDelegate> *)delegate
 {
-    NSString *deviceTokenStr = [[[[token description]
+    NSString *apnsTokenStr = nil;
+    if (token) {
+        apnsTokenStr = [[[[token description]
                                   stringByReplacingOccurrencesOfString: @"<" withString: @""]
                                  stringByReplacingOccurrencesOfString: @">" withString: @""]
                                 stringByReplacingOccurrencesOfString: @" " withString: @""];
-    [self requestPath:@"task/register" method:@"POST" parameters:[NSDictionary dictionaryWithObjects:@[[self getDeviceID], deviceTokenStr] forKeys:@[kJobDeviceIDKey, kAPNSDeviceTokenKey]]
+    } else {
+        apnsTokenStr = @"";
+    }
+    
+    [self requestPath:@"task/register" method:@"POST" parameters:[NSDictionary dictionaryWithObjects:@[[self getDeviceID], apnsTokenStr] forKeys:@[kJobDeviceIDKey, kAPNSDeviceTokenKey]]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [XMXimlyHTTPClient setIsRegistered:YES];
+                  NSDictionary *responseDict = (NSDictionary *)responseObject;
+                  NSNumber *numLeft = [responseDict objectForKey:kImagesLeft];
+                  [XMXimlyHTTPClient setImagesLeft:[numLeft intValue]];
+                  [delegate requestSucceeded];
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Failed to register token");
+                  [delegate requestFailed];
               }];
 }
 

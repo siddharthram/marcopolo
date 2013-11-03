@@ -151,8 +151,9 @@
     if (!self.pickedImage) {
         return;
     }
-        
-    if ([XMXimlyHTTPClient getImagesLeft] > 0) {
+    if (![XMXimlyHTTPClient isRegistered]) {
+        [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:nil delegate:self];
+    } else if ([XMXimlyHTTPClient getImagesLeft] > 0) {
         [self _submitToCloud];
     } else {
         [self askUserToPurchaseTranscriptions];
@@ -352,5 +353,18 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     
     return resultImage;
 }
+
+// XMXimlyHTTPClientDelegate methods
+
+- (void)requestSucceeded
+{
+    [self _submitToCloud];
+}
+
+- (void)requestFailed
+{
+    [self _submitToCloud];
+}
+
 
 @end
