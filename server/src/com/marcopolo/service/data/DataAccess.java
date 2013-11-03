@@ -216,6 +216,10 @@ public class DataAccess {
 				}
 				taskStatusResponse.addTaskStatus(ts);
 			}
+			
+			if (taskStatusResponse.getTaskStatuses().size() == 0 ) {
+				taskStatusResponse.setImagesLeft(getFreeTasks(taskReq.getDeviceId(), conn));
+			}
 			rs.close();
 			pstmtQuery.close();
 		} finally {
@@ -229,9 +233,9 @@ public class DataAccess {
 	}
 
 	private static String updateRegisterRow = "update device_table set apns_device_id = ? where device_id = ?";
-	private static String addRegisterRow = "insert into device_table (device_id, apns_device_id, free_tasks_left, is_internal_device) values(?,?,?, 0) on DUPLICATE KEY UPDATE apns_device_id = ?";
+	private static String addRegisterRow = "insert ignore into device_table (device_id, apns_device_id, free_tasks_left, is_internal_device) values(?,?,?, 0)";
 
-	public static TaskStatusResponse register(String ximlyDeviceId, String apnsDeviceId)
+	public static TaskStatusResponse register(String ximlyDeviceId, String apnsDeviceId, String updateApns)
 			throws SQLException {
 
 		Connection conn = _dataSource.getConnection();
@@ -240,7 +244,7 @@ public class DataAccess {
 			log.debug("Got register request");
 			int rows = 0;
 			PreparedStatement pstmtQuery = null;
-			if (null != apnsDeviceId && !("".equals(apnsDeviceId.trim()))) {
+			if ("t".equalsIgnoreCase(updateApns) && null != apnsDeviceId && !("".equals(apnsDeviceId.trim()))) {
 				pstmtQuery = conn.prepareStatement(updateRegisterRow);
 				pstmtQuery.setString(1, apnsDeviceId);
 				pstmtQuery.setString(2, ximlyDeviceId);
@@ -253,7 +257,6 @@ public class DataAccess {
 				pstmtQuery.setString(1, ximlyDeviceId);
 				pstmtQuery.setString(2, apnsDeviceId);
 				pstmtQuery.setInt(3, MAX_FREE_TASKS);
-				pstmtQuery.setString(4, apnsDeviceId);
 				pstmtQuery.executeUpdate();
 				pstmtQuery.close();
 			}

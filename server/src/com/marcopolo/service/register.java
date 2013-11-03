@@ -45,9 +45,10 @@ public class register extends AbstractServlet {
 		try {
 			String ximlyDeviceId = request.getParameter("deviceId");
 			String phoneDeviceId = request.getParameter("apnsDeviceId");
+			String updateApns = request.getParameter("updateApns");
 			log.debug("Got parameters for register as deviceId='" + ximlyDeviceId + "' and apnsDeviceId ='" + phoneDeviceId + "'");
 			if (ximlyDeviceId != null && !ximlyDeviceId.trim().equals("")) {
-				taskStatusResponse = DataAccess.register(ximlyDeviceId, phoneDeviceId);
+				taskStatusResponse = DataAccess.register(ximlyDeviceId, phoneDeviceId, updateApns);
 			} else {
 				throw new Exception("Required parameters not sent for registration");
 			}

@@ -46,7 +46,7 @@ public class Notify {
 	public static void sendAWSEmail(ArrayList<String> emails) {
 		final Email email = new Email();
 		email.setFromAddress("Ximly", "ximlynotification@gmail.com");
-		email.setSubject("New Transcription available.");
+		email.setSubject("Transcription from Ximly");
 		for (Iterator<String> emailIter = emails.iterator(); emailIter.hasNext();) {
 			String emailAdd = (String) emailIter.next();
 			email.addRecipient("Transcriber", emailAdd, RecipientType.BCC);
@@ -59,7 +59,7 @@ public class Notify {
 	public static void sendGmailEmail(ArrayList<String> emails) {
 		final Email email = new Email();
 		email.setFromAddress("Ximly", "ximlynotification@gmail.com");
-		email.setSubject("New Transcription available.");
+		email.setSubject("Transcription from Ximly");
 		for (Iterator<String> emailIter = emails.iterator(); emailIter.hasNext();) {
 			String emailAdd = (String) emailIter.next();
 			email.addRecipient("Transcriber", emailAdd, RecipientType.BCC);
