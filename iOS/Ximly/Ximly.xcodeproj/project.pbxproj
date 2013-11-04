@@ -80,6 +80,7 @@
 		24B2E06F16B3E6EC0022DFAF /* goodSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E06E16B3E6EC0022DFAF /* goodSelected.png */; };
 		24B2E07116B3F9400022DFAF /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B2E07016B3F9400022DFAF /* closeButton.png */; };
 		24B3A51016ED37B400C6B5F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */; };
+		24D26C701827720000EDD6D2 /* UINavigationController+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D26C6F1827720000EDD6D2 /* UINavigationController+Orientation.m */; };
 		24F1A15C16C87279003E02C8 /* 073-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15A16C87279003E02C8 /* 073-Setting.png */; };
 		24F1A15D16C87279003E02C8 /* 073-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15B16C87279003E02C8 /* 073-Setting@2x.png */; };
 		24F1A16016C874C7003E02C8 /* camera-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F1A15E16C874C7003E02C8 /* camera-gray.png */; };
@@ -193,6 +194,8 @@
 		24B2E06E16B3E6EC0022DFAF /* goodSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goodSelected.png; sourceTree = "<group>"; };
 		24B2E07016B3F9400022DFAF /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
 		24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		24D26C6E1827720000EDD6D2 /* UINavigationController+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Orientation.h"; sourceTree = "<group>"; };
+		24D26C6F1827720000EDD6D2 /* UINavigationController+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Orientation.m"; sourceTree = "<group>"; };
 		24F1A15A16C87279003E02C8 /* 073-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "073-Setting.png"; sourceTree = "<group>"; };
 		24F1A15B16C87279003E02C8 /* 073-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "073-Setting@2x.png"; sourceTree = "<group>"; };
 		24F1A15E16C874C7003E02C8 /* camera-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-gray.png"; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 				245F07B1180B4BFD005E53AC /* ximlydev.entitlements */,
 				2409380B16B9029F0045446F /* UIImage+XMAdditions.h */,
 				2409380C16B9029F0045446F /* UIImage+XMAdditions.m */,
+				24D26C6E1827720000EDD6D2 /* UINavigationController+Orientation.h */,
+				24D26C6F1827720000EDD6D2 /* UINavigationController+Orientation.m */,
 				245022A416ADD7F100FA03B0 /* XMAppDelegate.h */,
 				245022A516ADD7F100FA03B0 /* XMAppDelegate.m */,
 				24A802811748C7DF0053C06A /* XMAttachmentCache.h */,
@@ -589,6 +594,7 @@
 				245022A216ADD7F100FA03B0 /* main.m in Sources */,
 				245022A616ADD7F100FA03B0 /* XMAppDelegate.m in Sources */,
 				245022AF16ADD7F100FA03B0 /* XMSubmissionViewController.m in Sources */,
+				24D26C701827720000EDD6D2 /* UINavigationController+Orientation.m in Sources */,
 				245022B616ADD7F100FA03B0 /* XMHistoryViewController.m in Sources */,
 				248A4CC516ADEA2F0042B46C /* XMIntroViewController.m in Sources */,
 				248A4CEA16AE1FE20042B46C /* XMXimlyHTTPClient.m in Sources */,
