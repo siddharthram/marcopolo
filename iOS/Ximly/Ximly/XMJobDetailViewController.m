@@ -128,6 +128,9 @@
          */
         
         if ([self.job.attachmentUrl length] > 0) {
+            [self.attachmentView setContentMode:UIViewContentModeScaleAspectFit];
+            [self.attachmentView setScalesPageToFit:YES];
+            
             if ([XMAttachmentCache cacheFileExistsForKey:self.job.attachmentKey]) {
                 NSString *filePath = [XMAttachmentCache cacheFilePathForKey:self.job.attachmentKey];
                 NSURL *url = [NSURL fileURLWithPath:filePath];

@@ -124,22 +124,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotate
-{
-    return NO;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationIsPortrait(UIInterfaceOrientationMaskPortrait|| UIInterfaceOrientationMaskPortraitUpsideDown);
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationIsPortrait(UIInterfaceOrientationPortrait|| UIInterfaceOrientationPortraitUpsideDown);
-    
-}
-
 - (IBAction)showIntroSwitchChanged
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
