@@ -241,10 +241,17 @@ public class DataAccess {
 		Connection conn = _dataSource.getConnection();
 		TaskStatusResponse resp = new TaskStatusResponse();
 		try {
+			// take care of null apns id
+			if (null == apnsDeviceId) {
+				apnsDeviceId = "";
+			}
+			
+			
+			// update or erase the value of apns id
 			log.debug("Got register request");
 			int rows = 0;
 			PreparedStatement pstmtQuery = null;
-			if ("t".equalsIgnoreCase(updateApns) && null != apnsDeviceId && !("".equals(apnsDeviceId.trim()))) {
+			if ("t".equalsIgnoreCase(updateApns)) {
 				pstmtQuery = conn.prepareStatement(updateRegisterRow);
 				pstmtQuery.setString(1, apnsDeviceId);
 				pstmtQuery.setString(2, ximlyDeviceId);
@@ -252,6 +259,7 @@ public class DataAccess {
 				pstmtQuery.close();
 			}
 
+			// if no row was found then insert the row
 			if (rows == 0) {
 				pstmtQuery = conn.prepareStatement(addRegisterRow);
 				pstmtQuery.setString(1, ximlyDeviceId);
