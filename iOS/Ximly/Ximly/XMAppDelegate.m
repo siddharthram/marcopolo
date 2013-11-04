@@ -19,7 +19,7 @@
 
     if (![XMXimlyHTTPClient isRegistered]) {
         self.isLaunching = YES;
-        [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:nil delegate:nil];
+        [[XMXimlyHTTPClient sharedClient] registerDeviceWithAPNSToken:nil updateAPNS:NO delegate:nil];
     }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -66,7 +66,7 @@
 {
 	NSLog(@"My token is: %@", deviceToken);
     self.apnsDeviceToken = deviceToken;
-    [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:self.apnsDeviceToken delegate:nil];
+    [[XMXimlyHTTPClient sharedClient] registerDeviceWithAPNSToken:self.apnsDeviceToken updateAPNS:YES delegate:nil];
     [Flurry logEvent:@"Accept Push Notifications"];
 }
 
@@ -74,7 +74,6 @@
 {
     [Flurry logEvent:@"Decline Push Notifications"];
 	NSLog(@"Failed to get token, error: %@", error);
-
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -178,7 +177,7 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     if (!self.isLaunching && ![XMXimlyHTTPClient isRegistered]) {
-        [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:nil delegate:nil];
+        [[XMXimlyHTTPClient sharedClient] registerDeviceWithAPNSToken:nil updateAPNS:NO delegate:nil];
     } else {
         self.isLaunching = NO;
     }

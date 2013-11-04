@@ -57,7 +57,7 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 
 - (void)rateJob:(XMJob *)job;
 
-- (void)registerAPNSDeviceToken:(NSData *)token delegate:(NSObject<XMXimlyHTTPClientDelegate> *)delegate;
+- (void)registerDeviceWithAPNSToken:(NSData *)token updateAPNS:(BOOL)updateAPNS delegate:(NSObject<XMXimlyHTTPClientDelegate> *)delegate;
 
 + (BOOL)isRegistered;
 + (void)setIsRegistered:(BOOL)isRegistered;

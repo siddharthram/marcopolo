@@ -152,7 +152,7 @@
         return;
     }
     if (![XMXimlyHTTPClient isRegistered]) {
-        [[XMXimlyHTTPClient sharedClient] registerAPNSDeviceToken:nil delegate:self];
+        [[XMXimlyHTTPClient sharedClient] registerDeviceWithAPNSToken:nil updateAPNS:NO delegate:self];
     } else if ([XMXimlyHTTPClient getImagesLeft] > 0) {
         [self _submitToCloud];
     } else {
