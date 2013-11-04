@@ -245,10 +245,10 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     [self enqueueHTTPRequestOperation:operation];
 }
 
-- (void)registerAPNSDeviceToken:(NSData *)token delegate:(NSObject<XMXimlyHTTPClientDelegate> *)delegate
+- (void)registerDeviceWithAPNSToken:(NSData *)token updateAPNS:(BOOL)updateAPNS delegate:(NSObject<XMXimlyHTTPClientDelegate> *)delegate
 {
     NSString *apnsTokenStr = nil;
-    if (token) {
+    if ([token length] > 0) {
         apnsTokenStr = [[[[token description]
                                   stringByReplacingOccurrencesOfString: @"<" withString: @""]
                                  stringByReplacingOccurrencesOfString: @">" withString: @""]
@@ -257,7 +257,13 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
         apnsTokenStr = @"";
     }
     
-    [self requestPath:@"task/register" method:@"POST" parameters:[NSDictionary dictionaryWithObjects:@[[self getDeviceID], apnsTokenStr] forKeys:@[kJobDeviceIDKey, kAPNSDeviceTokenKey]]
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjects:@[[self getDeviceID], apnsTokenStr] forKeys:@[kJobDeviceIDKey, kAPNSDeviceTokenKey]];
+    
+    if (updateAPNS) {
+        [params setObject:@"t" forKey:@"updateApns"];
+    }
+    
+    [self requestPath:@"task/register" method:@"POST" parameters:params
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   [XMXimlyHTTPClient setIsRegistered:YES];
                   NSDictionary *responseDict = (NSDictionary *)responseObject;
