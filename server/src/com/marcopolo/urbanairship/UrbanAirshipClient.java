@@ -1,8 +1,17 @@
 package com.marcopolo.urbanairship;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
-import org.apache.log4j.BasicConfigurator;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthenticationException;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +36,7 @@ public class UrbanAirshipClient {
     private static final Logger logger = LoggerFactory.getLogger("com.urbanairship.api");
 	private static String appKey = "atnfkp1eSF6D0JWxACQQKA";
 	private static String appSecret = "U6yjggS4QP6KJGEToF42aQ";
+	private static UsernamePasswordCredentials creds = new UsernamePasswordCredentials(appKey, appSecret);
 
     public static void sendPush(String deviceToken, String serverUniqueRequestId){
 
@@ -71,11 +81,35 @@ public class UrbanAirshipClient {
 
     }
 
-    public static void main(String args[]){
+    public static void register(String token) throws IOException, AuthenticationException {
+
+    	HttpClient httpclient = new DefaultHttpClient();
+    	
+    	HttpPut putMethod = new HttpPut("https://go.urbanairship.com/api/device_tokens/" + token);
+    	putMethod.addHeader(new BasicScheme().authenticate(creds, putMethod));
+    	
+        HttpResponse response = httpclient.execute(putMethod);
+        System.out.println(response.getStatusLine());
+        HttpEntity entity = response.getEntity();
+        BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent()));
+        try {
+        	  String inputLine;
+              while ((inputLine = in.readLine()) != null) {
+                     //System.out.println(inputLine);
+              }
+              in.close();
+         } catch (IOException e) {
+              e.printStackTrace();
+         }
+    }
+    
+    public static void main(String args[]) throws IOException, AuthenticationException{
 //        BasicConfigurator.configure();
+    	
+    	// deviceId=0BC63237-B540-423F-A8EC-017B4ED42873&apnsDeviceId=021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0&updateApns=t
         logger.debug("Starting test push");
-        UrbanAirshipClient example = new UrbanAirshipClient();
-        example.sendPush("c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215", "dbc79144-794f-4cd0-9e82-ab13ec86b528");
+        register("021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0");
+        sendPush("021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0", "dbc79144-794f-4cd0-9e82-ab13ec86b528");
         //example.sendScheduledPush();
 
     }

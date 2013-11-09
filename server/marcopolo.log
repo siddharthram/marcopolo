@@ -1,0 +1,1281 @@
+main DEBUG urbanairship.api - Starting test push
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Fri, 08 Nov 2013 04:21:04 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Fri, 08 Nov 2013 04:21:04 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 2eea1db0-482d-11e3-be7a-d4bed9a88699[\r][\n]"
+main DEBUG http.wire - << "Date: Fri, 08 Nov 2013 04:21:04 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Fri, 08 Nov 2013 04:21:04 GMT
+main DEBUG http.headers - << Last-Modified: Fri, 08 Nov 2013 04:21:04 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 2eea1db0-482d-11e3-be7a-d4bed9a88699
+main DEBUG http.headers - << Date: Fri, 08 Nov 2013 04:21:04 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"2eea1db0-482d-11e3-be7a-d4bed9a88699","push_ids":["daf941cd-7166-4634-912a-1ebfa6479e97"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Fri, 08 Nov 2013 04:21:04 GMT, Last-Modified: Fri, 08 Nov 2013 04:21:04 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 2eea1db0-482d-11e3-be7a-d4bed9a88699, Date: Fri, 08 Nov 2013 04:21:04 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(2eea1db0-482d-11e3-be7a-d4bed9a88699)
+PushIds:Optional.of([daf941cd-7166-4634-912a-1ebfa6479e97])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Fri, 08 Nov 2013 04:21:58 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Fri, 08 Nov 2013 04:21:58 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 4f0b36b1-482d-11e3-a5e0-90e2ba02f340[\r][\n]"
+main DEBUG http.wire - << "Date: Fri, 08 Nov 2013 04:21:58 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Fri, 08 Nov 2013 04:21:58 GMT
+main DEBUG http.headers - << Last-Modified: Fri, 08 Nov 2013 04:21:58 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 4f0b36b1-482d-11e3-a5e0-90e2ba02f340
+main DEBUG http.headers - << Date: Fri, 08 Nov 2013 04:21:58 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"4f0b36b1-482d-11e3-a5e0-90e2ba02f340","push_ids":["5bfcbb80-2652-448b-8106-1ee826ecf4e6"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Fri, 08 Nov 2013 04:21:58 GMT, Last-Modified: Fri, 08 Nov 2013 04:21:58 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 4f0b36b1-482d-11e3-a5e0-90e2ba02f340, Date: Fri, 08 Nov 2013 04:21:58 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(4f0b36b1-482d-11e3-a5e0-90e2ba02f340)
+PushIds:Optional.of([5bfcbb80-2652-448b-8106-1ee826ecf4e6])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"d384530eedd88cf59e20d094ba0442d788e81f437f7deb152ca6ec0e1e8808f6"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Fri, 08 Nov 2013 04:23:27 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Fri, 08 Nov 2013 04:23:27 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 83f422b0-482d-11e3-a156-14feb5d317b8[\r][\n]"
+main DEBUG http.wire - << "Date: Fri, 08 Nov 2013 04:23:27 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Fri, 08 Nov 2013 04:23:27 GMT
+main DEBUG http.headers - << Last-Modified: Fri, 08 Nov 2013 04:23:27 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 83f422b0-482d-11e3-a156-14feb5d317b8
+main DEBUG http.headers - << Date: Fri, 08 Nov 2013 04:23:27 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"83f422b0-482d-11e3-a156-14feb5d317b8","push_ids":["aa75d302-7fbb-4e14-9250-f4f394b0d9fd"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Fri, 08 Nov 2013 04:23:27 GMT, Last-Modified: Fri, 08 Nov 2013 04:23:27 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 83f422b0-482d-11e3-a156-14feb5d317b8, Date: Fri, 08 Nov 2013 04:23:27 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(83f422b0-482d-11e3-a156-14feb5d317b8)
+PushIds:Optional.of([aa75d302-7fbb-4e14-9250-f4f394b0d9fd])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"d384530eedd88cf59e20d094ba0442d788e81f437f7deb152ca6ec0e1e8808f6"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"9d1b51e5-0d60-4108-8c7b-1f3f893cd4d6"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Fri, 08 Nov 2013 04:24:13 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Fri, 08 Nov 2013 04:24:13 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 9f5a72c1-482d-11e3-a136-d4bed9a88504[\r][\n]"
+main DEBUG http.wire - << "Date: Fri, 08 Nov 2013 04:24:13 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Fri, 08 Nov 2013 04:24:13 GMT
+main DEBUG http.headers - << Last-Modified: Fri, 08 Nov 2013 04:24:13 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 9f5a72c1-482d-11e3-a136-d4bed9a88504
+main DEBUG http.headers - << Date: Fri, 08 Nov 2013 04:24:13 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"9f5a72c1-482d-11e3-a136-d4bed9a88504","push_ids":["e67a3dab-bc17-427b-bf4f-545ee5341fd9"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Fri, 08 Nov 2013 04:24:13 GMT, Last-Modified: Fri, 08 Nov 2013 04:24:13 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 9f5a72c1-482d-11e3-a136-d4bed9a88504, Date: Fri, 08 Nov 2013 04:24:13 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(9f5a72c1-482d-11e3-a136-d4bed9a88504)
+PushIds:Optional.of([e67a3dab-bc17-427b-bf4f-545ee5341fd9])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {}->http://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:80
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: UNCHALLENGED
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 302 Moved Temporarily[\r][\n]"
+main DEBUG http.wire - << "Location: https://go.urbanairship.com/api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215[\r][\n]"
+main DEBUG http.wire - << "Server: BigIP[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:26:01 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 302 Moved Temporarily
+main DEBUG http.headers - << HTTP/1.1 302 Moved Temporarily
+main DEBUG http.headers - << Location: https://go.urbanairship.com/api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215
+main DEBUG http.headers - << Server: BigIP
+main DEBUG http.headers - << Content-Length: 0
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:26:01 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@4c331059
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {}->http://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:80
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: UNCHALLENGED
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 302 Moved Temporarily[\r][\n]"
+main DEBUG http.wire - << "Location: https://go.urbanairship.com/api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215[\r][\n]"
+main DEBUG http.wire - << "Server: BigIP[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:26:46 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 302 Moved Temporarily
+main DEBUG http.headers - << HTTP/1.1 302 Moved Temporarily
+main DEBUG http.headers - << Location: https://go.urbanairship.com/api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215
+main DEBUG http.headers - << Server: BigIP
+main DEBUG http.headers - << Content-Length: 0
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:26:46 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@78e61fd1
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: UNCHALLENGED
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 401 Unauthorized[\r][\n]"
+main DEBUG http.wire - << "WWW-Authenticate: Basic realm="API"[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/json[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 26[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: ad780990-4985-11e3-8a26-d4bed9a887d4[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:27:04 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: close[\r][\n]"
+main DEBUG http.wire - << "X-N: S[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 401 Unauthorized
+main DEBUG http.headers - << HTTP/1.1 401 Unauthorized
+main DEBUG http.headers - << WWW-Authenticate: Basic realm="API"
+main DEBUG http.headers - << Content-Type: application/json
+main DEBUG http.headers - << Content-Length: 26
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: ad780990-4985-11e3-8a26-d4bed9a887d4
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:27:04 GMT
+main DEBUG http.headers - << Connection: close
+main DEBUG http.headers - << X-N: S
+main DEBUG client.DefaultHttpClient - go.urbanairship.com:443 requested authentication
+main DEBUG client.TargetAuthenticationStrategy - Authentication schemes in the order of preference: [negotiate, Kerberos, NTLM, Digest, Basic]
+main DEBUG client.TargetAuthenticationStrategy - Challenge for negotiate authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for Kerberos authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for NTLM authentication scheme not available
+main DEBUG client.TargetAuthenticationStrategy - Challenge for Digest authentication scheme not available
+main DEBUG http.wire - << "{"message":"Unauthorized"}"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@7b7a4989
+main DEBUG conn.DefaultClientConnection - Connection 0.0.0.0:52565<->23.73.126.216:443 shut down
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive for 9223372036854775807 MILLISECONDS
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: text/plain[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: f3162681-4985-11e3-a156-14feb5d317b8[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2[\r][\n]"
+main DEBUG http.wire - << "X-N: S[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:29:00 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: text/plain
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: f3162681-4985-11e3-a156-14feb5d317b8
+main DEBUG http.headers - << Content-Length: 2
+main DEBUG http.headers - << X-N: S
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:29:00 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG http.wire - << "OK"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@6a6779e6
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215 HTTP/1.1
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: text/plain[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 14e7d5b0-4986-11e3-be7a-d4bed9a88699[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2[\r][\n]"
+main DEBUG http.wire - << "X-N: S[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:29:57 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: text/plain
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 14e7d5b0-4986-11e3-be7a-d4bed9a88699
+main DEBUG http.headers - << Content-Length: 2
+main DEBUG http.headers - << X-N: S
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:29:57 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG http.wire - << "OK"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@57ac3379
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"c670c3df1d3a14d5fbbf472c71659fca82f6035cf539c0dc2102d6a22a787215"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Sat, 09 Nov 2013 21:30:00 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Sat, 09 Nov 2013 21:30:00 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 167ad1c0-4986-11e3-a2a9-14feb5d31f47[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:30:00 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Sat, 09 Nov 2013 21:30:00 GMT
+main DEBUG http.headers - << Last-Modified: Sat, 09 Nov 2013 21:30:00 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 167ad1c0-4986-11e3-a2a9-14feb5d31f47
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:30:00 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"167ad1c0-4986-11e3-a2a9-14feb5d31f47","push_ids":["88dd4c8e-d7a9-46a0-a19a-d9f387ab4383"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Sat, 09 Nov 2013 21:30:00 GMT, Last-Modified: Sat, 09 Nov 2013 21:30:00 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 167ad1c0-4986-11e3-a2a9-14feb5d31f47, Date: Sat, 09 Nov 2013 21:30:00 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(167ad1c0-4986-11e3-a2a9-14feb5d31f47)
+PushIds:Optional.of([88dd4c8e-d7a9-46a0-a19a-d9f387ab4383])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: text/plain[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 6c2b3370-4987-11e3-a156-14feb5d317b8[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2[\r][\n]"
+main DEBUG http.wire - << "X-N: S[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:39:33 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: text/plain
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 6c2b3370-4987-11e3-a156-14feb5d317b8
+main DEBUG http.headers - << Content-Length: 2
+main DEBUG http.headers - << X-N: S
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:39:33 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG http.wire - << "OK"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@b8c3679
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Sat, 09 Nov 2013 21:39:35 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Sat, 09 Nov 2013 21:39:35 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 6d3aa7a0-4987-11e3-a156-14feb5d317b8[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:39:35 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Sat, 09 Nov 2013 21:39:35 GMT
+main DEBUG http.headers - << Last-Modified: Sat, 09 Nov 2013 21:39:35 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 6d3aa7a0-4987-11e3-a156-14feb5d317b8
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:39:35 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"6d3aa7a0-4987-11e3-a156-14feb5d317b8","push_ids":["e0bc9e8c-9995-4cba-baa6-35140f890c15"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Sat, 09 Nov 2013 21:39:35 GMT, Last-Modified: Sat, 09 Nov 2013 21:39:35 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 6d3aa7a0-4987-11e3-a156-14feb5d317b8, Date: Sat, 09 Nov 2013 21:39:35 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(6d3aa7a0-4987-11e3-a156-14feb5d317b8)
+PushIds:Optional.of([e0bc9e8c-9995-4cba-baa6-35140f890c15])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: text/plain[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 7ab08c10-4987-11e3-94a2-001b21ce3d90[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2[\r][\n]"
+main DEBUG http.wire - << "X-N: S[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:39:57 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: text/plain
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 7ab08c10-4987-11e3-94a2-001b21ce3d90
+main DEBUG http.headers - << Content-Length: 2
+main DEBUG http.headers - << X-N: S
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:39:57 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG http.wire - << "OK"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@197200b4
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Sat, 09 Nov 2013 21:39:59 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Sat, 09 Nov 2013 21:39:59 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 7bbddd61-4987-11e3-a136-d4bed9a88504[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:39:59 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Sat, 09 Nov 2013 21:39:59 GMT
+main DEBUG http.headers - << Last-Modified: Sat, 09 Nov 2013 21:39:59 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 7bbddd61-4987-11e3-a136-d4bed9a88504
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:39:59 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"7bbddd61-4987-11e3-a136-d4bed9a88504","push_ids":["06c3d25c-982c-47da-8cb5-ddafaf00b816"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Sat, 09 Nov 2013 21:39:59 GMT, Last-Modified: Sat, 09 Nov 2013 21:39:59 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 7bbddd61-4987-11e3-a136-d4bed9a88504, Date: Sat, 09 Nov 2013 21:39:59 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(7bbddd61-4987-11e3-a136-d4bed9a88504)
+PushIds:Optional.of([06c3d25c-982c-47da-8cb5-ddafaf00b816])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2 HTTP/1.1
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: text/plain[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 97615d81-4987-11e3-8a26-d4bed9a887d4[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2[\r][\n]"
+main DEBUG http.wire - << "X-N: S[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:40:46 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: text/plain
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 97615d81-4987-11e3-8a26-d4bed9a887d4
+main DEBUG http.headers - << Content-Length: 2
+main DEBUG http.headers - << X-N: S
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:40:46 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG http.wire - << "OK"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@6a6779e6
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"c23e12e53c7cb619eb873e698857306754fdeca1239632d365d55fb5ae8420c2"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Sat, 09 Nov 2013 21:40:47 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Sat, 09 Nov 2013 21:40:47 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 986e39a0-4987-11e3-a156-14feb5d317b8[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 21:40:47 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Sat, 09 Nov 2013 21:40:47 GMT
+main DEBUG http.headers - << Last-Modified: Sat, 09 Nov 2013 21:40:47 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 986e39a0-4987-11e3-a156-14feb5d317b8
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 21:40:47 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"986e39a0-4987-11e3-a156-14feb5d317b8","push_ids":["89db123f-b24c-4493-bd8d-8304ac6d984f"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Sat, 09 Nov 2013 21:40:47 GMT, Last-Modified: Sat, 09 Nov 2013 21:40:47 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 986e39a0-4987-11e3-a156-14feb5d317b8, Date: Sat, 09 Nov 2013 21:40:47 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(986e39a0-4987-11e3-a156-14feb5d317b8)
+PushIds:Optional.of([89db123f-b24c-4493-bd8d-8304ac6d984f])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: text/plain[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: f3876fd0-498e-11e3-a136-d4bed9a88504[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 22:33:27 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: text/plain
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: f3876fd0-498e-11e3-a136-d4bed9a88504
+main DEBUG http.headers - << Content-Length: 2
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 22:33:27 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG http.wire - << "OK"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@197200b4
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Sat, 09 Nov 2013 22:33:28 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Sat, 09 Nov 2013 22:33:28 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: f48816f0-498e-11e3-be7a-d4bed9a88699[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 22:33:28 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Sat, 09 Nov 2013 22:33:28 GMT
+main DEBUG http.headers - << Last-Modified: Sat, 09 Nov 2013 22:33:28 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: f48816f0-498e-11e3-be7a-d4bed9a88699
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 22:33:28 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"f48816f0-498e-11e3-be7a-d4bed9a88699","push_ids":["3b53da7d-8a73-465a-afaf-6f4149cfe457"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Sat, 09 Nov 2013 22:33:28 GMT, Last-Modified: Sat, 09 Nov 2013 22:33:28 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: f48816f0-498e-11e3-be7a-d4bed9a88699, Date: Sat, 09 Nov 2013 22:33:28 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(f48816f0-498e-11e3-be7a-d4bed9a88699)
+PushIds:Optional.of([3b53da7d-8a73-465a-afaf-6f4149cfe457])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: text/plain[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: f77f36e0-498e-11e3-84d3-90e2ba025998[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 22:33:33 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: text/plain
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: f77f36e0-498e-11e3-84d3-90e2ba025998
+main DEBUG http.headers - << Content-Length: 2
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 22:33:33 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG http.wire - << "OK"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@224c47db
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Sat, 09 Nov 2013 22:33:35 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Sat, 09 Nov 2013 22:33:35 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: f8702690-498e-11e3-a136-d4bed9a88504[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 22:33:35 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Sat, 09 Nov 2013 22:33:35 GMT
+main DEBUG http.headers - << Last-Modified: Sat, 09 Nov 2013 22:33:35 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: f8702690-498e-11e3-a136-d4bed9a88504
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 22:33:35 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"f8702690-498e-11e3-a136-d4bed9a88504","push_ids":["c95689bb-2603-487e-9800-497ee2df27c0"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Sat, 09 Nov 2013 22:33:35 GMT, Last-Modified: Sat, 09 Nov 2013 22:33:35 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: f8702690-498e-11e3-a136-d4bed9a88504, Date: Sat, 09 Nov 2013 22:33:35 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(f8702690-498e-11e3-a136-d4bed9a88504)
+PushIds:Optional.of([c95689bb-2603-487e-9800-497ee2df27c0])
+main DEBUG urbanairship.api - Starting test push
+main DEBUG conn.BasicClientConnectionManager - Get connection for route {s}->https://go.urbanairship.com
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Auth cache not set in the context
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1
+main DEBUG http.wire - >> "PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 0[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: Apache-HttpClient/4.2.1 (java 1.5)[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> PUT /api/device_tokens/021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0 HTTP/1.1
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.headers - >> Content-Length: 0
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: Apache-HttpClient/4.2.1 (java 1.5)
+main DEBUG http.wire - << "HTTP/1.1 200 OK[\r][\n]"
+main DEBUG http.wire - << "Content-Type: text/plain[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 06456910-498f-11e3-a156-14feb5d317b8[\r][\n]"
+main DEBUG http.wire - << "Content-Length: 2[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 22:33:58 GMT[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+main DEBUG http.headers - << HTTP/1.1 200 OK
+main DEBUG http.headers - << Content-Type: text/plain
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 06456910-498f-11e3-a156-14feb5d317b8
+main DEBUG http.headers - << Content-Length: 2
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 22:33:58 GMT
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG http.wire - << "OK"
+main DEBUG conn.BasicClientConnectionManager - Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@224c47db
+main DEBUG conn.BasicClientConnectionManager - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Setup an APIClient to handle the API call APIClient
+AppKey:atnfkp1eSF6D0JWxACQQKA
+AppSecret:U6yjggS4QP6KJGEToF42aQ
+main DEBUG urbanairship.api - Send the message
+main DEBUG urbanairship.api - Executing push request POST https://go.urbanairship.com/api/push/ HTTP/1.1
+main DEBUG conn.PoolingClientConnectionManager - Connection request: [route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 0 of 100; total allocated: 0 of 200]
+main DEBUG conn.PoolingClientConnectionManager - Connection leased: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 0; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG conn.DefaultClientConnectionOperator - Connecting to go.urbanairship.com:443
+main DEBUG protocol.RequestAddCookies - CookieSpec selected: best-match
+main DEBUG protocol.RequestAuthCache - Re-using cached 'basic' auth scheme for https://go.urbanairship.com:443
+main DEBUG protocol.RequestTargetAuthentication - Target auth state: SUCCESS
+main DEBUG protocol.RequestProxyAuthentication - Proxy auth state: UNCHALLENGED
+main DEBUG client.DefaultHttpClient - Attempt 1 to execute request
+main DEBUG conn.DefaultClientConnection - Sending request: POST /api/push/ HTTP/1.1
+main DEBUG http.wire - >> "POST /api/push/ HTTP/1.1[\r][\n]"
+main DEBUG http.wire - >> "Content-type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Accept: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - >> "Content-Length: 270[\r][\n]"
+main DEBUG http.wire - >> "Host: go.urbanairship.com[\r][\n]"
+main DEBUG http.wire - >> "Connection: Keep-Alive[\r][\n]"
+main DEBUG http.wire - >> "User-Agent: UrbanAirship/version0.1beta[\r][\n]"
+main DEBUG http.wire - >> "Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR[\r][\n]"
+main DEBUG http.wire - >> "[\r][\n]"
+main DEBUG http.headers - >> POST /api/push/ HTTP/1.1
+main DEBUG http.headers - >> Content-type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Accept: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - >> Content-Length: 270
+main DEBUG http.headers - >> Host: go.urbanairship.com
+main DEBUG http.headers - >> Connection: Keep-Alive
+main DEBUG http.headers - >> User-Agent: UrbanAirship/version0.1beta
+main DEBUG http.headers - >> Authorization: Basic YXRuZmtwMWVTRjZEMEpXeEFDUVFLQTpVNnlqZ2dTNFFQNktKR0VUb0Y0MmFR
+main DEBUG http.wire - >> "{"audience":{"device_token":"021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0"},"device_types":["ios"],"notification":{"ios":{"alert":"Your transcription is ready !","badge":"+1","extra":{"serverUniqueRequestId":"dbc79144-794f-4cd0-9e82-ab13ec86b528"}}}}"
+main DEBUG http.wire - << "HTTP/1.1 202 Accepted[\r][\n]"
+main DEBUG http.wire - << "Content-Type: application/vnd.urbanairship+json; version=3[\r][\n]"
+main DEBUG http.wire - << "Data-Attribute: push_ids[\r][\n]"
+main DEBUG http.wire - << "Cache-Control: max-age=0[\r][\n]"
+main DEBUG http.wire - << "Expires: Sat, 09 Nov 2013 22:33:59 GMT[\r][\n]"
+main DEBUG http.wire - << "Last-Modified: Sat, 09 Nov 2013 22:33:59 GMT[\r][\n]"
+main DEBUG http.wire - << "Server: Jetty(8.0.y.z-SNAPSHOT)[\r][\n]"
+main DEBUG http.wire - << "X-Request-Id: 0707f5c2-498f-11e3-a136-d4bed9a88504[\r][\n]"
+main DEBUG http.wire - << "Date: Sat, 09 Nov 2013 22:33:59 GMT[\r][\n]"
+main DEBUG http.wire - << "Transfer-Encoding:  chunked[\r][\n]"
+main DEBUG http.wire - << "Connection: keep-alive[\r][\n]"
+main DEBUG http.wire - << "Connection: Transfer-Encoding[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.DefaultClientConnection - Receiving response: HTTP/1.1 202 Accepted
+main DEBUG http.headers - << HTTP/1.1 202 Accepted
+main DEBUG http.headers - << Content-Type: application/vnd.urbanairship+json; version=3
+main DEBUG http.headers - << Data-Attribute: push_ids
+main DEBUG http.headers - << Cache-Control: max-age=0
+main DEBUG http.headers - << Expires: Sat, 09 Nov 2013 22:33:59 GMT
+main DEBUG http.headers - << Last-Modified: Sat, 09 Nov 2013 22:33:59 GMT
+main DEBUG http.headers - << Server: Jetty(8.0.y.z-SNAPSHOT)
+main DEBUG http.headers - << X-Request-Id: 0707f5c2-498f-11e3-a136-d4bed9a88504
+main DEBUG http.headers - << Date: Sat, 09 Nov 2013 22:33:59 GMT
+main DEBUG http.headers - << Transfer-Encoding:  chunked
+main DEBUG http.headers - << Connection: keep-alive
+main DEBUG http.headers - << Connection: Transfer-Encoding
+main DEBUG client.DefaultHttpClient - Connection can be kept alive indefinitely
+main DEBUG urbanairship.api - Handling response code:202
+main DEBUG http.wire - << "00000086[\r][\n]"
+main DEBUG http.wire - << "{"ok":true,"operation_id":"0707f5c2-498f-11e3-a136-d4bed9a88504","push_ids":["f1d1580b-835e-44e0-88ea-cf285aaae4d9"],"message_ids":[]}"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG http.wire - << "00000000[\r][\n]"
+main DEBUG http.wire - << "[\r][\n]"
+main DEBUG conn.PoolingClientConnectionManager - Connection [id: 0][route: {s}->https://go.urbanairship.com] can be kept alive indefinitely
+main DEBUG conn.PoolingClientConnectionManager - Connection released: [id: 0][route: {s}->https://go.urbanairship.com][total kept alive: 1; route allocated: 1 of 100; total allocated: 1 of 200]
+main DEBUG urbanairship.api - PUSH SUCCEEDED
+main DEBUG urbanairship.api - RESPONSE:
+Http:HTTP/1.1 202 Accepted [Content-Type: application/vnd.urbanairship+json; version=3, Data-Attribute: push_ids, Cache-Control: max-age=0, Expires: Sat, 09 Nov 2013 22:33:59 GMT, Last-Modified: Sat, 09 Nov 2013 22:33:59 GMT, Server: Jetty(8.0.y.z-SNAPSHOT), X-Request-Id: 0707f5c2-498f-11e3-a136-d4bed9a88504, Date: Sat, 09 Nov 2013 22:33:59 GMT, Transfer-Encoding:  chunked, Connection: keep-alive, Connection: Transfer-Encoding]
+API:
+APIPushResponse
+OperationId:Optional.of(0707f5c2-498f-11e3-a136-d4bed9a88504)
+PushIds:Optional.of([f1d1580b-835e-44e0-88ea-cf285aaae4d9])
