@@ -26,7 +26,7 @@ public class UrbanAirshipClient {
 
     private static final Logger logger = LoggerFactory.getLogger("com.urbanairship.api");
 	private static String appKey = "atnfkp1eSF6D0JWxACQQKA";
-	private static String appSecret = "U6yjggS4QP6KJGEToF42aQ";
+	private static String appSecret = "HNycfmlVTZKEpJbPDbkEvQ";
 
     public static void sendPush(String deviceToken, String serverUniqueRequestId){
 
