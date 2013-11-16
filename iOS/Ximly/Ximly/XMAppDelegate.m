@@ -182,6 +182,8 @@
         self.isLaunching = NO;
     }
     
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+
     [[XMXimlyHTTPClient sharedClient] updateTasks];
     
     [[EvernoteSession sharedSession] handleDidBecomeActive];
