@@ -28,7 +28,7 @@ public class ExternalQuestion {
 	private static final double maxReward = 0.25d; // in cents
 
 	// transcription server url
-	private static String baseTranscriptionURL = "http://ximly.herokuapp.com/tasks/";
+	private static String baseTranscriptionURL = "https://ximly.herokuapp.com/tasks/";
 
 	public static void init(String path) throws IOException {
 		service = new RequesterService(new PropertiesClientConfig(path
