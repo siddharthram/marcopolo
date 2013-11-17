@@ -44,8 +44,8 @@ public class UrbanAirshipClient {
                                        .setKey(appKey)
                                        .setSecret(appSecret)
                                        .build();
-        logger.debug(String.format("Setup an APIClient to handle the API call %s", apiClient.toString()));
-        logger.debug("Send the message");
+        //logger.debug(String.format("Setup an APIClient to handle the API call %s", apiClient.toString()));
+        System.out.println("Sending push notification to apnsid : " + deviceToken + " and serverUniqueRequestId : " + serverUniqueRequestId);
 
         IOSBadgeData badgeData = IOSBadgeData.newBuilder()
                 .setValue(1)
@@ -67,17 +67,24 @@ public class UrbanAirshipClient {
                                          .build();
         
         try {
-            APIClientResponse<APIPushResponse> response = apiClient.push(payload);
+        	register(deviceToken);
+        	APIClientResponse<APIPushResponse> response = apiClient.push(payload);
             logger.debug("PUSH SUCCEEDED");
             logger.debug(String.format("RESPONSE:%s", response.toString()));
+            System.out.println(String.format("RESPONSE:%s", response.toString()));
         }
         catch (APIRequestException ex){
             logger.error(String.format("APIRequestException " + ex));
             logger.error("EXCEPTION " + ex.toString());
+            System.out.println(String.format("EXCEPTION " + ex.toString()));
         }
         catch (IOException e){
             logger.error("IOException in API request " + e.getMessage());
-        }
+            System.out.println("IOException in API request " + e.getMessage());
+        } catch (AuthenticationException e) {
+        	System.out.println("AuthError in API request " + e.getMessage());
+        	e.printStackTrace();
+		}
 
     }
 
@@ -100,6 +107,7 @@ public class UrbanAirshipClient {
               in.close();
          } catch (IOException e) {
               e.printStackTrace();
+              System.out.println("IOException in register " + e.getMessage());  
          }
     }
     
@@ -108,8 +116,8 @@ public class UrbanAirshipClient {
     	
     	// deviceId=0BC63237-B540-423F-A8EC-017B4ED42873&apnsDeviceId=021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0&updateApns=t
         logger.debug("Starting test push");
-        register("021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0");
-        sendPush("021b29b39d7a2615aa0560de6f414c18133e45f898e6636d46af115bafc295b0", "dbc79144-794f-4cd0-9e82-ab13ec86b528");
+        //register("ee3cf720914ded0eee8e7cfd9bbf81bb724fb94c6ebb06da5c350dcff74272c5");
+        sendPush("ee3cf720914ded0eee8e7cfd9bbf81bb724fb94c6ebb06da5c350dcff74272c5", "dbc79144-794f-4cd0-9e82-ab13ec86b528");
         //example.sendScheduledPush();
 
     }

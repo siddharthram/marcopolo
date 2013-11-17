@@ -2,8 +2,6 @@ package com.marcopolo.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,9 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.marcopolo.mturk.ExternalQuestion;
-import com.marcopolo.service.data.DataAccess;
-import com.marcopolo.service.dto.TaskStatus;
-import com.marcopolo.service.dto.TaskStatusResponse;
+import com.marcopolo.mturk.MturkSubmitTask;
 
 
 
@@ -31,8 +27,6 @@ public class submitOverDue extends AbstractServlet {
 	public void init() throws ServletException {
 		try {
 			super.init();
-			String propertiesPath = getServletContext().getRealPath("config");
-			ExternalQuestion.init(propertiesPath);
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
@@ -53,21 +47,14 @@ public class submitOverDue extends AbstractServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/plain");
-		TaskStatusResponse taskStatusResponse = new TaskStatusResponse();
-		StringBuilder resp = new StringBuilder();
+		String resp = new String();
 		try {
-			taskStatusResponse  = DataAccess.getOverDueOpenTasks();
 			String turkprice = request.getParameter("turkprice");
-			ArrayList<TaskStatus> overdueTasks = taskStatusResponse.getTaskStatuses();
-			for (Iterator<TaskStatus> taskIter = overdueTasks.iterator(); taskIter
-					.hasNext();) {
-				TaskStatus taskStatus = (TaskStatus) taskIter.next();
-				resp.append(ExternalQuestion.submitMturkJob(taskStatus, turkprice));
-				resp.append("\n================================================\n");
-			}
+			MturkSubmitTask mturkTask = new MturkSubmitTask();
+			resp = mturkTask.submitAllTasksToTurk(turkprice);
 			
 		} catch (Exception ex) {
-			resp.append(ex.getLocalizedMessage());
+			resp = ex.getLocalizedMessage();
 			//throw new ServletException(ex);
 		}
 		response.setContentType("application/json");

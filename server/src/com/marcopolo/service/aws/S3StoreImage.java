@@ -30,7 +30,7 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 public class S3StoreImage {
 	private static final String awsAccessKeyId = "AKIAIGP5BWDMWRRINTSQ";
 	private static final String key = "SNZNbO2QlOAdpZc19BLlbgz7HoVLTOnHOMteClge";
-	private static final String bucketName = "ximly_test1";
+	private static final String bucketName = "ximley_images";
 
 	public static String storeS3pngFile(String uuid, byte[] data) {
 		String returnUrl = "https://s3.amazonaws.com/" + bucketName + "/" + uuid + ".png";

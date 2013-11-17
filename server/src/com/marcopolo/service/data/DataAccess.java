@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -26,9 +27,14 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 public class DataAccess {
 	private final static String AWS_DATASOURCE_NAME = "jdbc/marcopoloaws";
 	private final static int MAX_FREE_TASKS = 5;
-	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 300000l;// 5 mins
+//	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 10800000l;// 3 hours 
 																		// in
 																		// millisec
+	
+	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 120000l;// 2 mins
+																		// in
+																		// millisec for testing only
+	
 	private static DataSource _dataSource;
 
 	private static Log log = LogFactory.getLog(DataAccess.class);
@@ -418,6 +424,7 @@ public class DataAccess {
 		Connection conn = _dataSource.getConnection();
 		try {
 			log.debug("Got request for all overdue tasks ");
+			System.out.println("Got request for all overdue tasks ");
 			// first blocking all the exteral overdue tasks pending for more than 5 mins
 			PreparedStatement pstmtQuery = conn
 					.prepareStatement(blockOverDueTasks);
@@ -464,6 +471,54 @@ public class DataAccess {
 		return taskStatusResponse;
 	}
 
+	
+
+	/**
+	 * Used to reopen the tasks which errored out when submitting the job to mturk
+	 * @param serverUniqueIds
+	 * @throws SQLException
+	 */
+	private static String reOpenTurkErroredOutTasks = "update task_table set status = 0, assigned_to = '' where server_unique_guid = ?";
+	public static void reopenErroredOutTasks(ArrayList<String> serverUniqueIds) throws SQLException {
+
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got request for reopening the erored out jobs");
+			System.out.println("Got request for reopening the erored out jobs with ids " + serverUniqueIds.toString());
+			PreparedStatement pstmtQuery = conn
+					.prepareStatement(reOpenTurkErroredOutTasks);
+
+			// used to batch the requests
+			int count = 0;
+			int batchSize = 20;
+			
+			// iterate over all errored out tasks
+			for (Iterator<String> erroredTasks = serverUniqueIds.iterator(); erroredTasks.hasNext();) {
+				String taskId = (String) erroredTasks.next();
+				pstmtQuery.setString(1, taskId); 
+				pstmtQuery.addBatch(); // add errored out task to batch
+				
+				// batch the requests in small manageable chunks 
+				if (++count % batchSize == 0) {
+					pstmtQuery.executeBatch();
+					pstmtQuery.clearBatch(); //not sure if this is necessary
+				  }
+			}
+			// do a final execute to clear out left over tasks
+			pstmtQuery.executeBatch();
+			pstmtQuery.close();
+			
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+	}
+	
+	
+	
 	/**
 	 * 
 	 * Used by transcription website

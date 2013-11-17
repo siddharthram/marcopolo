@@ -60,7 +60,7 @@ public class ExternalQuestion {
 	 *            Mechanical Turk.
 	 */
 	public static String submitMturkJob(TaskStatus taskStatus, String price) {
-		String resp = "Something bad happened. Check logs";
+		String resp = "Error : Something bad happened. Check logs";
 
 		try {
 			// Loading the HIT properties file. HITProperties is a helper class
@@ -83,14 +83,11 @@ public class ExternalQuestion {
 					throw new NumberFormatException("Max price exceeded");
 				}
 			} catch (NumberFormatException e) {
-				System.out.println(e.getLocalizedMessage()
-						+ " Invalid mturk price '" + price
+				System.out.println("Debug : " + e.getLocalizedMessage()
+						+ " No mturk price '" + price
 						+ "'. So setting to default value");
 				mturkPrice = hitProps.getRewardAmount();
 			}
-
-			// System.out.println("mturk price '" + mturkPrice +
-			// "' and maxreward=" + maxReward);
 
 			String externalQuestion = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExternalQuestion xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd\">"
 					+ "<ExternalURL>"
@@ -137,7 +134,7 @@ public class ExternalQuestion {
 					+ hit.getHITTypeId();
 			resp += "\n" + "question url submitted was " + externalQuestion;
 		} catch (Exception e) {
-			resp = e.getLocalizedMessage();
+			resp = "Error : " + e.getLocalizedMessage();
 		}
 		return resp;
 	}

@@ -6,12 +6,9 @@ import java.lang.reflect.Type;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +23,8 @@ import org.apache.commons.logging.LogFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.marcopolo.mturk.ExternalQuestion;
+import com.marcopolo.mturk.JobSubmitScheduledExecuter;
+import com.marcopolo.mturk.MturkSubmitTask;
 import com.marcopolo.notification.Notify;
 import com.marcopolo.service.aws.S3StoreImage;
 import com.marcopolo.service.data.Cache;
@@ -55,6 +54,10 @@ public class add extends AbstractServlet {
 		try {
 			super.init();
 			Cache.loadAll();
+			// initialize the scheduler which will submit the job to mturk
+			new JobSubmitScheduledExecuter(1).scheduleAtFixedRate(new MturkSubmitTask(), 5, 5, TimeUnit.MINUTES);
+			String propertiesPath = getServletContext().getRealPath("config");
+			ExternalQuestion.init(propertiesPath);
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
