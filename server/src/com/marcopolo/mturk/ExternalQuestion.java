@@ -11,6 +11,7 @@ import com.amazonaws.mturk.addon.HITQuestion;
 import com.amazonaws.mturk.requester.HIT;
 import com.amazonaws.mturk.service.axis.RequesterService;
 import com.amazonaws.mturk.util.PropertiesClientConfig;
+import com.marcopolo.service.dto.RequestedFormatTypeEnum;
 import com.marcopolo.service.dto.TaskStatus;
 
 /**
@@ -20,12 +21,15 @@ public class ExternalQuestion {
 
 	private static RequesterService service = null;;
 	private static HITProperties hitProps = null;;
-
+	private static Properties propfile = new Properties();
+	
 	// Defining the location of the file containing the QAP and the properties
 	// of the HIT
 	private static String hitPropertiesFile = "/hit.properties";
 	private static String mturkProperties = "/mturk.properties";
 	private static final double maxReward = 0.25d; // in cents
+	private static double txtprice = 0d;
+	private static double pptprice = 0d;
 
 	// transcription server url
 	private static String baseTranscriptionURL = "https://ximly.herokuapp.com/tasks/";
@@ -34,9 +38,17 @@ public class ExternalQuestion {
 		service = new RequesterService(new PropertiesClientConfig(path
 				+ mturkProperties));
 		InputStream in = new FileInputStream(path + hitPropertiesFile);
-		Properties propfile = new Properties();
+
 		propfile.load(in);
 		hitProps = new HITProperties(propfile);
+		try {
+			pptprice = Double.parseDouble(propfile.getProperty("pptreward"));
+			txtprice = hitProps.getRewardAmount();
+		} catch (NumberFormatException ex) {
+			System.out.println("problem reading ppt price from properties file");
+		}					
+		System.out.println("setting ppt price to " + pptprice);
+		System.out.println("setting txt price to " + txtprice);
 	}
 
 	/**
@@ -86,7 +98,14 @@ public class ExternalQuestion {
 				System.out.println("Debug : " + e.getLocalizedMessage()
 						+ " No mturk price '" + price
 						+ "'. So setting to default value");
-				mturkPrice = hitProps.getRewardAmount();
+				// if type is ppt then use different price
+				if (RequestedFormatTypeEnum.PPT.name().equalsIgnoreCase(taskStatus.getRequestedResponseFormat())
+						|| RequestedFormatTypeEnum.PPTX.name().equalsIgnoreCase(taskStatus.getRequestedResponseFormat())) {
+					mturkPrice = pptprice;
+				} else {
+					mturkPrice = txtprice;
+				}
+				System.out.println("setting turk price to " + mturkPrice + " for request type " + taskStatus.getRequestedResponseFormat());
 			}
 
 			String externalQuestion = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExternalQuestion xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd\">"
@@ -114,11 +133,16 @@ public class ExternalQuestion {
 			// QAPValidator.validate(question.getQuestion());
 
 			// Create a HIT using the properties and question files
-			HIT hit = service.createHIT(
+			HIT hit = null;
+			
+			if (RequestedFormatTypeEnum.PPT.name().equalsIgnoreCase(taskStatus.getRequestedResponseFormat())
+						|| RequestedFormatTypeEnum.PPTX.name().equalsIgnoreCase(taskStatus.getRequestedResponseFormat()))
+					
+					hit = service.createHIT(
 					null, // HITTypeId
-					hitProps.getTitle(),
-					hitProps.getDescription(),
-					hitProps.getKeywords(), // keywords
+					propfile.getProperty("ppttitle"),
+					propfile.getProperty("pptdescription"),
+					propfile.getProperty("pptkeywords"), // keywords
 					question.getQuestion(), mturkPrice,
 					hitProps.getAssignmentDuration(),
 					hitProps.getAutoApprovalDelay(), hitProps.getLifetime(),
