@@ -27,11 +27,11 @@ import com.marcopolo.service.dto.TaskStatusResponse;
 public class DataAccess {
 	private final static String AWS_DATASOURCE_NAME = "jdbc/marcopoloaws";
 	private final static int MAX_FREE_TASKS = 5;
-	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 10800000l;// 3 hours 
+//	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 10800000l;// 3 hours 
 																		// in
 																		// millisec
 	
-//	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 120000l;// 2 mins
+	private final static long MAX_OVERDUE_INTERVAL_IN_MILSEC = 120000l;// 2 mins
 																		// in
 																		// millisec for testing only
 	
