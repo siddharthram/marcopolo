@@ -38,6 +38,7 @@ public class MturkSubmitTask implements Runnable {
 				output.append(resp);
 				if (null == resp || resp.startsWith("Error")) {
 					submitErrorTasks.add(taskStatus.getServerUniqueRequestId());
+					System.out.println("error in submitting job - " + taskStatus.getServerUniqueRequestId() + " with error " + resp);
 				}
 				output.append("\n================================================\n");
 			}

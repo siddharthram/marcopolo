@@ -22,7 +22,7 @@ public class ExternalQuestion {
 	private static RequesterService service = null;;
 	private static HITProperties hitProps = null;;
 	private static Properties propfile = new Properties();
-	
+
 	// Defining the location of the file containing the QAP and the properties
 	// of the HIT
 	private static String hitPropertiesFile = "/hit.properties";
@@ -45,8 +45,9 @@ public class ExternalQuestion {
 			pptprice = Double.parseDouble(propfile.getProperty("pptreward"));
 			txtprice = hitProps.getRewardAmount();
 		} catch (NumberFormatException ex) {
-			System.out.println("problem reading ppt price from properties file");
-		}					
+			System.out
+					.println("problem reading ppt price from properties file");
+		}
 		System.out.println("setting ppt price to " + pptprice);
 		System.out.println("setting txt price to " + txtprice);
 	}
@@ -99,13 +100,19 @@ public class ExternalQuestion {
 						+ " No mturk price '" + price
 						+ "'. So setting to default value");
 				// if type is ppt then use different price
-				if (RequestedFormatTypeEnum.PPT.name().equalsIgnoreCase(taskStatus.getRequestedResponseFormat())
-						|| RequestedFormatTypeEnum.PPTX.name().equalsIgnoreCase(taskStatus.getRequestedResponseFormat())) {
+				if (RequestedFormatTypeEnum.PPT.name().equalsIgnoreCase(
+						taskStatus.getRequestedResponseFormat())
+						|| RequestedFormatTypeEnum.PPTX
+								.name()
+								.equalsIgnoreCase(
+										taskStatus.getRequestedResponseFormat())) {
 					mturkPrice = pptprice;
 				} else {
 					mturkPrice = txtprice;
 				}
-				System.out.println("setting turk price to " + mturkPrice + " for request type " + taskStatus.getRequestedResponseFormat());
+				System.out.println("setting turk price to " + mturkPrice
+						+ " for request type "
+						+ taskStatus.getRequestedResponseFormat());
 			}
 
 			String externalQuestion = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExternalQuestion xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd\">"
@@ -115,7 +122,7 @@ public class ExternalQuestion {
 					+ "/preview?imageUrl="
 					+ URLEncoder.encode(taskStatus.getImageUrl(), "UTF-8")
 					+ "&amp;"
-					+ "requestedResponseFormat=" 
+					+ "requestedResponseFormat="
 					+ taskStatus.getRequestedResponseFormat()
 					+ "</ExternalURL>"
 					+ "<FrameHeight>600</FrameHeight>"
@@ -134,21 +141,38 @@ public class ExternalQuestion {
 
 			// Create a HIT using the properties and question files
 			HIT hit = null;
-			
-			if (RequestedFormatTypeEnum.PPT.name().equalsIgnoreCase(taskStatus.getRequestedResponseFormat())
-						|| RequestedFormatTypeEnum.PPTX.name().equalsIgnoreCase(taskStatus.getRequestedResponseFormat()))
-					
-					hit = service.createHIT(
-					null, // HITTypeId
-					propfile.getProperty("ppttitle"),
-					propfile.getProperty("pptdescription"),
-					propfile.getProperty("pptkeywords"), // keywords
-					question.getQuestion(), mturkPrice,
-					hitProps.getAssignmentDuration(),
-					hitProps.getAutoApprovalDelay(), hitProps.getLifetime(),
-					hitProps.getMaxAssignments(), hitProps.getAnnotation(), // requesterAnnotation
-					hitProps.getQualificationRequirements(), null // responseGroup
-					);
+
+			if (RequestedFormatTypeEnum.PPT.name().equalsIgnoreCase(
+					taskStatus.getRequestedResponseFormat())
+					|| RequestedFormatTypeEnum.PPTX.name().equalsIgnoreCase(
+							taskStatus.getRequestedResponseFormat())) {
+				// if ppt then create this hit
+				hit = service.createHIT(
+						null, // HITTypeId
+						propfile.getProperty("ppttitle"),
+						propfile.getProperty("pptdescription"),
+						propfile.getProperty("pptkeywords"), // keywords
+						question.getQuestion(), mturkPrice,
+						hitProps.getAssignmentDuration(),
+						hitProps.getAutoApprovalDelay(),
+						hitProps.getLifetime(), hitProps.getMaxAssignments(),
+						hitProps.getAnnotation(), // requesterAnnotation
+						hitProps.getQualificationRequirements(), null); // responseGroup
+			} else {
+				// if text then create this hit
+				hit = service.createHIT(
+						null, // HITTypeId
+						hitProps.getTitle(),
+						hitProps.getDescription(),
+						hitProps.getKeywords(), // keywords
+						question.getQuestion(), mturkPrice,
+						hitProps.getAssignmentDuration(),
+						hitProps.getAutoApprovalDelay(),
+						hitProps.getLifetime(), hitProps.getMaxAssignments(),
+						hitProps.getAnnotation(), // requesterAnnotation
+						hitProps.getQualificationRequirements(), null);// responseGroup
+
+			}
 
 			resp = "Created HIT: " + hit.getHITId() + " with price "
 					+ mturkPrice;
@@ -159,6 +183,7 @@ public class ExternalQuestion {
 			resp += "\n" + "question url submitted was " + externalQuestion;
 		} catch (Exception e) {
 			resp = "Error : " + e.getLocalizedMessage();
+			e.printStackTrace();
 		}
 		return resp;
 	}
