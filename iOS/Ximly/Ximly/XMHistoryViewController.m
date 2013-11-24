@@ -9,6 +9,7 @@
 #import "XMHistoryViewController.h"
 
 #import "XMAppDelegate.h"
+#import "XMColor.h"
 #import "XMHistoryTableViewCell.h"
 #import "XMImageCache.h"
 #import "XMJob.h"
@@ -89,6 +90,8 @@
         self.zeroStateLabel.hidden = YES;
     }
     
+
+
     self.tableView.tableHeaderView = self.searchBar;
     
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
@@ -244,64 +247,15 @@
         cell.thumbnailView.image = nil;
     }
     
-    NSString *labelText = theJob.status;
     
-    if (labelText) {
- //       cell.label1.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.0f];
-        
-        CGSize textSize = [labelText sizeWithFont:cell.label1.font];
-        CGRect label1Frame = cell.label1.frame;
-        label1Frame.size = CGSizeMake(textSize.width+7.0, textSize.height+2.0);
-        cell.label1.frame = label1Frame;
-        if ([theJob.status isEqualToString:kJobStatusOpenString]) {
-            cell.label1.backgroundColor = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
-        } else {
-            cell.label1.backgroundColor = [UIColor colorWithRed:0.0 green:.5 blue:0.0 alpha:1.0];
-
-        }
-        cell.label1.text = labelText;
-
-        CALayer *boxLayer = cell.label1.layer;
-        boxLayer.cornerRadius = 2.0;
-        boxLayer.masksToBounds = YES;
-        // boxLayer.borderWidth = 0;
-        // boxLayer.borderColor = [[UIColor darkGrayColor] CGColor];
-        // boxLayer.shouldRasterize = YES;
-        
-        labelText = theJob.userTranscription;
-    //    cell.label2.textColor = [UIColor colorWithRed:0.2 green:.2 blue:0.2 alpha:1.0];
-//        cell.label2.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f];
-        cell.label2.text = labelText ? labelText : @"";
-        
-        labelText = theJob.durationSinceLastAction;
-   //     cell.label3.textColor = [UIColor colorWithRed:0.2 green:.2 blue:0.2 alpha:1.0];
-        cell.label3.text = labelText ? labelText : @"";
-    } else {
-        cell.label1.textColor = [UIColor darkTextColor];
-
-        labelText = theJob.title;
-        cell.label1.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.0f];
-        cell.label1.text = labelText ? labelText : @"Untitled";
-        
-        labelText = theJob.durationSinceLastAction;
-        cell.label2.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0f];
-        cell.label2.text = labelText ? labelText : @"";
-        
-        cell.label3.text = @"";
-    }
+    NSString *labelText = theJob.userTranscription;
     
-    NSString *ratingStr = theJob.rating;
-    if ([ratingStr length] > 0) {
-        if ([ratingStr isEqualToString:kJobRatingGood]) {
-           cell.ratingImageView.image = [UIImage imageNamed:@"up_gray"];
-       //  cell.ratingImageView.image = [UIImage imageNamed:@"017-ThumbsUp"];
-        } else {
-            cell.ratingImageView.image = [UIImage imageNamed:@"down_gray"];
-         //  cell.ratingImageView.image = [UIImage imageNamed:@"018-ThumbsDown"];
-        }
-    } else {
-        cell.ratingImageView.image = nil;
-    }
+    cell.transcriptionView.text = labelText ? labelText : @"";
+    
+    labelText = theJob.durationSinceLastAction;
+    cell.durationLabel.text = labelText ? labelText : @"";
+
+    cell.statusImageView.image = [theJob statusImage];
     
     return cell;
 }

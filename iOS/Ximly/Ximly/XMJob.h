@@ -75,6 +75,7 @@ typedef enum {
 @property (nonatomic, readwrite) NSString *attachmentUrl;
 @property (nonatomic, readonly) NSString *attachmentKey;
 @property (nonatomic, readonly) NSData *attachment;
+@property (nonatomic, readonly) UIImage *statusImage;
 
 
 - (NSDictionary *)submissionMetaData;

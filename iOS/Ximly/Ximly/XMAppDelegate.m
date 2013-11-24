@@ -7,6 +7,7 @@
 //
 
 #import "XMAppDelegate.h"
+#import "XMColor.h"
 #import "XMXimlyHTTPClient.h"
 #import "XMSettingsViewController.h"
 #import "Flurry.h"
@@ -15,6 +16,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    [[UINavigationBar appearance] setBarTintColor:[XMColor navBarColor]];
+    [[UISearchBar appearance] setBackgroundImage:[UIImage new]];
+    [[UISearchBar appearance] setTintColor:[XMColor navBarColor]];
+    [[UISearchBar appearance] setBackgroundColor:[XMColor navBarColor]];
+    [[UISearchBar appearance] setBarTintColor:[XMColor navBarColor]];
+
+ //   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (![XMXimlyHTTPClient isRegistered]) {
@@ -58,7 +68,10 @@
     
     [Flurry startSession:@"ZVKPTTGDRS7GRHHQ9CCR"];
     [Flurry setSessionReportsOnPauseEnabled:YES];
-        
+    
+
+
+    
     return YES;
 }
 
