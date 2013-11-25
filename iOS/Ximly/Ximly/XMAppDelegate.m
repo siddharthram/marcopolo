@@ -22,6 +22,9 @@
     [[UISearchBar appearance] setTintColor:[XMColor navBarColor]];
     [[UISearchBar appearance] setBackgroundColor:[XMColor navBarColor]];
     [[UISearchBar appearance] setBarTintColor:[XMColor navBarColor]];
+    
+    [[UINavigationBar appearance] setTintColor:[XMColor greenColor]];
+
 
  //   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     

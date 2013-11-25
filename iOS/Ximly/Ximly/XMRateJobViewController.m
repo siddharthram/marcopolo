@@ -39,10 +39,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     CALayer *boxLayer = self.ratingBox.layer;
-    boxLayer.cornerRadius = 14.0;
+    boxLayer.cornerRadius = 7.0;
     boxLayer.masksToBounds = YES;
-    boxLayer.borderWidth = 6;
-    boxLayer.borderColor = [[UIColor blackColor] CGColor];
+    boxLayer.borderWidth = 1;
+    boxLayer.borderColor = [[UIColor whiteColor] CGColor];
  
     self.rating = self.job.rating;
     [self drawRatingBox];
@@ -83,11 +83,11 @@
             self.badButton.selected = NO;
         }
         self.commentBackdrop.hidden = NO;
-        self.submitButton.hidden = NO;
+    //    self.submitButton.hidden = NO;
     } else {
         self.commentBackdrop.hidden = YES;
-        self.submitButton.hidden = YES;
-        ratingBoxFrame.size.height = 115.0;
+    //    self.submitButton.hidden = YES;
+        ratingBoxFrame.size.height = 160.0;
     }
     
     self.ratingBox.frame = ratingBoxFrame;
@@ -138,11 +138,13 @@
 
 - (IBAction)submit:(id)sender
 {
-    self.job.rating = self.rating;
-    self.job.ratingComment = self.commentTextView.text;
-    [[XMXimlyHTTPClient sharedClient] rateJob:self.job];
-    [[XMJobList sharedInstance] writeToDisk];  // TODO - get data back from the cloud or mark record as local if call to cloud fails
-    [self.view removeFromSuperview];
+    if ([self.rating length] > 0) {
+        self.job.rating = self.rating;
+        self.job.ratingComment = self.commentTextView.text;
+        [[XMXimlyHTTPClient sharedClient] rateJob:self.job];
+        [[XMJobList sharedInstance] writeToDisk];  // TODO - get data back from the cloud or mark record as local if call to cloud fails
+        [self.view removeFromSuperview];
+    }
 }
 
 - (IBAction)close:(id)sender
@@ -153,10 +155,10 @@
 - (void)keyboardDidShow:(NSNotification *)notification
 {
     CGFloat screenHeight = [XMUtilities heightOfScreen];
-    CGFloat shiftDelta = 61.0;
+    CGFloat shiftDelta = 26.0;
 
     if (screenHeight > 960.0) {
-        shiftDelta = 51.0;
+        shiftDelta = 16.0;
     }
     
     [UIView animateWithDuration:.2 animations:^(void){
@@ -164,19 +166,19 @@
         aFrame.origin.y -= shiftDelta;
         self.ratingBox.frame = aFrame;
         
-        aFrame = self.closeButton.frame;
-        aFrame.origin.y -= shiftDelta;
-        self.closeButton.frame = aFrame;
+       // aFrame = self.closeButton.frame;
+       // aFrame.origin.y -= shiftDelta;
+       // self.closeButton.frame = aFrame;
     }];
 }
 
 - (void)keyboardDidHide:(NSNotification *)notification
 {
     CGFloat screenHeight = [XMUtilities heightOfScreen];
-    CGFloat shiftDelta = 61.0;
+    CGFloat shiftDelta = 26.0;
     
     if (screenHeight > 960.0) {
-        shiftDelta = 51.0;
+        shiftDelta = 16.0;
     }
     
     [UIView animateWithDuration:.2 animations:^(void){
@@ -184,9 +186,9 @@
         aFrame.origin.y += shiftDelta;
         self.ratingBox.frame = aFrame;
         
-        aFrame = self.closeButton.frame;
-        aFrame.origin.y += shiftDelta;
-        self.closeButton.frame = aFrame;
+      //  aFrame = self.closeButton.frame;
+      //  aFrame.origin.y += shiftDelta;
+      //  self.closeButton.frame = aFrame;
     }];
 }
 

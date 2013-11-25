@@ -64,14 +64,27 @@
 
     self.tableViewController.refreshControl = refreshControl;
     
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"073-Setting"] style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
+
+    UIImage *myImage = [UIImage imageNamed:@"settings"];
+    UIButton *myButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [myButton setImage:myImage forState:UIControlStateNormal];
+    myButton.showsTouchWhenHighlighted = YES;
+    myButton.frame = CGRectMake(0.0, 3.0, 24, 24);
+    [myButton addTarget:self action:@selector(showSettings) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightbutton = [[UIBarButtonItem alloc] initWithCustomView:myButton];
+    self.navigationItem.rightBarButtonItem = rightbutton;
     
+    self.navigationItem.rightBarButtonItem.tintColor = [XMColor greenColor];
+
+    /*
     
     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
         self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
     } else {
         self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     }
+     */
     
 //    self.navigationItem.titleView = self.listSelector;
     

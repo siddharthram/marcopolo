@@ -61,6 +61,23 @@
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editJob)];
     
+    UIImage *myImage = [UIImage imageNamed:@"detail_icon_rate"];
+    UIButton *myButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [myButton setImage:myImage forState:UIControlStateNormal];
+    myButton.showsTouchWhenHighlighted = YES;
+    myButton.frame = CGRectMake(0.0, 3.0, 24, 24);
+    [myButton addTarget:self action:@selector(rate:) forControlEvents:UIControlEventTouchUpInside];
+    self.rateButton = [[UIBarButtonItem alloc] initWithCustomView:myButton];
+    
+    
+    myImage = [UIImage imageNamed:@"detail_icon_evernote"];
+    myButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [myButton setImage:myImage forState:UIControlStateNormal];
+    myButton.showsTouchWhenHighlighted = YES;
+    myButton.frame = CGRectMake(0.0, 3.0, 24, 24);
+    [myButton addTarget:self action:@selector(saveToEvernote:) forControlEvents:UIControlEventTouchUpInside];
+    self.sendToEvernoteButton = [[UIBarButtonItem alloc] initWithCustomView:myButton];
+    
     [self hideSendingToEvernoteUI];
     
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
@@ -76,49 +93,6 @@
 
 - (void)redisplay:(BOOL)reloadImage
 {
-    CALayer *boxLayer = self.imageView.layer;
-    //  boxLayer.cornerRadius = 5.0;
-    boxLayer.masksToBounds = YES;
-    boxLayer.borderWidth = 1;
-    boxLayer.borderColor = [[UIColor darkGrayColor] CGColor];
-    
-    CALayer *boxShadowLayer = self.imageShadowView.layer;
-    boxShadowLayer.cornerRadius = 5.0;
-    boxShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
-    boxShadowLayer.shadowOpacity = 0.8;
-    boxShadowLayer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.imageShadowView.bounds cornerRadius:5.0];
-    boxShadowLayer.shadowPath = path.CGPath;
-    
-    /*
-     CALayer *backdropLayer = self.backdrop.layer;
-     backdropLayer.cornerRadius = 5.0;
-     backdropLayer.masksToBounds = YES;
-     backdropLayer.borderWidth = 2;
-     backdropLayer.borderColor = [[UIColor lightGrayColor] CGColor];
-     
-     CALayer *backdropShadowLayer = self.backdropShadow.layer;
-     backdropShadowLayer.cornerRadius = 5.0;
-     backdropShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
-     backdropShadowLayer.shadowOpacity = 0.6;
-     backdropShadowLayer.shadowRadius = 5.0;
-     backdropShadowLayer.shadowOffset = CGSizeMake(2.0f, 2.0f);
-     
-     CALayer *textShadowView = self.transcribedTextShadowView.layer;
-     //   textShadowView.cornerRadius = 5.0;
-     textShadowView.shadowColor = [[UIColor darkGrayColor] CGColor];
-     textShadowView.shadowOpacity = 0.8;
-     textShadowView.shadowRadius = 5.0;
-     textShadowView.shadowOffset = CGSizeMake(2.0f, 2.0f);
-     */
-    
-    CALayer *textShadowLayer = self.transcribedTextShadowView.layer;
-    textShadowLayer.cornerRadius = 5,0;
-    textShadowLayer.shadowColor = [[UIColor darkGrayColor] CGColor];
-    textShadowLayer.shadowOpacity = 0.8;
-    textShadowLayer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    path = [UIBezierPath bezierPathWithRect:self.transcribedTextShadowView.bounds];
-    textShadowLayer.shadowPath = path.CGPath;
     
     if (reloadImage) {
       
@@ -166,11 +140,11 @@
         self.titleLabel.hidden = YES;
         NSString *transcribedText = self.job.userTranscription;
         self.transcribedTextView.text = [transcribedText length] > 0 ? transcribedText : @"";
-        rateButton.enabled = YES;
+        self.rateButton.enabled = YES;
     } else {
         self.titleLabel.hidden = NO;
         self.transcribedTextView.text = @"";
-        rateButton.enabled = NO;
+        self.rateButton.enabled = NO;
     }
 }
 
@@ -225,11 +199,11 @@
 }
 
 - (void)showSendingToEvernoteUI {
-    [toolbar setItems:[NSArray arrayWithObjects:actionButton, rateButton, flexibleSpace, sendingToEvernoteView, nil]];
+    [toolbar setItems:[NSArray arrayWithObjects:actionButton, fixedSpace, self.rateButton, flexibleSpace, sendingToEvernoteView, nil]];
 }
 
 - (void)hideSendingToEvernoteUI {
-    [toolbar setItems:[NSArray arrayWithObjects:actionButton, rateButton, flexibleSpace, sendToEvernoteButton, nil]];
+    [toolbar setItems:[NSArray arrayWithObjects:actionButton, fixedSpace, self.rateButton, flexibleSpace, self.sendToEvernoteButton, nil]];
 }
 
 - (IBAction)saveToEvernote:(id)sender {
