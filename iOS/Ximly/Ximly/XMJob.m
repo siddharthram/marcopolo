@@ -15,6 +15,12 @@
 
 #define kNumberOfFields 14
 
+static UIImage *s_submittedStatusImage = nil;
+static UIImage *s_transcribingStatusImage = nil;
+static UIImage *s_transcribedStatusImage = nil;
+static UIImage *s_errorStatusImage = nil;
+
+
 @implementation XMJob 
 
 @dynamic requestID;
@@ -39,7 +45,40 @@
 @dynamic requestedResponseFormat;
 @dynamic attachmentUrl;
 @dynamic attachmentKey;
+@dynamic statusImage;
 
+
++ (UIImage *)submittedStatusImage
+{
+    if (!s_submittedStatusImage) {
+        s_submittedStatusImage = [UIImage imageNamed:@"icon_status_waiting_for_worker"];
+    }
+    return s_submittedStatusImage;
+}
+
++ (UIImage *)transcribingStatusImage
+{
+    if (!s_transcribingStatusImage) {
+        s_transcribingStatusImage = [UIImage imageNamed:@"icon_status_beingworkedon"];
+    }
+    return s_transcribedStatusImage;
+}
+
++ (UIImage *)transcribedStatusImage
+{
+    if (!s_transcribedStatusImage) {
+        s_transcribedStatusImage = [UIImage imageNamed:@"icon_status_transcribed"];
+    }
+    return s_transcribedStatusImage;
+}
+
++ (UIImage *)errorStatusImage
+{
+    if (!s_errorStatusImage) {
+        s_errorStatusImage = [UIImage imageNamed:@"icon_status_work_alert"];
+    }
+    return s_errorStatusImage;
+}
 
 
 - (id)init
@@ -141,6 +180,34 @@
     }
 
     return statusStr;
+}
+
+- (UIImage *)statusImage
+{
+    UIImage *statusImage = nil;
+    NSNumber *status = [self.jobData valueForKey:kJobStatusKey];
+    
+    if (status) {
+        switch ([status intValue]) {
+            case JobStatusOpen:
+                statusImage = [XMJob submittedStatusImage];
+                break;
+                
+            case JobStatusLocked:
+                statusImage = [XMJob transcribingStatusImage];
+                break;
+                
+            case JobStatusTranscribed:
+                statusImage = [XMJob transcribedStatusImage];
+                break;
+                
+            default:
+                statusImage = [XMJob errorStatusImage];
+                break;
+        }
+    }
+    
+    return statusImage;
 }
 
 - (void)setStatus:(NSString *)value

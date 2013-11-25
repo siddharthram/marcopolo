@@ -8,6 +8,7 @@
 
 #import "XMSettingsViewController.h"
 
+#import "XMColor.h"
 #import "XMImageCache.h"
 #import "XMJobList.h"
 #import "XMPurchaseManager.h"
@@ -39,9 +40,9 @@
     self.purchaseLevel1Button.layer.borderWidth = 2;
     self.purchaseLevel2Button.layer.borderWidth = 2;
     self.purchaseLevel3Button.layer.borderWidth = 2;
-    self.purchaseLevel1Button.layer.borderColor = [UIColor colorWithRed:53.0/255.0 green:177.0/255.0 blue:235.0/255.0 alpha:1.0].CGColor;
-    self.purchaseLevel2Button.layer.borderColor = [UIColor colorWithRed:53.0/255.0 green:177.0/255.0 blue:235.0/255.0 alpha:1.0].CGColor;
-    self.purchaseLevel3Button.layer.borderColor = [UIColor colorWithRed:53.0/255.0 green:177.0/255.0 blue:235.0/255.0 alpha:1.0].CGColor;
+    self.purchaseLevel1Button.layer.borderColor = [XMColor greenColor].CGColor;
+    self.purchaseLevel2Button.layer.borderColor = [XMColor greenColor].CGColor;
+    self.purchaseLevel3Button.layer.borderColor = [XMColor greenColor].CGColor;
 
     self.purchaseLevel1Button.enabled = NO;
     self.purchaseLevel2Button.enabled = NO;
@@ -68,7 +69,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	NSString *deviceID = [userDefaults stringForKey:kDeviceIDPrefKey];
     
-    self.navigationItem.title = @"Transcriptions";
+    self.navigationItem.title = @"Credits";
     
     if ([deviceID length] > 0) {
         self.deviceIDSwitch.on = YES;

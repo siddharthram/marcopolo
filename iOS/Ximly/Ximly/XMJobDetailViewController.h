@@ -16,9 +16,8 @@
 
 @interface XMJobDetailViewController : UIViewController {
     IBOutlet UIBarButtonItem *actionButton;
-    IBOutlet UIBarButtonItem *rateButton;
+    IBOutlet UIBarButtonItem *fixedSpace;
     IBOutlet UIBarButtonItem *flexibleSpace;
-    IBOutlet UIBarButtonItem *sendToEvernoteButton;
     IBOutlet UIBarButtonItem *sendingToEvernoteView;
     IBOutlet UIToolbar *toolbar;
 }
@@ -33,6 +32,10 @@
 @property (nonatomic, weak) IBOutlet UIImageView *transcribedTextShadowView;
 @property (nonatomic, strong) IBOutlet UIWebView *attachmentView;
 @property (nonatomic, strong) XMRateJobViewController *rateJobViewController;
+
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *rateButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *sendToEvernoteButton;
+
 
 - (IBAction)share:(id)sender;
 - (IBAction)rate:(id)sender;
