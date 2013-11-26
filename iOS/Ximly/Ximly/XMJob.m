@@ -61,7 +61,7 @@ static UIImage *s_errorStatusImage = nil;
     if (!s_transcribingStatusImage) {
         s_transcribingStatusImage = [UIImage imageNamed:@"icon_status_beingworkedon"];
     }
-    return s_transcribedStatusImage;
+    return s_transcribingStatusImage;
 }
 
 + (UIImage *)transcribedStatusImage
