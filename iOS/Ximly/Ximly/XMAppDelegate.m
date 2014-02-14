@@ -83,19 +83,19 @@
 	NSLog(@"My token is: %@", deviceToken);
     self.apnsDeviceToken = deviceToken;
     [[XMXimlyHTTPClient sharedClient] registerDeviceWithAPNSToken:self.apnsDeviceToken updateAPNS:YES delegate:nil];
-    [Flurry logEvent:@"Accept Push Notifications"];
+//    [Flurry logEvent:@"Accept Push Notifications"];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
-    [Flurry logEvent:@"Decline Push Notifications"];
+ //   [Flurry logEvent:@"Decline Push Notifications"];
 	NSLog(@"Failed to get token, error: %@", error);
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 	NSLog(@"Got Notification%@",userInfo);
 	if ( application.applicationState == UIApplicationStateActive ){
-        [Flurry logEvent:@"Receive push: App open"];
+ //       [Flurry logEvent:@"Receive push: App open"];
 		// App was in forefront
 		[[XMXimlyHTTPClient sharedClient] updateTasks];
         if (self.historyViewController && self.historyNavController && (self.window.rootViewController == self.historyNavController) && (self.historyNavController.visibleViewController == self.historyNavController)) {
@@ -105,7 +105,7 @@
     }
     else
     {
-        [Flurry logEvent:@"Open with Push"];
+   //     [Flurry logEvent:@"Open with Push"];
         // App was just brought from background to forefront
         // We call '[[XMXimlyHTTPClient sharedClient] updateTasks]' in applicationDidBecomeActive: so there's nothing to do here
     }
@@ -204,7 +204,7 @@
     
     [[EvernoteSession sharedSession] handleDidBecomeActive];
     
-    [Flurry logEvent:@"App launched"];
+ //   [Flurry logEvent:@"App launched"];
     
     [[XMPurchaseManager sharedInstance] startObservingTransactions];
 }
