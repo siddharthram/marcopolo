@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UIView *backdrop;
 @property (nonatomic, weak) IBOutlet UIView *backdropShadow;
 @property (nonatomic, weak) IBOutlet UITextView *transcriptionView;
+@property (nonatomic, weak) IBOutlet UIImageView *iconView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *statusImageView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *waitIndicator;

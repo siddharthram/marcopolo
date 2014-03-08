@@ -298,6 +298,12 @@
         cell.thumbnailView.image = nil;
     }
     
+    if ([theJob.attachmentUrl length] > 0) {
+        cell.iconView.hidden = NO;
+        cell.iconView.image = [UIImage imageNamed:@"ppt_icon_80x80"];
+    } else {
+        cell.iconView.hidden = YES;
+    }
     
     NSString *labelText = theJob.userTranscription;
     
