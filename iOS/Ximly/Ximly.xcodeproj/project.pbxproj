@@ -15,7 +15,6 @@
 		2409380D16B9029F0045446F /* UIImage+XMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2409380C16B9029F0045446F /* UIImage+XMAdditions.m */; };
 		2419BE3816C250C000650F3B /* XMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2419BE3616C250C000650F3B /* XMSettingsViewController.m */; };
 		2419BE3916C250C000650F3B /* XMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2419BE3716C250C000650F3B /* XMSettingsViewController.xib */; };
-		241A120F18C47B8100E32903 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 241A120E18C47B8100E32903 /* Default-568h@2x.png */; };
 		2450229616ADD7F100FA03B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229516ADD7F100FA03B0 /* UIKit.framework */; };
 		2450229816ADD7F100FA03B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229716ADD7F100FA03B0 /* Foundation.framework */; };
 		2450229A16ADD7F100FA03B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2450229916ADD7F100FA03B0 /* CoreGraphics.framework */; };
@@ -86,6 +85,7 @@
 		24B2E06516B3D5150022DFAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B2E06416B3D5150022DFAF /* QuartzCore.framework */; };
 		24B3A51016ED37B400C6B5F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */; };
 		24C62DA518CB9BAA00E29361 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24C62DA418CB9BAA00E29361 /* Images.xcassets */; };
+		24C62DAB18CBB42900E29361 /* start_no_jobs_640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 24C62DAA18CBB42900E29361 /* start_no_jobs_640x1136.png */; };
 		24D26C701827720000EDD6D2 /* UINavigationController+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D26C6F1827720000EDD6D2 /* UINavigationController+Orientation.m */; };
 /* End PBXBuildFile section */
 
@@ -110,7 +110,6 @@
 		2419BE3516C250C000650F3B /* XMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMSettingsViewController.h; sourceTree = "<group>"; };
 		2419BE3616C250C000650F3B /* XMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMSettingsViewController.m; sourceTree = "<group>"; };
 		2419BE3716C250C000650F3B /* XMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMSettingsViewController.xib; sourceTree = "<group>"; };
-		241A120E18C47B8100E32903 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2450229116ADD7F100FA03B0 /* Ximly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ximly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2450229516ADD7F100FA03B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2450229716ADD7F100FA03B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -201,6 +200,7 @@
 		24B2E06416B3D5150022DFAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		24C62DA418CB9BAA00E29361 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		24C62DAA18CBB42900E29361 /* start_no_jobs_640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = start_no_jobs_640x1136.png; path = "../../../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/Archive-4/start_no_jobs_640x1136.png"; sourceTree = "<group>"; };
 		24D26C6E1827720000EDD6D2 /* UINavigationController+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Orientation.h"; sourceTree = "<group>"; };
 		24D26C6F1827720000EDD6D2 /* UINavigationController+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Orientation.m"; sourceTree = "<group>"; };
 		443383F986B54B62861349AB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -258,7 +258,6 @@
 		2450228616ADD7F100FA03B0 = {
 			isa = PBXGroup;
 			children = (
-				241A120E18C47B8100E32903 /* Default-568h@2x.png */,
 				2487D76816F659DE00C31039 /* StoreKit.framework */,
 				24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */,
 				2409380916B8EF9C0045446F /* Security.framework */,
@@ -358,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				24C62DA418CB9BAA00E29361 /* Images.xcassets */,
+				24C62DAA18CBB42900E29361 /* start_no_jobs_640x1136.png */,
 				24A006211841D0CB005A0CDB /* credits_camera.png */,
 				24A006221841D0CB005A0CDB /* credits_camera2x.png */,
 				24A006231841D0CB005A0CDB /* detail_icon_attachment.png */,
@@ -506,7 +506,6 @@
 				245022B116ADD7F100FA03B0 /* first.png in Resources */,
 				245022B316ADD7F100FA03B0 /* first@2x.png in Resources */,
 				245022B816ADD7F100FA03B0 /* second.png in Resources */,
-				241A120F18C47B8100E32903 /* Default-568h@2x.png in Resources */,
 				24A0063D1841D0CB005A0CDB /* credits_camera.png in Resources */,
 				245022BA16ADD7F100FA03B0 /* second@2x.png in Resources */,
 				245022BD16ADD7F100FA03B0 /* XMSubmissionViewController_iPhone.xib in Resources */,
@@ -534,6 +533,7 @@
 				24A006521841D0CB005A0CDB /* vote_bad_hilite2x.png in Resources */,
 				2419BE3916C250C000650F3B /* XMSettingsViewController.xib in Resources */,
 				24A0063F1841D0CB005A0CDB /* detail_icon_attachment.png in Resources */,
+				24C62DAB18CBB42900E29361 /* start_no_jobs_640x1136.png in Resources */,
 				24A006481841D0CB005A0CDB /* icon_status_beingworkedon.png in Resources */,
 				24A006501841D0CB005A0CDB /* settings.png in Resources */,
 				24A006441841D0CB005A0CDB /* detail_icon_rate2x.png in Resources */,
