@@ -2,11 +2,28 @@ package com.marcopolo.service.data;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Cache {
 	private static ArrayList<String> deviceIdsToExclude = null;
 	private static ArrayList<String> notificationSMS = null;
 	private static ArrayList<String> notificationEmail = null;
+
+	// 2 mins.. lower bar. can not set below this
+	private static final long minInterval = 120000l; 
+	private static AtomicLong maxOverDueInterval = new AtomicLong(5400000l);
+
+
+	public static long getMaxOverDueInterval() {
+		return maxOverDueInterval.get();
+	}
+
+	public static long setMaxOverDueInterval(long maxOverDueInt) {
+		if (maxOverDueInt > minInterval) {
+			maxOverDueInterval.set(maxOverDueInt);
+		}
+		return getMaxOverDueInterval();
+	}
 
 	public static void loadDeviceExclusionIds() {
 		try {

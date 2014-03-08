@@ -15,6 +15,11 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		<servlet-class>com.marcopolo.service.add</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>setMaxOverDueInterval</servlet-name>
+		<servlet-class>com.marcopolo.service.setMaxOverDueInterval</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>submitOverDue</servlet-name>
 		<servlet-class>com.marcopolo.service.submitOverDue</servlet-class>
 	</servlet>
@@ -66,6 +71,10 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	<servlet-mapping>
 		<servlet-name>testsmsapi</servlet-name>
 		<url-pattern>/task/testsmsapi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>setMaxOverDueInterval</servlet-name>
+		<url-pattern>/pref/setMaxOverDueInterval</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>product</servlet-name>
