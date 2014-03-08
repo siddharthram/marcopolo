@@ -19,7 +19,13 @@
 @property (nonatomic, strong) IBOutlet UISegmentedControl *listSelector;
 @property (nonatomic, assign) NSInteger selectedListSegmentIndex;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, weak) IBOutlet UILabel *zeroStateLabel;
+@property (nonatomic, weak) IBOutlet UILabel *zeroStateLabel1;
+@property (nonatomic, weak) IBOutlet UILabel *zeroStateLabel2;
+@property (nonatomic, weak) IBOutlet UILabel *zeroStateLabel3;
+@property (nonatomic, weak) IBOutlet UILabel *zeroStateLabel4;
+
+@property (nonatomic, weak) IBOutlet UIButton *cameraButton;
+
 
 - (IBAction)doSubmit:(id)sender;
 
