@@ -52,6 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationController.view setBackgroundColor:[UIColor whiteColor]];
+    
 	// Do any additional setup after loading the view, typically from a nib.
     // Register the nib for our custom cell for re-use
     
@@ -98,15 +101,10 @@
     [self setCurrentJobListFromSegmentIndex:self.selectedListSegmentIndex];
     
     if ([self tableView:self.tableView numberOfRowsInSection:0] == 0) {
-        self.zeroStateLabel1.hidden = NO;
-        self.zeroStateLabel2.hidden = NO;
-        self.zeroStateLabel3.hidden = NO;
-        self.zeroStateLabel4.hidden = NO;
+        self.FTUImageView.hidden = NO;
     } else {
-        self.zeroStateLabel1.hidden = YES;
-        self.zeroStateLabel2.hidden = YES;
-        self.zeroStateLabel3.hidden = YES;
-        self.zeroStateLabel4.hidden = YES;    }
+        self.FTUImageView.hidden = YES;
+    }
     
 
 
@@ -263,10 +261,7 @@
 {
     int numRows =[self.currentJobList count];
     if (numRows > 0) {
-        self.zeroStateLabel1.hidden = YES;
-        self.zeroStateLabel2.hidden = YES;
-        self.zeroStateLabel3.hidden = YES;
-        self.zeroStateLabel4.hidden = YES;
+        self.FTUImageView.hidden = YES;
     }
     return numRows;
 }

@@ -34,6 +34,8 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController.view setBackgroundColor:[UIColor whiteColor]];
+    
     self.purchaseLevel1Button.layer.cornerRadius = 3;
     self.purchaseLevel2Button.layer.cornerRadius = 3;
     self.purchaseLevel3Button.layer.cornerRadius = 3;

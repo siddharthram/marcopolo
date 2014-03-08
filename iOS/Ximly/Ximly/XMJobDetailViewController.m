@@ -59,6 +59,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self.navigationController.view setBackgroundColor:[UIColor whiteColor]];
+    
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editJob)];
     
     UIImage *myImage = [UIImage imageNamed:@"detail_icon_rate"];

@@ -22,6 +22,7 @@
     [[UISearchBar appearance] setTintColor:[XMColor navBarColor]];
     [[UISearchBar appearance] setBackgroundColor:[XMColor navBarColor]];
     [[UISearchBar appearance] setBarTintColor:[XMColor navBarColor]];
+
     [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil]
      setTitleTextAttributes:[NSDictionary
                              dictionaryWithObjectsAndKeys:[UIColor
@@ -29,7 +30,8 @@
                                                                                                  valueWithUIOffset:UIOffsetMake(0,
                                                                                                                                 1)],UITextAttributeTextShadowOffset,nil]
      forState:UIControlStateNormal];
-    [[UINavigationBar appearance] setTintColor:[XMColor greenColor]];
+
+//    [[UINavigationBar appearance] setTintColor:[XMColor greenColor]];
 
 
  //   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -138,7 +140,7 @@
     
     if (!self.historyNavController) {
         self.historyNavController= [[UINavigationController alloc] initWithRootViewController:self.historyViewController];
-        self.historyNavController.navigationBar.barStyle = UIBarStyleBlack;
+  //      self.historyNavController.navigationBar.barStyle = UIBarStyleDefault;
     }
 
     self.window.rootViewController = self.historyNavController;
