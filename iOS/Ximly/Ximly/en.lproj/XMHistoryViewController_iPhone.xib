@@ -99,7 +99,7 @@
                 <action selector="listSelectorValueChanged:" destination="-1" eventType="valueChanged" id="47"/>
             </connections>
         </segmentedControl>
-        <searchBar contentMode="redraw" showsCancelButton="YES" id="59">
+        <searchBar contentMode="redraw" placeholder="Search" showsCancelButton="YES" id="59">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
             <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>

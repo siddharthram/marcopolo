@@ -230,7 +230,7 @@ static NSString     *_dataFilePath = nil;
         listToFilter = self.lastFilteredList;
     }
         
-    self.lastFilteredList = [listToFilter filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"status contains[cd] %@ OR title contains[cd] %@ OR userTranscription contains[cd] %@ OR durationSinceLastAction contains[cd] %@", filterString, filterString, filterString, filterString]];
+    self.lastFilteredList = [listToFilter filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"userTranscription contains[cd] %@ OR durationSinceLastAction contains[cd] %@", filterString, filterString]];
     self.lastFilterString = filterString;
     
     return self.lastFilteredList;
