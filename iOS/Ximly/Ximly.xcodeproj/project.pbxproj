@@ -85,7 +85,7 @@
 		24B2E06516B3D5150022DFAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B2E06416B3D5150022DFAF /* QuartzCore.framework */; };
 		24B3A51016ED37B400C6B5F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */; };
 		24C62DA518CB9BAA00E29361 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24C62DA418CB9BAA00E29361 /* Images.xcassets */; };
-		24C62DAB18CBB42900E29361 /* start_no_jobs_640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 24C62DAA18CBB42900E29361 /* start_no_jobs_640x1136.png */; };
+		24C62DAD18CBC3B700E29361 /* start_no_jobs_640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 24C62DAC18CBC3B700E29361 /* start_no_jobs_640x1136.png */; };
 		24D26C701827720000EDD6D2 /* UINavigationController+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D26C6F1827720000EDD6D2 /* UINavigationController+Orientation.m */; };
 /* End PBXBuildFile section */
 
@@ -200,7 +200,7 @@
 		24B2E06416B3D5150022DFAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		24B3A50F16ED37B400C6B5F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		24C62DA418CB9BAA00E29361 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		24C62DAA18CBB42900E29361 /* start_no_jobs_640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = start_no_jobs_640x1136.png; path = "../../../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/Archive-4/start_no_jobs_640x1136.png"; sourceTree = "<group>"; };
+		24C62DAC18CBC3B700E29361 /* start_no_jobs_640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_no_jobs_640x1136.png; sourceTree = "<group>"; };
 		24D26C6E1827720000EDD6D2 /* UINavigationController+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Orientation.h"; sourceTree = "<group>"; };
 		24D26C6F1827720000EDD6D2 /* UINavigationController+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Orientation.m"; sourceTree = "<group>"; };
 		443383F986B54B62861349AB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -357,7 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				24C62DA418CB9BAA00E29361 /* Images.xcassets */,
-				24C62DAA18CBB42900E29361 /* start_no_jobs_640x1136.png */,
+				24C62DAC18CBC3B700E29361 /* start_no_jobs_640x1136.png */,
 				24A006211841D0CB005A0CDB /* credits_camera.png */,
 				24A006221841D0CB005A0CDB /* credits_camera2x.png */,
 				24A006231841D0CB005A0CDB /* detail_icon_attachment.png */,
@@ -533,7 +533,7 @@
 				24A006521841D0CB005A0CDB /* vote_bad_hilite2x.png in Resources */,
 				2419BE3916C250C000650F3B /* XMSettingsViewController.xib in Resources */,
 				24A0063F1841D0CB005A0CDB /* detail_icon_attachment.png in Resources */,
-				24C62DAB18CBB42900E29361 /* start_no_jobs_640x1136.png in Resources */,
+				24C62DAD18CBC3B700E29361 /* start_no_jobs_640x1136.png in Resources */,
 				24A006481841D0CB005A0CDB /* icon_status_beingworkedon.png in Resources */,
 				24A006501841D0CB005A0CDB /* settings.png in Resources */,
 				24A006441841D0CB005A0CDB /* detail_icon_rate2x.png in Resources */,
