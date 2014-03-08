@@ -22,7 +22,13 @@
     [[UISearchBar appearance] setTintColor:[XMColor navBarColor]];
     [[UISearchBar appearance] setBackgroundColor:[XMColor navBarColor]];
     [[UISearchBar appearance] setBarTintColor:[XMColor navBarColor]];
-    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil]
+     setTitleTextAttributes:[NSDictionary
+                             dictionaryWithObjectsAndKeys:[UIColor
+                                                           darkGrayColor],UITextAttributeTextColor,[NSValue
+                                                                                                 valueWithUIOffset:UIOffsetMake(0,
+                                                                                                                                1)],UITextAttributeTextShadowOffset,nil]
+     forState:UIControlStateNormal];
     [[UINavigationBar appearance] setTintColor:[XMColor greenColor]];
 
 
