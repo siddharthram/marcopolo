@@ -64,7 +64,7 @@
 
     self.tableViewController.refreshControl = refreshControl;
     
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
 
     UIImage *myImage = [UIImage imageNamed:@"settings"];
     UIButton *myButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -98,10 +98,15 @@
     [self setCurrentJobListFromSegmentIndex:self.selectedListSegmentIndex];
     
     if ([self tableView:self.tableView numberOfRowsInSection:0] == 0) {
-        self.zeroStateLabel.hidden = NO;
+        self.zeroStateLabel1.hidden = NO;
+        self.zeroStateLabel2.hidden = NO;
+        self.zeroStateLabel3.hidden = NO;
+        self.zeroStateLabel4.hidden = NO;
     } else {
-        self.zeroStateLabel.hidden = YES;
-    }
+        self.zeroStateLabel1.hidden = YES;
+        self.zeroStateLabel2.hidden = YES;
+        self.zeroStateLabel3.hidden = YES;
+        self.zeroStateLabel4.hidden = YES;    }
     
 
 
@@ -110,6 +115,41 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
+ 
+    /*
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
+    self.title = nil;
+    [self deactivateContentForSubviewsInView:self.view];
+     */
+}
+
+
+
+
+
+
+- (void)deactivateContentForSubviewsInView:(UIView *)contentView {
+    for (UIView *aView in contentView.subviews) {
+        if ([aView isKindOfClass:[UILabel class]]) {
+            [(UILabel *)aView setText:nil];
+        }
+        else if ([aView isKindOfClass:[UITableView class]]) {
+            [(UITableView *)aView setDataSource:nil];
+        }
+        else if ([aView isKindOfClass:[UIToolbar class]]) {
+            [(UIToolbar *)aView setItems:nil];
+        }
+        else if ([aView isKindOfClass:[UIImageView class]]) {
+            [(UIImageView *)aView setImage:nil];
+        }
+        else if ([aView isKindOfClass:[UIView class]]) {
+            // i often put views in UIViews to group them
+            [self deactivateContentForSubviewsInView:aView];
+        }
+    }
+    self.searchBar.hidden = YES;
+    self.cameraButton.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -223,7 +263,10 @@
 {
     int numRows =[self.currentJobList count];
     if (numRows > 0) {
-        self.zeroStateLabel.hidden = YES;
+        self.zeroStateLabel1.hidden = YES;
+        self.zeroStateLabel2.hidden = YES;
+        self.zeroStateLabel3.hidden = YES;
+        self.zeroStateLabel4.hidden = YES;
     }
     return numRows;
 }

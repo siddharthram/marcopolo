@@ -34,17 +34,8 @@
         self.isLaunching = YES;
         [[XMXimlyHTTPClient sharedClient] registerDeviceWithAPNSToken:nil updateAPNS:NO delegate:nil];
     }
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    BOOL hasSeenInstructions = [userDefaults boolForKey:@"hasSeenInstructions"];
-    BOOL alwaysShowIntro = [userDefaults boolForKey:kShowIntroPrefKey];
-    
-    if (!hasSeenInstructions || alwaysShowIntro) {
-        [self showIntroView];
-    } else {
-        [self showHistoryView];
-    }
+        
+    [self showHistoryView];
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
