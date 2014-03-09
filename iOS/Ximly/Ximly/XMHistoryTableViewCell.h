@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFImageRequestOperation.h"
 
 @interface XMHistoryTableViewCell : UITableViewCell
 
@@ -19,5 +20,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *statusImageView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *waitIndicator;
+@property (nonatomic, strong) AFImageRequestOperation *imageRequestOperation;
+@property (nonatomic, strong) NSString *requestID;
 
 @end
