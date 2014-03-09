@@ -279,23 +279,32 @@
     
  //   cell.contentView.backgroundColor = [UIColor underPageBackgroundColor];
     
-    if (theJob.thumbnail) {
-        cell.waitIndicator.hidden = YES;
-        cell.thumbnailView.image = theJob.thumbnail;
-    } else if ([theJob.imageURL length] > 0) {
-        cell.waitIndicator.hidden = NO;
-        cell.thumbnailView.image = nil;
-        [[XMXimlyHTTPClient sharedClient] fetchImageWithURL:[NSURL URLWithString:theJob.imageURL]
-            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                [XMImageCache saveImage:responseObject forJob:theJob];
-                cell.thumbnailView.image = theJob.thumbnail;
-                cell.waitIndicator.hidden = YES;
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                cell.waitIndicator.hidden = YES;
-            }];
+    if (([cell.requestID length] > 0) && [cell.requestID isEqualToString:theJob.requestID]) {
+        
     } else {
-        cell.waitIndicator.hidden = YES;
-        cell.thumbnailView.image = nil;
+        if (theJob.thumbnail) {
+            cell.waitIndicator.hidden = YES;
+            cell.thumbnailView.image = theJob.thumbnail;
+        } else if ([theJob.imageURL length] > 0) {
+            cell.waitIndicator.hidden = NO;
+            cell.thumbnailView.image = nil;
+            cell.requestID = theJob.requestID;
+            cell.imageRequestOperation = [[XMXimlyHTTPClient sharedClient] fetchImageWithURL:[NSURL URLWithString:theJob.imageURL]
+                                                                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                                                         [XMImageCache saveImage:responseObject forJob:theJob];
+                                                                                         if ([cell.requestID isEqualToString:theJob.requestID]) {
+                                                                                             cell.thumbnailView.image = theJob.thumbnail;
+                                                                                             cell.waitIndicator.hidden = YES;
+                                                                                         }
+                                                                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                                         if ([cell.requestID isEqualToString:theJob.requestID]) {
+                                                                                             cell.waitIndicator.hidden = YES;
+                                                                                         }
+                                                                                     }];
+        } else {
+            cell.waitIndicator.hidden = YES;
+            cell.thumbnailView.image = nil;
+        }
     }
     
     if ([theJob.attachmentUrl length] > 0) {

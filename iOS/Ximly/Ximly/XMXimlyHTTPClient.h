@@ -7,6 +7,7 @@
 //
 
 #import "AFHTTPClient.h"
+#import "AFImageRequestOperation.h"
 #import "XMPurchaseManager.h"
 
 #define kXMKeychainService      @"XMKeychainService"
@@ -64,7 +65,7 @@ typedef void (^APIErrorBlock)(AFHTTPRequestOperation *operation, NSError *error)
 
 - (void)submitImage:(NSData *)imageData forJob:(XMJob *)theJob;
 
-- (void)fetchImageWithURL:(NSURL *)url
+- (AFImageRequestOperation *)fetchImageWithURL:(NSURL *)url
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 

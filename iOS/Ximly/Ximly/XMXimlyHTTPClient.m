@@ -277,7 +277,7 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
               }];
 }
 
-- (void)fetchImageWithURL:(NSURL *)url
+- (AFImageRequestOperation *)fetchImageWithURL:(NSURL *)url
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -285,6 +285,7 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
     AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
     [operation setCompletionBlockWithSuccess:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
+    return operation;
 }
 
 - (void)fetchAttachmentWithURL:(NSURL *)url
