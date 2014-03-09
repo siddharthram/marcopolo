@@ -33,12 +33,9 @@ public class setMaxOverDueInterval extends AbstractServlet {
 
 	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
+	protected void service(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/xml");
 		long longInterval = -60000l;
 		try {
 			String interval = request.getParameter("intervalinMin");
@@ -47,9 +44,10 @@ public class setMaxOverDueInterval extends AbstractServlet {
 			longInterval = Cache.setMaxOverDueInterval(longInterval); 
 			
 		} catch (Exception ex) {
-			throw new ServletException(ex);
+			// do nothing
+			longInterval = Cache.getMaxOverDueInterval();
 		}
-		response.setContentType("application/json");
+		response.setContentType("text/plain");
 		PrintWriter writer = response.getWriter();
 		writer.println(longInterval/60000 + " mins");
 	}
