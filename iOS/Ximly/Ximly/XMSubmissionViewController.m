@@ -15,6 +15,8 @@
 
 #define kMaxImageDimension      500
 #define kPurchaseSuccessfulAlertTitle   @"Purchase Successful!"            // TODO: Put in strings file
+#define kPurchaseProblemAlertTitle      @"Problem Purchasing"
+#define kPurchaseFailedAlertTitle       @"Purchase Failed"
 
 #define kRequestFormatActionSheetTitle @"Make me a ..."
 
@@ -151,6 +153,7 @@
     if (!self.pickedImage) {
         return;
     }
+
     if (![XMXimlyHTTPClient isRegistered]) {
         [[XMXimlyHTTPClient sharedClient] registerDeviceWithAPNSToken:nil updateAPNS:NO delegate:self];
     } else if ([XMXimlyHTTPClient getImagesLeft] > 0) {
@@ -186,6 +189,9 @@
         [[XMPurchaseManager sharedInstance] setDelegate:self];
         self.isFetchingProducts = YES;
         [[XMPurchaseManager sharedInstance] fetchProducts];
+    } else {
+        self.view.hidden = YES;
+        [self.view removeFromSuperview];
     }
 }
 
@@ -201,12 +207,20 @@
                                                                     [NSString stringWithFormat:@"20-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel2ProductCode] price] stringValue]],
                                                                     [NSString stringWithFormat:@"100-pack @ $%@", [[[[[XMPurchaseManager sharedInstance] listOfProducts] objectForKey:kLevel3ProductCode] price] stringValue]], nil];
         [alertView show];
+    } else {
+        self.view.hidden = YES;
+        [self.view removeFromSuperview];
     }
 }
 
 - (void)failedToStartPurchase
 {
-    //TODO
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kPurchaseProblemAlertTitle
+                                                        message:@"Unable to make a purchase at this time.  Please try again later."
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alertView show];
 }
 
 - (void)didProcessTransactionSuccessfully:(int)numAvailable
@@ -239,16 +253,24 @@
             // TODO
             break;
     }
+    
+    self.view.hidden = YES;
+    [self.view removeFromSuperview];
 }
 
 - (void)didProcessTransactionWithXimlyError:(int)errorCode
 {
-    // TODO
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kPurchaseProblemAlertTitle
+                                                        message:@"Unable to make a purchase at this time.  Please try again later."
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alertView show];
 }
 
 -(void)alertUserToFailedPurchase
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Purchase Failed"
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:kPurchaseFailedAlertTitle
                                                          message:@"Please make sure your payment information on iTunes is up-to-date and try again later."
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
@@ -260,7 +282,12 @@
 {
     if ([alertView.title isEqualToString:kPurchaseSuccessfulAlertTitle]) {
         [self _submitToCloud];
+    } else if ([alertView.title isEqualToString:kPurchaseProblemAlertTitle] || [alertView.title isEqualToString:kPurchaseFailedAlertTitle]) {
+        self.view.hidden = YES;
+        [self.view removeFromSuperview];
     } else {
+        self.view.hidden = YES;
+        [self.view removeFromSuperview];
         switch (buttonIndex) {
             case 0:
                 break;
@@ -278,6 +305,7 @@
                 break;
                 
             default:
+
                 break;
         }
     }
