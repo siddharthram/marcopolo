@@ -85,18 +85,20 @@ static NSString * const kXimlyBaseURLString = @"http://default-environment-jrcyx
                                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     // Wrap the success block to log requests
     void (^wrappedSuccess)(AFHTTPRequestOperation *, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
+#ifdef _DEBUG_
         NSLog(@"Request: %@ %@\nHeaders: %@\nBody: %@", [operation.request HTTPMethod], [operation.request URL], [operation.request allHTTPHeaderFields], [[NSString alloc] initWithData:[operation.request HTTPBody] encoding:NSASCIIStringEncoding]);
         NSLog(@"Response: %d\nHeaders: %@\nBody: %@", [operation.response statusCode],
               [operation.response allHeaderFields], responseObject);
-        
+#endif
         success(operation, responseObject);
     };
     
     // Wrap the failure block to log failures
     APIErrorBlock wrappedFailure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+#ifdef _DEBUG_
         NSLog(@"Request: %@ %@\nHeaders: %@\nBody: %@", [operation.request HTTPMethod], [operation.request URL], [operation.request allHTTPHeaderFields], [[NSString alloc] initWithData:[operation.request HTTPBody] encoding:NSASCIIStringEncoding]);
         NSLog(@"Response: %d\nHeaders: %@\nBody: %@\nError: %@", [operation.response statusCode], [operation.response allHeaderFields], [operation responseString], [error localizedDescription]);
-        
+#endif
         if (failure) {
             failure(operation, error);
         }
