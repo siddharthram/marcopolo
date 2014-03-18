@@ -79,7 +79,9 @@
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
+#ifdef _DEBUG_
 	NSLog(@"My token is: %@", deviceToken);
+#endif
     self.apnsDeviceToken = deviceToken;
     [[XMXimlyHTTPClient sharedClient] registerDeviceWithAPNSToken:self.apnsDeviceToken updateAPNS:YES delegate:nil];
 //    [Flurry logEvent:@"Accept Push Notifications"];
@@ -92,7 +94,9 @@
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+#ifdef _DEBUG_
 	NSLog(@"Got Notification%@",userInfo);
+#endif
 	if ( application.applicationState == UIApplicationStateActive ){
  //       [Flurry logEvent:@"Receive push: App open"];
 		// App was in forefront

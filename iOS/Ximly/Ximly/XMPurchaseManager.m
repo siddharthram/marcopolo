@@ -229,9 +229,10 @@ static int POS(char c)
     
     if ([transaction transactionReceipt] != nil)
     {
+#ifdef _DEBUG_
         NSLog(@"Purchase: The receipt is %@",[[NSString alloc] initWithData:[transaction transactionReceipt]
                                                          encoding:NSUTF8StringEncoding] );
-        
+#endif
         NSDictionary *receiptDict       = [self dictionaryFromPlistData:transaction.transactionReceipt];
         NSString *purchaseInfo = [receiptDict objectForKey:@"purchase-info"];
         NSString *decodedPurchaseInfo   = [self decodeBase64:purchaseInfo length:nil];
@@ -250,8 +251,9 @@ static int POS(char c)
         NSString *txnID = [purchaseInfoDict objectForKey:@"transaction-id"];
         
         NSDictionary *purchaseData = @{@"deviceId" : deviceID, @"product_id" : productID, @"transaction_id" : txnID, @"receipt_data" : receiptData};
+#ifdef _DEBUG_
         NSLog(@"Purchase data:  %@", purchaseData);
-
+#endif
         [self submitPurchase:purchaseData transaction:transaction];
     }
 }

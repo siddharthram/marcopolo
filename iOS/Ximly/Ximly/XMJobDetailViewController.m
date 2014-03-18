@@ -273,7 +273,9 @@
             [[EvernoteNoteStore noteStore] createNote:newNote success:^(EDAMNote *note) {
                 [Flurry logEvent:@"Evernote send note success"];
                 [self hideSendingToEvernoteUI];
+#ifdef _DEBUG_
                 NSLog(@"Note created successfully.");
+#endif
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your transcription was successfully sent to Evernote." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alertView show];
             } failure:^(NSError *error) {
