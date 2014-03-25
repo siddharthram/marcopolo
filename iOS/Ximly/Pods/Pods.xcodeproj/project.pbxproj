@@ -563,6 +563,11 @@
 		603985127AEB4B33833E6C84 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
+				ONLY_ACTIVE_ARCH = NO;
 			};
 			name = Release;
 		};
@@ -600,7 +605,11 @@
 		E47EC0ADA47B4CCB82CCCD3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ONLY_ACTIVE_ARCH = YES;
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
+				ONLY_ACTIVE_ARCH = NO;
 			};
 			name = Debug;
 		};
