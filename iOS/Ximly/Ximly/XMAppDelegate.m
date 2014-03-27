@@ -48,10 +48,10 @@
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
-    UILocalNotification *remoteNotif =
+    NSDictionary *remoteNotif =
     [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotif) {
-        [self alertUserToUpdatedJobs:remoteNotif.userInfo];
+        [self alertUserToUpdatedJobs:remoteNotif];
     }
     
     // Initial development is done on the sandbox service
