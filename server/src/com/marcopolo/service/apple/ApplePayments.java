@@ -29,7 +29,7 @@ public class ApplePayments
     	
 	}
     
-    public static boolean isReceiptGenuine(final String receiptBase64Encoded) {
+    public static boolean isReceiptGenuine(final String receiptBase64Encoded) throws Exception {
     	boolean isGenuine = false;
     	try {
     		// first check with production server
@@ -48,7 +48,7 @@ public class ApplePayments
             }
 		} catch (Exception e) {
 			e.printStackTrace();
-			// do nothing.
+			throw e;
 		}
     	return isGenuine;
     	
