@@ -11,11 +11,23 @@ public class Cache {
 
 	// 2 mins.. lower bar. can not set below this
 	private static final long minInterval = 120000l; 
-	private static AtomicLong maxOverDueInterval = new AtomicLong(5400000l);
-
+	private static AtomicLong maxOverDueInterval = new AtomicLong(5400000l); // 90 minutes
+	
+	private static AtomicLong privateWorkerDuration = new AtomicLong(3600000l); // 60 minutes
 
 	public static long getMaxOverDueInterval() {
 		return maxOverDueInterval.get();
+	}
+
+	public static long getPrivateWorkerDuration() {
+		return privateWorkerDuration.get();
+	}
+
+	public static long setPrivateWorkerDuration(long privateWorkerDur) {
+		if (privateWorkerDur > minInterval) {
+			privateWorkerDuration.set(privateWorkerDur);
+		}
+		return getPrivateWorkerDuration();
 	}
 
 	public static long setMaxOverDueInterval(long maxOverDueInt) {

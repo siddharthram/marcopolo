@@ -53,6 +53,6 @@ public class JobSubmitScheduledExecuter extends ScheduledThreadPoolExecutor {
         }
 
         public static void main(String[] args) {
-                new JobSubmitScheduledExecuter(1).scheduleAtFixedRate(new MturkSubmitTask(), 5, 5, TimeUnit.MINUTES);
+                new JobSubmitScheduledExecuter(1).scheduleAtFixedRate(new ManageTurkAndPrivateWorkerJobs(), 5, 5, TimeUnit.MINUTES);
         }
 }

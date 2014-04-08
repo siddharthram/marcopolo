@@ -13,6 +13,7 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	<servlet>
 		<servlet-name>add</servlet-name>
 		<servlet-class>com.marcopolo.service.add</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>setMaxOverDueInterval</servlet-name>

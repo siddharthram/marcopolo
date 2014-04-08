@@ -31,12 +31,20 @@
     <!--
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
-
- <Resource name="jdbc/marcopoloaws" auth="Container" type="javax.sql.DataSource"
+<!--  prod -->
+ <!--  Resource name="jdbc/marcopoloaws" auth="Container" type="javax.sql.DataSource"
                maxActive="100" maxIdle="30" maxWait="10000"
                username="javauser" password="marcopolo" driverClassName="com.mysql.jdbc.Driver"
                factory="org.apache.commons.dbcp.BasicDataSourceFactory"
-               url="jdbc:mysql://aa1fj65y0wi38vu.couokv6egrzf.us-east-1.rds.amazonaws.com:3306/marcopolo"/>	
+       url="jdbc:mysql://aa1fj65y0wi38vu.couokv6egrzf.us-east-1.rds.amazonaws.com:3306/marcopolo"/ -->
+
+<!-- dev -->
+ <Resource name="jdbc/marcopoloaws" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="testuser" password="marcoximly76" driverClassName="com.mysql.jdbc.Driver"
+               factory="org.apache.commons.dbcp.BasicDataSourceFactory"
+               url="jdbc:mysql://aa1blnkhrm8ydb1.couokv6egrzf.us-east-1.rds.amazonaws.com:3306/marcopolo"/>	
+        	
 <!--
   <Resource name="jdbc/MarcoPolo" auth="Container" type="javax.sql.DataSource"
                maxActive="100" maxIdle="30" maxWait="10000"

@@ -51,7 +51,7 @@ public class Notify {
 			String emailAdd = (String) emailIter.next();
 			email.addRecipient("Transcriber", emailAdd, RecipientType.BCC);
 		}
-		email.setText("A new trascription is available. Please log into http://ximly.herokuapp.com/users/sign_in to start transcribing.");
+		email.setText("A new trascription is available. Please log into http://ximly.herokuapp.com/users/sign_in to start transcribing. You will have " + Cache.getPrivateWorkerDuration()/1000 + " minutes to complete the job after accepting. After that job will be unlocked for other workers.");
 		new Mailer("email-smtp.us-east-1.amazonaws.com", 587, "AKIAJ54BVQ2QQYKQCK5Q", "AuEozWpJ6pv/nzsOqPiuWw+xrFlE50tw1JSA5NGRHKbg", TransportStrategy.SMTP_TLS).sendMail(email);
 	}
 

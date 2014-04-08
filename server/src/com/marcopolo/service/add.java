@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.marcopolo.mturk.ExternalQuestion;
 import com.marcopolo.mturk.JobSubmitScheduledExecuter;
-import com.marcopolo.mturk.MturkSubmitTask;
+import com.marcopolo.mturk.ManageTurkAndPrivateWorkerJobs;
 import com.marcopolo.notification.Notify;
 import com.marcopolo.service.aws.S3StoreImage;
 import com.marcopolo.service.data.Cache;
@@ -54,8 +54,8 @@ public class add extends AbstractServlet {
 		try {
 			super.init();
 			Cache.loadAll();
-			// initialize the scheduler which will submit the job to mturk
-			new JobSubmitScheduledExecuter(1).scheduleAtFixedRate(new MturkSubmitTask(), 5, 5, TimeUnit.MINUTES);
+			// initialize the scheduler which will submit the job to mturk and unlock private worker jobs
+			new JobSubmitScheduledExecuter(1).scheduleAtFixedRate(new ManageTurkAndPrivateWorkerJobs(), 5, 5, TimeUnit.MINUTES);
 			String propertiesPath = getServletContext().getRealPath("config");
 			ExternalQuestion.init(propertiesPath);
 		} catch (Exception e) {

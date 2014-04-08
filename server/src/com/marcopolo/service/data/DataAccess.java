@@ -599,8 +599,35 @@ public class DataAccess {
 		}
 	}
 
+
 	
-	private static String lockTaskByServerGuidQuery = "update task_table set status = 1, assigned_to = ? where server_unique_guid = ? ";
+	
+	/**
+	 * method to unlock tasks which were assigned to private worker but not finished withing given time.
+	 * @throws SQLException
+	 */
+	private static String unlockPendingOpenTasks = "update task_table set status = 0, assigned_to = null where assigned_to != 'mturk' and status = 1 and lock_time < ?";
+	public static void unlockPendingOverDueTasks() throws SQLException  {
+		Connection conn = _dataSource.getConnection();
+		try {
+			log.debug("Got ulock overdue pending tasks ");
+				PreparedStatement pstmtQuery = conn
+						.prepareStatement(unlockPendingOpenTasks);
+				pstmtQuery.setLong(2, System.currentTimeMillis()
+						- Cache.getPrivateWorkerDuration());
+				pstmtQuery.executeUpdate();
+				pstmtQuery.close();
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				log.error("Error closing connection", e);
+			}
+		}
+	}
+
+	
+	private static String lockTaskByServerGuidQuery = "update task_table set status = 1, assigned_to = ?, lock_time = ? where server_unique_guid = ? ";
 	
 	public static void lockTaskByServerGuid(TaskStatusRequest tsr, String emailId) throws SQLException  {
 		Connection conn = _dataSource.getConnection();
@@ -610,7 +637,8 @@ public class DataAccess {
 				PreparedStatement pstmtQuery = conn
 						.prepareStatement(lockTaskByServerGuidQuery);
 				pstmtQuery.setString(1, emailId);
-				pstmtQuery.setString(2, tsr.getTaskId());
+				pstmtQuery.setLong(2, System.currentTimeMillis());
+				pstmtQuery.setString(3, tsr.getTaskId());
 				pstmtQuery.executeUpdate();
 				pstmtQuery.close();
 		} finally {

@@ -12,7 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.marcopolo.mturk.ExternalQuestion;
-import com.marcopolo.mturk.MturkSubmitTask;
+import com.marcopolo.mturk.ManageTurkAndPrivateWorkerJobs;
 
 
 
@@ -50,7 +50,7 @@ public class submitOverDue extends AbstractServlet {
 		String resp = new String();
 		try {
 			String turkprice = request.getParameter("turkprice");
-			MturkSubmitTask mturkTask = new MturkSubmitTask();
+			ManageTurkAndPrivateWorkerJobs mturkTask = new ManageTurkAndPrivateWorkerJobs();
 			resp = mturkTask.submitAllTasksToTurk(turkprice);
 			
 		} catch (Exception ex) {

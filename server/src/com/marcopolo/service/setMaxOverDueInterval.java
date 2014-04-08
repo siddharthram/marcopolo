@@ -39,19 +39,30 @@ public class setMaxOverDueInterval extends AbstractServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/xml");
-		long longInterval = -60000l;
+		long overDueIntervalForTurkSubmit = -60000l;
+		long overDueIntervalForPendingPrivateWorker = -60000l;
+		
 		try {
 			String interval = request.getParameter("intervalinMin");
-			longInterval = Integer.parseInt(interval) * 60000l; //convert to millisecs
+			overDueIntervalForTurkSubmit = Integer.parseInt(interval) * 60000l; //convert to millisecs
 			// set interval 
-			longInterval = Cache.setMaxOverDueInterval(longInterval); 
-			
+			overDueIntervalForTurkSubmit = Cache.setMaxOverDueInterval(overDueIntervalForTurkSubmit); 
 		} catch (Exception ex) {
-			throw new ServletException(ex);
+			//throw new ServletException(ex);
 		}
+		try {
+			String interval = request.getParameter("workerPendingUnlockInMin");
+			overDueIntervalForPendingPrivateWorker = Integer.parseInt(interval) * 60000l; //convert to millisecs
+			// set interval 
+			overDueIntervalForPendingPrivateWorker = Cache.setPrivateWorkerDuration(overDueIntervalForPendingPrivateWorker); 
+		} catch (Exception ex) {
+			//throw new ServletException(ex);
+		}
+
 		response.setContentType("application/json");
 		PrintWriter writer = response.getWriter();
-		writer.println(longInterval/60000 + " mins");
+		writer.println(overDueIntervalForTurkSubmit/60000 + " mins\n");
+		writer.println(overDueIntervalForPendingPrivateWorker/60000 + " mins");		
 	}
 
 
